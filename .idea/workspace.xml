@@ -4,8 +4,32 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ec566682-672c-4b02-8981-652c66cb3fe3" name="Changes" comment="Initialized Project">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="ec566682-672c-4b02-8981-652c66cb3fe3" name="Changes" comment="Updated Models Classes">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/project/youtube/client/Handle_Server_Response.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/project/youtube/models/ClassInfo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/project/youtube/models/ServerResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/project/youtube/models/channel/Client_channel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/project/youtube/models/channel/Server_channel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/project/youtube/models/comment/Client_comment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/project/youtube/models/comment/Server_comment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/project/youtube/models/notification/Server_notification.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/project/youtube/models/playlist/Client_playlist.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/project/youtube/models/playlist/Server_playlist.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/project/youtube/models/user/Client_account.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/project/youtube/models/user/Server_account.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/project/youtube/models/video/Client_video.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/project/youtube/models/video/Server_video.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/project/youtube/server/Client_Handler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/youtube/client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/project/youtube/client/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/youtube/models/Channel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/project/youtube/models/channel/Channel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/youtube/models/Comment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/project/youtube/models/comment/Comment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/youtube/models/Content.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/project/youtube/models/Content.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/youtube/models/Notification.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/project/youtube/models/notification/Notification.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/youtube/models/Playlist.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/project/youtube/models/playlist/Playlist.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/youtube/models/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/project/youtube/models/user/Account.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/youtube/models/Video.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/project/youtube/models/video/Video.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,7 +46,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="develop" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -34,9 +58,12 @@
       </MavenGeneralSettings>
     </option>
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 3
-}]]></component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
   <component name="ProjectId" id="2irRHITZ4w6U1ENbH8rGgw0yzuk" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -47,11 +74,16 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.Client.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "develop",
-    "kotlin-language-version-configured": "true"
+    "git-widget-placeholder": "database",
+    "kotlin-language-version-configured": "true",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   }
 }]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -77,7 +109,21 @@
       <option name="presentableId" value="LOCAL‎−۰۰۰۰۲" />
       <updated>1720246902140</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL‎−۰۰۰۰۳" summary="Initialized Models &amp; Access Objects">
+      <option name="closed" value="true" />
+      <created>1720251963229</created>
+      <option name="number" value="LOCAL‎−۰۰۰۰۳" />
+      <option name="presentableId" value="LOCAL‎−۰۰۰۰۳" />
+      <updated>1720251963229</updated>
+    </task>
+    <task id="LOCAL‎−۰۰۰۰۴" summary="Updated Models Classes">
+      <option name="closed" value="true" />
+      <created>1720265568491</created>
+      <option name="number" value="LOCAL‎−۰۰۰۰۴" />
+      <option name="presentableId" value="LOCAL‎−۰۰۰۰۴" />
+      <updated>1720265568491</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -94,6 +140,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Created Repository" />
     <MESSAGE value="Initialized Project" />
-    <option name="LAST_COMMIT_MESSAGE" value="Initialized Project" />
+    <MESSAGE value="Initialized Models &amp; Access Objects" />
+    <MESSAGE value="Updated Models Classes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated Models Classes" />
   </component>
 </project>

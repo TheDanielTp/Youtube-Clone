@@ -1,6 +1,7 @@
-package org.project.youtube.models;
+package org.project.youtube.models.video;
 
 import javafx.scene.image.Image;
+import org.project.youtube.models.Content;
 
 import java.util.UUID;
 
@@ -12,15 +13,21 @@ public class Video extends Content
 
     String title;
     String description;
+    String dataType;
 
     String videoURL;
-    Image thumbnail;
+    Image  thumbnail;
 
     int commentsCount;
 
     //endregion
 
     //region [ - Constructor - ]
+
+    public Video ()
+    {
+        super("video");
+    }
 
     public Video (UUID creatorID, UUID communityID, UUID channelID, String title, String description, String videoURL, boolean isOnlyComrade)
     {
@@ -64,6 +71,16 @@ public class Video extends Content
     public void setDescription (String description)
     {
         this.description = description;
+    }
+
+    public String getDataType ()
+    {
+        return dataType;
+    }
+
+    public void setDataType (String dataType)
+    {
+        this.dataType = dataType;
     }
 
     public String getVideoURL ()
