@@ -12,7 +12,6 @@ public class MainApplication extends Application
     @Override
     public void start (Stage stage) throws IOException
     {
-
     }
 
     public static void main (String[] args)
