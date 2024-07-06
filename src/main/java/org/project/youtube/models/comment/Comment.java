@@ -1,4 +1,6 @@
-package org.project.youtube.models;
+package org.project.youtube.models.comment;
+
+import org.project.youtube.models.Content;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -20,15 +22,20 @@ public class Comment extends Content
 
     //region [ - Constructor - ]
 
+    public Comment ()
+    {
+        super("comment");
+    }
+
     public Comment (UUID contentID, UUID creatorID, String content, boolean isReply)
     {
         super (creatorID, creatorID, false);
 
-        this.contentID       = contentID;
-        this.content         = content;
-        this.isReply         = isReply;
+        this.contentID = contentID;
+        this.content   = content;
+        this.isReply   = isReply;
 
-        replyCount     = 0;
+        replyCount = 0;
     }
 
     public Comment (UUID contentID, UUID creatorID, UUID parentCommentID, String content, boolean isReply)
@@ -40,7 +47,7 @@ public class Comment extends Content
         this.content         = content;
         this.isReply         = isReply;
 
-        replyCount     = 0;
+        replyCount = 0;
     }
 
     //endregion

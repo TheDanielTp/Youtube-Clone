@@ -3,7 +3,7 @@ package org.project.youtube.models;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-public class Content
+public class Content extends ClassInfo
 {
     //region [ - Attributes - ]
 
@@ -21,6 +21,11 @@ public class Content
     //endregion
 
     //region [ - Constructor - ]
+
+    public Content (String className)
+    {
+        super.className = className;
+    }
 
     public Content (UUID creatorID, UUID channelID, boolean isOnlyComrade)
     {

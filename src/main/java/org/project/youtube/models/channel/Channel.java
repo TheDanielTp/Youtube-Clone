@@ -1,11 +1,13 @@
-package org.project.youtube.models;
+package org.project.youtube.models.channel;
 
 import javafx.scene.image.Image;
+import org.project.youtube.models.ClassInfo;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.UUID;
 
-public class Channel
+public class Channel extends ClassInfo
 {
     //region [ - Attributes - ]
 
@@ -16,9 +18,11 @@ public class Channel
     private String description;
 
     private int subscribersCount;
-    private int videosCount;
+    private int totalVideos;
     private int totalViews;
     private int watchTime;
+
+    private ArrayList<UUID> subscribersID;
 
     private LocalDate creationDate;
 
@@ -26,11 +30,16 @@ public class Channel
 
     private Double outcome;
 
-    private Image channelPic;
+    private Image channelPicture;
 
     //endregion
 
     //region [ - Constructor - ]
+
+    public Channel ()
+    {
+        super.className = "channel";
+    }
 
     public Channel (String name, String description)
     {
@@ -38,9 +47,9 @@ public class Channel
         this.description = description;
 
         subscribersCount = 0;
-        videosCount = 0;
-        totalViews = 0;
-        watchTime = 0;
+        totalVideos      = 0;
+        totalViews       = 0;
+        watchTime        = 0;
 
         creationDate = LocalDate.now ();
 
@@ -101,14 +110,14 @@ public class Channel
         this.subscribersCount = subscribersCount;
     }
 
-    public int getVideosCount ()
+    public int getTotalVideos ()
     {
-        return videosCount;
+        return totalVideos;
     }
 
-    public void setVideosCount (int videosCount)
+    public void setTotalVideos (int totalVideos)
     {
-        this.videosCount = videosCount;
+        this.totalVideos = totalVideos;
     }
 
     public int getTotalViews ()
@@ -129,6 +138,16 @@ public class Channel
     public void setWatchTime (int watchTime)
     {
         this.watchTime = watchTime;
+    }
+
+    public ArrayList <UUID> getSubscribersID ()
+    {
+        return subscribersID;
+    }
+
+    public void setSubscribersID (ArrayList <UUID> subscribersID)
+    {
+        this.subscribersID = subscribersID;
     }
 
     public LocalDate getCreationDate ()
@@ -161,14 +180,14 @@ public class Channel
         this.outcome = outcome;
     }
 
-    public Image getChannelPic ()
+    public Image getChannelPicture ()
     {
-        return channelPic;
+        return channelPicture;
     }
 
-    public void setChannelPic (Image channelPic)
+    public void setChannelPicture (Image channelPicture)
     {
-        this.channelPic = channelPic;
+        this.channelPicture = channelPicture;
     }
 
     //endregion

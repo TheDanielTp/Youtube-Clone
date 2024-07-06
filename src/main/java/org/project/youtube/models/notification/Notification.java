@@ -1,6 +1,7 @@
-package org.project.youtube.models;
+package org.project.youtube.models.notification;
 
 import org.project.youtube.database.objects.NotificationDAO;
+import org.project.youtube.models.ClassInfo;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -22,6 +23,11 @@ public class Notification
     //endregion
 
     //region [ - Constructor - ]
+
+    public Notification ()
+    {
+
+    }
 
     public Notification (UUID userID, UUID contentID, String title)
     {

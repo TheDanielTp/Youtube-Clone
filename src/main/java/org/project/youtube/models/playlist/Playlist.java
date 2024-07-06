@@ -1,9 +1,12 @@
-package org.project.youtube.models;
+package org.project.youtube.models.playlist;
+
+import org.project.youtube.models.ClassInfo;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.UUID;
 
-public class Playlist
+public class Playlist extends ClassInfo
 {
     //region [ - Attributes - ]
 
@@ -14,6 +17,8 @@ public class Playlist
     String title;
     String description;
 
+    private ArrayList <UUID> videosID;
+
     boolean isPublic;
     boolean isOnlyComrade;
 
@@ -22,6 +27,11 @@ public class Playlist
     //endregion
 
     //region [ - Constructor - ]
+
+    public Playlist ()
+    {
+        super.className = "playlist";
+    }
 
     public Playlist (UUID creatorID, UUID channelID, String title, String description, boolean isPublic, boolean isOnlyComrade)
     {
@@ -87,6 +97,16 @@ public class Playlist
     public void setDescription (String description)
     {
         this.description = description;
+    }
+
+    public ArrayList <UUID> getVideosID ()
+    {
+        return videosID;
+    }
+
+    public void setVideosID (ArrayList <UUID> videosID)
+    {
+        this.videosID = videosID;
     }
 
     public boolean isPublic ()

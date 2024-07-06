@@ -1,12 +1,12 @@
-package org.project.youtube.models;
+package org.project.youtube.models.user;
 
 import javafx.scene.image.Image;
+import org.project.youtube.models.ClassInfo;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.UUID;
 
-public class User
+public class Account extends ClassInfo
 {
     //region [ - Attributes - ]
 
@@ -32,16 +32,19 @@ public class User
 
     //region [ - Constructor - ]
 
-    public User (UUID channelID, String firstName, String lastName, String username, String email, String password, LocalDate birthdate, Image profilePicture)
+    public Account ()
     {
-        this.channelID      = channelID;
+        super.className = "account";
+    }
+
+    public Account (String firstName, String lastName, String username, String email, String password, LocalDate birthdate)
+    {
         this.firstName      = firstName;
         this.lastName       = lastName;
         this.username       = username;
         this.email          = email;
         this.password       = password;
         this.birthdate      = birthdate;
-        this.profilePicture = profilePicture;
 
         joinDate = LocalDate.now ();
 
