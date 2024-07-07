@@ -6,14 +6,14 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.UUID;
 
-public class Client_account
+public class UserClient
 {
-    private Account          account = new Account ();
+    private User             account = new User ();
     private DataOutputStream out;
     private ObjectMapper     mapper  = new ObjectMapper ();
     private String           jsonString;
 
-    public Client_account (DataOutputStream out)
+    public UserClient (DataOutputStream out)
     {
         this.out = out;
     }
@@ -86,7 +86,7 @@ public class Client_account
         }
         finally
         {
-            account = new Account ();
+            account = new User ();
         }
     }
 }
