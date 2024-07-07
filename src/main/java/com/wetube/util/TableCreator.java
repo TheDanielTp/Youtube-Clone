@@ -116,7 +116,7 @@ public class TableCreator
         String createPostsTable = """
                                   CREATE TABLE IF NOT EXISTS Posts (
                                       ID UUID PRIMARY KEY,
-                                      communityID UUID,
+                                      communityID UUID REFERENCES Communities(ID),
                                       creatorID UUID REFERENCES Users(ID),
                                       channelID UUID REFERENCES Channels(ID),
                                       title VARCHAR(255),
@@ -132,19 +132,28 @@ public class TableCreator
 
         String createSubscribersTable = """
                                         CREATE TABLE IF NOT EXISTS Subscribers (
-                                            userID UUID,
-                                            channelID UUID,
+                                            userID UUID REFERENCES Users(ID),
+                                            channelID UUID REFERENCES Channels(ID),
                                             PRIMARY KEY (userID, channelID)
                                         );
                                         """;
 
         String createVideoPlaylistsTable = """
                                            CREATE TABLE IF NOT EXISTS VideoPlaylists (
-                                               playlistID UUID,
-                                               videoID UUID,
+                                               playlistID UUID REFERENCES Playlists(ID),
+                                               videoID UUID REFERENCES Videos(ID),
                                                PRIMARY KEY (playlistID, videoID)
                                            );
                                            """;
+
+        String createContentsActionTable = """
+                                     CREATE TABLE IF NOT EXISTS ContentsAction (
+                                     ID UUID PRIMARY KEY,
+                                     contentID UUID,
+                                     userID UUID REFERENCES Users(ID),
+                                     liked BOOLEAN
+                                     );
+                                     """;
 
         try (Connection conn = DatabaseConnection.getConnection ();
              Statement stmt = conn.createStatement ())
@@ -160,6 +169,7 @@ public class TableCreator
             stmt.execute (createPostsTable);
             stmt.execute (createSubscribersTable);
             stmt.execute (createVideoPlaylistsTable);
+            stmt.execute (createContentsActionTable);
             System.out.println ("Tables created successfully.");
         }
         catch (Exception e)

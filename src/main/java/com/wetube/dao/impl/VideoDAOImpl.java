@@ -38,6 +38,53 @@ public class VideoDAOImpl
         }
     }
 
+    public void update (Video video)
+    {
+        String sql = "UPDATE Videos SET creatorID = ?, channelID = ?, communityID = ?, title = ?, description = ?, dataType = ?, videoURL = ?, thumbnail = ?, commentsCount = ?, likesCount = ?, dislikesCount = ?, creationDate = ?, isOnlyComrade = ? WHERE ID = ?";
+        try (Connection conn = DatabaseConnection.getConnection ();
+             PreparedStatement pstmt = conn.prepareStatement (sql))
+        {
+            pstmt.setObject (1, video.getCreatorID ());
+            pstmt.setObject (2, video.getChannelID ());
+            pstmt.setObject (3, video.getCommunityID ());
+            pstmt.setString (4, video.getTitle ());
+            pstmt.setString (5, video.getDescription ());
+            pstmt.setString (6, video.getDataType ());
+            pstmt.setString (7, video.getVideoURL ());
+            pstmt.setBytes (8, video.getThumbnailURL () != null ? video.getThumbnailURL ().toString ().getBytes () : null);
+            pstmt.setInt (9, video.getCommentsCount ());
+            pstmt.setInt (10, video.getLikesCount ());
+            pstmt.setInt (11, video.getDislikesCount ());
+            pstmt.setTimestamp (12, Timestamp.valueOf (video.getCreationDate ()));
+            pstmt.setBoolean (13, video.isOnlyComrade ());
+            pstmt.setObject (14, video.getID ());
+            pstmt.executeUpdate ();
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace ();
+        }
+    }
+
+    public void delete (UUID id)
+    {
+        try (Connection conn = DatabaseConnection.getConnection ();
+             Statement stmt = conn.createStatement ())
+        {
+            String deleteComments       = "DELETE FROM Comments WHERE contentID = '" + id + "'";
+            String deleteVideoPlaylists = "DELETE FROM VideoPlaylists WHERE videoID = '" + id + "'";
+            stmt.executeUpdate (deleteComments);
+            stmt.executeUpdate (deleteVideoPlaylists);
+
+            String deleteVideo = "DELETE FROM Videos WHERE ID = '" + id + "'";
+            stmt.executeUpdate (deleteVideo);
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace ();
+        }
+    }
+
     public Video findById (UUID id)
     {
         String sql = "SELECT * FROM Videos WHERE ID = ?";
@@ -123,53 +170,5 @@ public class VideoDAOImpl
             e.printStackTrace ();
         }
         return videos;
-    }
-
-    public void update (Video video)
-    {
-        String sql = "UPDATE Videos SET creatorID = ?, channelID = ?, communityID = ?, title = ?, description = ?, dataType = ?, videoURL = ?, thumbnail = ?, commentsCount = ?, likesCount = ?, dislikesCount = ?, creationDate = ?, isOnlyComrade = ? WHERE ID = ?";
-        try (Connection conn = DatabaseConnection.getConnection ();
-             PreparedStatement pstmt = conn.prepareStatement (sql))
-        {
-            pstmt.setObject (1, video.getCreatorID ());
-            pstmt.setObject (2, video.getChannelID ());
-            pstmt.setObject (3, video.getCommunityID ());
-            pstmt.setString (4, video.getTitle ());
-            pstmt.setString (5, video.getDescription ());
-            pstmt.setString (6, video.getDataType ());
-            pstmt.setString (7, video.getVideoURL ());
-            pstmt.setBytes (8, video.getThumbnailURL () != null ? video.getThumbnailURL ().toString ().getBytes () : null);
-            pstmt.setInt (9, video.getCommentsCount ());
-            pstmt.setInt (10, video.getLikesCount ());
-            pstmt.setInt (11, video.getDislikesCount ());
-            pstmt.setTimestamp (12, Timestamp.valueOf (video.getCreationDate ()));
-            pstmt.setBoolean (13, video.isOnlyComrade ());
-            pstmt.setObject (14, video.getID ());
-            pstmt.executeUpdate ();
-        }
-        catch (SQLException e)
-        {
-            e.printStackTrace ();
-        }
-    }
-
-    public void delete (UUID id)
-    {
-        try (Connection conn = DatabaseConnection.getConnection ();
-             Statement stmt = conn.createStatement ())
-        {
-            String deleteComments       = "DELETE FROM Comments WHERE contentID = '" + id + "'";
-            String deleteVideoPlaylists = "DELETE FROM VideoPlaylists WHERE videoID = '" + id + "'";
-
-            stmt.executeUpdate (deleteComments);
-            stmt.executeUpdate (deleteVideoPlaylists);
-
-            String deleteVideo = "DELETE FROM Videos WHERE ID = '" + id + "'";
-            stmt.executeUpdate (deleteVideo);
-        }
-        catch (SQLException e)
-        {
-            e.printStackTrace ();
-        }
     }
 }

@@ -68,12 +68,11 @@ public class PostDAOImpl
         try (Connection conn = DatabaseConnection.getConnection ();
              Statement stmt = conn.createStatement ())
         {
-            String deleteComments       = "DELETE FROM Comments WHERE contentID = '" + id + "'";
-
+            String deleteComments = "DELETE FROM Comments WHERE contentID = '" + id + "'";
             stmt.executeUpdate (deleteComments);
 
-            String deleteVideo = "DELETE FROM Videos WHERE ID = '" + id + "'";
-            stmt.executeUpdate (deleteVideo);
+            String deletePost = "DELETE FROM Posts WHERE ID = '" + id + "'";
+            stmt.executeUpdate (deletePost);
         }
         catch (SQLException e)
         {
@@ -140,7 +139,7 @@ public class PostDAOImpl
     public List <Post> findAll ()
     {
         List <Post> posts = new ArrayList <> ();
-        String       sql    = "SELECT * FROM Posts";
+        String      sql   = "SELECT * FROM Posts";
         try (Connection conn = DatabaseConnection.getConnection ();
              Statement stmt = conn.createStatement ();
              ResultSet rs = stmt.executeQuery (sql))

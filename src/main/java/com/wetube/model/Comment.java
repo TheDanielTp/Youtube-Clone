@@ -19,17 +19,6 @@ public class Comment extends Content
 
     //region [ - Constructor - ]
 
-    public Comment (UUID contentID, UUID creatorID, String content, boolean isReply)
-    {
-        super (creatorID, creatorID, false);
-
-        this.contentID = contentID;
-        this.content   = content;
-        this.isReply   = isReply;
-
-        replyCount = 0;
-    }
-
     public Comment (UUID contentID, UUID creatorID, UUID parentCommentID, String content, boolean isReply)
     {
         super (creatorID, creatorID, false);
