@@ -258,6 +258,7 @@ public class UserDAO
         queries.add("DELETE FROM commentAction WHERE userID = ?");
         queries.add("DELETE FROM posts WHERE creatorID = ?");
         queries.add("DELETE FROM commentAction WHERE userID = ?");
+        queries.add("DELETE FROM playlistAdmins WHERE adminID = ?");
 
         try (Connection connection = connection()) {
             connection.setAutoCommit (false);
