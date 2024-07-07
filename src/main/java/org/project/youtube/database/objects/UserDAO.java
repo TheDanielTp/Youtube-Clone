@@ -97,11 +97,12 @@ public class UserDAO
     public static void createAccount (String username, String email, String password, String firstName, String lastName,
                                         LocalDate birthdate, String profilePicture) {
         System.out.println("> Database: Creating new account for " + username + " ...");
-        Channel_DB.create_user_default_channel(get_id_by_username(username));
-        Playlist_DB.create_watch_later(get_id_by_username(username));
         UUID ID = UUID.randomUUID();
         boolean isPremium = false;
         double balance = 0.00;
+        ChannelDAO.createChannel(ID);
+        Playlist_DB.create_watch_later(get_id_by_username(username));
+
 
         String query = "INSERT INTO users (ID, channelID, firstname, lastname, username, email, password, " +
                 "birthdate, joindate, ispremium, balance, profilePicture) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -124,6 +125,44 @@ public class UserDAO
             preparedStatement.executeUpdate();
             connection.commit();
             System.out.println("> Database: New account for " + username + " created.");
+        } catch (SQLException e)
+        {
+            System.out.println(e.getMessage());
+        }
+    }
+    public static void setName (UUID ID, String firstName, String lastName) {
+        System.out.println("> Database: Setting new information of " + getUsernameViaID(ID) + " ...");
+
+        String query = "UPDATE users SET (firstname, lastname) VALUES (?, ?) WHERE ID = ?";
+        try (Connection connection = connection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query))
+        {
+            connection.setAutoCommit(false);
+            preparedStatement.setString(1, firstName);
+            preparedStatement.setString(2, lastName);
+            preparedStatement.setObject(3, ID);
+            preparedStatement.executeUpdate();
+            connection.commit();
+            System.out.println("> Database: New information of " + getUsernameViaID(ID) + " set.");
+        } catch (SQLException e)
+        {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public static void setProfilePicture (UUID ID, String profilePicture) {
+        System.out.println("> Database: Setting new profile picture for " + getUsernameViaID(ID) + " ...");
+
+        String query = "UPDATE users SET profilePicture VALUES ? WHERE ID = ?";
+        try (Connection connection = connection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query))
+        {
+            connection.setAutoCommit(false);
+            preparedStatement.setString(1, profilePicture);
+            preparedStatement.setObject(3, ID);
+            preparedStatement.executeUpdate();
+            connection.commit();
+            System.out.println("> Database: New profile picture for " + getUsernameViaID(ID) + " set.");
         } catch (SQLException e)
         {
             System.out.println(e.getMessage());
@@ -299,7 +338,7 @@ public class UserDAO
         return null;
     }
     public static String getUsernameViaID (UUID ID) {
-        String query = "SELECT username FROM users WHERE id = ?";
+        String query = "SELECT username FROM users WHERE ID = ?";
         try (Connection connection = connection(); PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setObject(1, ID);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
