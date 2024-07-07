@@ -64,8 +64,7 @@ public class Database
                 "CREATE TABLE IF NOT EXISTS commentAction (ID UUID PRIMARY KEY, commentID UUID REFERENCES comment(ID)," +
                         " userID UUID REFERENCES users(ID), liked BOOLEAN);",
                 "CREATE TABLE IF NOT EXISTS videoInPlayList (videoID UUID REFERENCES video(ID)," +
-                        " playlistID UUID REFERENCES playlist(ID), indexInPlaylist INTEGER," +
-                        " addedDate TIMESTAMP WITHOUT TIME ZONE);"
+                        " playlistID UUID REFERENCES playlist(ID), addedDate TIMESTAMP WITHOUT TIME ZONE);"
         };
         try (Connection connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/WeTube-DataBase",
                 "postgres", "0000");Statement statement = connection.createStatement())
