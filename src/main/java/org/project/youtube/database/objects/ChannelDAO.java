@@ -17,6 +17,27 @@ public class ChannelDAO
         return DriverManager.getConnection(JDBC_URL, USER, PASSWORD);
     }
 
+    //region Checking methods
+    public static boolean checkSubscription (UUID channelID, UUID userID) {
+        System.out.println("> Database: Checking the subscription of user " +
+                UserDAO.getUsernameViaID(userID) + " to channel " + getNameViaID(channelID) + " ...");
+        String query = "SELECT EXISTS (SELECT 1 FROM subscriptions WHERE channelID = ? AND subscriberID = ? )";
+        try (Connection connection = connection(); PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setObject(1, channelID);
+            preparedStatement.setObject(2, userID);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    System.out.println("> Database: Subscription checked.");
+                    return resultSet.getBoolean(1);
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return false;
+    }
+    //endregion
+
     //region Create channel and setting attributes
     public static void createChannel (UUID userID) {
         System.out.println("> Database: Creating the channel of user " + userID + " ...");
@@ -239,27 +260,6 @@ public class ChannelDAO
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-    }
-    //endregion
-
-    //region Checking methods
-    public static boolean checkSubscription (UUID channelID, UUID userID) {
-        System.out.println("> Database: Checking the subscription of user " +
-                UserDAO.getUsernameViaID(userID) + " to channel " + getNameViaID(channelID) + " ...");
-        String query = "SELECT EXISTS (SELECT 1 FROM subscriptions WHERE channelID = ? AND subscriberID = ? )";
-        try (Connection connection = connection(); PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            preparedStatement.setObject(1, channelID);
-            preparedStatement.setObject(2, userID);
-            try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                if (resultSet.next()) {
-                    System.out.println("> Database: Subscription checked.");
-                    return resultSet.getBoolean(1);
-                }
-            }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-        return false;
     }
     //endregion
 
