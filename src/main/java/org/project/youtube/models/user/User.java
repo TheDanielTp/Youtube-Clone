@@ -1,12 +1,11 @@
 package org.project.youtube.models.user;
 
-import javafx.scene.image.Image;
 import org.project.youtube.models.ClassInfo;
 
 import java.time.LocalDate;
 import java.util.UUID;
 
-public class Account extends ClassInfo
+public class User extends ClassInfo
 {
     //region [ - Attributes - ]
 
@@ -19,6 +18,12 @@ public class Account extends ClassInfo
     String email;
     String password;
 
+    String newFirstName;
+    String newLastName;
+    String newUsername;
+    String newEmail;
+    String newPassword;
+
     LocalDate birthdate;
     LocalDate joinDate;
 
@@ -26,18 +31,18 @@ public class Account extends ClassInfo
 
     Double balance;
 
-    Image profilePicture;
+    String profilePictureURL;
 
     //endregion
 
     //region [ - Constructor - ]
 
-    public Account ()
+    public User ()
     {
         super.className = "account";
     }
 
-    public Account (String firstName, String lastName, String username, String email, String password, LocalDate birthdate)
+    public User (String firstName, String lastName, String username, String email, String password, LocalDate birthdate)
     {
         this.firstName      = firstName;
         this.lastName       = lastName;
@@ -127,6 +132,56 @@ public class Account extends ClassInfo
         this.password = password;
     }
 
+    public String getNewFirstName ()
+    {
+        return newFirstName;
+    }
+
+    public void setNewFirstName (String newFirstName)
+    {
+        this.newFirstName = newFirstName;
+    }
+
+    public String getNewLastName ()
+    {
+        return newLastName;
+    }
+
+    public void setNewLastName (String newLastName)
+    {
+        this.newLastName = newLastName;
+    }
+
+    public String getNewUsername ()
+    {
+        return newUsername;
+    }
+
+    public void setNewUsername (String newUsername)
+    {
+        this.newUsername = newUsername;
+    }
+
+    public String getNewEmail ()
+    {
+        return newEmail;
+    }
+
+    public void setNewEmail (String newEmail)
+    {
+        this.newEmail = newEmail;
+    }
+
+    public String getNewPassword ()
+    {
+        return newPassword;
+    }
+
+    public void setNewPassword (String newPassword)
+    {
+        this.newPassword = newPassword;
+    }
+
     public LocalDate getBirthdate ()
     {
         return birthdate;
@@ -167,14 +222,14 @@ public class Account extends ClassInfo
         this.balance = balance;
     }
 
-    public Image getProfilePicture ()
+    public String getProfilePictureURL ()
     {
-        return profilePicture;
+        return profilePictureURL;
     }
 
-    public void setProfilePicture (Image profilePicture)
+    public void setProfilePictureURL (String profilePictureURL)
     {
-        this.profilePicture = profilePicture;
+        this.profilePictureURL = profilePictureURL;
     }
 
     //endregion
