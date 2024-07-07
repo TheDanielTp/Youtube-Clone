@@ -4,7 +4,8 @@ module org.project.project_wetube {
 
     requires org.kordamp.bootstrapfx.core;
     requires java.sql;
+    requires com.fasterxml.jackson.databind;
 
-    opens org.project.youtube to javafx.fxml;
-    exports org.project.youtube;
+    opens com.wetube to javafx.fxml;
+    exports com.wetube;
 }

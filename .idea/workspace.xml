@@ -4,10 +4,64 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ec566682-672c-4b02-8981-652c66cb3fe3" name="Changes" comment="Updated Database: Added new table to Database">
+    <list default="true" id="ec566682-672c-4b02-8981-652c66cb3fe3" name="Changes" comment="Updated Database: UserDAO class">
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/wetube/client/Client.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/wetube/database/objects/ChannelDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/wetube/database/objects/UserDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/wetube/server/Server.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/wetube/server/Video_receiver.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/wetube/server/Video_sender.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/wetube/util/DatabaseConnection.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/wetube/util/TableCreator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_7_6_2024_10_57_AM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_7_6_2024_10_57_AM__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_7_6_2024_11_17_AM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_7_6_2024_11_17_AM__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_6_2024_7_16_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_6_2024_7_16_PM__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_7_2024_2_14_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_7_2024_2_14_PM__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/youtube/database/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/project/youtube/database/Database.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/youtube/database/objects/PlaylistDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/project/youtube/database/objects/PlaylistDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/youtube/MainApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/MainApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/youtube/client/Client.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/youtube/client/Handle_Server_Response.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/client/Handle_Server_Response.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/youtube/database/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/database/Database.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/youtube/database/objects/CategoryDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/database/objects/CategoryDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/youtube/database/objects/ChannelDAO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/youtube/database/objects/CommentDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/database/objects/CommentDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/youtube/database/objects/CommunityDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/database/objects/CommunityDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/youtube/database/objects/ContentDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/database/objects/ContentDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/youtube/database/objects/PlaylistDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/database/objects/PlaylistDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/youtube/database/objects/PostDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/database/objects/PostDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/youtube/database/objects/UserDAO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/youtube/database/objects/VideoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/database/objects/VideoDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/youtube/models/Category.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/models/Category.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/youtube/models/ClassInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/models/ClassInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/youtube/models/Community.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/models/Community.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/youtube/models/Content.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/models/Content.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/youtube/models/Post.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/models/Post.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/youtube/models/ServerResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/models/ServerResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/youtube/models/channel/Channel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/models/channel/Channel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/youtube/models/channel/Client_channel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/models/channel/Client_channel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/youtube/models/channel/Server_channel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/models/channel/Server_channel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/youtube/models/comment/Client_comment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/models/comment/Client_comment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/youtube/models/comment/Comment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/models/comment/Comment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/youtube/models/comment/Server_comment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/models/comment/Server_comment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/youtube/models/notification/Notification.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/models/notification/Notification.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/youtube/models/notification/Server_notification.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/models/notification/Server_notification.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/youtube/models/playlist/Client_playlist.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/models/playlist/Client_playlist.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/youtube/models/playlist/Playlist.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/models/playlist/Playlist.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/youtube/models/playlist/Server_playlist.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/models/playlist/Server_playlist.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/youtube/models/user/Server_account.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/youtube/models/user/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/models/user/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/youtube/models/user/UserClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/models/user/UserClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/youtube/models/user/UserServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/models/user/UserServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/youtube/models/video/Client_video.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/models/video/Client_video.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/youtube/models/video/Server_video.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/models/video/Server_video.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/youtube/models/video/Video.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/models/video/Video.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/youtube/server/Client_Handler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/server/Client_Handler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/youtube/server/Server.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,7 +86,7 @@
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
-        <option name="mavenHome" value="Use Maven wrapper" />
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
       </MavenGeneralSettings>
     </option>
   </component>
@@ -50,28 +104,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.Client.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;database&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/AP/Project_WeTube&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Client.executor": "Run",
+    "Application.TableCreator.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "database",
+    "kotlin-language-version-configured": "true",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql_aurora_aws",
+      "postgresql"
+    ]
   }
-}</component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="jdk-21.0.2-openjdk-21.0.2-4caba194b151-4f524021" />
-      </set>
-    </attachedChunks>
-  </component>
+}]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -125,47 +179,7 @@
       <option name="project" value="LOCAL" />
       <updated>1720353787159</updated>
     </task>
-    <task id="LOCAL-00007" summary="Updated Database: ChannelDAO class">
-      <option name="closed" value="true" />
-      <created>1720362375490</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1720362375490</updated>
-    </task>
-    <task id="LOCAL-00008" summary="Updated Database: added new methods to UserDAO">
-      <option name="closed" value="true" />
-      <created>1720362413717</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1720362413717</updated>
-    </task>
-    <task id="LOCAL-00009" summary="Updated Database: Fix few methods of UserDAO">
-      <option name="closed" value="true" />
-      <created>1720372539919</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1720372539919</updated>
-    </task>
-    <task id="LOCAL-00010" summary="Updated Database: Fix few methods of ChannelDAO">
-      <option name="closed" value="true" />
-      <created>1720372555754</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1720372555754</updated>
-    </task>
-    <task id="LOCAL-00011" summary="Updated Database: Added new table to Database">
-      <option name="closed" value="true" />
-      <created>1720372576289</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1720372576289</updated>
-    </task>
-    <option name="localTasksCounter" value="12" />
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -186,11 +200,6 @@
     <MESSAGE value="Updated Models Classes" />
     <MESSAGE value="Updated Database class" />
     <MESSAGE value="Updated Database: UserDAO class" />
-    <MESSAGE value="Updated Database: ChannelDAO class" />
-    <MESSAGE value="Updated Database: added new methods to UserDAO" />
-    <MESSAGE value="Updated Database: Fix few methods of UserDAO" />
-    <MESSAGE value="Updated Database: Fix few methods of ChannelDAO" />
-    <MESSAGE value="Updated Database: Added new table to Database" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated Database: Added new table to Database" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated Database: UserDAO class" />
   </component>
 </project>
