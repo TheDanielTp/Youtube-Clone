@@ -62,7 +62,6 @@ public class Client_channel
         send_request ();
     }
 
-
     private void send_request ()
     {
         try
@@ -83,5 +82,4 @@ public class Client_channel
     private void erase_info ()
     {
     }
-
 }

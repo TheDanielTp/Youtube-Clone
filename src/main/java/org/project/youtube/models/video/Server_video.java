@@ -97,7 +97,7 @@ public class Server_video extends Video
 
         PostDAO.add_post (UUID.fromString (super.getVideoURL ()), super.getChannelID (), super.getTitle (), super.getDescription (), UUID.randomUUID (), true);
         serverResponse.add_part ("status", "received");
-        //notification.upload_post();
+        notification.upload_post();
         return serverResponse;
     }
 
