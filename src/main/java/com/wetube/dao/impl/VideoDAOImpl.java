@@ -1,5 +1,6 @@
 package com.wetube.dao.impl;
 
+import com.wetube.model.User;
 import com.wetube.model.Video;
 import com.wetube.util.DatabaseConnection;
 
@@ -170,5 +171,55 @@ public class VideoDAOImpl
             e.printStackTrace ();
         }
         return videos;
+    }
+
+    public List <User> findLikedUsers (Video video)
+    {
+        List <User> users = new ArrayList <> ();
+        String sql = "SELECT * FROM ContentsAction WHERE id = ?";
+        try (Connection conn = DatabaseConnection.getConnection ();
+             PreparedStatement pstmt = conn.prepareStatement (sql))
+        {
+            pstmt.setObject (1, video.getID ());
+            ResultSet rs = pstmt.executeQuery ();
+            UserDAOImpl userDAO = new UserDAOImpl ();
+            while (rs.next ())
+            {
+                if (rs.getBoolean ("liked"))
+                {
+                    users.add (userDAO.findById (rs.getObject ("userID", UUID.class)));
+                }
+            }
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace ();
+        }
+        return users;
+    }
+
+    public List <User> findDislikedUsers (Video video)
+    {
+        List <User> users = new ArrayList <> ();
+        String sql = "SELECT * FROM ContentsAction WHERE id = ?";
+        try (Connection conn = DatabaseConnection.getConnection ();
+             PreparedStatement pstmt = conn.prepareStatement (sql))
+        {
+            pstmt.setObject (1, video.getID ());
+            ResultSet rs = pstmt.executeQuery ();
+            UserDAOImpl userDAO = new UserDAOImpl ();
+            while (rs.next ())
+            {
+                if (! rs.getBoolean ("liked"))
+                {
+                    users.add (userDAO.findById (rs.getObject ("userID", UUID.class)));
+                }
+            }
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace ();
+        }
+        return users;
     }
 }

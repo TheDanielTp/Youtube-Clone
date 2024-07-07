@@ -10,7 +10,6 @@ import java.util.UUID;
 
 public class UserDAOImpl
 {
-
     public void create (User user)
     {
         String sql = "INSERT INTO Users (ID, channelID, firstName, lastName, username, email, password, birthdate, joinDate, isPremium, balance, profilePictureURL) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
