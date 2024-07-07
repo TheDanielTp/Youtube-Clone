@@ -5,7 +5,32 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ec566682-672c-4b02-8981-652c66cb3fe3" name="Changes" comment="Initialized Project">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/project/youtube/controller/CommunistFrontView.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/project/youtube/controller/CommunistSignupFirstView.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/project/youtube/controller/CommunistSignupSecondView.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/project/youtube/controller/SignInController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/project/youtube/controller/VideoPageController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/project/youtube/controller/VideoRecommendationController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/org/youtube/communist-front-view.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/org/youtube/communist-front-view.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/org/youtube/communist-login-view.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/org/youtube/communist-login-view.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/org/youtube/communist-signup-first-view.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/org/youtube/communist-signup-second-view.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/org/youtube/images/Picture2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/org/youtube/images/logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/org/youtube/images/menu.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/org/youtube/images/menuHover.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/org/youtube/images/mic.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/org/youtube/images/micHover.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/org/youtube/images/png-transparent-joseph-stalin-soviet-union-dialectical-and-historical-materialism-stalinism-stalin-celebrities-communism-stalin-png-thumbnail.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/org/youtube/images/profile.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/org/youtube/images/setting.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/org/youtube/images/settingHover.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/org/youtube/images/signin.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/org/youtube/images/signinHover.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/org/youtube/images/signup.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/youtube/MainApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/project/youtube/MainApplication.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,9 +59,9 @@
       </MavenGeneralSettings>
     </option>
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 3
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
   <component name="ProjectId" id="2irRHITZ4w6U1ENbH8rGgw0yzuk" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -47,10 +72,12 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "Application.MainApplication.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "develop",
+    "git-widget-placeholder": "interface",
     "kotlin-language-version-configured": "true"
   }
 }]]></component>
@@ -92,6 +119,7 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Created Repository" />
     <MESSAGE value="Initialized Project" />
     <option name="LAST_COMMIT_MESSAGE" value="Initialized Project" />
