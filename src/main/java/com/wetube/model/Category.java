@@ -1,21 +1,21 @@
-package com.wetube.models;
+package com.wetube.model;
 
 import java.util.UUID;
 
-public class Community
+public class Category
 {
     //region [ - Attributes - ]
 
-    UUID ID;
-    UUID channelID;
+    UUID   ID;
+    String title;
 
     //endregion
 
     //region [ - Constructor - ]
 
-    public Community (UUID channelID)
+    public Category (String title)
     {
-        this.channelID = channelID;
+        this.title = title;
     }
 
     //endregion
@@ -32,14 +32,14 @@ public class Community
         this.ID = ID;
     }
 
-    public UUID getChannelID ()
+    public String getTitle ()
     {
-        return channelID;
+        return title;
     }
 
-    public void setChannelID (UUID channelID)
+    public void setTitle (String title)
     {
-        this.channelID = channelID;
+        this.title = title;
     }
 
     //endregion

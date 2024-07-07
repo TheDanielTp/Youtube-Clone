@@ -1,11 +1,9 @@
-package com.wetube.models.user;
-
-import com.wetube.models.ClassInfo;
+package com.wetube.model;
 
 import java.time.LocalDate;
 import java.util.UUID;
 
-public class User extends ClassInfo
+public class User
 {
     //region [ - Attributes - ]
 
@@ -17,12 +15,6 @@ public class User extends ClassInfo
     String username;
     String email;
     String password;
-
-    String newFirstName;
-    String newLastName;
-    String newUsername;
-    String newEmail;
-    String newPassword;
 
     LocalDate birthdate;
     LocalDate joinDate;
@@ -36,11 +28,6 @@ public class User extends ClassInfo
     //endregion
 
     //region [ - Constructor - ]
-
-    public User ()
-    {
-        super.className = "user";
-    }
 
     public User (String firstName, String lastName, String username, String email, String password, LocalDate birthdate)
     {
@@ -130,56 +117,6 @@ public class User extends ClassInfo
     public void setPassword (String password)
     {
         this.password = password;
-    }
-
-    public String getNewFirstName ()
-    {
-        return newFirstName;
-    }
-
-    public void setNewFirstName (String newFirstName)
-    {
-        this.newFirstName = newFirstName;
-    }
-
-    public String getNewLastName ()
-    {
-        return newLastName;
-    }
-
-    public void setNewLastName (String newLastName)
-    {
-        this.newLastName = newLastName;
-    }
-
-    public String getNewUsername ()
-    {
-        return newUsername;
-    }
-
-    public void setNewUsername (String newUsername)
-    {
-        this.newUsername = newUsername;
-    }
-
-    public String getNewEmail ()
-    {
-        return newEmail;
-    }
-
-    public void setNewEmail (String newEmail)
-    {
-        this.newEmail = newEmail;
-    }
-
-    public String getNewPassword ()
-    {
-        return newPassword;
-    }
-
-    public void setNewPassword (String newPassword)
-    {
-        this.newPassword = newPassword;
     }
 
     public LocalDate getBirthdate ()

@@ -1,6 +1,4 @@
-package com.wetube.models;
-
-import javafx.scene.image.Image;
+package com.wetube.model;
 
 import java.util.UUID;
 
@@ -13,7 +11,7 @@ public class Post extends Content
     String title;
     String description;
 
-    Image image;
+    String imageURL;
 
     int commentsCount;
 
@@ -21,14 +19,14 @@ public class Post extends Content
 
     //region [ - Constructor - ]
 
-    public Post (UUID creatorID, UUID communityID, UUID channelID, String title, String description, Image image, boolean isOnlyComrade)
+    public Post (UUID creatorID, UUID communityID, UUID channelID, String title, String description, String imageURL, boolean isOnlyComrade)
     {
         super (creatorID, channelID, isOnlyComrade);
 
         this.communityID = communityID;
-        this.title = title;
+        this.title       = title;
         this.description = description;
-        this.image = image;
+        this.imageURL    = imageURL;
 
         commentsCount = 0;
     }
@@ -67,14 +65,14 @@ public class Post extends Content
         this.description = description;
     }
 
-    public Image getImage ()
+    public String getImageURL ()
     {
-        return image;
+        return imageURL;
     }
 
-    public void setImage (Image image)
+    public void setImageURL (String imageURL)
     {
-        this.image = image;
+        this.imageURL = imageURL;
     }
 
     public int getCommentsCount ()

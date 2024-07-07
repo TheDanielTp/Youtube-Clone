@@ -1,14 +1,8 @@
-package com.wetube.models;
+package com.wetube.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.wetube.models.channel.Channel;
-import com.wetube.models.notification.Notification;
-import com.wetube.models.video.Video;
-import com.wetube.models.comment.Comment;
-import com.wetube.models.playlist.Playlist;
-import com.wetube.models.user.User;
 
 import java.util.ArrayList;
 import java.util.HashMap;

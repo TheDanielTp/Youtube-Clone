@@ -1,7 +1,4 @@
-package com.wetube.models.video;
-
-import javafx.scene.image.Image;
-import com.wetube.models.Content;
+package com.wetube.model;
 
 import java.util.UUID;
 
@@ -16,7 +13,7 @@ public class Video extends Content
     String dataType;
 
     String videoURL;
-    Image  thumbnail;
+    String thumbnailURL;
 
     int commentsCount;
 
@@ -24,19 +21,15 @@ public class Video extends Content
 
     //region [ - Constructor - ]
 
-    public Video ()
-    {
-        super("video");
-    }
-
-    public Video (UUID creatorID, UUID communityID, UUID channelID, String title, String description, String videoURL, boolean isOnlyComrade)
+    public Video (UUID creatorID, UUID communityID, UUID channelID, String title, String description, String videoURL, String thumbnailURL, boolean isOnlyComrade)
     {
         super (creatorID, channelID, isOnlyComrade);
 
-        this.communityID = communityID;
-        this.title = title;
-        this.description = description;
-        this.videoURL = videoURL;
+        this.communityID  = communityID;
+        this.title        = title;
+        this.description  = description;
+        this.videoURL     = videoURL;
+        this.thumbnailURL = thumbnailURL;
     }
 
     //endregion
@@ -93,14 +86,14 @@ public class Video extends Content
         this.videoURL = videoURL;
     }
 
-    public Image getThumbnail ()
+    public String getThumbnailURL ()
     {
-        return thumbnail;
+        return thumbnailURL;
     }
 
-    public void setThumbnail (Image thumbnail)
+    public void setThumbnailURL (String thumbnailURL)
     {
-        this.thumbnail = thumbnail;
+        this.thumbnailURL = thumbnailURL;
     }
 
     public int getCommentsCount ()

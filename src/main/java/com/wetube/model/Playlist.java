@@ -1,12 +1,10 @@
-package com.wetube.models.playlist;
-
-import com.wetube.models.ClassInfo;
+package com.wetube.model;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.UUID;
 
-public class Playlist extends ClassInfo
+public class Playlist
 {
     //region [ - Attributes - ]
 
@@ -27,11 +25,6 @@ public class Playlist extends ClassInfo
     //endregion
 
     //region [ - Constructor - ]
-
-    public Playlist ()
-    {
-        super.className = "playlist";
-    }
 
     public Playlist (UUID creatorID, UUID channelID, String title, String description, boolean isPublic, boolean isOnlyComrade)
     {

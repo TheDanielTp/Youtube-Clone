@@ -1,13 +1,12 @@
-package com.wetube.models.channel;
+package com.wetube.model;
 
-import com.wetube.models.ClassInfo;
 import javafx.scene.image.Image;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.UUID;
 
-public class Channel extends ClassInfo
+public class Channel
 {
     //region [ - Attributes - ]
 
@@ -35,11 +34,6 @@ public class Channel extends ClassInfo
     //endregion
 
     //region [ - Constructor - ]
-
-    public Channel ()
-    {
-        super.className = "channel";
-    }
 
     public Channel (String name, String description)
     {

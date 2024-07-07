@@ -1,6 +1,4 @@
-package com.wetube.models.comment;
-
-import com.wetube.models.Content;
+package com.wetube.model;
 
 import java.util.UUID;
 
@@ -20,11 +18,6 @@ public class Comment extends Content
     //endregion
 
     //region [ - Constructor - ]
-
-    public Comment ()
-    {
-        super("comment");
-    }
 
     public Comment (UUID contentID, UUID creatorID, String content, boolean isReply)
     {

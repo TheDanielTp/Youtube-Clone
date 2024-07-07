@@ -1,9 +1,9 @@
-package com.wetube.models;
+package com.wetube.model;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-public class Content extends ClassInfo
+public class Content
 {
     //region [ - Attributes - ]
 
@@ -12,7 +12,7 @@ public class Content extends ClassInfo
     UUID channelID;
 
     int likesCount;
-    int dislikesCounts;
+    int dislikesCount;
 
     LocalDateTime creationDate;
 
@@ -22,11 +22,6 @@ public class Content extends ClassInfo
 
     //region [ - Constructor - ]
 
-    public Content (String className)
-    {
-        super.className = className;
-    }
-
     public Content (UUID creatorID, UUID channelID, boolean isOnlyComrade)
     {
         this.creatorID     = creatorID;
@@ -35,8 +30,8 @@ public class Content extends ClassInfo
 
         creationDate  = LocalDateTime.now ();
 
-        likesCount     = 0;
-        dislikesCounts = 0;
+        likesCount    = 0;
+        dislikesCount = 0;
     }
 
     //endregion
@@ -83,14 +78,14 @@ public class Content extends ClassInfo
         this.likesCount = likesCount;
     }
 
-    public int getDislikesCounts ()
+    public int getDislikesCount ()
     {
-        return dislikesCounts;
+        return dislikesCount;
     }
 
-    public void setDislikesCounts (int dislikesCounts)
+    public void setDislikesCount (int dislikesCount)
     {
-        this.dislikesCounts = dislikesCounts;
+        this.dislikesCount = dislikesCount;
     }
 
     public LocalDateTime getCreationDate ()

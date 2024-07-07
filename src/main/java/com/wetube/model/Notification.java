@@ -1,4 +1,4 @@
-package com.wetube.models.notification;
+package com.wetube.model;
 
 import java.time.LocalDateTime;
 import java.util.UUID;

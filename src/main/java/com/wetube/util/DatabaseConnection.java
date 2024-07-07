@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class DatabaseConnection
 {
-    private static final String JDBC_URL = "jdbc:postgresql://localhost:5432/WeTube-DataBase";
+    private static final String JDBC_URL = "jdbc:postgresql://localhost:5432/WeTube";
     private static final String USER     = "postgres";
     private static final String PASSWORD = "123456789";
 
