@@ -42,6 +42,8 @@ public class Database
                 "CREATE TABLE IF NOT EXISTS playlists (ID UUID PRIMARY KEY, creatorID UUID REFERENCES users(ID)," +
                         " channelID UUID REFERENCES channels(ID), title VARCHAR(100), description TEXT," +
                         " isPublic BOOLEAN, isOnlyComrade BOOLEAN, creationDate DATE);",
+                "CREATE TABLE IF NOT EXISTS playlistAdmins (playlistID UUID REFERENCES playlists(ID)," +
+                        " adminID UUID REFERENCES users(ID));",
                 "CREATE TABLE IF NOT EXISTS playlistSubscriptions (playlistID UUID REFERENCES playlists(ID)," +
                         " subscriberID UUID REFERENCES users(ID), subscriptionDate DATE);",
                 "CREATE TABLE IF NOT EXISTS contentAction (ID UUID PRIMARY KEY, contentID UUID REFERENCES contents(ID)," +
