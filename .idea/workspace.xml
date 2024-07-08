@@ -5,23 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ec566682-672c-4b02-8981-652c66cb3fe3" name="Changes" comment="Mark 6, might undo these changes later">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/project/youtube/controller/CommunistLoginController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/project/youtube/controller/MainApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/org/youtube/dark-front-view.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/org/youtube/dark-front-view.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/org/youtube/images/mic2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/org/youtube/images/micGray.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/org/youtube/images/more.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/org/youtube/images/moreGray.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/org/youtube/images/naziWeTube.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/org/youtube/images/signinGray.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/org/youtube/images/signinb.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/youtube/MainApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/youtube/controller/CommunistFrontView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/project/youtube/controller/CommunistFrontController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/youtube/controller/CommunistSignupFirstView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/project/youtube/controller/CommunistSignupFirstView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/youtube/controller/CommunistSignupSecondView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/project/youtube/controller/CommunistSignupSecondView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/youtube/controller/SignInController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/project/youtube/controller/SignInController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/youtube/controller/VideoPageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/project/youtube/controller/VideoPageController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/youtube/controller/VideoRecommendationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/project/youtube/controller/VideoRecommendationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/youtube/communist-front-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/youtube/communist-front-view.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/youtube/communist-login-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/youtube/communist-login-view.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/youtube/communist-signup-first-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/youtube/communist-signup-first-view.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/youtube/communist-signup-second-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/youtube/communist-signup-second-view.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,17 +31,10 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="database_step2" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="MavenImportPreferences">
-    <option name="generalSettings">
-      <MavenGeneralSettings>
-        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
-      </MavenGeneralSettings>
-    </option>
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 3
@@ -61,18 +47,38 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "Application.MainApplication.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "interface",
-    "kotlin-language-version-configured": "true",
-    "node.js.selected.package.tslint": "(autodetect)"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;Application.MainApplication.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;interface&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;
   }
-}]]></component>
+}</component>
+  <component name="RunManager">
+    <configuration name="MainApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.project.youtube.controller.MainApplication" />
+      <module name="Project_WeTube" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.project.youtube.controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.MainApplication" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
