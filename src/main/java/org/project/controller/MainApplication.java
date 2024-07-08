@@ -1,4 +1,4 @@
-package org.project.youtube.controller;
+package org.project.controller;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -22,7 +22,7 @@ public class MainApplication extends Application
     @Override
     public void start (Stage stage) throws Exception
     {
-        FXMLLoader fxmlLoader = new FXMLLoader (MainApplication.class.getResource ("communist-front-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader (MainApplication.class.getResource ("dark-front-view.fxml"));
         Scene scene = new Scene (fxmlLoader.load ());
         stage.setTitle ("WeTube");
         stage.setScene (scene);

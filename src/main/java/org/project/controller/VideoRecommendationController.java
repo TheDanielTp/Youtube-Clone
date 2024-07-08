@@ -1,4 +1,4 @@
-package org.project.youtube.controller;
+package org.project.controller;
 
 public class VideoRecommendationController
 {

@@ -1,4 +1,4 @@
-package org.project.youtube.controller;
+package org.project.controller;
 
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
@@ -166,7 +166,7 @@ public class CommunistFrontController implements Initializable
 
     public void signInButtonClicked (MouseEvent event) throws IOException
     {
-        Parent root = FXMLLoader.load (Objects.requireNonNull (getClass ().getResource ("org/project/wetube/communist-signup-first-view.fxml")));
+        Parent root = FXMLLoader.load (Objects.requireNonNull (getClass ().getResource ("communist-signup-first-view.fxml")));
 
         Stage stage = (Stage) ((Node) event.getSource ()).getScene ().getWindow ();
 

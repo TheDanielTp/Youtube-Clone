@@ -13,13 +13,13 @@
 <?import javafx.scene.shape.SVGPath?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: #000000; -fx-border-color: #000000;" stylesheets="@communist-front-view.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.project.youtube.controller.CommunistFrontController">
+<VBox fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: #000000; -fx-border-color: #000000;" stylesheets="@dark-front-view.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.project.controller.CommunistFrontController">
     <children>
         <HBox prefHeight="0.0" prefWidth="1920.0" style="-fx-background-color: #000000; -fx-border-color: #000000; -fx-border-width: 5;">
             <children>
                 <ImageView fx:id="menuHover" fitHeight="40.0" fitWidth="40.0" onMouseClicked="#menuClick" onMouseEntered="#menuButtonHover" onMouseExited="#menuButtonUnHover" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@controller/images/menuHover.png" />
+                        <Image url="@images/menuGray.png" />
                     </image>
                     <HBox.margin>
                         <Insets left="15.0" top="17.0" />
@@ -27,7 +27,7 @@
                 </ImageView>
                 <ImageView fx:id="menuButton" fitHeight="40.0" fitWidth="40.0" onMouseClicked="#menuClick" onMouseEntered="#menuButtonHover" onMouseExited="#menuButtonUnHover" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@controller/images/menu.png" />
+                        <Image url="@images/menu2.png" />
                     </image>
                     <HBox.margin>
                         <Insets left="-40.0" top="17.0" />
@@ -35,7 +35,7 @@
                 </ImageView>
                 <ImageView fitHeight="36.0" fitWidth="138.0" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@controller/images/naziWeTube.png" />
+                        <Image url="@images/naziWeTube.png" />
                     </image>
                     <HBox.margin>
                         <Insets bottom="20.0" left="15.0" right="100.0" top="20.0" />
@@ -51,7 +51,7 @@
                 </TextField>
                 <ImageView fx:id="micHover" fitHeight="40.0" fitWidth="40.0" onMouseEntered="#micButtonHover" onMouseExited="#micButtonUnHover" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@controller/images/micGray.png" />
+                        <Image url="@images/micGray.png" />
                     </image>
                     <HBox.margin>
                         <Insets left="15.0" top="17.0" />
@@ -59,7 +59,7 @@
                 </ImageView>
                 <ImageView fx:id="micButton" fitHeight="40.0" fitWidth="40.0" onMouseEntered="#micButtonHover" onMouseExited="#micButtonUnHover" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@controller/images/mic2.png" />
+                        <Image url="@images/mic2.png" />
                     </image>
                     <HBox.margin>
                         <Insets left="-40.0" top="17.0" />
@@ -67,7 +67,7 @@
                 </ImageView>
                 <ImageView fx:id="settingHover" fitHeight="40.0" fitWidth="40.0" onMouseEntered="#settingButtonHover" onMouseExited="#settingButtonUnHover" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@controller/images/moreGray.png" />
+                        <Image url="@images/moreGray.png" />
                     </image>
                     <HBox.margin>
                         <Insets left="100.0" top="17.0" />
@@ -75,7 +75,7 @@
                 </ImageView>
                 <ImageView fx:id="settingButton" fitHeight="40.0" fitWidth="40.0" onMouseEntered="#settingButtonHover" onMouseExited="#settingButtonUnHover" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@controller/images/more.png" />
+                        <Image url="@images/more.png" />
                     </image>
                     <HBox.margin>
                         <Insets left="-40.0" right="15.0" top="17.0" />
@@ -83,7 +83,7 @@
                 </ImageView>
                 <ImageView fx:id="signInHover" fitHeight="150.0" fitWidth="100.0" onMouseClicked="#signInButtonClicked" onMouseEntered="#signInButtonHover" onMouseExited="#signInButtonUnHover" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@controller/images/signinGray.png" />
+                        <Image url="@images/signinGray.png" />
                     </image>
                     <HBox.margin>
                         <Insets top="16.0" />
@@ -91,7 +91,7 @@
                 </ImageView>
                 <ImageView fx:id="signInButton" fitHeight="150.0" fitWidth="100.0" onMouseClicked="#signInButtonClicked" onMouseEntered="#signInButtonHover" onMouseExited="#signInButtonUnHover" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@controller/images/signinb.png" />
+                        <Image url="@images/signinb.png" />
                     </image>
                     <HBox.margin>
                         <Insets left="-100.0" right="15.0" top="16.0" />
@@ -329,7 +329,7 @@
                                 </Label>
                                 <ImageView fx:id="signInHover1" fitHeight="150.0" fitWidth="100.0" onMouseClicked="#signInButtonClicked" onMouseEntered="#signInButtonHover1" onMouseExited="#signInButtonUnHover1" onMousePressed="#signInButtonClicked" pickOnBounds="true" preserveRatio="true">
                                     <image>
-                                        <Image url="@controller/images/signinGray.png" />
+                                        <Image url="@images/signinGray.png" />
                                     </image>
                                     <VBox.margin>
                                         <Insets left="20.0" top="10.0" />
@@ -337,7 +337,7 @@
                                 </ImageView>
                                 <ImageView fx:id="signInButton1" fitHeight="150.0" fitWidth="100.0" onMouseClicked="#signInButtonClicked" onMouseEntered="#signInButtonHover1" onMouseExited="#signInButtonUnHover1" onMousePressed="#signInButtonClicked" pickOnBounds="true" preserveRatio="true">
                                     <image>
-                                        <Image url="@controller/images/signinb.png" />
+                                        <Image url="@images/signinb.png" />
                                     </image>
                                     <VBox.margin>
                                         <Insets left="20.0" top="-43.0" />
