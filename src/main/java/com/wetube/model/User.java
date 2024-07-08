@@ -45,6 +45,22 @@ public class User
         balance = 0.0;
     }
 
+    public User (UUID ID, UUID channelID, String firstName, String lastName, String username, String email, String password, LocalDate birthdate, LocalDate joinDate, boolean isPremium, Double balance, String profilePictureURL)
+    {
+        this.ID                = ID;
+        this.channelID         = channelID;
+        this.firstName         = firstName;
+        this.lastName          = lastName;
+        this.username          = username;
+        this.email             = email;
+        this.password          = password;
+        this.birthdate         = birthdate;
+        this.joinDate          = joinDate;
+        this.isPremium         = isPremium;
+        this.balance           = balance;
+        this.profilePictureURL = profilePictureURL;
+    }
+
     //endregion
 
     //region [ - Getters & Setters - ]

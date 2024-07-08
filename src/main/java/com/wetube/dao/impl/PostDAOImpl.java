@@ -1,10 +1,12 @@
 package com.wetube.dao.impl;
 
 import com.wetube.model.Post;
+import com.wetube.model.User;
 import com.wetube.model.Video;
 import com.wetube.util.DatabaseConnection;
 
 import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -80,6 +82,60 @@ public class PostDAOImpl
         }
     }
 
+    public void like (Post post, User user)
+    {
+        String sql = "INSERT INTO ContentsAction (contentID, userID, liked, disliked) VALUES (?, ?, ?, ?)";
+        try (Connection conn = DatabaseConnection.getConnection ();
+             PreparedStatement pstmt = conn.prepareStatement (sql))
+        {
+            pstmt.setObject (1, post.getID ());
+            pstmt.setObject (2, user.getID ());
+            pstmt.setBoolean (3, true);
+            pstmt.setBoolean (4, false);
+            pstmt.executeUpdate ();
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace ();
+        }
+    }
+
+    public void dislike (Post post, User user)
+    {
+        String sql = "INSERT INTO ContentsAction (contentID, userID, liked, disliked) VALUES (?, ?, ?, ?)";
+        try (Connection conn = DatabaseConnection.getConnection ();
+             PreparedStatement pstmt = conn.prepareStatement (sql))
+        {
+            pstmt.setObject (1, post.getID ());
+            pstmt.setObject (2, user.getID ());
+            pstmt.setBoolean (3, false);
+            pstmt.setBoolean (4, true);
+            pstmt.executeUpdate ();
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace ();
+        }
+    }
+
+    public void removeLikeDislike (Post post, User user)
+    {
+        String sql = "INSERT INTO ContentsAction (contentID, userID, liked, disliked) VALUES (?, ?, ?, ?)";
+        try (Connection conn = DatabaseConnection.getConnection ();
+             PreparedStatement pstmt = conn.prepareStatement (sql))
+        {
+            pstmt.setObject (1, post.getID ());
+            pstmt.setObject (2, user.getID ());
+            pstmt.setBoolean (3, false);
+            pstmt.setBoolean (4, false);
+            pstmt.executeUpdate ();
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace ();
+        }
+    }
+
     public Post findById (UUID id)
     {
         String sql = "SELECT * FROM Posts WHERE ID = ?";
@@ -91,13 +147,18 @@ public class PostDAOImpl
             if (rs.next ())
             {
                 return new Post (
+                        rs.getObject ("ID", UUID.class),
                         rs.getObject ("creatorID", UUID.class),
                         rs.getObject ("communityID", UUID.class),
                         rs.getObject ("channelID", UUID.class),
+                        rs.getInt ("likesCount"),
+                        rs.getInt ("dislikesCount"),
+                        rs.getObject ("creationDate", LocalDateTime.class),
+                        rs.getBoolean ("isOnlyComrade"),
                         rs.getString ("title"),
                         rs.getString ("description"),
                         rs.getString ("imageURL"),
-                        rs.getBoolean ("isOnlyComrade")
+                        rs.getInt ("commentsCount")
                 );
             }
         }
@@ -119,13 +180,18 @@ public class PostDAOImpl
             if (rs.next ())
             {
                 return new Post (
+                        rs.getObject ("ID", UUID.class),
                         rs.getObject ("creatorID", UUID.class),
                         rs.getObject ("communityID", UUID.class),
                         rs.getObject ("channelID", UUID.class),
+                        rs.getInt ("likesCount"),
+                        rs.getInt ("dislikesCount"),
+                        rs.getObject ("creationDate", LocalDateTime.class),
+                        rs.getBoolean ("isOnlyComrade"),
                         rs.getString ("title"),
                         rs.getString ("description"),
                         rs.getString ("imageURL"),
-                        rs.getBoolean ("isOnlyComrade")
+                        rs.getInt ("commentsCount")
                 );
             }
         }
@@ -147,13 +213,18 @@ public class PostDAOImpl
             while (rs.next ())
             {
                 posts.add (new Post (
+                        rs.getObject ("ID", UUID.class),
                         rs.getObject ("creatorID", UUID.class),
                         rs.getObject ("communityID", UUID.class),
                         rs.getObject ("channelID", UUID.class),
+                        rs.getInt ("likesCount"),
+                        rs.getInt ("dislikesCount"),
+                        rs.getObject ("creationDate", LocalDateTime.class),
+                        rs.getBoolean ("isOnlyComrade"),
                         rs.getString ("title"),
                         rs.getString ("description"),
                         rs.getString ("imageURL"),
-                        rs.getBoolean ("isOnlyComrade")
+                        rs.getInt ("commentsCount")
                 ));
             }
         }
@@ -162,5 +233,55 @@ public class PostDAOImpl
             e.printStackTrace ();
         }
         return posts;
+    }
+
+    public List <User> findLikedUsers (Post post)
+    {
+        List <User> users = new ArrayList <> ();
+        String      sql   = "SELECT * FROM ContentsAction WHERE id = ?";
+        try (Connection conn = DatabaseConnection.getConnection ();
+             PreparedStatement pstmt = conn.prepareStatement (sql))
+        {
+            pstmt.setObject (1, post.getID ());
+            ResultSet   rs      = pstmt.executeQuery ();
+            UserDAOImpl userDAO = new UserDAOImpl ();
+            while (rs.next ())
+            {
+                if (rs.getBoolean ("liked"))
+                {
+                    users.add (userDAO.findById (rs.getObject ("userID", UUID.class)));
+                }
+            }
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace ();
+        }
+        return users;
+    }
+
+    public List <User> findDislikedUsers (Post post)
+    {
+        List <User> users = new ArrayList <> ();
+        String      sql   = "SELECT * FROM ContentsAction WHERE id = ?";
+        try (Connection conn = DatabaseConnection.getConnection ();
+             PreparedStatement pstmt = conn.prepareStatement (sql))
+        {
+            pstmt.setObject (1, post.getID ());
+            ResultSet   rs      = pstmt.executeQuery ();
+            UserDAOImpl userDAO = new UserDAOImpl ();
+            while (rs.next ())
+            {
+                if (rs.getBoolean ("disliked"))
+                {
+                    users.add (userDAO.findById (rs.getObject ("userID", UUID.class)));
+                }
+            }
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace ();
+        }
+        return users;
     }
 }

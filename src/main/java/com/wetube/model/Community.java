@@ -18,6 +18,12 @@ public class Community
         this.channelID = channelID;
     }
 
+    public Community (UUID ID, UUID channelID)
+    {
+        this.ID = ID;
+        this.channelID = channelID;
+    }
+
     //endregion
 
     //region [ - Getters & Setters - ]

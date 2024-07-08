@@ -1,5 +1,6 @@
 package com.wetube.model;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 public class Video extends Content
@@ -30,6 +31,18 @@ public class Video extends Content
         this.description  = description;
         this.videoURL     = videoURL;
         this.thumbnailURL = thumbnailURL;
+    }
+
+    public Video (UUID ID, UUID creatorID, UUID communityID, UUID channelID, int likesCount, int dislikesCount, LocalDateTime creationDate, boolean isOnlyComrade, String title, String description, String dataType, String videoURL, String thumbnailURL, int commentsCount)
+    {
+        super (ID, creatorID, channelID, likesCount, dislikesCount, creationDate, isOnlyComrade);
+        this.communityID   = communityID;
+        this.title         = title;
+        this.description   = description;
+        this.dataType      = dataType;
+        this.videoURL      = videoURL;
+        this.thumbnailURL  = thumbnailURL;
+        this.commentsCount = commentsCount;
     }
 
     //endregion

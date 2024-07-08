@@ -34,6 +34,17 @@ public class Content
         dislikesCount = 0;
     }
 
+    public Content (UUID ID, UUID creatorID, UUID channelID, int likesCount, int dislikesCount, LocalDateTime creationDate, boolean isOnlyComrade)
+    {
+        this.ID            = ID;
+        this.creatorID     = creatorID;
+        this.channelID     = channelID;
+        this.likesCount    = likesCount;
+        this.dislikesCount = dislikesCount;
+        this.creationDate  = creationDate;
+        this.isOnlyComrade = isOnlyComrade;
+    }
+
     //endregion
 
     //region [ - Getters & Setters - ]

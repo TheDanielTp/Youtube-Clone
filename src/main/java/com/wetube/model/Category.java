@@ -18,6 +18,12 @@ public class Category
         this.title = title;
     }
 
+    public Category (UUID ID, String title)
+    {
+        this.ID = ID;
+        this.title = title;
+    }
+
     //endregion
 
     //region [ - Getters & Setters - ]

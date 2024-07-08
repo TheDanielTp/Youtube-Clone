@@ -37,7 +37,7 @@ public class TableCreator
                                          creationDate DATE,
                                          isVerified BOOLEAN DEFAULT FALSE,
                                          outcome DOUBLE PRECISION DEFAULT 0.0,
-                                         channelPicture BYTEA
+                                         channelPictureURL VARCHAR(255)
                                      );
                                      """;
 
@@ -148,10 +148,11 @@ public class TableCreator
 
         String createContentsActionTable = """
                                      CREATE TABLE IF NOT EXISTS ContentsAction (
-                                     ID UUID PRIMARY KEY,
-                                     contentID UUID,
+                                     contentID UUID PRIMARY KEY,
                                      userID UUID REFERENCES Users(ID),
-                                     liked BOOLEAN
+                                     liked BOOLEAN,
+                                     disliked BOOLEAN,
+                                     PRIMARY KEY (contentID, userID)
                                      );
                                      """;
 

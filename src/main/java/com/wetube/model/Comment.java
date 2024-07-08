@@ -1,5 +1,6 @@
 package com.wetube.model;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 public class Comment extends Content
@@ -29,6 +30,16 @@ public class Comment extends Content
         this.isReply         = isReply;
 
         replyCount = 0;
+    }
+
+    public Comment (UUID ID, UUID contentID, UUID creatorID, UUID channelID, int likesCount, int dislikesCount, LocalDateTime creationDate, boolean isOnlyComrade, UUID parentCommentID, String content, int replyCount, boolean isReply)
+    {
+        super (ID, creatorID, channelID, likesCount, dislikesCount, creationDate, isOnlyComrade);
+        this.contentID       = contentID;
+        this.parentCommentID = parentCommentID;
+        this.content         = content;
+        this.replyCount      = replyCount;
+        this.isReply         = isReply;
     }
 
     //endregion

@@ -21,11 +21,6 @@ public class Notification
 
     //region [ - Constructor - ]
 
-    public Notification ()
-    {
-
-    }
-
     public Notification (UUID userID, UUID contentID, String title)
     {
         this.userID    = userID;
@@ -35,6 +30,16 @@ public class Notification
         receiveDate = LocalDateTime.now ();
 
         isSeen = false;
+    }
+
+    public Notification (UUID ID, UUID userID, UUID contentID, String title, LocalDateTime receiveDate, boolean isSeen)
+    {
+        this.ID = ID;
+        this.userID    = userID;
+        this.contentID = contentID;
+        this.title     = title;
+        this.receiveDate = receiveDate;
+        this.isSeen = isSeen;
     }
 
     //endregion

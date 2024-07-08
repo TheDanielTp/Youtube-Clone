@@ -29,7 +29,7 @@ public class Channel
 
     private Double outcome;
 
-    private Image channelPicture;
+    private String channelPictureURL;
 
     //endregion
 
@@ -48,6 +48,23 @@ public class Channel
         creationDate = LocalDate.now ();
 
         outcome = 0.0;
+    }
+
+    public Channel (UUID ID, UUID userID, String name, String description, int subscribersCount, int totalVideos, int totalViews, int watchTime, ArrayList <UUID> subscribersID, LocalDate creationDate, boolean isVerified, Double outcome, String channelPictureURL)
+    {
+        this.ID                = ID;
+        this.userID            = userID;
+        this.name              = name;
+        this.description       = description;
+        this.subscribersCount  = subscribersCount;
+        this.totalVideos       = totalVideos;
+        this.totalViews        = totalViews;
+        this.watchTime         = watchTime;
+        this.subscribersID     = subscribersID;
+        this.creationDate     = creationDate;
+        this.isVerified       = isVerified;
+        this.outcome           = outcome;
+        this.channelPictureURL = channelPictureURL;
     }
 
     //endregion
@@ -174,14 +191,14 @@ public class Channel
         this.outcome = outcome;
     }
 
-    public Image getChannelPicture ()
+    public String getChannelPictureURL ()
     {
-        return channelPicture;
+        return channelPictureURL;
     }
 
-    public void setChannelPicture (Image channelPicture)
+    public void setChannelPictureURL (String channelPictureURL)
     {
-        this.channelPicture = channelPicture;
+        this.channelPictureURL = channelPictureURL;
     }
 
     //endregion

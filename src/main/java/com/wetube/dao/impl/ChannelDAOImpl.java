@@ -1,16 +1,19 @@
 package com.wetube.dao.impl;
 
 import com.wetube.model.Channel;
+import com.wetube.model.User;
 import com.wetube.util.DatabaseConnection;
+import javafx.scene.image.Image;
 
 import java.sql.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 public class ChannelDAOImpl
 {
-
     public void create (Channel channel)
     {
         String sql = "INSERT INTO Channels (ID, userID, name, description, subscribersCount, totalVideos, totalViews, watchTime, creationDate, isVerified, outcome, channelPicture) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -28,59 +31,13 @@ public class ChannelDAOImpl
             pstmt.setDate (9, Date.valueOf (channel.getCreationDate ()));
             pstmt.setBoolean (10, channel.isVerified ());
             pstmt.setDouble (11, channel.getOutcome ());
-            pstmt.setBytes (12, channel.getChannelPicture () != null ? channel.getChannelPicture ().toString ().getBytes () : null);
+            pstmt.setBytes (12, channel.getChannelPictureURL () != null ? channel.getChannelPictureURL ().toString ().getBytes () : null);
             pstmt.executeUpdate ();
         }
         catch (SQLException e)
         {
             e.printStackTrace ();
         }
-    }
-
-    public Channel findById (UUID id)
-    {
-        String sql = "SELECT * FROM Channels WHERE ID = ?";
-        try (Connection conn = DatabaseConnection.getConnection ();
-             PreparedStatement pstmt = conn.prepareStatement (sql))
-        {
-            pstmt.setObject (1, id);
-            ResultSet rs = pstmt.executeQuery ();
-            if (rs.next ())
-            {
-                return new Channel (
-                        rs.getString ("name"),
-                        rs.getString ("description")
-                );
-            }
-        }
-        catch (SQLException e)
-        {
-            e.printStackTrace ();
-        }
-        return null;
-    }
-
-    public List <Channel> findAll ()
-    {
-        List <Channel> channels = new ArrayList <> ();
-        String         sql      = "SELECT * FROM Channels";
-        try (Connection conn = DatabaseConnection.getConnection ();
-             Statement stmt = conn.createStatement ();
-             ResultSet rs = stmt.executeQuery (sql))
-        {
-            while (rs.next ())
-            {
-                channels.add (new Channel (
-                        rs.getString ("name"),
-                        rs.getString ("description")
-                ));
-            }
-        }
-        catch (SQLException e)
-        {
-            e.printStackTrace ();
-        }
-        return channels;
     }
 
     public void update (Channel channel)
@@ -99,7 +56,7 @@ public class ChannelDAOImpl
             pstmt.setDate (8, Date.valueOf (channel.getCreationDate ()));
             pstmt.setBoolean (9, channel.isVerified ());
             pstmt.setDouble (10, channel.getOutcome ());
-            pstmt.setBytes (11, channel.getChannelPicture () != null ? channel.getChannelPicture ().toString ().getBytes () : null);
+            pstmt.setBytes (11, channel.getChannelPictureURL () != null ? channel.getChannelPictureURL ().toString ().getBytes () : null);
             pstmt.setObject (12, channel.getID ());
             pstmt.executeUpdate ();
         }
@@ -114,19 +71,16 @@ public class ChannelDAOImpl
         try (Connection conn = DatabaseConnection.getConnection ();
              Statement stmt = conn.createStatement ())
         {
-            // Delete related records from other tables
             String deleteVideos      = "DELETE FROM Videos WHERE channelID = '" + id + "'";
             String deletePlaylists   = "DELETE FROM Playlists WHERE channelID = '" + id + "'";
             String deleteComments    = "DELETE FROM Comments WHERE channelID = '" + id + "'";
             String deleteSubscribers = "DELETE FROM Subscribers WHERE channelID = '" + id + "'";
 
-            // Execute deletion in reverse order of dependencies
             stmt.executeUpdate (deleteSubscribers);
             stmt.executeUpdate (deletePlaylists);
             stmt.executeUpdate (deleteVideos);
             stmt.executeUpdate (deleteComments);
 
-            // Delete the channel
             String deleteChannel = "DELETE FROM Channels WHERE ID = '" + id + "'";
             stmt.executeUpdate (deleteChannel);
 
@@ -135,5 +89,126 @@ public class ChannelDAOImpl
         {
             e.printStackTrace ();
         }
+    }
+
+    public void subscribe (User user, Channel channel)
+    {
+        String sql = "INSERT INTO Subscribers (userID, channelID) VALUES (?, ?)";
+        try (Connection conn = DatabaseConnection.getConnection ();
+             PreparedStatement pstmt = conn.prepareStatement (sql))
+        {
+            pstmt.setObject (1, user.getID ());
+            pstmt.setObject (2, channel.getID ());
+            pstmt.executeUpdate ();
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace ();
+        }
+    }
+
+    public void unsubscribe (User user, Channel channel)
+    {
+        try (Connection conn = DatabaseConnection.getConnection ();
+             Statement stmt = conn.createStatement ())
+        {
+            String unsubscribe = "DELETE FROM Subscribers WHERE userID = '" + user.getID () + "' && channelID = '" + channel.getID () + "'";
+            stmt.executeUpdate (unsubscribe);
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace ();
+        }
+    }
+
+    public Channel findById (UUID id)
+    {
+        String sql = "SELECT * FROM Channels WHERE ID = ?";
+        try (Connection conn = DatabaseConnection.getConnection ();
+             PreparedStatement pstmt = conn.prepareStatement (sql))
+        {
+            pstmt.setObject (1, id);
+            ResultSet rs = pstmt.executeQuery ();
+            if (rs.next ())
+            {
+                return new Channel (
+                        rs.getObject ("ID", UUID.class),
+                        rs.getObject ("userID", UUID.class),
+                        rs.getString ("name"),
+                        rs.getString ("description"),
+                        rs.getInt ("subscribersCount"),
+                        rs.getInt ("totalVideos"),
+                        rs.getInt ("totalViews"),
+                        rs.getInt ("watchTime"),
+                        findSubscribers (id),
+                        rs.getObject ("creationDate", LocalDate.class),
+                        rs.getBoolean ("isVerified"),
+                        rs.getDouble ("outcome"),
+                        rs.getString ("channelPicture")
+                        );
+            }
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace ();
+        }
+        return null;
+    }
+
+    public ArrayList <UUID> findSubscribers (UUID id)
+    {
+        ArrayList <UUID> subscribersID = new ArrayList <> ();
+        String         sql      = "SELECT * FROM Subscribers";
+        try (Connection conn = DatabaseConnection.getConnection ();
+             Statement stmt = conn.createStatement ();
+             ResultSet rs = stmt.executeQuery (sql))
+        {
+            while (rs.next ())
+            {
+                if (id.equals (rs.getObject ("channelID", UUID.class)))
+                {
+                    subscribersID.add (rs.getObject ("userID", UUID.class));
+                }
+            }
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace ();
+        }
+        return subscribersID;
+    }
+
+    public List <Channel> findAll ()
+    {
+        List <Channel> channels = new ArrayList <> ();
+        String         sql      = "SELECT * FROM Channels";
+        try (Connection conn = DatabaseConnection.getConnection ();
+             Statement stmt = conn.createStatement ();
+             ResultSet rs = stmt.executeQuery (sql))
+        {
+            while (rs.next ())
+            {
+                channels.add (new Channel (
+                        rs.getObject ("ID", UUID.class),
+                        rs.getObject ("userID", UUID.class),
+                        rs.getString ("name"),
+                        rs.getString ("description"),
+                        rs.getInt ("subscribersCount"),
+                        rs.getInt ("totalVideos"),
+                        rs.getInt ("totalViews"),
+                        rs.getInt ("watchTime"),
+                        findSubscribers (rs.getObject ("ID", UUID.class)),
+                        rs.getObject ("creationDate", LocalDate.class),
+                        rs.getBoolean ("isVerified"),
+                        rs.getDouble ("outcome"),
+                        rs.getString ("channelPicture")
+                ));
+            }
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace ();
+        }
+        return channels;
     }
 }

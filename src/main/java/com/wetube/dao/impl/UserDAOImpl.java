@@ -36,114 +36,6 @@ public class UserDAOImpl
         }
     }
 
-    public User findById (UUID id)
-    {
-        String sql = "SELECT * FROM Users WHERE ID = ?";
-        try (Connection conn = DatabaseConnection.getConnection ();
-             PreparedStatement pstmt = conn.prepareStatement (sql))
-        {
-            pstmt.setObject (1, id);
-            ResultSet rs = pstmt.executeQuery ();
-            if (rs.next ())
-            {
-                return new User (
-                        rs.getString ("firstName"),
-                        rs.getString ("lastName"),
-                        rs.getString ("username"),
-                        rs.getString ("email"),
-                        rs.getString ("password"),
-                        rs.getDate ("birthdate").toLocalDate ()
-                );
-            }
-        }
-        catch (SQLException e)
-        {
-            e.printStackTrace ();
-        }
-        return null;
-    }
-
-    public User findByUsername (String username)
-    {
-        String sql = "SELECT * FROM Users WHERE username = ?";
-        try (Connection conn = DatabaseConnection.getConnection ();
-             PreparedStatement pstmt = conn.prepareStatement (sql))
-        {
-            pstmt.setString (1, username);
-            ResultSet rs = pstmt.executeQuery ();
-            if (rs.next ())
-            {
-                return new User (
-                        rs.getString ("firstName"),
-                        rs.getString ("lastName"),
-                        rs.getString ("username"),
-                        rs.getString ("email"),
-                        rs.getString ("password"),
-                        rs.getDate ("birthdate").toLocalDate ()
-                );
-            }
-        }
-        catch (SQLException e)
-        {
-            e.printStackTrace ();
-        }
-        return null;
-    }
-
-    public User findByEmail (String email)
-    {
-        String sql = "SELECT * FROM Users WHERE email = ?";
-        try (Connection conn = DatabaseConnection.getConnection ();
-             PreparedStatement pstmt = conn.prepareStatement (sql))
-        {
-            pstmt.setString (1, email);
-            ResultSet rs = pstmt.executeQuery ();
-            if (rs.next ())
-            {
-                return new User (
-                        rs.getString ("firstName"),
-                        rs.getString ("lastName"),
-                        rs.getString ("username"),
-                        rs.getString ("email"),
-                        rs.getString ("password"),
-                        rs.getDate ("birthdate").toLocalDate ()
-                );
-            }
-        }
-        catch (SQLException e)
-        {
-            e.printStackTrace ();
-        }
-        return null;
-    }
-
-    public List <User> findAll ()
-    {
-        List <User> users = new ArrayList <> ();
-        String      sql   = "SELECT * FROM Users";
-        try (Connection conn = DatabaseConnection.getConnection ();
-             Statement stmt = conn.createStatement ();
-             ResultSet rs = stmt.executeQuery (sql))
-        {
-            while (rs.next ())
-            {
-                users.add (new User (
-                        rs.getString ("firstName"),
-                        rs.getString ("lastName"),
-                        rs.getString ("username"),
-                        rs.getString ("email"),
-                        rs.getString ("password"),
-                        rs.getDate ("birthdate").toLocalDate ()
-                ));
-            }
-        }
-        catch (SQLException e)
-        {
-            e.printStackTrace ();
-        }
-        return users;
-    }
-
     public void update (User user)
     {
         String sql = "UPDATE Users SET channelID = ?, firstName = ?, lastName = ?, username = ?, email = ?, password = ?, birthdate = ?, joinDate = ?, isPremium = ?, balance = ?, profilePictureURL = ? WHERE ID = ?";
@@ -196,5 +88,137 @@ public class UserDAOImpl
         {
             e.printStackTrace ();
         }
+    }
+
+    public User findById (UUID id)
+    {
+        String sql = "SELECT * FROM Users WHERE ID = ?";
+        try (Connection conn = DatabaseConnection.getConnection ();
+             PreparedStatement pstmt = conn.prepareStatement (sql))
+        {
+            pstmt.setObject (1, id);
+            ResultSet rs = pstmt.executeQuery ();
+            if (rs.next ())
+            {
+                return new User (
+                        rs.getObject ("ID", UUID.class),
+                        rs.getObject ("channelID", UUID.class),
+                        rs.getString ("firstName"),
+                        rs.getString ("lastName"),
+                        rs.getString ("username"),
+                        rs.getString ("email"),
+                        rs.getString ("password"),
+                        rs.getDate ("birthdate").toLocalDate (),
+                        rs.getDate ("joinDate").toLocalDate (),
+                        rs.getBoolean ("isPremium"),
+                        rs.getDouble ("balance"),
+                        rs.getString ("profilePictureURL")
+                );
+            }
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace ();
+        }
+        return null;
+    }
+
+    public User findByUsername (String username)
+    {
+        String sql = "SELECT * FROM Users WHERE username = ?";
+        try (Connection conn = DatabaseConnection.getConnection ();
+             PreparedStatement pstmt = conn.prepareStatement (sql))
+        {
+            pstmt.setString (1, username);
+            ResultSet rs = pstmt.executeQuery ();
+            if (rs.next ())
+            {
+                return new User (
+                        rs.getObject ("ID", UUID.class),
+                        rs.getObject ("channelID", UUID.class),
+                        rs.getString ("firstName"),
+                        rs.getString ("lastName"),
+                        rs.getString ("username"),
+                        rs.getString ("email"),
+                        rs.getString ("password"),
+                        rs.getDate ("birthdate").toLocalDate (),
+                        rs.getDate ("joinDate").toLocalDate (),
+                        rs.getBoolean ("isPremium"),
+                        rs.getDouble ("balance"),
+                        rs.getString ("profilePictureURL")
+                );
+            }
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace ();
+        }
+        return null;
+    }
+
+    public User findByEmail (String email)
+    {
+        String sql = "SELECT * FROM Users WHERE email = ?";
+        try (Connection conn = DatabaseConnection.getConnection ();
+             PreparedStatement pstmt = conn.prepareStatement (sql))
+        {
+            pstmt.setString (1, email);
+            ResultSet rs = pstmt.executeQuery ();
+            if (rs.next ())
+            {
+                return new User (
+                        rs.getObject ("ID", UUID.class),
+                        rs.getObject ("channelID", UUID.class),
+                        rs.getString ("firstName"),
+                        rs.getString ("lastName"),
+                        rs.getString ("username"),
+                        rs.getString ("email"),
+                        rs.getString ("password"),
+                        rs.getDate ("birthdate").toLocalDate (),
+                        rs.getDate ("joinDate").toLocalDate (),
+                        rs.getBoolean ("isPremium"),
+                        rs.getDouble ("balance"),
+                        rs.getString ("profilePictureURL")
+                );
+            }
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace ();
+        }
+        return null;
+    }
+
+    public List <User> findAll ()
+    {
+        List <User> users = new ArrayList <> ();
+        String      sql   = "SELECT * FROM Users";
+        try (Connection conn = DatabaseConnection.getConnection ();
+             Statement stmt = conn.createStatement ();
+             ResultSet rs = stmt.executeQuery (sql))
+        {
+            while (rs.next ())
+            {
+                users.add (new User (
+                        rs.getObject ("ID", UUID.class),
+                        rs.getObject ("channelID", UUID.class),
+                        rs.getString ("firstName"),
+                        rs.getString ("lastName"),
+                        rs.getString ("username"),
+                        rs.getString ("email"),
+                        rs.getString ("password"),
+                        rs.getDate ("birthdate").toLocalDate (),
+                        rs.getDate ("joinDate").toLocalDate (),
+                        rs.getBoolean ("isPremium"),
+                        rs.getDouble ("balance"),
+                        rs.getString ("profilePictureURL")
+                ));
+            }
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace ();
+        }
+        return users;
     }
 }

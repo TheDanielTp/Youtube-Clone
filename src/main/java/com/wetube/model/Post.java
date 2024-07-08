@@ -1,5 +1,6 @@
 package com.wetube.model;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 public class Post extends Content
@@ -29,6 +30,16 @@ public class Post extends Content
         this.imageURL    = imageURL;
 
         commentsCount = 0;
+    }
+
+    public Post (UUID ID, UUID creatorID, UUID communityID, UUID channelID, int likesCount, int dislikesCount, LocalDateTime creationDate, boolean isOnlyComrade, String title, String description, String imageURL, int commentsCount)
+    {
+        super (ID, creatorID, channelID, likesCount, dislikesCount, creationDate, isOnlyComrade);
+        this.communityID   = communityID;
+        this.title         = title;
+        this.description   = description;
+        this.imageURL      = imageURL;
+        this.commentsCount = commentsCount;
     }
 
     //endregion

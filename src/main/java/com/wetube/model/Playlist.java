@@ -38,6 +38,19 @@ public class Playlist
         creationDate = LocalDateTime.now ();
     }
 
+    public Playlist (UUID ID, UUID creatorID, UUID channelID, String title, String description, ArrayList <UUID> videosID, boolean isPublic, boolean isOnlyComrade, LocalDateTime creationDate)
+    {
+        this.ID            = ID;
+        this.creatorID     = creatorID;
+        this.channelID     = channelID;
+        this.title         = title;
+        this.description   = description;
+        this.videosID      = videosID;
+        this.isPublic      = isPublic;
+        this.isOnlyComrade = isOnlyComrade;
+        this.creationDate  = creationDate;
+    }
+
     //endregion
 
     //region [ - Getters & Setters - ]
