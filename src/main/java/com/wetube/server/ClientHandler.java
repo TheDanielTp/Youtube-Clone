@@ -640,12 +640,12 @@ public class ClientHandler extends Thread
         return new Response ("SUCCESS", "Channel deleted successfully", null);
     }
 
-    private Response subscribe (Object[] data)
-    {
-        ChannelDAOImpl channelDAO = new ChannelDAOImpl ();
-
-
-    }
+//    private Response subscribe (Object[] data)
+//    {
+//        ChannelDAOImpl channelDAO = new ChannelDAOImpl ();
+//
+//
+//    }
 
     //endregion
 }

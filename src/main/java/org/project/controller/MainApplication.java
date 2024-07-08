@@ -1,5 +1,6 @@
 package org.project.controller;
 
+import com.wetube.client.Client;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -33,6 +34,7 @@ public class MainApplication extends Application
 
     public static void main(String[] args) throws IOException
     {
+        Client client = new Client ("127.0.0.1", 12345);
         launch ();
     }
 }

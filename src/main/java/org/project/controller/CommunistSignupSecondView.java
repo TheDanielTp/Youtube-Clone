@@ -1,5 +1,6 @@
 package org.project.controller;
 
+import com.wetube.model.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -52,7 +53,9 @@ public class CommunistSignupSecondView
 
             if (checkAge (birthDate))
             {
-                
+                User user = new User (firstName, lastName, CommunistSignupFirstView.username, CommunistSignupFirstView.email, CommunistSignupFirstView.password, birthDate);
+
+
             }
         }
     }
