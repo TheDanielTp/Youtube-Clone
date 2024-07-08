@@ -1,0 +1,30 @@
+.button {
+    -fx-background-color: #000000;
+    -fx-text-fill: #ffffff;
+    -fx-padding: 10px 20px;
+    -fx-border-radius: 25px;
+    -fx-background-radius: 25px;
+    -fx-border-color: #000000;
+    -fx-border-width: 3;
+}
+
+.button:hover {
+    -fx-background-color: #a4a4a4;
+    -fx-text-fill: #ffffff;
+}
+
+.scroll-pane .scroll-bar:horizontal .track {
+    -fx-background-color: #a4a4a4;
+}
+
+.scroll-pane .scroll-bar:horizontal .thumb {
+    -fx-background-color: #000000;
+}
+
+.scroll-pane .scroll-bar:vertical .track {
+    -fx-background-color: #000000;
+}
+
+.scroll-pane .scroll-bar:vertical .thumb {
+    -fx-background-color: #a4a4a4;
+}
