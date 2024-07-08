@@ -4,52 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ec566682-672c-4b02-8981-652c66cb3fe3" name="Changes" comment="Mark 6, might undo these changes later">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/images/menu2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/images/menuGray.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_7_8_2024_1_44_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_7_8_2024_1_44_PM__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_7_8_2024_5_35_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_7_8_2024_5_35_PM__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_7_8_2024_5_36_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_7_8_2024_5_36_PM__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_8_2024_5_30_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_8_2024_5_30_PM__Changes_.xml" afterDir="false" />
+    <list default="true" id="ec566682-672c-4b02-8981-652c66cb3fe3" name="Changes" comment="Mark 5, might undo these changes later">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/mic.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/micGray.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/more.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/moreGray.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/signin.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/signinGray.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/youtube/controller/CommunistFrontController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/project/controller/CommunistFrontController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/youtube/controller/CommunistLoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/project/controller/CommunistLoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/youtube/controller/CommunistSignupFirstView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/project/controller/CommunistSignupFirstView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/youtube/controller/CommunistSignupSecondView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/project/controller/CommunistSignupSecondView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/youtube/controller/MainApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/project/controller/MainApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/youtube/controller/SignInController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/project/controller/SignInController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/youtube/controller/VideoPageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/project/controller/VideoPageController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/youtube/controller/VideoRecommendationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/project/controller/VideoRecommendationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/youtube/communist-front-view.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/communist-front-view.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/youtube/communist-front-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/communist-front-view.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/youtube/communist-login-view.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/communist-login-view.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/youtube/communist-login-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/communist-login-view.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/youtube/communist-signup-first-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/communist-signup-first-view.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/youtube/communist-signup-second-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/communist-signup-second-view.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/youtube/controller/images/Picture2.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/images/Picture2.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/youtube/controller/images/logo.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/images/logo.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/youtube/controller/images/menu.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/images/menu.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/youtube/controller/images/menuHover.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/images/menuHover.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/youtube/controller/images/mic.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/images/mic.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/youtube/controller/images/mic2.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/images/mic2.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/youtube/controller/images/micGray.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/images/micGray.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/youtube/controller/images/micHover.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/images/micHover.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/youtube/controller/images/more.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/images/more.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/youtube/controller/images/moreGray.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/images/moreGray.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/youtube/controller/images/naziWeTube.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/images/naziWeTube.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/youtube/controller/images/png-transparent-joseph-stalin-soviet-union-dialectical-and-historical-materialism-stalinism-stalin-celebrities-communism-stalin-png-thumbnail.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/images/png-transparent-joseph-stalin-soviet-union-dialectical-and-historical-materialism-stalinism-stalin-celebrities-communism-stalin-png-thumbnail.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/youtube/controller/images/profile.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/images/profile.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/youtube/controller/images/setting.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/images/setting.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/youtube/controller/images/settingHover.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/images/settingHover.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/youtube/controller/images/signin.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/images/signin.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/youtube/controller/images/signinGray.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/images/signinGray.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/youtube/controller/images/signinHover.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/images/signinHover.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/youtube/controller/images/signinb.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/images/signinb.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/youtube/controller/images/signup.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/images/signup.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/youtube/dark-front-view.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/dark-front-view.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/youtube/dark-front-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/dark-front-view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wetube/client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/client/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wetube/dao/impl/PostDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/dao/impl/PostDAOImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wetube/dao/impl/VideoDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/dao/impl/VideoDAOImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wetube/server/ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/server/ClientHandler.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,10 +33,32 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="database_step2" />
+        <entry key="$PROJECT_DIR$" value="database" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;TheDanielTp&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/TheDanielTp/Project_WeTube&quot;,
+    &quot;accountId&quot;: &quot;3c65712a-ed86-4130-bb90-4a7622407ea5&quot;
+  }
+}</component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 3
@@ -82,44 +71,42 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "Application.MainApplication.executor": "Run",
-    "Application.org.project.controller.MainApplication.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "interface",
-    "kotlin-language-version-configured": "true",
-    "node.js.selected.package.tslint": "(autodetect)"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Client.executor&quot;: &quot;Run&quot;,
+    &quot;Application.TableCreator.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;database__step2&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;database.query.execution&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql_aurora_aws&quot;,
+      &quot;postgresql&quot;
+    ],
+    &quot;com.intellij.ide.scratch.LRUPopupBuilder$1/SQL Dialect&quot;: [
+      &quot;PostgreSQL&quot;
+    ]
   }
-}]]></component>
-  <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\Java\Projects\Project_WeTube\src\main\java\org\project\controller" />
-      <recent name="D:\Java\Projects\Project_WeTube\src\main\resources\org\youtube\controller" />
-    </key>
-  </component>
-  <component name="RunManager">
-    <configuration name="org.project.controller.MainApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="org.project.controller.MainApplication" />
-      <module name="Project_WeTube" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.project.youtube.controller.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Application.org.project.controller.MainApplication" />
-      </list>
-    </recent_temporary>
+}</component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.18034.62" />
+        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-IU-241.18034.62" />
+      </set>
+    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -129,6 +116,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1720246621657</updated>
+      <workItem from="1720382424785" duration="4557000" />
     </task>
     <task id="LOCAL‎−۰۰۰۰۱" summary="Created Repository">
       <option name="closed" value="true" />
@@ -144,8 +132,55 @@
       <option name="presentableId" value="LOCAL‎−۰۰۰۰۲" />
       <updated>1720246902140</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL‎−۰۰۰۰۳" summary="Initialized Models &amp; Access Objects">
+      <option name="closed" value="true" />
+      <created>1720251963229</created>
+      <option name="number" value="LOCAL‎−۰۰۰۰۳" />
+      <option name="presentableId" value="LOCAL‎−۰۰۰۰۳" />
+      <updated>1720251963229</updated>
+    </task>
+    <task id="LOCAL‎−۰۰۰۰۴" summary="Updated Models Classes">
+      <option name="closed" value="true" />
+      <created>1720265568491</created>
+      <option name="number" value="LOCAL‎−۰۰۰۰۴" />
+      <option name="presentableId" value="LOCAL‎−۰۰۰۰۴" />
+      <updated>1720265568491</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Updated Database class">
+      <option name="closed" value="true" />
+      <created>1720353747360</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1720353747360</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Updated Database: UserDAO class">
+      <option name="closed" value="true" />
+      <created>1720353787159</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1720353787159</updated>
+    </task>
+    <task id="LOCAL‎−۰۰۰۰۷" summary="Mark 1, might undo these changes later">
+      <option name="closed" value="true" />
+      <created>1720381519983</created>
+      <option name="number" value="LOCAL‎−۰۰۰۰۷" />
+      <option name="presentableId" value="LOCAL‎−۰۰۰۰۷" />
+      <updated>1720381519983</updated>
+    </task>
+    <task id="LOCAL‎−۰۰۰۰۸" summary="Mark 5, might undo these changes later">
+      <option name="closed" value="true" />
+      <created>1720442304421</created>
+      <option name="number" value="LOCAL‎−۰۰۰۰۸" />
+      <option name="presentableId" value="LOCAL‎−۰۰۰۰۸" />
+      <updated>1720442304421</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -159,9 +194,14 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Created Repository" />
     <MESSAGE value="Initialized Project" />
-    <option name="LAST_COMMIT_MESSAGE" value="Initialized Project" />
+    <MESSAGE value="Initialized Models &amp; Access Objects" />
+    <MESSAGE value="Updated Models Classes" />
+    <MESSAGE value="Updated Database class" />
+    <MESSAGE value="Updated Database: UserDAO class" />
+    <MESSAGE value="Mark 1, might undo these changes later" />
+    <MESSAGE value="Mark 5, might undo these changes later" />
+    <option name="LAST_COMMIT_MESSAGE" value="Mark 5, might undo these changes later" />
   </component>
 </project>
