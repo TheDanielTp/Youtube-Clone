@@ -4,7 +4,39 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ec566682-672c-4b02-8981-652c66cb3fe3" name="Changes" comment="Updated Interface: Dark signup added" />
+    <list default="true" id="ec566682-672c-4b02-8981-652c66cb3fe3" name="Changes" comment="Updated Interface: Dark signup added">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wetube/server/ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/server/ClientHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/controller/CommunistFrontController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/project/controller/CommunistFrontController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/controller/MainApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/project/controller/MainApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/images/mic.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/images/micGray.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/images/more.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/images/moreGray.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/images/nazi.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/images/nazi.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/images/naziWeTube.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/images/profilePictures/pfp1.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/images/profilePictures/pfp1.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/images/signin.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/images/signinGray.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/project/controller/communist-front-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/communist-front-view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/project/controller/dark-front-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/dark-front-view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/project/controller/images/menu.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/images/menu.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/project/controller/images/menu2.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/images/menu2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/project/controller/images/menuGray.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/images/menuGray.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/project/controller/images/menuHover.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/images/menuHover.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/project/controller/images/mic.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/images/mic.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/project/controller/images/mic2.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/images/mic2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/project/controller/images/micGray.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/images/micGray.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/project/controller/images/micHover.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/images/micHover.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/project/controller/images/more.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/images/more.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/project/controller/images/moreGray.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/images/moreGray.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/project/controller/images/setting.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/images/setting.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/project/controller/images/settingHover.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/images/settingHover.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/project/controller/images/signin.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/images/signin.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/project/controller/images/signinGray.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/images/signinGray.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/project/controller/images/signinHover.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/images/signinHover.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/project/controller/images/signinb.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/images/signinb.png" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -62,7 +94,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "iterface__step2",
+    "git-widget-placeholder": "login",
     "kotlin-language-version-configured": "true",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -84,7 +116,13 @@
     ]
   }
 }]]></component>
-  <component name="RunManager">
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Java\Projects\Project_WeTube\src\main\resources\org\project\controller\images" />
+      <recent name="D:\Java\Projects\Project_WeTube\src\main\resources\org\project\controller" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.Client1">
     <configuration name="Client1" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="org.project.controller.MainApplication" />
       <module name="Project_WeTube" />
@@ -92,6 +130,17 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Server" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="com.wetube.server.Server" />
+      <module name="Project_WeTube" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.Client1" />
+      <item itemvalue="Application.Server" />
+    </list>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>

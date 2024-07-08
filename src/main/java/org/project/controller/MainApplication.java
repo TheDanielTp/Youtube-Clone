@@ -17,6 +17,8 @@ public class MainApplication extends Application
 
     static Client client;
 
+    static boolean DarkTheme = false;
+
     public MainApplication ()
     {
 
@@ -30,7 +32,7 @@ public class MainApplication extends Application
     @Override
     public void start (Stage stage) throws Exception
     {
-        FXMLLoader fxmlLoader = new FXMLLoader (MainApplication.class.getResource ("dark-front-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader (MainApplication.class.getResource ("communist-front-view.fxml"));
         Scene      scene      = new Scene (fxmlLoader.load ());
         stage.setTitle ("WeTube");
         stage.setScene (scene);

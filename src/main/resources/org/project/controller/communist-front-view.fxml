@@ -65,12 +65,28 @@
                   <Insets left="-40.0" top="17.0" />
                </HBox.margin>
             </ImageView>
+            <ImageView fx:id="themeHover" fitHeight="40.0" fitWidth="40.0" onMouseClicked="#themeButtonClicked" onMouseEntered="#themeButtonHover" onMouseExited="#themeButtonUnHover" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/darkthemeHover.png" />
+               </image>
+               <HBox.margin>
+                  <Insets left="100.0" top="17.0" />
+               </HBox.margin>
+            </ImageView>
+            <ImageView fx:id="themeButton" fitHeight="40.0" fitWidth="40.0" onMouseClicked="#themeButtonClicked" onMouseEntered="#themeButtonHover" onMouseExited="#themeButtonUnHover" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/darktheme.png" />
+               </image>
+               <HBox.margin>
+                  <Insets left="-40.0" right="15.0" top="17.0" />
+               </HBox.margin>
+            </ImageView>
             <ImageView fx:id="settingHover" fitHeight="40.0" fitWidth="40.0" onMouseEntered="#settingButtonHover" onMouseExited="#settingButtonUnHover" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/settingHover.png" />
                </image>
                <HBox.margin>
-                  <Insets left="100.0" top="17.0" />
+                  <Insets top="17.0" />
                </HBox.margin>
             </ImageView>
             <ImageView fx:id="settingButton" fitHeight="40.0" fitWidth="40.0" onMouseEntered="#settingButtonHover" onMouseExited="#settingButtonUnHover" pickOnBounds="true" preserveRatio="true">
@@ -262,7 +278,7 @@
                               <Font name="Roboto Medium" size="14.0" />
                            </font>
                            <graphic>
-                              <SVGPath fx:id="homeButtonSVG" content="M4 21 4 10.08 12 3.12 20 10.08 20 21 14 21 14 15 10 15 10 21 4 21Z" fill="WHITE" />
+                              <SVGPath fx:id="homeButtonSVG" content="m12 4.44 7 6.09V20h-4v-6H9v6H5v-9.47l7-6.09m0-1.32-8 6.96V21h6v-6h4v6h6V10.08l-8-6.96z" fill="WHITE" />
                            </graphic>
                         </Button>
                         <Button alignment="TOP_LEFT" mnemonicParsing="false" onMouseEntered="#shortsButtonHover" onMouseExited="#shortsButtonUnHover" prefHeight="21.0" prefWidth="227.0" text="   Shorts">

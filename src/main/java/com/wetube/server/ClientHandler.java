@@ -236,7 +236,7 @@ public class ClientHandler extends Thread
 
             //endregion
 
-            //region [ - Comment Functions - ]
+            //region [ - Channel Functions - ]
 
 
 

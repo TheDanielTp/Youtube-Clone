@@ -129,6 +129,74 @@ public class CommunistFrontController implements Initializable
     }
 
     @FXML
+    ImageView themeButton;
+
+    @FXML
+    ImageView themeHover;
+
+    public void themeButtonClicked (MouseEvent event) throws IOException
+    {
+        if (! MainApplication.DarkTheme)
+        {
+            MainApplication.DarkTheme = true;
+            Parent root = FXMLLoader.load (Objects.requireNonNull (getClass ().getResource ("dark-front-view.fxml")));
+
+            Stage stage = (Stage) ((Node) event.getSource ()).getScene ().getWindow ();
+
+            double width  = stage.getWidth ();
+            double height = stage.getHeight ();
+            double x      = stage.getX ();
+            double y      = stage.getY ();
+
+            Scene scene = new Scene (root);
+
+            stage.setScene (scene);
+
+            stage.setWidth (width);
+            stage.setHeight (height);
+            stage.setX (x);
+            stage.setY (y);
+
+            System.out.println ("> Front: opening dark theme front page");
+        }
+        else
+        {
+            MainApplication.DarkTheme = false;
+            Parent root = FXMLLoader.load (Objects.requireNonNull (getClass ().getResource ("communist-front-view.fxml")));
+
+            Stage stage = (Stage) ((Node) event.getSource ()).getScene ().getWindow ();
+
+            double width  = stage.getWidth ();
+            double height = stage.getHeight ();
+            double x      = stage.getX ();
+            double y      = stage.getY ();
+
+            Scene scene = new Scene (root);
+
+            stage.setScene (scene);
+
+            stage.setWidth (width);
+            stage.setHeight (height);
+            stage.setX (x);
+            stage.setY (y);
+
+            System.out.println ("> Front: opening light theme front page");
+        }
+    }
+
+    public void themeButtonHover ()
+    {
+        themeButton.setVisible (false);
+        themeHover.setVisible (true);
+    }
+
+    public void themeButtonUnHover ()
+    {
+        themeButton.setVisible (true);
+        themeHover.setVisible (false);
+    }
+
+    @FXML
     ImageView settingButton;
 
     @FXML

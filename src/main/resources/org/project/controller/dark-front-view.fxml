@@ -65,12 +65,28 @@
                         <Insets left="-40.0" top="17.0" />
                     </HBox.margin>
                 </ImageView>
+            <ImageView fx:id="themeHover" fitHeight="40.0" fitWidth="40.0" onMouseClicked="#themeButtonClicked" onMouseEntered="#themeButtonHover" onMouseExited="#themeButtonUnHover" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/lightthemeHover.png" />
+               </image>
+               <HBox.margin>
+                  <Insets left="100.0" top="17.0" />
+               </HBox.margin>
+            </ImageView>
+            <ImageView fx:id="themeButton" fitHeight="40.0" fitWidth="40.0" onMouseClicked="#themeButtonClicked" onMouseEntered="#themeButtonHover" onMouseExited="#themeButtonUnHover" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/lighttheme.png" />
+               </image>
+               <HBox.margin>
+                  <Insets left="-40.0" right="15.0" top="17.0" />
+               </HBox.margin>
+            </ImageView>
                 <ImageView fx:id="settingHover" fitHeight="40.0" fitWidth="40.0" onMouseEntered="#settingButtonHover" onMouseExited="#settingButtonUnHover" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@images/moreGray.png" />
                     </image>
                     <HBox.margin>
-                        <Insets left="100.0" top="17.0" />
+                        <Insets top="17.0" />
                     </HBox.margin>
                 </ImageView>
                 <ImageView fx:id="settingButton" fitHeight="40.0" fitWidth="40.0" onMouseEntered="#settingButtonHover" onMouseExited="#settingButtonUnHover" pickOnBounds="true" preserveRatio="true">
