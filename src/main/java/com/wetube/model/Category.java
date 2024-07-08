@@ -1,5 +1,7 @@
 package com.wetube.model;
 
+import com.wetube.dao.impl.CategoryDAOImpl;
+
 import java.io.Serializable;
 import java.util.UUID;
 
@@ -16,6 +18,9 @@ public class Category implements Serializable
 
     public Category (String title)
     {
+        CategoryDAOImpl categoryDAO = new CategoryDAOImpl();
+        ID = categoryDAO.generateID ();
+
         this.title = title;
     }
 

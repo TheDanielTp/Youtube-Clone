@@ -1,5 +1,7 @@
 package com.wetube.model;
 
+import com.wetube.dao.impl.VideoDAOImpl;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -26,6 +28,9 @@ public class Video extends Content implements Serializable
     public Video (UUID creatorID, UUID communityID, UUID channelID, String title, String description, String videoURL, String thumbnailURL, boolean isOnlyComrade)
     {
         super (creatorID, channelID, isOnlyComrade);
+
+        VideoDAOImpl videoDAO = new VideoDAOImpl();
+        ID = videoDAO.generateID ();
 
         this.communityID  = communityID;
         this.title        = title;

@@ -2,14 +2,32 @@ package com.wetube.dao.impl;
 
 import com.wetube.model.Notification;
 import com.wetube.model.Playlist;
+import com.wetube.model.Video;
 import com.wetube.util.DatabaseConnection;
 
 import java.sql.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class NotificationDAOImpl
 {
+    public UUID generateID ()
+    {
+        UUID uuid = UUID.randomUUID ();
+
+        List <Notification> all = findAll ();
+        for (Notification object : all)
+        {
+            if (object.getID () == uuid)
+            {
+                uuid = generateID ();
+            }
+        }
+        return uuid;
+    }
+
     public void create (Notification notification)
     {
         String sql = "INSERT INTO Notifications (ID, userID, contentID, title, receiveDate, isSeen) VALUES (?, ?, ?, ?, ?, ?)";
@@ -89,5 +107,32 @@ public class NotificationDAOImpl
             e.printStackTrace ();
         }
         return null;
+    }
+
+    public List <Notification> findAll ()
+    {
+        List <Notification> notifications = new ArrayList <> ();
+        String       sql    = "SELECT * FROM Notifications";
+        try (Connection conn = DatabaseConnection.getConnection ();
+             Statement stmt = conn.createStatement ();
+             ResultSet rs = stmt.executeQuery (sql))
+        {
+            while (rs.next ())
+            {
+                notifications.add (new Notification (
+                        rs.getObject ("ID", UUID.class),
+                        rs.getObject ("userID", UUID.class),
+                        rs.getObject ("contentID", UUID.class),
+                        rs.getString ("title"),
+                        rs.getObject ("receiveDate", LocalDateTime.class),
+                        rs.getBoolean ("isSeen")
+                ));
+            }
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace ();
+        }
+        return notifications;
     }
 }

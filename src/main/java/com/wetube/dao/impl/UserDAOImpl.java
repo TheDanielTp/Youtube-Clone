@@ -47,10 +47,10 @@ public class UserDAOImpl
     {
         UUID uuid = UUID.randomUUID ();
 
-        List <User> allUsers = findAll ();
-        for (User user : allUsers)
+        List <User> all = findAll ();
+        for (User object : all)
         {
-            if (user.getID () == uuid)
+            if (object.getID () == uuid)
             {
                 uuid = generateID ();
             }

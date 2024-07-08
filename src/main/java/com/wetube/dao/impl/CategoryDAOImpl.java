@@ -1,6 +1,7 @@
 package com.wetube.dao.impl;
 
 import com.wetube.model.Category;
+import com.wetube.model.Channel;
 import com.wetube.model.Community;
 import com.wetube.util.DatabaseConnection;
 
@@ -11,6 +12,21 @@ import java.util.UUID;
 
 public class CategoryDAOImpl
 {
+    public UUID generateID ()
+    {
+        UUID uuid = UUID.randomUUID ();
+
+        List <Category> all = findAll ();
+        for (Category object : all)
+        {
+            if (object.getID () == uuid)
+            {
+                uuid = generateID ();
+            }
+        }
+        return uuid;
+    }
+
     public void create (Category category)
     {
         String sql = "INSERT INTO Categories (ID, title) VALUES (?, ?)";

@@ -12,6 +12,21 @@ import java.util.UUID;
 
 public class PostDAOImpl
 {
+    public UUID generateID ()
+    {
+        UUID uuid = UUID.randomUUID ();
+
+        List <Post> all = findAll ();
+        for (Post object : all)
+        {
+            if (object.getID () == uuid)
+            {
+                uuid = generateID ();
+            }
+        }
+        return uuid;
+    }
+
     public void create (Post post)
     {
         String sql = "INSERT INTO Posts (ID, communityID, creatorID, channelID, title, description, image, commentsCount, likesCount, dislikesCount, creationDate, isOnlyComrade) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";

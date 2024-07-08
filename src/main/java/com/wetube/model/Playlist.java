@@ -1,5 +1,7 @@
 package com.wetube.model;
 
+import com.wetube.dao.impl.PlaylistDAOImpl;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -29,6 +31,9 @@ public class Playlist implements Serializable
 
     public Playlist (UUID creatorID, UUID channelID, String title, String description, boolean isPublic, boolean isOnlyComrade)
     {
+        PlaylistDAOImpl playlistDAO = new PlaylistDAOImpl();
+        ID = playlistDAO.generateID ();
+
         this.creatorID     = creatorID;
         this.channelID     = channelID;
         this.title         = title;

@@ -1,5 +1,8 @@
 package com.wetube.model;
 
+import com.wetube.dao.impl.CommentDAOImpl;
+import com.wetube.dao.impl.CommunityDAOImpl;
+
 import java.io.Serializable;
 import java.util.UUID;
 
@@ -16,6 +19,9 @@ public class Community implements Serializable
 
     public Community (UUID channelID)
     {
+        CommunityDAOImpl communityDAO = new CommunityDAOImpl ();
+        ID = communityDAO.generateID ();
+
         this.channelID = channelID;
     }
 

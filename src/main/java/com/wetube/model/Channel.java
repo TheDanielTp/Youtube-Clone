@@ -1,5 +1,6 @@
 package com.wetube.model;
 
+import com.wetube.dao.impl.ChannelDAOImpl;
 import javafx.scene.image.Image;
 
 import java.io.Serializable;
@@ -38,6 +39,10 @@ public class Channel implements Serializable
 
     public Channel (String name, String description)
     {
+        ChannelDAOImpl channelDAO = new ChannelDAOImpl();
+        ID = channelDAO.generateID ();
+        userID = ID;
+
         this.name        = name;
         this.description = description;
 

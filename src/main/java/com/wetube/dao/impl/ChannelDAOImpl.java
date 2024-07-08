@@ -1,6 +1,7 @@
 package com.wetube.dao.impl;
 
 import com.wetube.model.Channel;
+import com.wetube.model.Comment;
 import com.wetube.model.User;
 import com.wetube.util.DatabaseConnection;
 import javafx.scene.image.Image;
@@ -14,6 +15,21 @@ import java.util.UUID;
 
 public class ChannelDAOImpl
 {
+    public UUID generateID ()
+    {
+        UUID uuid = UUID.randomUUID ();
+
+        List <Channel> all = findAll ();
+        for (Channel object : all)
+        {
+            if (object.getID () == uuid)
+            {
+                uuid = generateID ();
+            }
+        }
+        return uuid;
+    }
+
     public void create (Channel channel)
     {
         String sql = "INSERT INTO Channels (ID, userID, name, description, subscribersCount, totalVideos, totalViews, watchTime, creationDate, isVerified, outcome, channelPicture) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";

@@ -1,5 +1,7 @@
 package com.wetube.model;
 
+import com.wetube.dao.impl.CommentDAOImpl;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -24,6 +26,9 @@ public class Comment extends Content implements Serializable
     public Comment (UUID contentID, UUID creatorID, UUID parentCommentID, String content, boolean isReply)
     {
         super (creatorID, creatorID, false);
+
+        CommentDAOImpl commentDAO = new CommentDAOImpl();
+        ID = commentDAO.generateID ();
 
         this.contentID       = contentID;
         this.parentCommentID = parentCommentID;

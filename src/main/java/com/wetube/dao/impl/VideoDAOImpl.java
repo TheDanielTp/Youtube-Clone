@@ -13,6 +13,21 @@ import java.util.UUID;
 
 public class VideoDAOImpl
 {
+    public UUID generateID ()
+    {
+        UUID uuid = UUID.randomUUID ();
+
+        List <Video> all = findAll ();
+        for (Video object : all)
+        {
+            if (object.getID () == uuid)
+            {
+                uuid = generateID ();
+            }
+        }
+        return uuid;
+    }
+
     public void create (Video video)
     {
         String sql = "INSERT INTO Videos (ID, creatorID, channelID, communityID, title, description, dataType, videoURL, thumbnailURL, commentsCount, likesCount, dislikesCount, creationDate, isOnlyComrade) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";

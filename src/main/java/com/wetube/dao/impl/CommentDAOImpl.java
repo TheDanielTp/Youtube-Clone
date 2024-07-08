@@ -1,9 +1,6 @@
 package com.wetube.dao.impl;
 
-import com.wetube.model.Comment;
-import com.wetube.model.Post;
-import com.wetube.model.User;
-import com.wetube.model.Video;
+import com.wetube.model.*;
 import com.wetube.util.DatabaseConnection;
 
 import java.sql.*;
@@ -14,6 +11,21 @@ import java.util.UUID;
 
 public class CommentDAOImpl
 {
+    public UUID generateID ()
+    {
+        UUID uuid = UUID.randomUUID ();
+
+        List <Comment> all = findAll ();
+        for (Comment object : all)
+        {
+            if (object.getID () == uuid)
+            {
+                uuid = generateID ();
+            }
+        }
+        return uuid;
+    }
+
     public void create (Comment comment)
     {
         String sql = "INSERT INTO Comments (ID, contentID, creatorID, parentCommentID, content, replyCount, creationDate, isReply, likesCount, dislikesCount) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";

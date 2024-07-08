@@ -1,6 +1,7 @@
 package com.wetube.dao.impl;
 
 import com.wetube.model.Playlist;
+import com.wetube.model.Post;
 import com.wetube.model.User;
 import com.wetube.model.Video;
 import com.wetube.util.DatabaseConnection;
@@ -13,6 +14,21 @@ import java.util.UUID;
 
 public class PlaylistDAOImpl
 {
+    public UUID generateID ()
+    {
+        UUID uuid = UUID.randomUUID ();
+
+        List <Playlist> all = findAll ();
+        for (Playlist object : all)
+        {
+            if (object.getID () == uuid)
+            {
+                uuid = generateID ();
+            }
+        }
+        return uuid;
+    }
+
     public void create (Playlist playlist)
     {
         String sql = "INSERT INTO Playlists (ID, creatorID, channelID, title, description, isPublic, isOnlyComrade, creationDate) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";

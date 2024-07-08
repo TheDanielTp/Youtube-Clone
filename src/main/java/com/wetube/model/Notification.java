@@ -1,5 +1,7 @@
 package com.wetube.model;
 
+import com.wetube.dao.impl.NotificationDAOImpl;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -24,6 +26,9 @@ public class Notification implements Serializable
 
     public Notification (UUID userID, UUID contentID, String title)
     {
+        NotificationDAOImpl notificationDAO = new NotificationDAOImpl();
+        ID = notificationDAO.generateID ();
+
         this.userID    = userID;
         this.contentID = contentID;
         this.title     = title;

@@ -1,5 +1,7 @@
 package com.wetube.model;
 
+import com.wetube.dao.impl.PostDAOImpl;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -24,6 +26,9 @@ public class Post extends Content implements Serializable
     public Post (UUID creatorID, UUID communityID, UUID channelID, String title, String description, String imageURL, boolean isOnlyComrade)
     {
         super (creatorID, channelID, isOnlyComrade);
+
+        PostDAOImpl postDAO = new PostDAOImpl();
+        ID = postDAO.generateID ();
 
         this.communityID = communityID;
         this.title       = title;

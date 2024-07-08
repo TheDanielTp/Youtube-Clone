@@ -1,6 +1,7 @@
 package com.wetube.dao.impl;
 
 import com.wetube.model.Community;
+import com.wetube.model.Notification;
 import com.wetube.model.Playlist;
 import com.wetube.util.DatabaseConnection;
 
@@ -11,6 +12,21 @@ import java.util.UUID;
 
 public class CommunityDAOImpl
 {
+    public UUID generateID ()
+    {
+        UUID uuid = UUID.randomUUID ();
+
+        List <Community> all = findAll ();
+        for (Community object : all)
+        {
+            if (object.getID () == uuid)
+            {
+                uuid = generateID ();
+            }
+        }
+        return uuid;
+    }
+
     public void create (Community community)
     {
         String sql = "INSERT INTO Communities (ID, channelID) VALUES (?, ?)";
