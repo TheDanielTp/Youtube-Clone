@@ -11,6 +11,7 @@
 .button:hover {
     -fx-background-color: #a4a4a4;
     -fx-text-fill: #ffffff;
+    -fx-border-color: #a4a4a4;
 }
 
 .scroll-pane .scroll-bar:horizontal .track {
