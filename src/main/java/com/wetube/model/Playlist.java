@@ -1,10 +1,11 @@
 package com.wetube.model;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.UUID;
 
-public class Playlist
+public class Playlist implements Serializable
 {
     //region [ - Attributes - ]
 

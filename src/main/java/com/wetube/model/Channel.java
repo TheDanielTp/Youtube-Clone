@@ -2,11 +2,12 @@ package com.wetube.model;
 
 import javafx.scene.image.Image;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.UUID;
 
-public class Channel
+public class Channel implements Serializable
 {
     //region [ - Attributes - ]
 

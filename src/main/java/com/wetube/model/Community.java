@@ -1,8 +1,9 @@
 package com.wetube.model;
 
+import java.io.Serializable;
 import java.util.UUID;
 
-public class Community
+public class Community implements Serializable
 {
     //region [ - Attributes - ]
 

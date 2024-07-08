@@ -3,13 +3,61 @@ package com.wetube.dao.impl;
 import com.wetube.model.User;
 import com.wetube.util.DatabaseConnection;
 
+import java.io.IOException;
+import java.nio.file.DirectoryStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.UUID;
 
 public class UserDAOImpl
 {
+    public String chooseRandomImage () throws IOException
+    {
+        Path        dir        = Paths.get ("D:\\Java\\Projects\\Project_WeTube\\src\\main\\resources\\images\\profilePictures");
+        List <Path> imageFiles = new ArrayList <> ();
+
+        try (DirectoryStream <Path> stream = Files.newDirectoryStream (dir, "*.{jpg,jpeg,png,gif,bmp}"))
+        {
+            for (Path entry : stream)
+            {
+                imageFiles.add (entry);
+            }
+        }
+        catch (IOException e)
+        {
+            throw new IOException ("Failed to read directory stream", e);
+        }
+
+        if (imageFiles.isEmpty ())
+        {
+            return null;
+        }
+
+        Random random      = new Random ();
+        int    randomIndex = random.nextInt (imageFiles.size ());
+        return imageFiles.get (randomIndex).toString ();
+    }
+
+    public UUID generateID ()
+    {
+        UUID uuid = UUID.randomUUID ();
+
+        List <User> allUsers = findAll ();
+        for (User user : allUsers)
+        {
+            if (user.getID () == uuid)
+            {
+                uuid = generateID ();
+            }
+        }
+        return uuid;
+    }
+
     public void create (User user)
     {
         String sql = "INSERT INTO Users (ID, channelID, firstName, lastName, username, email, password, birthdate, joinDate, isPremium, balance, profilePictureURL) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";

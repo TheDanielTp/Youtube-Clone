@@ -1,9 +1,10 @@
 package com.wetube.model;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-public class Video extends Content
+public class Video extends Content implements Serializable
 {
     //region [ - Attributes - ]
 

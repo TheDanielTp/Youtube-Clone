@@ -16,17 +16,17 @@ public class Client
     private ObjectInputStream  in;
     private ObjectOutputStream out;
 
-    public Client (String serverAddress, int port)
+    public Client (Socket socket)
     {
         try
         {
-            socket = new Socket (serverAddress, port);
+            this.socket = socket;
             out    = new ObjectOutputStream (socket.getOutputStream ());
             in     = new ObjectInputStream (socket.getInputStream ());
         }
         catch (IOException e)
         {
-            e.printStackTrace ();
+            close (socket, out, in);
         }
     }
 
@@ -41,6 +41,29 @@ public class Client
         {
             e.printStackTrace ();
             return null;
+        }
+    }
+
+    private static void close (Socket socket, ObjectOutputStream out, ObjectInputStream in)
+    {
+        try
+        {
+            if (socket != null)
+            {
+                socket.close ();
+            }
+            if (out != null)
+            {
+                out.close ();
+            }
+            if (in != null)
+            {
+                in.close ();
+            }
+        }
+        catch (IOException e)
+        {
+            throw new RuntimeException (e);
         }
     }
 
