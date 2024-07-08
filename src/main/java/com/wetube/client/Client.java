@@ -46,7 +46,7 @@ public class Client
 
     //region [ - User Functions - ]
 
-    public Object[] signUp (User user)
+    public Object[] create (User user)
     {
         Request  request  = new Request ("CREATE_USER", user);
         Response response = sendRequest (request);
@@ -69,7 +69,7 @@ public class Client
         return null;
     }
 
-    public Object[] signIn (String username, String password)
+    public Object[] login (String username, String password)
     {
         Request  request  = new Request ("CHECK_USER", new Object[]{username, password});
         Response response = sendRequest (request);
@@ -92,7 +92,7 @@ public class Client
         return null;
     }
 
-    public Object[] updateUser (User user)
+    public Object[] update (User user)
     {
         Request request  = new Request ("UPDATE_USER", user);
         Response response = sendRequest (request);
@@ -111,7 +111,7 @@ public class Client
         return null;
     }
 
-    public Object[] deleteAccount (User user)
+    public Object[] delete (User user)
     {
         Request request = new Request ("DELETE_USER", user);
         Response response = sendRequest (request);
@@ -142,7 +142,7 @@ public class Client
 
     //region [ - Video Functions - ]
 
-    public Object[] createVideo (Video video)
+    public Object[] create (Video video)
     {
         Request request = new Request ("CREATE_VIDEO", video);
         Response response = sendRequest (request);
@@ -150,7 +150,7 @@ public class Client
         return new Object[]{0, response.getData ()};
     }
 
-    public Object[] updateVideo (Video video)
+    public Object[] update (Video video)
     {
         Request request = new Request ("UPDATE_VIDEO", video);
         Response response = sendRequest (request);
@@ -158,9 +158,57 @@ public class Client
         return new Object[]{0, response.getData ()};
     }
 
-    public Object[] deleteVideo (Video video)
+    public Object[] delete (Video video)
     {
         Request request = new Request ("DELETE_VIDEO", video);
+        Response response = sendRequest (request);
+
+        return new Object[]{0, response.getData ()};
+    }
+
+    public Object[] like (Video video, User user)
+    {
+        Request request = new Request ("LIKE_VIDEO", new Object[]{video, user});
+        Response response = sendRequest (request);
+
+        return new Object[]{0, response.getData ()};
+    }
+
+    public Object[] dislike (Video video, User user)
+    {
+        Request request = new Request ("DISLIKE_VIDEO", new Object[]{video, user});
+        Response response = sendRequest (request);
+
+        return new Object[]{0, response.getData ()};
+    }
+
+    public Object[] getLikedUsers (Video video)
+    {
+        Request request = new Request ("GET_VIDEO_LIKED_USERS", video);
+        Response response = sendRequest (request);
+
+        return new Object[]{0, response.getData ()};
+    }
+
+    public Object[] getDislikedUsers (Video video)
+    {
+        Request request = new Request ("GET_VIDEO_DISLIKED_USERS", video);
+        Response response = sendRequest (request);
+
+        return new Object[]{0, response.getData ()};
+    }
+
+    public Object[] getUserVideos (User user)
+    {
+        Request request = new Request ("GET_USER_VIDEOS", user);
+        Response response = sendRequest (request);
+
+        return new Object[]{0, response.getData ()};
+    }
+
+    public Object[] getAllVideos ()
+    {
+        Request request = new Request ("GET_ALL_VIDEOS", null);
         Response response = sendRequest (request);
 
         return new Object[]{0, response.getData ()};
@@ -170,7 +218,7 @@ public class Client
 
     //region [ - Post Functions - ]
 
-    public Object[] createPost (Post post)
+    public Object[] create (Post post)
     {
         Request request = new Request ("CREATE_POST", post);
         Response response = sendRequest (request);
@@ -178,7 +226,7 @@ public class Client
         return new Object[]{0, response.getData ()};
     }
 
-    public Object[] updatePost (Post post)
+    public Object[] update (Post post)
     {
         Request request = new Request ("UPDATE_POST", post);
         Response response = sendRequest (request);
@@ -186,7 +234,7 @@ public class Client
         return new Object[]{0, response.getData ()};
     }
 
-    public Object[] deletePost (Post post)
+    public Object[] delete (Post post)
     {
         Request request = new Request ("DELETE_POST", post);
         Response response = sendRequest (request);
@@ -194,9 +242,25 @@ public class Client
         return new Object[]{0, response.getData ()};
     }
 
+    public Object[] like (Post post, User user)
+    {
+        Request request = new Request ("LIKE_POST", new Object[]{post, user});
+        Response response = sendRequest (request);
+
+        return new Object[]{0, response.getData ()};
+    }
+
+    public Object[] dislike (Post post, User user)
+    {
+        Request request = new Request ("DISLIKE_POST", new Object[]{post, user});
+        Response response = sendRequest (request);
+
+        return new Object[]{0, response.getData ()};
+    }
+
     public Object[] getLikedUsers (Post post)
     {
-        Request request = new Request ("GET_LIKED_USERS", post);
+        Request request = new Request ("GET_POST_LIKED_USERS", post);
         Response response = sendRequest (request);
 
         return new Object[]{0, response.getData ()};
@@ -204,7 +268,7 @@ public class Client
 
     public Object[] getDislikedUsers (Post post)
     {
-        Request request = new Request ("GET_DISLIKED_USERS", post);
+        Request request = new Request ("GET_POST_DISLIKED_USERS", post);
         Response response = sendRequest (request);
 
         return new Object[]{0, response.getData ()};
@@ -227,4 +291,74 @@ public class Client
     }
 
     //endregion
+
+    //region [ - Comment Functions - ]
+
+    public Object[] create (Comment comment)
+    {
+        Request request = new Request ("CREATE_COMMENT", comment);
+        Response response = sendRequest (request);
+
+        return new Object[]{0, response.getData ()};
+    }
+
+    public Object[] update (Comment comment)
+    {
+        Request request = new Request ("UPDATE_COMMENT", comment);
+        Response response = sendRequest (request);
+
+        return new Object[]{0, response.getData ()};
+    }
+
+    public Object[] delete (Comment comment)
+    {
+        Request request = new Request ("DELETE_COMMENT", comment);
+        Response response = sendRequest (request);
+
+        return new Object[]{0, response.getData ()};
+    }
+
+    public Object[] like (Comment comment, User user)
+    {
+        Request request = new Request ("LIKE_COMMENT", new Object[]{comment, user});
+        Response response = sendRequest (request);
+
+        return new Object[]{0, response.getData ()};
+    }
+
+    public Object[] dislike (Comment comment, User user)
+    {
+        Request request = new Request ("DISLIKE_COMMENT", new Object[]{comment, user});
+        Response response = sendRequest (request);
+
+        return new Object[]{0, response.getData ()};
+    }
+
+    public Object[] getLikedUsers (Comment comment)
+    {
+        Request request = new Request ("GET_POST_LIKED_USERS", comment);
+        Response response = sendRequest (request);
+
+        return new Object[]{0, response.getData ()};
+    }
+
+    public Object[] getDislikedUsers (Comment comment)
+    {
+        Request request = new Request ("GET_POST_DISLIKED_USERS", comment);
+        Response response = sendRequest (request);
+
+        return new Object[]{0, response.getData ()};
+    }
+
+    public Object[] getAllComments ()
+    {
+        Request request = new Request ("GET_ALL_COMMENTS", null);
+        Response response = sendRequest (request);
+
+        return new Object[]{0, response.getData ()};
+    }
+
+    //endregion
+
+    //region [ - Channel Functions - ]
 }

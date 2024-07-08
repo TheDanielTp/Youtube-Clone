@@ -155,6 +155,40 @@ public class ChannelDAOImpl
         return null;
     }
 
+    public Channel findByName (String name)
+    {
+        String sql = "SELECT * FROM Channels WHERE name = ?";
+        try (Connection conn = DatabaseConnection.getConnection ();
+             PreparedStatement pstmt = conn.prepareStatement (sql))
+        {
+            pstmt.setObject (1, name);
+            ResultSet rs = pstmt.executeQuery ();
+            if (rs.next ())
+            {
+                return new Channel (
+                        rs.getObject ("ID", UUID.class),
+                        rs.getObject ("userID", UUID.class),
+                        rs.getString ("name"),
+                        rs.getString ("description"),
+                        rs.getInt ("subscribersCount"),
+                        rs.getInt ("totalVideos"),
+                        rs.getInt ("totalViews"),
+                        rs.getInt ("watchTime"),
+                        findSubscribers (rs.getObject ("ID", UUID.class)),
+                        rs.getObject ("creationDate", LocalDate.class),
+                        rs.getBoolean ("isVerified"),
+                        rs.getDouble ("outcome"),
+                        rs.getString ("channelPicture")
+                );
+            }
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace ();
+        }
+        return null;
+    }
+
     public ArrayList <UUID> findSubscribers (UUID id)
     {
         ArrayList <UUID> subscribersID = new ArrayList <> ();

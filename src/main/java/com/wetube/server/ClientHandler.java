@@ -111,9 +111,34 @@ public class ClientHandler extends Thread
                 return delete ((Video) data);
             }
 
-            case "GET_LIKED_VIDEOS":
+            case "LIKE_VIDEO":
+            {
+                return likeVideo ((Object[]) data);
+            }
+
+            case "DISLIKE_VIDEO":
+            {
+                return dislikeVideo ((Object[]) data);
+            }
+
+            case "GET_VIDEO_LIKED_USERS":
             {
                 return getLikedUsers ((Video) data);
+            }
+
+            case "GET_VIDEO_DISLIKED_USERS":
+            {
+                return getDislikedUsers ((Video) data);
+            }
+
+            case "GET_USER_VIDEOS":
+            {
+                return getUserVideos ((User) data);
+            }
+
+            case "GET_ALL_VIDEOS":
+            {
+                return getAllVideos ();
             }
 
             //endregion
@@ -135,12 +160,22 @@ public class ClientHandler extends Thread
                 return delete ((Post) data);
             }
 
-            case "GET_LIKED_USERS":
+            case "LIKE_POST":
+            {
+                return likePost ((Object[]) data);
+            }
+
+            case "DISLIKE_POST":
+            {
+                return dislikePost ((Object[]) data);
+            }
+
+            case "GET_POST_LIKED_USERS":
             {
                 return getLikedUsers ((Post) data);
             }
 
-            case "GET_DISLIKED_USERS":
+            case "GET_POST_DISLIKED_USERS":
             {
                 return getDislikedUsers ((Post) data);
             }
@@ -154,6 +189,56 @@ public class ClientHandler extends Thread
             {
                 return getAllPosts ();
             }
+
+            //endregion
+
+            //region [ - Comment Functions - ]
+
+            case "CREATE_COMMENT":
+            {
+                return create ((Comment) data);
+            }
+
+            case "UPDATE_COMMENT":
+            {
+                return update ((Comment) data);
+            }
+
+            case "DELETE_COMMENT":
+            {
+                return delete ((Comment) data);
+            }
+
+            case "LIKE_COMMENT":
+            {
+                return likeComment ((Object[]) data);
+            }
+
+            case "DISLIKE_COMMENT":
+            {
+                return dislikeComment ((Object[]) data);
+            }
+
+            case "GET_COMMENT_LIKED_USERS":
+            {
+                return getLikedUsers ((Comment) data);
+            }
+
+            case "GET_COMMENT_DISLIKED_USERS":
+            {
+                return getDislikedUsers ((Comment) data);
+            }
+
+            case "GET_ALL_COMMENTS":
+            {
+                return getAllComments ();
+            }
+
+            //endregion
+
+            //region [ - Comment Functions - ]
+
+
 
             //endregion
 
@@ -258,7 +343,7 @@ public class ClientHandler extends Thread
         VideoDAOImpl videoDAO = new VideoDAOImpl ();
         videoDAO.update (video);
 
-        return new Response ("SUCCESS", "Video updated successfully", null);
+        return new Response ("SUCCESS", "Video updated successfully", video);
     }
 
     private Response delete (Video video)
@@ -267,6 +352,42 @@ public class ClientHandler extends Thread
         videoDAO.delete (video.getID ());
 
         return new Response ("SUCCESS", "Video deleted successfully", null);
+    }
+
+    private Response likeVideo (Object[] data)
+    {
+        Video video = (Video) data[0];
+        User user = (User) data[1];
+
+        VideoDAOImpl videoDAO = new VideoDAOImpl ();
+        if (videoDAO.findLikedUsers (video).contains (user))
+        {
+            videoDAO.removeLikeDislike (video, user);
+            return new Response ("SUCCESS", "Like removed successfully", null);
+        }
+        else
+        {
+            videoDAO.like (video, user);
+            return new Response ("SUCCESS", "Like added successfully", null);
+        }
+    }
+
+    private Response dislikeVideo (Object[] data)
+    {
+        Video video = (Video) data[0];
+        User user = (User) data[1];
+
+        VideoDAOImpl videoDAO = new VideoDAOImpl ();
+        if (videoDAO.findDislikedUsers (video).contains (user))
+        {
+            videoDAO.removeLikeDislike (video, user);
+            return new Response ("SUCCESS", "Dislike removed successfully", null);
+        }
+        else
+        {
+            videoDAO.dislike (video, user);
+            return new Response ("SUCCESS", "Dislike added successfully", null);
+        }
     }
 
     private Response getLikedUsers (Video video)
@@ -329,6 +450,42 @@ public class ClientHandler extends Thread
         return new Response ("SUCCESS", "Post deleted successfully", null);
     }
 
+    private Response likePost (Object[] data)
+    {
+        Post post = (Post) data[0];
+        User user = (User) data[1];
+
+        PostDAOImpl postDAO = new PostDAOImpl ();
+        if (postDAO.findLikedUsers (post).contains (user))
+        {
+            postDAO.removeLikeDislike (post, user);
+            return new Response ("SUCCESS", "Like removed successfully", null);
+        }
+        else
+        {
+            postDAO.like (post, user);
+            return new Response ("SUCCESS", "Like added successfully", null);
+        }
+    }
+
+    private Response dislikePost (Object[] data)
+    {
+        Post post = (Post) data[0];
+        User user = (User) data[1];
+
+        PostDAOImpl postDAO = new PostDAOImpl ();
+        if (postDAO.findDislikedUsers (post).contains (user))
+        {
+            postDAO.removeLikeDislike (post, user);
+            return new Response ("SUCCESS", "Dislike removed successfully", null);
+        }
+        else
+        {
+            postDAO.dislike (post, user);
+            return new Response ("SUCCESS", "Dislike added successfully", null);
+        }
+    }
+
     private Response getLikedUsers (Post post)
     {
         PostDAOImpl postDAO = new PostDAOImpl ();
@@ -359,6 +516,135 @@ public class ClientHandler extends Thread
 
         List<Post> posts = postDAO.findAll ();
         return new Response ("SUCCESS", "Posts found successfully", posts);
+    }
+
+    //endregion
+
+    //region [ - Comment Functions - ]
+
+    private Response create (Comment comment)
+    {
+        CommentDAOImpl commentDAO = new CommentDAOImpl ();
+        commentDAO.create (comment);
+
+        return new Response ("SUCCESS", "Comment created successfully", comment);
+    }
+
+    private Response update (Comment comment)
+    {
+        CommentDAOImpl commentDAO = new CommentDAOImpl ();
+        commentDAO.update (comment);
+
+        return new Response ("SUCCESS", "Comment updated successfully", comment);
+    }
+
+    private Response delete (Comment comment)
+    {
+        CommentDAOImpl commentDAO = new CommentDAOImpl ();
+        commentDAO.delete (comment.getID ());
+
+        return new Response ("SUCCESS", "Comment deleted successfully", null);
+    }
+
+    private Response likeComment (Object[] data)
+    {
+        Comment comment = (Comment) data[0];
+        User user = (User) data[1];
+
+        CommentDAOImpl commentDAO = new CommentDAOImpl ();
+        if (commentDAO.findLikedUsers (comment).contains (user))
+        {
+            commentDAO.removeLikeDislike (comment, user);
+            return new Response ("SUCCESS", "Like removed successfully", null);
+        }
+        else
+        {
+            commentDAO.like (comment, user);
+            return new Response ("SUCCESS", "Like added successfully", null);
+        }
+    }
+
+    private Response dislikeComment (Object[] data)
+    {
+        Comment comment = (Comment) data[0];
+        User user = (User) data[1];
+
+        CommentDAOImpl commentDAO = new CommentDAOImpl ();
+        if (commentDAO.findDislikedUsers (comment).contains (user))
+        {
+            commentDAO.removeLikeDislike (comment, user);
+            return new Response ("SUCCESS", "Dislike removed successfully", null);
+        }
+        else
+        {
+            commentDAO.dislike (comment, user);
+            return new Response ("SUCCESS", "Dislike added successfully", null);
+        }
+    }
+
+    private Response getLikedUsers (Comment comment)
+    {
+        CommentDAOImpl commentDAO = new CommentDAOImpl ();
+        List<User> likedUsers = commentDAO.findLikedUsers (comment);
+
+        return new Response ("SUCCESS", "Liked users found successfully", likedUsers);
+    }
+
+    private Response getDislikedUsers (Comment comment)
+    {
+        CommentDAOImpl commentDAO    = new CommentDAOImpl ();
+        List <User>    dislikedUsers = commentDAO.findDislikedUsers (comment);
+
+        return new Response ("SUCCESS", "Disliked users found successfully", dislikedUsers);
+    }
+
+    private Response getAllComments ()
+    {
+        CommentDAOImpl commentDAO = new CommentDAOImpl ();
+        List<Comment> comments = commentDAO.findAll ();
+
+        return new Response ("SUCCESS", "Comments found successfully", comments);
+    }
+
+    //endregion
+
+    //region [ - Channel Functions - ]
+
+    private Response create (Channel channel)
+    {
+        ChannelDAOImpl channelDAO = new ChannelDAOImpl ();
+
+        Channel findChannelByName = channelDAO.findById (channel.getID ());
+        if (findChannelByName != null)
+        {
+            return new Response ("ERROR", "Channel already exists");
+        }
+
+        channelDAO.create (channel);
+        return new Response ("SUCCESS", "Channel created successfully", channel);
+    }
+
+    private Response update (Channel channel)
+    {
+        ChannelDAOImpl channelDAO = new ChannelDAOImpl ();
+        channelDAO.update (channel);
+
+        return new Response ("SUCCESS", "Channel updated successfully", channel);
+    }
+
+    private Response delete (Channel channel)
+    {
+        ChannelDAOImpl channelDAO = new ChannelDAOImpl ();
+        channelDAO.delete (channel.getID ());
+
+        return new Response ("SUCCESS", "Channel deleted successfully", null);
+    }
+
+    private Response subscribe (Object[] data)
+    {
+        ChannelDAOImpl channelDAO = new ChannelDAOImpl ();
+
+
     }
 
     //endregion
