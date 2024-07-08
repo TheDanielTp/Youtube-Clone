@@ -4,18 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ec566682-672c-4b02-8981-652c66cb3fe3" name="Changes" comment="Mark 6, might undo these changes later">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/org/youtube/dark-front-view.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/org/youtube/dark-front-view.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/org/youtube/images/mic2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/org/youtube/images/micGray.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/org/youtube/images/more.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/org/youtube/images/moreGray.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/org/youtube/images/naziWeTube.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/org/youtube/images/signinGray.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/org/youtube/images/signinb.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="ec566682-672c-4b02-8981-652c66cb3fe3" name="Changes" comment="Updated Interface: Dark front view" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -59,6 +48,11 @@
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\AP\Project_WeTube\src\main\resources\org\youtube\controller" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="MainApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.project.youtube.controller.MainApplication" />
@@ -102,7 +96,23 @@
       <option name="presentableId" value="LOCAL‎−۰۰۰۰۲" />
       <updated>1720246902140</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Updated Interface: Dark fron view">
+      <option name="closed" value="true" />
+      <created>1720450915068</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1720450915068</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Updated Interface: Dark front view">
+      <option name="closed" value="true" />
+      <created>1720450992839</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1720450992839</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -120,6 +130,8 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Created Repository" />
     <MESSAGE value="Initialized Project" />
-    <option name="LAST_COMMIT_MESSAGE" value="Initialized Project" />
+    <MESSAGE value="Updated Interface: Dark fron view" />
+    <MESSAGE value="Updated Interface: Dark front view" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated Interface: Dark front view" />
   </component>
 </project>
