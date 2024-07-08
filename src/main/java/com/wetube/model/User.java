@@ -1,9 +1,13 @@
 package com.wetube.model;
 
+import com.wetube.dao.impl.UserDAOImpl;
+
+import java.io.IOException;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.UUID;
 
-public class User
+public class User implements Serializable
 {
     //region [ - Attributes - ]
 
@@ -31,18 +35,32 @@ public class User
 
     public User (String firstName, String lastName, String username, String email, String password, LocalDate birthdate)
     {
-        this.firstName      = firstName;
-        this.lastName       = lastName;
-        this.username       = username;
-        this.email          = email;
-        this.password       = password;
-        this.birthdate      = birthdate;
+        UserDAOImpl userDAO = new UserDAOImpl();
+
+        ID = userDAO.generateID();
+        channelID = ID;
+
+        this.firstName = firstName;
+        this.lastName  = lastName;
+        this.username  = username;
+        this.email     = email;
+        this.password  = password;
+        this.birthdate = birthdate;
 
         joinDate = LocalDate.now ();
 
         isPremium = false;
 
         balance = 0.0;
+
+        try
+        {
+            profilePictureURL = userDAO.chooseRandomImage ();
+        }
+        catch (IOException e)
+        {
+            throw new RuntimeException (e);
+        }
     }
 
     public User (UUID ID, UUID channelID, String firstName, String lastName, String username, String email, String password, LocalDate birthdate, LocalDate joinDate, boolean isPremium, Double balance, String profilePictureURL)

@@ -4,18 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ec566682-672c-4b02-8981-652c66cb3fe3" name="Changes" comment="Mark 5, might undo these changes later">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_7_6_2024_10_57_AM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_7_6_2024_10_57_AM__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_7_6_2024_11_17_AM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_7_6_2024_11_17_AM__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_7_8_2024_1_44_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_7_8_2024_1_44_PM__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_7_8_2024_5_35_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_7_8_2024_5_35_PM__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_7_8_2024_5_36_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_7_8_2024_5_36_PM__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_6_2024_7_16_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_6_2024_7_16_PM__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_7_2024_2_14_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_7_2024_2_14_PM__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_8_2024_5_30_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_8_2024_5_30_PM__Changes_.xml" afterDir="false" />
+    <list default="true" id="ec566682-672c-4b02-8981-652c66cb3fe3" name="Changes" comment="Project Next Step">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/profilePictures/pfp1.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wetube/server/ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/server/ClientHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wetube/client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/client/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wetube/dao/impl/UserDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/dao/impl/UserDAOImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wetube/model/Category.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/model/Category.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wetube/model/Channel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/model/Channel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wetube/model/Comment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/model/Comment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wetube/model/Community.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/model/Community.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wetube/model/Content.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/model/Content.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wetube/model/Notification.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/model/Notification.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wetube/model/Playlist.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/model/Playlist.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wetube/model/Post.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/model/Post.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wetube/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/model/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wetube/model/Video.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/model/Video.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/controller/CommunistSignupFirstView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/project/controller/CommunistSignupFirstView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/project/controller/CommunistSignupSecondView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/project/controller/CommunistSignupSecondView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/project/controller/MainApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/project/controller/MainApplication.java" afterDir="false" />
     </list>
@@ -34,7 +38,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="database" />
+        <entry key="$PROJECT_DIR$" value="develop" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -75,13 +79,15 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.Client.executor": "Run",
+    "Application.Client1.executor": "Run",
+    "Application.Client2.executor": "Run",
     "Application.MainApplication.executor": "Run",
     "Application.Server.executor": "Run",
     "Application.TableCreator.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "develop",
+    "git-widget-placeholder": "login",
     "kotlin-language-version-configured": "true",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -103,7 +109,7 @@
     ]
   }
 }]]></component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.Client1">
     <configuration name="Client1" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="org.project.controller.MainApplication" />
       <module name="Project_WeTube" />
@@ -111,6 +117,25 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Client2" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="org.project.controller.MainApplication" />
+      <module name="Project_WeTube" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Server" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="com.wetube.server.Server" />
+      <module name="Project_WeTube" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.Client1" />
+      <item itemvalue="Application.Server" />
+      <item itemvalue="Application.Client2" />
+    </list>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -188,7 +213,14 @@
       <option name="presentableId" value="LOCAL‎−۰۰۰۰۸" />
       <updated>1720442304421</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL‎−۰۰۰۰۹" summary="Project Next Step">
+      <option name="closed" value="true" />
+      <created>1720454626391</created>
+      <option name="number" value="LOCAL‎−۰۰۰۰۹" />
+      <option name="presentableId" value="LOCAL‎−۰۰۰۰۹" />
+      <updated>1720454626391</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -214,6 +246,7 @@
     <MESSAGE value="Updated Database: UserDAO class" />
     <MESSAGE value="Mark 1, might undo these changes later" />
     <MESSAGE value="Mark 5, might undo these changes later" />
-    <option name="LAST_COMMIT_MESSAGE" value="Mark 5, might undo these changes later" />
+    <MESSAGE value="Project Next Step" />
+    <option name="LAST_COMMIT_MESSAGE" value="Project Next Step" />
   </component>
 </project>

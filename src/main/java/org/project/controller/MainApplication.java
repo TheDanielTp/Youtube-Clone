@@ -15,26 +15,34 @@ public class MainApplication extends Application
     private static BufferedReader bufferedReader;
     private static BufferedWriter bufferedWriter;
 
+    static Client client;
+
     public MainApplication ()
     {
 
+    }
+
+    public MainApplication (Client client)
+    {
+        this.client = client;
     }
 
     @Override
     public void start (Stage stage) throws Exception
     {
         FXMLLoader fxmlLoader = new FXMLLoader (MainApplication.class.getResource ("dark-front-view.fxml"));
-        Scene scene = new Scene (fxmlLoader.load ());
+        Scene      scene      = new Scene (fxmlLoader.load ());
         stage.setTitle ("WeTube");
         stage.setScene (scene);
         stage.setWidth (960);
         stage.setHeight (540);
-        stage.show();
+        stage.show ();
     }
 
-    public static void main(String[] args) throws IOException
+    public static void main (String[] args) throws IOException
     {
-        Client client = new Client ("127.0.0.1", 12345);
+        Socket socket = new Socket ("127.0.0.1", 12345);
+        client = new Client (socket);
         launch ();
     }
 }

@@ -1,5 +1,6 @@
 package org.project.controller;
 
+import com.wetube.dao.impl.UserDAOImpl;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -90,6 +91,12 @@ public class CommunistSignupFirstView
             return 1;
         }
 
+        UserDAOImpl userDAO = new UserDAOImpl ();
+        if (userDAO.findByUsername (username) != null)
+        {
+            return 2;
+        }
+
         return 0;
     }
 
@@ -104,6 +111,12 @@ public class CommunistSignupFirstView
         {
             emailError1.setVisible (true);
             return 1;
+        }
+
+        UserDAOImpl userDAO = new UserDAOImpl ();
+        if (userDAO.findByEmail (email) != null)
+        {
+            return 2;
         }
 
         return 0;

@@ -17,6 +17,8 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Objects;
 
+import static org.project.controller.MainApplication.client;
+
 public class CommunistSignupSecondView
 {
     //region--------------------------------------------------SignUp Functions--------------------------------------------------
@@ -42,8 +44,8 @@ public class CommunistSignupSecondView
     {
         hideErrors ();
 
-        firstName      = firstNameField.getText ();
-        lastName = lastNameField.getText ();
+        firstName = firstNameField.getText ();
+        lastName  = lastNameField.getText ();
         birthDate = birthField.getValue ();
         joinDate  = LocalDate.now ();
 
@@ -55,7 +57,22 @@ public class CommunistSignupSecondView
             {
                 User user = new User (firstName, lastName, CommunistSignupFirstView.username, CommunistSignupFirstView.email, CommunistSignupFirstView.password, birthDate);
 
-
+                Object[] signUpResponse = client.create (user);
+                if (signUpResponse != null)
+                {
+                    if ((int) signUpResponse[0] == 1)
+                    {
+                        return;
+                    }
+                    if ((int) signUpResponse[0] == 2)
+                    {
+                        return;
+                    }
+                    if ((int) signUpResponse[0] == 0)
+                    {
+                        System.out.println ("> Front: User sign up successful");
+                    }
+                }
             }
         }
     }
