@@ -1,5 +1,6 @@
 package com.wetube.dao.impl;
 
+import com.wetube.model.Post;
 import com.wetube.model.User;
 import com.wetube.model.Video;
 import com.wetube.util.DatabaseConnection;
@@ -244,6 +245,49 @@ public class VideoDAOImpl
             e.printStackTrace ();
         }
         return videos;
+    }
+
+    public List <Video> findByUser (UUID id)
+    {
+        List <Video> videos = new ArrayList <> ();
+        String      sql   = "SELECT * FROM Posts";
+        try (Connection conn = DatabaseConnection.getConnection ();
+             Statement stmt = conn.createStatement ();
+             ResultSet rs = stmt.executeQuery (sql))
+        {
+            while (rs.next ())
+            {
+                videos.add (new Video (
+                        rs.getObject ("ID", UUID.class),
+                        rs.getObject ("creatorID", UUID.class),
+                        rs.getObject ("communityID", UUID.class),
+                        rs.getObject ("channelID", UUID.class),
+                        rs.getInt ("likesCount"),
+                        rs.getInt ("dislikesCount"),
+                        rs.getObject ("creationDate", LocalDateTime.class),
+                        rs.getBoolean ("isOnlyComrade"),
+                        rs.getString ("title"),
+                        rs.getString ("description"),
+                        rs.getString ("dataType"),
+                        rs.getString ("videoURL"),
+                        rs.getString ("thumbnailURL"),
+                        rs.getInt ("commentsCount")
+                ));
+            }
+        }
+        catch(SQLException e)
+        {
+            e.printStackTrace ();
+        }
+        List <Video> userVideos = new ArrayList <> ();
+        for (Video video : videos)
+        {
+            if (video.getCreatorID () == id)
+            {
+                userVideos.add (video);
+            }
+        }
+        return userVideos;
     }
 
     public List <User> findLikedUsers (Video video)

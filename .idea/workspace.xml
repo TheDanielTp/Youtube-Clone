@@ -4,34 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ec566682-672c-4b02-8981-652c66cb3fe3" name="Changes" comment="Mark 1, might undo these changes later">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/wetube/client/Client.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/wetube/dao/impl/CategoryDAOImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/wetube/dao/impl/CommunityDAOImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/wetube/dao/impl/NotificationDAOImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/wetube/dao/impl/PlaylistDAOImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/wetube/network/Request.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/wetube/network/Response.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/wetube/server/ClientHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/wetube/server/Server.java" afterDir="false" />
+    <list default="true" id="ec566682-672c-4b02-8981-652c66cb3fe3" name="Changes" comment="Mark 5, might undo these changes later">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/mic.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/micGray.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/more.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/moreGray.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/signin.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/signinGray.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wetube/dao/impl/ChannelDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/dao/impl/ChannelDAOImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wetube/dao/impl/CommentDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/dao/impl/CommentDAOImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wetube/client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/client/Client.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/wetube/dao/impl/PostDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/dao/impl/PostDAOImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wetube/dao/impl/UserDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/dao/impl/UserDAOImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/wetube/dao/impl/VideoDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/dao/impl/VideoDAOImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wetube/model/Category.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/model/Category.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wetube/model/Channel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/model/Channel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wetube/model/Comment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/model/Comment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wetube/model/Community.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/model/Community.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wetube/model/Content.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/model/Content.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wetube/model/Notification.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/model/Notification.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wetube/model/Playlist.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/model/Playlist.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wetube/model/Post.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/model/Post.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wetube/model/ServerResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wetube/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/model/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wetube/model/Video.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/model/Video.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wetube/util/TableCreator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/util/TableCreator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wetube/server/ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/server/ClientHandler.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -184,7 +169,14 @@
       <option name="presentableId" value="LOCAL‎−۰۰۰۰۷" />
       <updated>1720381519983</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL‎−۰۰۰۰۸" summary="Mark 5, might undo these changes later">
+      <option name="closed" value="true" />
+      <created>1720442304421</created>
+      <option name="number" value="LOCAL‎−۰۰۰۰۸" />
+      <option name="presentableId" value="LOCAL‎−۰۰۰۰۸" />
+      <updated>1720442304421</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -209,6 +201,7 @@
     <MESSAGE value="Updated Database class" />
     <MESSAGE value="Updated Database: UserDAO class" />
     <MESSAGE value="Mark 1, might undo these changes later" />
-    <option name="LAST_COMMIT_MESSAGE" value="Mark 1, might undo these changes later" />
+    <MESSAGE value="Mark 5, might undo these changes later" />
+    <option name="LAST_COMMIT_MESSAGE" value="Mark 5, might undo these changes later" />
   </component>
 </project>
