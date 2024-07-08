@@ -1,7 +1,5 @@
-package org.project.wetube.controller;
+package org.project.youtube.controller;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,12 +15,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.shape.SVGPath;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import org.project.wetube.YoutubeApplication;
-import org.project.wetube.models.Request;
-import org.project.wetube.models.Response;
-import org.project.wetube.models.User;
-import org.apache.commons.codec.digest.DigestUtils;
-import org.project.wetube.models.UserVideo;
 
 import java.io.IOException;
 import java.net.URL;
@@ -64,7 +56,7 @@ public class SignInController implements Initializable
     public void initialize (URL location, ResourceBundle resources)
     {
         inputError.getParent ().setVisible (false);
-        nextBtn.setOnAction (this::verifyCredentials);
+//        nextBtn.setOnAction (this::verifyCredentials);
     }
 
     @FXML
@@ -88,40 +80,40 @@ public class SignInController implements Initializable
         stage.show ();
     }
 
-    private void verifyCredentials (ActionEvent event)
-    {
-        String input = inputField.getText ();
-        String password = DigestUtils.sha256Hex(passField.getText ());
-
-        Boolean isEmail = determineInput(input);
-
-        User user;
-
-        if (isEmail == null || password.isEmpty ())
-        {
-            inputLog.setText ("Invalid entry.");
-            inputLog.getParent ().setVisible (true);
-            return;
-        }
-        else if (isEmail)
-        {
-            user = new User (input, "", password);
-        }
-        else
-        {
-            user = new User ("", input, password);
-        }
-
-        if (signIn(user))
-        {
-            exitSignInSignUp (event);
-            System.out.println ("Signed In");
-        }
-        else
-        {
-            inputLog.getParent ().setVisible (true);
-        }
-    }
+//    private void verifyCredentials (ActionEvent event)
+//    {
+//        String input = inputField.getText ();
+//        String password = DigestUtils.sha256Hex(passField.getText ());
+//
+//        Boolean isEmail = determineInput(input);
+//
+//        User user;
+//
+//        if (isEmail == null || password.isEmpty ())
+//        {
+//            inputLog.setText ("Invalid entry.");
+//            inputLog.getParent ().setVisible (true);
+//            return;
+//        }
+//        else if (isEmail)
+//        {
+//            user = new User (input, "", password);
+//        }
+//        else
+//        {
+//            user = new User ("", input, password);
+//        }
+//
+//        if (signIn(user))
+//        {
+//            exitSignInSignUp (event);
+//            System.out.println ("Signed In");
+//        }
+//        else
+//        {
+//            inputLog.getParent ().setVisible (true);
+//        }
+//    }
 
     Boolean determineInput(String input)
     {
@@ -145,33 +137,4 @@ public class SignInController implements Initializable
         inputLog.setText ("Invalid entry");
         return null;
     }
-
-    private boolean signIn (User user)
-    {
-        Request<User> userRequest = new Request <> (YoutubeApplication.socket, "SignIn");
-        userRequest.send ();
-
-        String response = YoutubeApplication.receiveResponse ();
-        Gson gson = new Gson ();
-        TypeToken<Response<User>> responseTypeToken = new TypeToken <> ()
-        {
-        };
-        Response<User> userResponse = gson.fromJson (response, responseTypeToken.getType ());
-
-        User responseUser = userResponse.getBody ();
-
-        if (responseUser != null)
-        {
-            YoutubeApplication.user = responseUser;
-            System.out.println (userResponse.getMessage ());
-            return true;
-        }
-        else
-        {
-            inputLog.setText (userResponse.getMessage ());
-            return false;
-        }
-    }
-
-
 }

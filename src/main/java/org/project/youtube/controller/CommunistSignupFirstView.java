@@ -1,4 +1,4 @@
-package org.project.wetube.controller;
+package org.project.youtube.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

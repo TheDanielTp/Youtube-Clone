@@ -4,33 +4,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ec566682-672c-4b02-8981-652c66cb3fe3" name="Changes" comment="Initialized Project">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/project/youtube/controller/CommunistFrontView.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/project/youtube/controller/CommunistSignupFirstView.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/project/youtube/controller/CommunistSignupSecondView.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/project/youtube/controller/SignInController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/project/youtube/controller/VideoPageController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/project/youtube/controller/VideoRecommendationController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/org/youtube/communist-front-view.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/org/youtube/communist-front-view.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/org/youtube/communist-login-view.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/org/youtube/communist-login-view.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/org/youtube/communist-signup-first-view.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/org/youtube/communist-signup-second-view.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/org/youtube/images/Picture2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/org/youtube/images/logo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/org/youtube/images/menu.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/org/youtube/images/menuHover.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/org/youtube/images/mic.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/org/youtube/images/micHover.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/org/youtube/images/png-transparent-joseph-stalin-soviet-union-dialectical-and-historical-materialism-stalinism-stalin-celebrities-communism-stalin-png-thumbnail.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/org/youtube/images/profile.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/org/youtube/images/setting.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/org/youtube/images/settingHover.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/org/youtube/images/signin.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/org/youtube/images/signinHover.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/org/youtube/images/signup.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/youtube/MainApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/project/youtube/MainApplication.java" afterDir="false" />
+    <list default="true" id="ec566682-672c-4b02-8981-652c66cb3fe3" name="Changes" comment="Mark 6, might undo these changes later">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/project/youtube/controller/CommunistLoginController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/project/youtube/controller/MainApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/youtube/MainApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/youtube/controller/CommunistFrontView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/project/youtube/controller/CommunistFrontController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/youtube/controller/CommunistSignupFirstView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/project/youtube/controller/CommunistSignupFirstView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/youtube/controller/CommunistSignupSecondView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/project/youtube/controller/CommunistSignupSecondView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/youtube/controller/SignInController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/project/youtube/controller/SignInController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/youtube/controller/VideoPageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/project/youtube/controller/VideoPageController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/youtube/controller/VideoRecommendationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/project/youtube/controller/VideoRecommendationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/youtube/communist-front-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/youtube/communist-front-view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/youtube/communist-login-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/youtube/communist-login-view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/youtube/communist-signup-first-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/youtube/communist-signup-first-view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/youtube/communist-signup-second-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/youtube/communist-signup-second-view.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,7 +46,7 @@
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
-        <option name="mavenHome" value="Use Maven wrapper" />
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
       </MavenGeneralSettings>
     </option>
   </component>
@@ -78,7 +69,8 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "interface",
-    "kotlin-language-version-configured": "true"
+    "kotlin-language-version-configured": "true",
+    "node.js.selected.package.tslint": "(autodetect)"
   }
 }]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />

@@ -1,10 +1,6 @@
-package org.project.wetube.controller;
-
-import org.project.wetube.models.Video;
+package org.project.youtube.controller;
 
 public class VideoRecommendationController
 {
-    public void setVideo (Video v)
-    {
-    }
+
 }

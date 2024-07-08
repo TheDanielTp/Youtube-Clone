@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox prefHeight="1080.0" prefWidth="1920.0" stylesheets="@communist-login-view.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.project.wetube.controller.CommunistSignupSecondView">
+<HBox prefHeight="1080.0" prefWidth="1920.0" stylesheets="@communist-login-view.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.project.youtube.controller.CommunistSignupSecondView">
    <children>
       <HBox prefHeight="1080.0" prefWidth="80.0" style="-fx-border-color: ffffff; -fx-border-width: 5;">
          <HBox.margin>

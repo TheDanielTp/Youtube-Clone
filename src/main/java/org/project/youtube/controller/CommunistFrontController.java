@@ -1,4 +1,4 @@
-package org.project.wetube.controller;
+package org.project.youtube.controller;
 
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
@@ -14,7 +14,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.SVGPath;
@@ -26,7 +25,7 @@ import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-public class CommunistFrontView implements Initializable
+public class CommunistFrontController implements Initializable
 {
     @FXML
     private VBox mainPane;

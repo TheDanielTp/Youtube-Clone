@@ -4,6 +4,6 @@ module org.project.project_wetube {
 
     requires org.kordamp.bootstrapfx.core;
 
-    opens org.project.youtube to javafx.fxml;
-    exports org.project.youtube;
+    opens org.project.youtube.controller to javafx.fxml;
+    exports org.project.youtube.controller;
 }

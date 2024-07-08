@@ -1,4 +1,4 @@
-package org.project.wetube.controller;
+package org.project.youtube.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,7 +11,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import org.project.wetube.models.User;
 
 import java.io.IOException;
 import java.time.LocalDate;
