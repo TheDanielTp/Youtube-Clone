@@ -5,7 +5,8 @@ import java.sql.Statement;
 
 public class TableCreator {
 
-    public static void createTables() {
+    public static void createTables()
+    {
         String createUsersTable = """
                 CREATE TABLE IF NOT EXISTS Users (
                     ID UUID PRIMARY KEY,
