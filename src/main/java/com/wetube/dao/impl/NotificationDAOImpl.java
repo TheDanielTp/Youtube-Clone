@@ -23,6 +23,7 @@ public class NotificationDAOImpl
             if (object.getID () == uuid)
             {
                 uuid = generateID ();
+                break;
             }
         }
         return uuid;
@@ -30,17 +31,18 @@ public class NotificationDAOImpl
 
     public void create (Notification notification)
     {
-        String sql = "INSERT INTO Notifications (ID, userID, contentID, title, receiveDate, isSeen) VALUES (?, ?, ?, ?, ?, ?)";
-        try (Connection conn = DatabaseConnection.getConnection ();
-             PreparedStatement pstmt = conn.prepareStatement (sql))
+        String sql = "INSERT INTO Notifications (ID, userID, contentID, title, receiveDate, isSeen)" +
+                " VALUES (?, ?, ?, ?, ?, ?)";
+        try (Connection connection = DatabaseConnection.getConnection ();
+             PreparedStatement  preparedStatement = connection.prepareStatement (sql))
         {
-            pstmt.setObject (1, notification.getID ());
-            pstmt.setObject (2, notification.getUserID ());
-            pstmt.setObject (3, notification.getContentID ());
-            pstmt.setString (4, notification.getTitle ());
-            pstmt.setTimestamp (5, Timestamp.valueOf (notification.getReceiveDate ()));
-            pstmt.setBoolean (6, notification.isSeen ());
-            pstmt.executeUpdate ();
+             preparedStatement.setObject (1, notification.getID ());
+             preparedStatement.setObject (2, notification.getUserID ());
+             preparedStatement.setObject (3, notification.getContentID ());
+             preparedStatement.setString (4, notification.getTitle ());
+             preparedStatement.setTimestamp (5, Timestamp.valueOf (notification.getReceiveDate ()));
+             preparedStatement.setBoolean (6, notification.isSeen ());
+             preparedStatement.executeUpdate ();
         }
         catch (SQLException e)
         {
@@ -51,16 +53,16 @@ public class NotificationDAOImpl
     public void update (Notification notification)
     {
         String sql = "UPDATE Notifications SET userID = ?, contentID = ?, title = ?, receiveDate = ?, isSeen = ? WHERE ID = ?";
-        try (Connection conn = DatabaseConnection.getConnection ();
-             PreparedStatement pstmt = conn.prepareStatement (sql))
+        try (Connection connection = DatabaseConnection.getConnection ();
+             PreparedStatement  preparedStatement = connection.prepareStatement (sql))
         {
-            pstmt.setObject (1, notification.getUserID ());
-            pstmt.setObject (2, notification.getContentID ());
-            pstmt.setString (3, notification.getTitle ());
-            pstmt.setTimestamp (4, Timestamp.valueOf (notification.getReceiveDate ()));
-            pstmt.setBoolean (5, notification.isSeen ());
-            pstmt.setObject (6, notification.getID ());
-            pstmt.executeUpdate ();
+             preparedStatement.setObject (1, notification.getUserID ());
+             preparedStatement.setObject (2, notification.getContentID ());
+             preparedStatement.setString (3, notification.getTitle ());
+             preparedStatement.setTimestamp (4, Timestamp.valueOf (notification.getReceiveDate ()));
+             preparedStatement.setBoolean (5, notification.isSeen ());
+             preparedStatement.setObject (6, notification.getID ());
+             preparedStatement.executeUpdate ();
         }
         catch (SQLException e)
         {
@@ -70,11 +72,11 @@ public class NotificationDAOImpl
 
     public void delete (UUID id)
     {
-        try (Connection conn = DatabaseConnection.getConnection ();
-             Statement stmt = conn.createStatement ())
+        try (Connection connection = DatabaseConnection.getConnection ();
+             Statement statement = connection.createStatement ())
         {
             String deleteNotification = "DELETE FROM Notifications WHERE ID = '" + id + "'";
-            stmt.executeUpdate (deleteNotification);
+            statement.executeUpdate (deleteNotification);
         }
         catch (SQLException e)
         {
@@ -85,20 +87,20 @@ public class NotificationDAOImpl
     public Notification findById (UUID id)
     {
         String sql = "SELECT * FROM Notifications WHERE ID = ?";
-        try (Connection conn = DatabaseConnection.getConnection ();
-             PreparedStatement pstmt = conn.prepareStatement (sql))
+        try (Connection connection = DatabaseConnection.getConnection ();
+             PreparedStatement  preparedStatement = connection.prepareStatement (sql))
         {
-            pstmt.setObject (1, id);
-            ResultSet rs = pstmt.executeQuery ();
-            if (rs.next ())
+             preparedStatement.setObject (1, id);
+            ResultSet  resultSet =  preparedStatement.executeQuery ();
+            if  (resultSet.next ())
             {
                 return new Notification (
-                        rs.getObject ("ID", UUID.class),
-                        rs.getObject ("userID", UUID.class),
-                        rs.getObject ("contentID", UUID.class),
-                        rs.getString ("title"),
-                        rs.getObject ("receiveDate", LocalDateTime.class),
-                        rs.getBoolean ("isSeen")
+                         resultSet.getObject ("ID", UUID.class),
+                         resultSet.getObject ("userID", UUID.class),
+                         resultSet.getObject ("contentID", UUID.class),
+                         resultSet.getString ("title"),
+                         resultSet.getObject ("receiveDate", LocalDateTime.class),
+                         resultSet.getBoolean ("isSeen")
                 );
             }
         }
@@ -113,19 +115,19 @@ public class NotificationDAOImpl
     {
         List <Notification> notifications = new ArrayList <> ();
         String       sql    = "SELECT * FROM Notifications";
-        try (Connection conn = DatabaseConnection.getConnection ();
-             Statement stmt = conn.createStatement ();
-             ResultSet rs = stmt.executeQuery (sql))
+        try (Connection connection = DatabaseConnection.getConnection ();
+             Statement statement = connection.createStatement ();
+             ResultSet  resultSet = statement.executeQuery (sql))
         {
-            while (rs.next ())
+            while  (resultSet.next ())
             {
                 notifications.add (new Notification (
-                        rs.getObject ("ID", UUID.class),
-                        rs.getObject ("userID", UUID.class),
-                        rs.getObject ("contentID", UUID.class),
-                        rs.getString ("title"),
-                        rs.getObject ("receiveDate", LocalDateTime.class),
-                        rs.getBoolean ("isSeen")
+                         resultSet.getObject ("ID", UUID.class),
+                         resultSet.getObject ("userID", UUID.class),
+                         resultSet.getObject ("contentID", UUID.class),
+                         resultSet.getString ("title"),
+                         resultSet.getObject ("receiveDate", LocalDateTime.class),
+                         resultSet.getBoolean ("isSeen")
                 ));
             }
         }

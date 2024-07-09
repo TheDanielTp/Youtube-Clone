@@ -10,7 +10,7 @@ public class Video extends Content implements Serializable
 {
     //region [ - Attributes - ]
 
-    UUID communityID;
+    UUID categoryID;
 
     String title;
     String description;
@@ -26,45 +26,45 @@ public class Video extends Content implements Serializable
 
     //region [ - Constructor - ]
 
-    public Video (UUID creatorID, UUID communityID, UUID channelID, String title, String description, String videoURL, String thumbnailURL, boolean isOnlyComrade)
+    public Video (UUID creatorID, UUID categoryID, UUID channelID, String title, String description, String videoURL, String thumbnailURL, boolean isOnlyComrade)
     {
         super (creatorID, channelID, isOnlyComrade);
 
         VideoDAOImpl videoDAO = new VideoDAOImpl();
         ID = videoDAO.generateID ();
 
-        this.communityID  = communityID;
-        this.title        = title;
-        this.description  = description;
-        this.videoURL     = videoURL;
+        this.categoryID  = categoryID;
+        this.title       = title;
+        this.description = description;
+        this.videoURL    = videoURL;
         this.thumbnailURL = thumbnailURL;
     }
 
-    public Video (UUID ID, UUID creatorID, UUID communityID, UUID channelID, int likesCount, int dislikesCount, LocalDateTime creationDate, boolean isOnlyComrade, String title, String description, String dataType, String videoURL, String thumbnailURL, int commentsCount, int viewsCount)
+    public Video (UUID ID, UUID creatorID, UUID categoryID, UUID channelID, int likesCount, int dislikesCount, LocalDateTime creationDate, boolean isOnlyComrade, String title, String description, String dataType, String videoURL, String thumbnailURL, int commentsCount, int viewsCount)
     {
         super (ID, creatorID, channelID, likesCount, dislikesCount, creationDate, isOnlyComrade);
-        this.communityID   = communityID;
+        this.categoryID    = categoryID;
         this.title         = title;
         this.description   = description;
         this.dataType      = dataType;
         this.videoURL      = videoURL;
         this.thumbnailURL  = thumbnailURL;
         this.commentsCount = commentsCount;
-        this.viewsCount = viewsCount;
+        this.viewsCount    = viewsCount;
     }
 
     //endregion
 
     //region [ - Getters & Setters - ]
 
-    public UUID getCommunityID ()
+    public UUID getCategoryID ()
     {
-        return communityID;
+        return categoryID;
     }
 
-    public void setCommunityID (UUID communityID)
+    public void setCategoryID (UUID categoryID)
     {
-        this.communityID = communityID;
+        this.categoryID = categoryID;
     }
 
     public String getTitle ()

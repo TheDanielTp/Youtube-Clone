@@ -15,12 +15,13 @@ public class CommentDAOImpl
     {
         UUID uuid = UUID.randomUUID ();
 
-        List <Comment> all = findAll ();
-        for (Comment object : all)
+        List <Content> all = VideoDAOImpl.findAllContents ();
+        for (Content object : all)
         {
             if (object.getID () == uuid)
             {
                 uuid = generateID ();
+                break;
             }
         }
         return uuid;
@@ -28,21 +29,22 @@ public class CommentDAOImpl
 
     public void create (Comment comment)
     {
-        String sql = "INSERT INTO Comments (ID, contentID, creatorID, parentCommentID, content, replyCount, creationDate, isReply, likesCount, dislikesCount) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        try (Connection conn = DatabaseConnection.getConnection ();
-             PreparedStatement pstmt = conn.prepareStatement (sql))
+        String sql = "INSERT INTO Comments (ID, contentID, creatorID, parentCommentID, content, replyCount," +
+                " creationDate, isReply, likesCount, dislikesCount) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        try (Connection connection = DatabaseConnection.getConnection ();
+             PreparedStatement preparedStatement = connection.prepareStatement (sql))
         {
-            pstmt.setObject (1, comment.getID ());
-            pstmt.setObject (2, comment.getContentID ());
-            pstmt.setObject (3, comment.getCreatorID ());
-            pstmt.setObject (4, comment.getParentCommentID ());
-            pstmt.setString (5, comment.getContent ());
-            pstmt.setInt (6, comment.getReplyCount ());
-            pstmt.setTimestamp (7, Timestamp.valueOf (comment.getCreationDate ()));
-            pstmt.setBoolean (8, comment.isReply ());
-            pstmt.setInt (9, comment.getLikesCount ());
-            pstmt.setInt (10, comment.getDislikesCount ());
-            pstmt.executeUpdate ();
+            preparedStatement.setObject (1, comment.getID ());
+            preparedStatement.setObject (2, comment.getContentID ());
+            preparedStatement.setObject (3, comment.getCreatorID ());
+            preparedStatement.setObject (4, comment.getParentCommentID ());
+            preparedStatement.setString (5, comment.getContent ());
+            preparedStatement.setInt (6, comment.getReplyCount ());
+            preparedStatement.setTimestamp (7, Timestamp.valueOf (comment.getCreationDate ()));
+            preparedStatement.setBoolean (8, comment.isReply ());
+            preparedStatement.setInt (9, comment.getLikesCount ());
+            preparedStatement.setInt (10, comment.getDislikesCount ());
+            preparedStatement.executeUpdate ();
         }
         catch (SQLException e)
         {
@@ -52,21 +54,22 @@ public class CommentDAOImpl
 
     public void update (Comment comment)
     {
-        String sql = "UPDATE Comments SET contentID = ?, creatorID = ?, parentCommentID = ?, content = ?, replyCount = ?, creationDate = ?, isReply = ?, likesCount = ?, dislikesCount = ? WHERE ID = ?";
-        try (Connection conn = DatabaseConnection.getConnection ();
-             PreparedStatement pstmt = conn.prepareStatement (sql))
+        String sql = "UPDATE Comments SET contentID = ?, creatorID = ?, parentCommentID = ?, content = ?," +
+                " replyCount = ?, creationDate = ?, isReply = ?, likesCount = ?, dislikesCount = ? WHERE ID = ?";
+        try (Connection connection = DatabaseConnection.getConnection ();
+             PreparedStatement preparedStatement = connection.prepareStatement (sql))
         {
-            pstmt.setObject (1, comment.getContentID ());
-            pstmt.setObject (2, comment.getCreatorID ());
-            pstmt.setObject (3, comment.getParentCommentID ());
-            pstmt.setString (4, comment.getContent ());
-            pstmt.setInt (5, comment.getReplyCount ());
-            pstmt.setTimestamp (6, Timestamp.valueOf (comment.getCreationDate ()));
-            pstmt.setBoolean (7, comment.isReply ());
-            pstmt.setInt (8, comment.getLikesCount ());
-            pstmt.setInt (9, comment.getDislikesCount ());
-            pstmt.setObject (10, comment.getID ());
-            pstmt.executeUpdate ();
+            preparedStatement.setObject (1, comment.getContentID ());
+            preparedStatement.setObject (2, comment.getCreatorID ());
+            preparedStatement.setObject (3, comment.getParentCommentID ());
+            preparedStatement.setString (4, comment.getContent ());
+            preparedStatement.setInt (5, comment.getReplyCount ());
+            preparedStatement.setTimestamp (6, Timestamp.valueOf (comment.getCreationDate ()));
+            preparedStatement.setBoolean (7, comment.isReply ());
+            preparedStatement.setInt (8, comment.getLikesCount ());
+            preparedStatement.setInt (9, comment.getDislikesCount ());
+            preparedStatement.setObject (10, comment.getID ());
+            preparedStatement.executeUpdate ();
         }
         catch (SQLException e)
         {
@@ -76,8 +79,8 @@ public class CommentDAOImpl
 
     public void delete (UUID id)
     {
-        try (Connection conn = DatabaseConnection.getConnection ();
-             Statement stmt = conn.createStatement ())
+        try (Connection connection = DatabaseConnection.getConnection ();
+             Statement stmt = connection.createStatement ())
         {
             String deleteComment = "DELETE FROM Comments WHERE ID = '" + id + "'";
             stmt.executeUpdate (deleteComment);
@@ -91,14 +94,14 @@ public class CommentDAOImpl
     public void like (Comment comment, User user)
     {
         String sql = "INSERT INTO ContentsAction (contentID, userID, liked, disliked) VALUES (?, ?, ?, ?)";
-        try (Connection conn = DatabaseConnection.getConnection ();
-             PreparedStatement pstmt = conn.prepareStatement (sql))
+        try (Connection connection = DatabaseConnection.getConnection ();
+             PreparedStatement preparedStatement = connection.prepareStatement (sql))
         {
-            pstmt.setObject (1, comment.getID ());
-            pstmt.setObject (2, user.getID ());
-            pstmt.setBoolean (3, true);
-            pstmt.setBoolean (4, false);
-            pstmt.executeUpdate ();
+            preparedStatement.setObject (1, comment.getID ());
+            preparedStatement.setObject (2, user.getID ());
+            preparedStatement.setBoolean (3, true);
+            preparedStatement.setBoolean (4, false);
+            preparedStatement.executeUpdate ();
         }
         catch (SQLException e)
         {
@@ -109,14 +112,14 @@ public class CommentDAOImpl
     public void dislike (Comment comment, User user)
     {
         String sql = "INSERT INTO ContentsAction (contentID, userID, liked, disliked) VALUES (?, ?, ?, ?)";
-        try (Connection conn = DatabaseConnection.getConnection ();
-             PreparedStatement pstmt = conn.prepareStatement (sql))
+        try (Connection connection = DatabaseConnection.getConnection ();
+             PreparedStatement preparedStatement = connection.prepareStatement (sql))
         {
-            pstmt.setObject (1, comment.getID ());
-            pstmt.setObject (2, user.getID ());
-            pstmt.setBoolean (3, false);
-            pstmt.setBoolean (4, true);
-            pstmt.executeUpdate ();
+            preparedStatement.setObject (1, comment.getID ());
+            preparedStatement.setObject (2, user.getID ());
+            preparedStatement.setBoolean (3, false);
+            preparedStatement.setBoolean (4, true);
+            preparedStatement.executeUpdate ();
         }
         catch (SQLException e)
         {
@@ -127,14 +130,14 @@ public class CommentDAOImpl
     public void removeLikeDislike (Comment comment, User user)
     {
         String sql = "INSERT INTO ContentsAction (contentID, userID, liked, disliked) VALUES (?, ?, ?, ?)";
-        try (Connection conn = DatabaseConnection.getConnection ();
-             PreparedStatement pstmt = conn.prepareStatement (sql))
+        try (Connection connection = DatabaseConnection.getConnection ();
+             PreparedStatement preparedStatement = connection.prepareStatement (sql))
         {
-            pstmt.setObject (1, comment.getID ());
-            pstmt.setObject (2, user.getID ());
-            pstmt.setBoolean (3, false);
-            pstmt.setBoolean (4, false);
-            pstmt.executeUpdate ();
+            preparedStatement.setObject (1, comment.getID ());
+            preparedStatement.setObject (2, user.getID ());
+            preparedStatement.setBoolean (3, false);
+            preparedStatement.setBoolean (4, false);
+            preparedStatement.executeUpdate ();
         }
         catch (SQLException e)
         {
@@ -145,26 +148,26 @@ public class CommentDAOImpl
     public Comment findById (UUID id)
     {
         String sql = "SELECT * FROM Comments WHERE ID = ?";
-        try (Connection conn = DatabaseConnection.getConnection ();
-             PreparedStatement pstmt = conn.prepareStatement (sql))
+        try (Connection connection = DatabaseConnection.getConnection ();
+             PreparedStatement preparedStatement = connection.prepareStatement (sql))
         {
-            pstmt.setObject (1, id);
-            ResultSet rs = pstmt.executeQuery ();
-            if (rs.next ())
+            preparedStatement.setObject (1, id);
+            ResultSet resultSet = preparedStatement.executeQuery ();
+            if (resultSet.next ())
             {
                 return new Comment (
-                        rs.getObject ("ID", UUID.class),
-                        rs.getObject ("contentID", UUID.class),
-                        rs.getObject ("creatorID", UUID.class),
-                        rs.getObject ("channelID", UUID.class),
-                        rs.getInt ("likesCount"),
-                        rs.getInt ("dislikesCount"),
-                        rs.getObject ("creationDate", LocalDateTime.class),
-                        rs.getBoolean ("isOnlyComrade"),
-                        rs.getObject ("parentCommentID", UUID.class),
-                        rs.getString ("content"),
-                        rs.getInt ("replyCount"),
-                        rs.getBoolean ("isReply")
+                        resultSet.getObject ("ID", UUID.class),
+                        resultSet.getObject ("contentID", UUID.class),
+                        resultSet.getObject ("creatorID", UUID.class),
+                        resultSet.getObject ("channelID", UUID.class),
+                        resultSet.getInt ("likesCount"),
+                        resultSet.getInt ("dislikesCount"),
+                        resultSet.getObject ("creationDate", LocalDateTime.class),
+                        resultSet.getBoolean ("isOnlyComrade"),
+                        resultSet.getObject ("parentCommentID", UUID.class),
+                        resultSet.getString ("content"),
+                        resultSet.getInt ("replyCount"),
+                        resultSet.getBoolean ("isReply")
                 );
             }
         }
@@ -179,25 +182,25 @@ public class CommentDAOImpl
     {
         List <Comment> comments = new ArrayList <> ();
         String       sql    = "SELECT * FROM Comment";
-        try (Connection conn = DatabaseConnection.getConnection ();
-             Statement stmt = conn.createStatement ();
-             ResultSet rs = stmt.executeQuery (sql))
+        try (Connection connection = DatabaseConnection.getConnection ();
+             Statement stmt = connection.createStatement ();
+             ResultSet resultSet = stmt.executeQuery (sql))
         {
-            while (rs.next ())
+            while (resultSet.next ())
             {
                 comments.add (new Comment (
-                        rs.getObject ("ID", UUID.class),
-                        rs.getObject ("contentID", UUID.class),
-                        rs.getObject ("creatorID", UUID.class),
-                        rs.getObject ("channelID", UUID.class),
-                        rs.getInt ("likesCount"),
-                        rs.getInt ("dislikesCount"),
-                        rs.getObject ("creationDate", LocalDateTime.class),
-                        rs.getBoolean ("isOnlyComrade"),
-                        rs.getObject ("parentCommentID", UUID.class),
-                        rs.getString ("content"),
-                        rs.getInt ("replyCount"),
-                        rs.getBoolean ("isReply")
+                        resultSet.getObject ("ID", UUID.class),
+                        resultSet.getObject ("contentID", UUID.class),
+                        resultSet.getObject ("creatorID", UUID.class),
+                        resultSet.getObject ("channelID", UUID.class),
+                        resultSet.getInt ("likesCount"),
+                        resultSet.getInt ("dislikesCount"),
+                        resultSet.getObject ("creationDate", LocalDateTime.class),
+                        resultSet.getBoolean ("isOnlyComrade"),
+                        resultSet.getObject ("parentCommentID", UUID.class),
+                        resultSet.getString ("content"),
+                        resultSet.getInt ("replyCount"),
+                        resultSet.getBoolean ("isReply")
                 ));
             }
         }
@@ -212,17 +215,17 @@ public class CommentDAOImpl
     {
         List <User> users = new ArrayList <> ();
         String sql = "SELECT * FROM ContentsAction WHERE id = ?";
-        try (Connection conn = DatabaseConnection.getConnection ();
-             PreparedStatement pstmt = conn.prepareStatement (sql))
+        try (Connection connection = DatabaseConnection.getConnection ();
+             PreparedStatement preparedStatement = connection.prepareStatement (sql))
         {
-            pstmt.setObject (1, comment.getID ());
-            ResultSet rs = pstmt.executeQuery ();
+            preparedStatement.setObject (1, comment.getID ());
+            ResultSet resultSet = preparedStatement.executeQuery ();
             UserDAOImpl userDAO = new UserDAOImpl ();
-            while (rs.next ())
+            while (resultSet.next ())
             {
-                if (rs.getBoolean ("liked"))
+                if (resultSet.getBoolean ("liked"))
                 {
-                    users.add (userDAO.findById (rs.getObject ("userID", UUID.class)));
+                    users.add (userDAO.findById (resultSet.getObject ("userID", UUID.class)));
                 }
             }
         }
@@ -237,17 +240,17 @@ public class CommentDAOImpl
     {
         List <User> users = new ArrayList <> ();
         String sql = "SELECT * FROM ContentsAction WHERE id = ?";
-        try (Connection conn = DatabaseConnection.getConnection ();
-             PreparedStatement pstmt = conn.prepareStatement (sql))
+        try (Connection connection = DatabaseConnection.getConnection ();
+             PreparedStatement preparedStatement = connection.prepareStatement (sql))
         {
-            pstmt.setObject (1, comment.getID ());
-            ResultSet rs = pstmt.executeQuery ();
+            preparedStatement.setObject (1, comment.getID ());
+            ResultSet resultSet = preparedStatement.executeQuery ();
             UserDAOImpl userDAO = new UserDAOImpl ();
-            while (rs.next ())
+            while (resultSet.next ())
             {
-                if (rs.getBoolean ("disliked"))
+                if (resultSet.getBoolean ("disliked"))
                 {
-                    users.add (userDAO.findById (rs.getObject ("userID", UUID.class)));
+                    users.add (userDAO.findById (resultSet.getObject ("userID", UUID.class)));
                 }
             }
         }

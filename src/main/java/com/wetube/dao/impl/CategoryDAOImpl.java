@@ -22,81 +22,77 @@ public class CategoryDAOImpl
             if (object.getID () == uuid)
             {
                 uuid = generateID ();
+                break;
             }
         }
-        System.out.println ("> Database: ID generated");
         return uuid;
     }
 
     public void create (Category category)
     {
-        String sql = "INSERT INTO Categories (ID, title) VALUES (?, ?)";
-        try (Connection conn = DatabaseConnection.getConnection ();
-             PreparedStatement pstmt = conn.prepareStatement (sql))
+        String query = "INSERT INTO Categories (ID, title) VALUES (?, ?)";
+        try (Connection connection = DatabaseConnection.getConnection ();
+             PreparedStatement preparedStatement = connection.prepareStatement (query))
         {
-            pstmt.setObject (1, category.getID ());
-            pstmt.setString (2, category.getTitle ());
-            pstmt.executeUpdate ();
-            System.out.println ("> Database: category created");
+            preparedStatement.setObject (1, category.getID ());
+            preparedStatement.setString (2, category.getTitle ());
+            preparedStatement.executeUpdate ();
         }
         catch (SQLException e)
         {
-            System.out.println ("> Database: failed to create category");
+            e.printStackTrace ();
         }
     }
 
     public void update (Category category)
     {
-        String sql = "UPDATE Categories SET title = ? WHERE ID = ?";
+        String query = "UPDATE Categories SET title = ? WHERE ID = ?";
         try (Connection conn = DatabaseConnection.getConnection ();
-             PreparedStatement pstmt = conn.prepareStatement (sql))
+             PreparedStatement preparedStatement = conn.prepareStatement (query))
         {
-            pstmt.setString (1, category.getTitle ());
-            pstmt.setObject (2, category.getID ());
-            pstmt.executeUpdate ();
-            System.out.println ("> Database: category updated");
+            preparedStatement.setString (1, category.getTitle ());
+            preparedStatement.setObject (2, category.getID ());
+            preparedStatement.executeUpdate ();
         }
         catch (SQLException e)
         {
-            System.out.println ("> Database: failed to update category");
+            e.printStackTrace ();
         }
     }
 
     public void delete (UUID id)
     {
-        try (Connection conn = DatabaseConnection.getConnection ();
-             Statement stmt = conn.createStatement ())
+        try (Connection connection = DatabaseConnection.getConnection ();
+             Statement statement = connection.createStatement ())
         {
             String deleteCategory = "DELETE FROM Categories WHERE ID = '" + id + "'";
-            stmt.executeUpdate (deleteCategory);
-            System.out.println ("> Database: category deleted");
+            statement.executeUpdate (deleteCategory);
         }
         catch (SQLException e)
         {
-            System.out.println ("> Database: failed to delete category");
+            e.printStackTrace ();
         }
     }
 
     public Category findById (UUID id)
     {
-        String sql = "SELECT * FROM Categories WHERE ID = ?";
-        try (Connection conn = DatabaseConnection.getConnection ();
-             PreparedStatement pstmt = conn.prepareStatement (sql))
+        String query = "SELECT * FROM Categories WHERE ID = ?";
+        try (Connection connection = DatabaseConnection.getConnection ();
+             PreparedStatement preparedStatement = connection.prepareStatement (query))
         {
-            pstmt.setObject (1, id);
-            ResultSet rs = pstmt.executeQuery ();
-            if (rs.next ())
+            preparedStatement.setObject (1, id);
+            ResultSet resultSet = preparedStatement.executeQuery ();
+            if (resultSet.next ())
             {
-                System.out.println ("> Database: category found");
                 return new Category (
-                        rs.getObject ("ID", UUID.class),
-                        rs.getString ("title")
+                        resultSet.getObject ("ID", UUID.class),
+                        resultSet.getString ("title")
                 );
             }
         }
         catch (SQLException e)
         {
-            System.out.println ("> Database: failed to find category by ID");
+            e.printStackTrace ();
         }
         return null;
     }
@@ -104,24 +100,46 @@ public class CategoryDAOImpl
     public List <Category> findAll ()
     {
         List <Category> categories = new ArrayList <> ();
-        String      sql   = "SELECT * FROM Categories";
-        try (Connection conn = DatabaseConnection.getConnection ();
-             Statement stmt = conn.createStatement ();
-             ResultSet rs = stmt.executeQuery (sql))
+        String      query   = "SELECT * FROM Categories";
+        try (Connection connection = DatabaseConnection.getConnection ();
+             Statement statement = connection.createStatement ();
+             ResultSet resultSet = statement.executeQuery (query))
         {
-            while (rs.next ())
+            while (resultSet.next ())
             {
                 categories.add (new Category (
-                        rs.getObject ("ID", UUID.class),
-                        rs.getString ("title")
+                        resultSet.getObject ("ID", UUID.class),
+                        resultSet.getString ("title")
                 ));
             }
-            System.out.println ("> Database: categories found");
         }
         catch (SQLException e)
         {
-            System.out.println ("> Database: failed to find categories");
+            e.printStackTrace ();
         }
         return categories;
+    }
+
+    public ArrayList <UUID> findAllVideos (UUID id)
+    {
+        ArrayList <UUID> videosID = new ArrayList <> ();
+        String           sql      = "SELECT * FROM Videos";
+        try (Connection connection= DatabaseConnection.getConnection ();
+             Statement statement = connection.createStatement ();
+             ResultSet resultSet= statement.executeQuery (sql))
+        {
+            while (resultSet.next ())
+            {
+                if (id.equals (resultSet.getObject ("categoryID", UUID.class)))
+                {
+                    videosID.add (resultSet.getObject ("ID", UUID.class));
+                }
+            }
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace ();
+        }
+        return videosID;
     }
 }

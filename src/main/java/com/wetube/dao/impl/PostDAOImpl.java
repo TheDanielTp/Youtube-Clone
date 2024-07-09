@@ -1,5 +1,6 @@
 package com.wetube.dao.impl;
 
+import com.wetube.model.Content;
 import com.wetube.model.Post;
 import com.wetube.model.User;
 import com.wetube.util.DatabaseConnection;
@@ -16,12 +17,13 @@ public class PostDAOImpl
     {
         UUID uuid = UUID.randomUUID ();
 
-        List <Post> all = findAll ();
-        for (Post object : all)
+        List <Content> all = VideoDAOImpl.findAllContents ();
+        for (Content object : all)
         {
             if (object.getID () == uuid)
             {
                 uuid = generateID ();
+                break;
             }
         }
         return uuid;
@@ -29,23 +31,25 @@ public class PostDAOImpl
 
     public void create (Post post)
     {
-        String sql = "INSERT INTO Posts (ID, communityID, creatorID, channelID, title, description, image, commentsCount, likesCount, dislikesCount, creationDate, isOnlyComrade) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        try (Connection conn = DatabaseConnection.getConnection ();
-             PreparedStatement pstmt = conn.prepareStatement (sql))
+        String sql = "INSERT INTO Posts (ID, communityID, creatorID, channelID, title, description, image," +
+                " commentsCount, likesCount, dislikesCount, creationDate, isOnlyComrade) VALUES" +
+                " (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        try (Connection connection = DatabaseConnection.getConnection ();
+             PreparedStatement  preparedStatement = connection.prepareStatement (sql))
         {
-            pstmt.setObject (1, post.getID ());
-            pstmt.setObject (2, post.getCommunityID ());
-            pstmt.setObject (3, post.getCreatorID ());
-            pstmt.setObject (4, post.getChannelID ());
-            pstmt.setString (5, post.getTitle ());
-            pstmt.setString (6, post.getDescription ());
-            pstmt.setString (7, post.getImageURL ());
-            pstmt.setInt (8, post.getCommentsCount ());
-            pstmt.setInt (9, post.getLikesCount ());
-            pstmt.setInt (10, post.getDislikesCount ());
-            pstmt.setTimestamp (11, Timestamp.valueOf (post.getCreationDate ()));
-            pstmt.setBoolean (12, post.isOnlyComrade ());
-            pstmt.executeUpdate ();
+             preparedStatement.setObject (1, post.getID ());
+             preparedStatement.setObject (2, post.getCommunityID ());
+             preparedStatement.setObject (3, post.getCreatorID ());
+             preparedStatement.setObject (4, post.getChannelID ());
+             preparedStatement.setString (5, post.getTitle ());
+             preparedStatement.setString (6, post.getDescription ());
+             preparedStatement.setString (7, post.getImageURL ());
+             preparedStatement.setInt (8, post.getCommentsCount ());
+             preparedStatement.setInt (9, post.getLikesCount ());
+             preparedStatement.setInt (10, post.getDislikesCount ());
+             preparedStatement.setTimestamp (11, Timestamp.valueOf (post.getCreationDate ()));
+             preparedStatement.setBoolean (12, post.isOnlyComrade ());
+             preparedStatement.executeUpdate ();
         }
         catch (SQLException e)
         {
@@ -55,23 +59,25 @@ public class PostDAOImpl
 
     public void update (Post post)
     {
-        String sql = "UPDATE Posts SET communityID = ?, creatorID = ?, channelID = ?, title = ?, description = ?, imageURL = ?, commentsCount = ?, likesCount = ?, dislikesCount = ?, creationDate = ?, isOnlyComrade = ? WHERE ID = ?";
-        try (Connection conn = DatabaseConnection.getConnection ();
-             PreparedStatement pstmt = conn.prepareStatement (sql))
+        String sql = "UPDATE Posts SET communityID = ?, creatorID = ?, channelID = ?, title = ?, description = ?," +
+                " imageURL = ?, commentsCount = ?, likesCount = ?, dislikesCount = ?, creationDate = ?," +
+                " isOnlyComrade = ? WHERE ID = ?";
+        try (Connection connection = DatabaseConnection.getConnection ();
+             PreparedStatement  preparedStatement = connection.prepareStatement (sql))
         {
-            pstmt.setObject (1, post.getCommunityID ());
-            pstmt.setObject (2, post.getCreatorID ());
-            pstmt.setObject (3, post.getChannelID ());
-            pstmt.setString (4, post.getTitle ());
-            pstmt.setString (5, post.getDescription ());
-            pstmt.setString (6, post.getImageURL ());
-            pstmt.setInt (7, post.getCommentsCount ());
-            pstmt.setInt (8, post.getLikesCount ());
-            pstmt.setInt (9, post.getDislikesCount ());
-            pstmt.setTimestamp (10, Timestamp.valueOf (post.getCreationDate ()));
-            pstmt.setBoolean (11, post.isOnlyComrade ());
-            pstmt.setObject (12, post.getID ());
-            pstmt.executeUpdate ();
+             preparedStatement.setObject (1, post.getCommunityID ());
+             preparedStatement.setObject (2, post.getCreatorID ());
+             preparedStatement.setObject (3, post.getChannelID ());
+             preparedStatement.setString (4, post.getTitle ());
+             preparedStatement.setString (5, post.getDescription ());
+             preparedStatement.setString (6, post.getImageURL ());
+             preparedStatement.setInt (7, post.getCommentsCount ());
+             preparedStatement.setInt (8, post.getLikesCount ());
+             preparedStatement.setInt (9, post.getDislikesCount ());
+             preparedStatement.setTimestamp (10, Timestamp.valueOf (post.getCreationDate ()));
+             preparedStatement.setBoolean (11, post.isOnlyComrade ());
+             preparedStatement.setObject (12, post.getID ());
+             preparedStatement.executeUpdate ();
         }
         catch (SQLException e)
         {
@@ -81,14 +87,14 @@ public class PostDAOImpl
 
     public void delete (UUID id)
     {
-        try (Connection conn = DatabaseConnection.getConnection ();
-             Statement stmt = conn.createStatement ())
+        try (Connection connection = DatabaseConnection.getConnection ();
+             Statement statement = connection.createStatement ())
         {
             String deleteComments = "DELETE FROM Comments WHERE contentID = '" + id + "'";
-            stmt.executeUpdate (deleteComments);
+            statement.executeUpdate (deleteComments);
 
             String deletePost = "DELETE FROM Posts WHERE ID = '" + id + "'";
-            stmt.executeUpdate (deletePost);
+            statement.executeUpdate (deletePost);
         }
         catch (SQLException e)
         {
@@ -99,14 +105,14 @@ public class PostDAOImpl
     public void like (Post post, User user)
     {
         String sql = "INSERT INTO ContentsAction (contentID, userID, liked, disliked) VALUES (?, ?, ?, ?)";
-        try (Connection conn = DatabaseConnection.getConnection ();
-             PreparedStatement pstmt = conn.prepareStatement (sql))
+        try (Connection connection = DatabaseConnection.getConnection ();
+             PreparedStatement  preparedStatement = connection.prepareStatement (sql))
         {
-            pstmt.setObject (1, post.getID ());
-            pstmt.setObject (2, user.getID ());
-            pstmt.setBoolean (3, true);
-            pstmt.setBoolean (4, false);
-            pstmt.executeUpdate ();
+             preparedStatement.setObject (1, post.getID ());
+             preparedStatement.setObject (2, user.getID ());
+             preparedStatement.setBoolean (3, true);
+             preparedStatement.setBoolean (4, false);
+             preparedStatement.executeUpdate ();
         }
         catch (SQLException e)
         {
@@ -117,14 +123,14 @@ public class PostDAOImpl
     public void dislike (Post post, User user)
     {
         String sql = "INSERT INTO ContentsAction (contentID, userID, liked, disliked) VALUES (?, ?, ?, ?)";
-        try (Connection conn = DatabaseConnection.getConnection ();
-             PreparedStatement pstmt = conn.prepareStatement (sql))
+        try (Connection connection = DatabaseConnection.getConnection ();
+             PreparedStatement  preparedStatement = connection.prepareStatement (sql))
         {
-            pstmt.setObject (1, post.getID ());
-            pstmt.setObject (2, user.getID ());
-            pstmt.setBoolean (3, false);
-            pstmt.setBoolean (4, true);
-            pstmt.executeUpdate ();
+             preparedStatement.setObject (1, post.getID ());
+             preparedStatement.setObject (2, user.getID ());
+             preparedStatement.setBoolean (3, false);
+             preparedStatement.setBoolean (4, true);
+             preparedStatement.executeUpdate ();
         }
         catch (SQLException e)
         {
@@ -135,14 +141,14 @@ public class PostDAOImpl
     public void removeLikeDislike (Post post, User user)
     {
         String sql = "INSERT INTO ContentsAction (contentID, userID, liked, disliked) VALUES (?, ?, ?, ?)";
-        try (Connection conn = DatabaseConnection.getConnection ();
-             PreparedStatement pstmt = conn.prepareStatement (sql))
+        try (Connection connection = DatabaseConnection.getConnection ();
+             PreparedStatement  preparedStatement = connection.prepareStatement (sql))
         {
-            pstmt.setObject (1, post.getID ());
-            pstmt.setObject (2, user.getID ());
-            pstmt.setBoolean (3, false);
-            pstmt.setBoolean (4, false);
-            pstmt.executeUpdate ();
+             preparedStatement.setObject (1, post.getID ());
+             preparedStatement.setObject (2, user.getID ());
+             preparedStatement.setBoolean (3, false);
+             preparedStatement.setBoolean (4, false);
+             preparedStatement.executeUpdate ();
         }
         catch (SQLException e)
         {
@@ -153,26 +159,26 @@ public class PostDAOImpl
     public Post findById (UUID id)
     {
         String sql = "SELECT * FROM Posts WHERE ID = ?";
-        try (Connection conn = DatabaseConnection.getConnection ();
-             PreparedStatement pstmt = conn.prepareStatement (sql))
+        try (Connection connection = DatabaseConnection.getConnection ();
+             PreparedStatement  preparedStatement = connection.prepareStatement (sql))
         {
-            pstmt.setObject (1, id);
-            ResultSet rs = pstmt.executeQuery ();
-            if (rs.next ())
+             preparedStatement.setObject (1, id);
+            ResultSet  resultSet =  preparedStatement.executeQuery ();
+            if  (resultSet.next ())
             {
                 return new Post (
-                        rs.getObject ("ID", UUID.class),
-                        rs.getObject ("creatorID", UUID.class),
-                        rs.getObject ("communityID", UUID.class),
-                        rs.getObject ("channelID", UUID.class),
-                        rs.getInt ("likesCount"),
-                        rs.getInt ("dislikesCount"),
-                        rs.getObject ("creationDate", LocalDateTime.class),
-                        rs.getBoolean ("isOnlyComrade"),
-                        rs.getString ("title"),
-                        rs.getString ("description"),
-                        rs.getString ("imageURL"),
-                        rs.getInt ("commentsCount")
+                         resultSet.getObject ("ID", UUID.class),
+                         resultSet.getObject ("creatorID", UUID.class),
+                         resultSet.getObject ("communityID", UUID.class),
+                         resultSet.getObject ("channelID", UUID.class),
+                         resultSet.getInt ("likesCount"),
+                         resultSet.getInt ("dislikesCount"),
+                         resultSet.getObject ("creationDate", LocalDateTime.class),
+                         resultSet.getBoolean ("isOnlyComrade"),
+                         resultSet.getString ("title"),
+                         resultSet.getString ("description"),
+                         resultSet.getString ("imageURL"),
+                         resultSet.getInt ("commentsCount")
                 );
             }
         }
@@ -186,26 +192,26 @@ public class PostDAOImpl
     public Post findByTitle (UUID id)
     {
         String sql = "SELECT * FROM Posts WHERE title = ?";
-        try (Connection conn = DatabaseConnection.getConnection ();
-             PreparedStatement pstmt = conn.prepareStatement (sql))
+        try (Connection connection = DatabaseConnection.getConnection ();
+             PreparedStatement  preparedStatement = connection.prepareStatement (sql))
         {
-            pstmt.setObject (1, id);
-            ResultSet rs = pstmt.executeQuery ();
-            if (rs.next ())
+             preparedStatement.setObject (1, id);
+            ResultSet  resultSet =  preparedStatement.executeQuery ();
+            if  (resultSet.next ())
             {
                 return new Post (
-                        rs.getObject ("ID", UUID.class),
-                        rs.getObject ("creatorID", UUID.class),
-                        rs.getObject ("communityID", UUID.class),
-                        rs.getObject ("channelID", UUID.class),
-                        rs.getInt ("likesCount"),
-                        rs.getInt ("dislikesCount"),
-                        rs.getObject ("creationDate", LocalDateTime.class),
-                        rs.getBoolean ("isOnlyComrade"),
-                        rs.getString ("title"),
-                        rs.getString ("description"),
-                        rs.getString ("imageURL"),
-                        rs.getInt ("commentsCount")
+                         resultSet.getObject ("ID", UUID.class),
+                         resultSet.getObject ("creatorID", UUID.class),
+                         resultSet.getObject ("communityID", UUID.class),
+                         resultSet.getObject ("channelID", UUID.class),
+                         resultSet.getInt ("likesCount"),
+                         resultSet.getInt ("dislikesCount"),
+                         resultSet.getObject ("creationDate", LocalDateTime.class),
+                         resultSet.getBoolean ("isOnlyComrade"),
+                         resultSet.getString ("title"),
+                         resultSet.getString ("description"),
+                         resultSet.getString ("imageURL"),
+                         resultSet.getInt ("commentsCount")
                 );
             }
         }
@@ -220,25 +226,25 @@ public class PostDAOImpl
     {
         List <Post> posts = new ArrayList <> ();
         String      sql   = "SELECT * FROM Posts";
-        try (Connection conn = DatabaseConnection.getConnection ();
-             Statement stmt = conn.createStatement ();
-             ResultSet rs = stmt.executeQuery (sql))
+        try (Connection connection = DatabaseConnection.getConnection ();
+             Statement statement = connection.createStatement ();
+             ResultSet  resultSet = statement.executeQuery (sql))
         {
-            while (rs.next ())
+            while  (resultSet.next ())
             {
                 posts.add (new Post (
-                        rs.getObject ("ID", UUID.class),
-                        rs.getObject ("creatorID", UUID.class),
-                        rs.getObject ("communityID", UUID.class),
-                        rs.getObject ("channelID", UUID.class),
-                        rs.getInt ("likesCount"),
-                        rs.getInt ("dislikesCount"),
-                        rs.getObject ("creationDate", LocalDateTime.class),
-                        rs.getBoolean ("isOnlyComrade"),
-                        rs.getString ("title"),
-                        rs.getString ("description"),
-                        rs.getString ("imageURL"),
-                        rs.getInt ("commentsCount")
+                         resultSet.getObject ("ID", UUID.class),
+                         resultSet.getObject ("creatorID", UUID.class),
+                         resultSet.getObject ("communityID", UUID.class),
+                         resultSet.getObject ("channelID", UUID.class),
+                         resultSet.getInt ("likesCount"),
+                         resultSet.getInt ("dislikesCount"),
+                         resultSet.getObject ("creationDate", LocalDateTime.class),
+                         resultSet.getBoolean ("isOnlyComrade"),
+                         resultSet.getString ("title"),
+                         resultSet.getString ("description"),
+                         resultSet.getString ("imageURL"),
+                         resultSet.getInt ("commentsCount")
                 ));
             }
         }
@@ -253,25 +259,25 @@ public class PostDAOImpl
     {
         List <Post> posts = new ArrayList <> ();
         String      sql   = "SELECT * FROM Posts";
-        try (Connection conn = DatabaseConnection.getConnection ();
-             Statement stmt = conn.createStatement ();
-             ResultSet rs = stmt.executeQuery (sql))
+        try (Connection connection = DatabaseConnection.getConnection ();
+             Statement statement = connection.createStatement ();
+             ResultSet  resultSet = statement.executeQuery (sql))
         {
-            while (rs.next ())
+            while  (resultSet.next ())
             {
                 posts.add (new Post (
-                        rs.getObject ("ID", UUID.class),
-                        rs.getObject ("creatorID", UUID.class),
-                        rs.getObject ("communityID", UUID.class),
-                        rs.getObject ("channelID", UUID.class),
-                        rs.getInt ("likesCount"),
-                        rs.getInt ("dislikesCount"),
-                        rs.getObject ("creationDate", LocalDateTime.class),
-                        rs.getBoolean ("isOnlyComrade"),
-                        rs.getString ("title"),
-                        rs.getString ("description"),
-                        rs.getString ("imageURL"),
-                        rs.getInt ("commentsCount")
+                         resultSet.getObject ("ID", UUID.class),
+                         resultSet.getObject ("creatorID", UUID.class),
+                         resultSet.getObject ("communityID", UUID.class),
+                         resultSet.getObject ("channelID", UUID.class),
+                         resultSet.getInt ("likesCount"),
+                         resultSet.getInt ("dislikesCount"),
+                         resultSet.getObject ("creationDate", LocalDateTime.class),
+                         resultSet.getBoolean ("isOnlyComrade"),
+                         resultSet.getString ("title"),
+                         resultSet.getString ("description"),
+                         resultSet.getString ("imageURL"),
+                         resultSet.getInt ("commentsCount")
                 ));
             }
         }
@@ -294,17 +300,17 @@ public class PostDAOImpl
     {
         List <User> users = new ArrayList <> ();
         String      sql   = "SELECT * FROM ContentsAction WHERE id = ?";
-        try (Connection conn = DatabaseConnection.getConnection ();
-             PreparedStatement pstmt = conn.prepareStatement (sql))
+        try (Connection connection = DatabaseConnection.getConnection ();
+             PreparedStatement  preparedStatement = connection.prepareStatement (sql))
         {
-            pstmt.setObject (1, post.getID ());
-            ResultSet   rs      = pstmt.executeQuery ();
+             preparedStatement.setObject (1, post.getID ());
+            ResultSet    resultSet      =  preparedStatement.executeQuery ();
             UserDAOImpl userDAO = new UserDAOImpl ();
-            while (rs.next ())
+            while  (resultSet.next ())
             {
-                if (rs.getBoolean ("liked"))
+                if  (resultSet.getBoolean ("liked"))
                 {
-                    users.add (userDAO.findById (rs.getObject ("userID", UUID.class)));
+                    users.add (userDAO.findById  (resultSet.getObject ("userID", UUID.class)));
                 }
             }
         }
@@ -319,17 +325,17 @@ public class PostDAOImpl
     {
         List <User> users = new ArrayList <> ();
         String      sql   = "SELECT * FROM ContentsAction WHERE id = ?";
-        try (Connection conn = DatabaseConnection.getConnection ();
-             PreparedStatement pstmt = conn.prepareStatement (sql))
+        try (Connection connection = DatabaseConnection.getConnection ();
+             PreparedStatement  preparedStatement = connection.prepareStatement (sql))
         {
-            pstmt.setObject (1, post.getID ());
-            ResultSet   rs      = pstmt.executeQuery ();
+             preparedStatement.setObject (1, post.getID ());
+            ResultSet    resultSet      =  preparedStatement.executeQuery ();
             UserDAOImpl userDAO = new UserDAOImpl ();
-            while (rs.next ())
+            while  (resultSet.next ())
             {
-                if (rs.getBoolean ("disliked"))
+                if  (resultSet.getBoolean ("disliked"))
                 {
-                    users.add (userDAO.findById (rs.getObject ("userID", UUID.class)));
+                    users.add (userDAO.findById  (resultSet.getObject ("userID", UUID.class)));
                 }
             }
         }
