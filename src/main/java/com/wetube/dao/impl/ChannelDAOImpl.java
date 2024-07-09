@@ -34,7 +34,7 @@ public class ChannelDAOImpl
     public void create (Channel channel)
     {
         String sql = "INSERT INTO Channels (ID, userID, name, description, subscribersCount, totalVideos, totalViews," +
-                " watchTime, creationDate, isVerified, outcome, channelPicture) VALUES" +
+                " watchTime, creationDate, isVerified, outcome, channelPictureURL) VALUES" +
                 " (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try (Connection connection= DatabaseConnection.getConnection ();
              PreparedStatement preparedStatement = connection.prepareStatement (sql))
@@ -64,7 +64,7 @@ public class ChannelDAOImpl
     {
         String sql = "UPDATE Channels SET userID = ?, name = ?, description = ?, subscribersCount = ?," +
                 " totalVideos = ?, totalViews = ?, watchTime = ?, creationDate = ?, isVerified = ?, outcome = ?," +
-                " channelPicture = ? WHERE ID = ?";
+                " channelPictureURL = ? WHERE ID = ?";
         try (Connection connection= DatabaseConnection.getConnection ();
              PreparedStatement preparedStatement = connection.prepareStatement (sql))
         {
@@ -164,7 +164,7 @@ public class ChannelDAOImpl
                         resultSet.getObject ("creationDate", LocalDate.class),
                         resultSet.getBoolean ("isVerified"),
                         resultSet.getDouble ("outcome"),
-                        resultSet.getString ("channelPicture")
+                        resultSet.getString ("channelPictureURL")
                         );
             }
         }
@@ -198,7 +198,7 @@ public class ChannelDAOImpl
                         resultSet.getObject ("creationDate", LocalDate.class),
                         resultSet.getBoolean ("isVerified"),
                         resultSet.getDouble ("outcome"),
-                        resultSet.getString ("channelPicture")
+                        resultSet.getString ("channelPictureURL")
                 );
             }
         }
@@ -328,7 +328,7 @@ public class ChannelDAOImpl
                         resultSet.getObject ("creationDate", LocalDate.class),
                         resultSet.getBoolean ("isVerified"),
                         resultSet.getDouble ("outcome"),
-                        resultSet.getString ("channelPicture")
+                        resultSet.getString ("channelPictureURL")
                 ));
             }
         }

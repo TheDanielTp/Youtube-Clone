@@ -16,6 +16,7 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -190,12 +191,14 @@ public class VideoPageController implements Initializable
         UserDAOImpl userDAO = new UserDAOImpl ();
         user = userDAO.findById (channel.getUserID ());
 
-        //region [ - Bindings - ]
+        setLikeCount ();
+        setViewCount ();
+        setChannelPhoto ();
+
         vbxCommentSection.prefWidthProperty ().bind (videoScrollPane.viewportBoundsProperty ().map (Bounds :: getWidth));
         vbxCommentSection.prefHeightProperty ().bind (videoScrollPane.viewportBoundsProperty ().map (Bounds :: getHeight));
         vbxLeft.prefWidthProperty ().bind (videoScrollPane.viewportBoundsProperty ().map (Bounds :: getWidth));
         vbxLeft.prefHeightProperty ().bind (videoScrollPane.viewportBoundsProperty ().map (Bounds :: getHeight));
-
 
         hbx.prefWidthProperty ().bind (anchrpnVideoPage.widthProperty ());
         vbxRecommendedVideos.prefWidthProperty ().bind (Bindings.multiply (anchrpnVideoPage.widthProperty (), 7.0 / 20.0).add (30));
@@ -209,7 +212,6 @@ public class VideoPageController implements Initializable
         recommendedVideosScrollPane.setVbarPolicy (ScrollPane.ScrollBarPolicy.NEVER);
         recommendedVideosScrollPane.setContent (vbxRecommendedVideos);
 
-        //region [ - videoScrollPane - ]
         videoScrollPane.getStyleClass ().add ("scroll-pane");
         videoScrollPane.setFitToWidth (true);
         videoScrollPane.prefWidthProperty ().bind (Bindings.multiply (anchrpnVideoPage.widthProperty (), 13.0 / 20.0));
@@ -219,19 +221,9 @@ public class VideoPageController implements Initializable
         videoScrollPane.setVbarPolicy (ScrollPane.ScrollBarPolicy.NEVER);
         hbx.getChildren ().addAll (videoScrollPane, recommendedVideosScrollPane);
         hbx.prefHeightProperty ().bind (anchrpnVideoPage.heightProperty ());
-        //endregion
 
-        //endregion
-
-        //region [ - Video API - ]
         video = MainApplication.currentVideo;
-        //endregion
 
-        //region [ - Check Video View API  - ]
-
-        //todo set subscribe
-
-        //endregion
         if (channel.getUserID ().equals (MainApplication.currentUser.getID ()))
         {
             btnSub.setVisible (false);
@@ -239,15 +231,10 @@ public class VideoPageController implements Initializable
 
         setVideo ();
         new Thread (this :: displayMedia).start ();
-//        setPlaybackButtons();
         new Thread (this :: displayRecommendedVideos).start ();
-//        displayRecommendedVideos();
         new Thread (this :: displayComments).start ();
-//        displayComments();
     }
-    //endregion
 
-    //region [ - setLikeCount() - ]
     private void setLikeCount ()
     {
         Platform.runLater (() ->
@@ -256,21 +243,20 @@ public class VideoPageController implements Initializable
             txtLikes.setText (String.valueOf (video.getLikesCount ()));
         });
     }
-    //endregion
 
-    //region [ - setViewCount() - ]
     private void setViewCount ()
     {
         txtViews.setText (String.valueOf (video.getViewsCount ()));
     }
-    //endregion
 
-    //region [ - displayMedia() - ]
+    private void setChannelPhoto ()
+    {
+        File file = new File (channel.getChannelPictureURL ());
+        imgChannelProfile = new ImageView (new Image (file.toURI ().toString ()));
+    }
+
     private void displayMedia ()
     {
-//        String videoPath = Paths.get("src/main/resources/Videos/Arcane2.mp4").toUri().toString();
-//        media = new Media(videoPath);
-
         File tempFile;
         try
         {
@@ -280,7 +266,6 @@ public class VideoPageController implements Initializable
             tempFile = File.createTempFile ("video", ".mp4");
             tempFile.deleteOnExit ();
 
-            // Write the byte array to the temporary file
             try (FileOutputStream fos = new FileOutputStream (tempFile); ByteArrayInputStream bais = new ByteArrayInputStream (fileBytes))
             {
                 byte[] buffer = new byte[1024];
@@ -298,18 +283,7 @@ public class VideoPageController implements Initializable
             return;
         }
 
-        // Create a Media object from the temporary file
         media = new Media (tempFile.toURI ().toString ());
-
-        //region [ - Without Thread - ]
-//         mediaPlayer = new MediaPlayer(media);
-//        mediaView = new MediaView(mediaPlayer);
-//        mediaView.setPreserveRatio(true);
-//        mediaView.setSmooth(true);
-//        mediaView.fitWidthProperty().bind(Bindings.multiply(anchrpnVideoPage.widthProperty(), 13.0 / 20.0).subtract(30));
-//        vbxLeft.getChildren().addFirst(mediaView);
-//        mediaPlayer.play();
-        //endregion
 
         Platform.runLater (() ->
         {
@@ -337,9 +311,7 @@ public class VideoPageController implements Initializable
             });
         });
     }
-    //endregion
 
-    //region [ - displayRecommendedVideos() - ]
     private void displayRecommendedVideos ()
     {
         ArrayList <Video> videos = (ArrayList <Video>) MainApplication.client.getAllVideos ()[1];
@@ -386,9 +358,7 @@ public class VideoPageController implements Initializable
         });
 
     }
-    //endregion
 
-    //region [ - getVideo(ActionEvent event, Video video) - ]
     private void getVideo (ActionEvent event, Video video)
     {
         MainApplication.currentVideo = video;
@@ -407,11 +377,10 @@ public class VideoPageController implements Initializable
         stage = (Stage) ((Node) event.getSource ()).getScene ().getWindow ();
         scene = new Scene (root);
         stage.setScene (scene);
+
         stage.show ();
     }
-    //endregion
 
-    //region [ - displayComments() - ]
     private void displayComments ()
     {
         Platform.runLater (() ->
@@ -423,7 +392,7 @@ public class VideoPageController implements Initializable
 
             for (var comment : comments)
             {
-                FXMLLoader commentPreviewLoader = new FXMLLoader (getClass ().getResource ("/sbu/cs/youtube/comment-preview.fxml"));
+                FXMLLoader commentPreviewLoader = new FXMLLoader (getClass ().getResource ("/org/project/controller/comment-preview.fxml"));
                 Parent     commentPreview;
                 try
                 {
@@ -602,7 +571,8 @@ public class VideoPageController implements Initializable
     //region [ - next(ActionEvent event) - ]
     private void next (ActionEvent event)
     {
-        getVideo (event, recommendedVideos.getFirst ());
+        pause (event);
+        getVideo (event, recommendedVideos.getLast ());
     }
     //endregion
 
@@ -621,7 +591,6 @@ public class VideoPageController implements Initializable
         mediaPlayer.pause ();
         SVGPath svgPath = (SVGPath) btnPlayPause.getChildrenUnmodifiable ().getFirst ();
         svgPath.setContent ("M 12,26 18.5,22 18.5,14 12,10 z M 18.5,22 25,18 25,18 18.5,14 z");
-
     }
     //endregion
 
@@ -804,6 +773,27 @@ public class VideoPageController implements Initializable
     }
     //endregion
 
-    //endregion
+    public void backToMenu (Event event)
+    {
+        pause ((ActionEvent) event);
 
+        Stage      stage;
+        Scene      scene;
+        Parent     root;
+        FXMLLoader loader = new FXMLLoader (getClass ().getResource ("/org/project/controller/communist-main-view.fxml"));
+        try
+        {
+            root = loader.load ();
+        }
+        catch (IOException e)
+        {
+            throw new RuntimeException (e);
+        }
+        stage = (Stage) ((Node) event.getSource ()).getScene ().getWindow ();
+        scene = new Scene (root, vbxLeft.getScene ().getWidth (), vbxLeft.getScene ().getHeight ());
+        stage.setScene (scene);
+        stage.show ();
+    }
+
+    //endregion
 }

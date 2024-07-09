@@ -15,7 +15,6 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <AnchorPane fx:id="anchrpnVideoPage" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="466.0" prefWidth="850.0" styleClass="background" stylesheets="@video-page-view.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.project.controller.VideoPageController">
    <padding>
       <Insets bottom="10.0" left="10.0" right="10.0" />
@@ -52,29 +51,16 @@
                         <Insets />
                      </VBox.margin>
                   </HBox>
-                  <VBox fx:id="vbxVideoDetails" prefHeight="170.0" prefWidth="830.0">
+                  <VBox fx:id="vbxVideoDetails" prefHeight="170.0" prefWidth="830.0" spacing="10.0">
                      <children>
-                        <HBox>
-                           <children>
-                              <Text fx:id="txtVideoTitle" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Star War Episode III | Revenge of the Sith">
-                                 <font>
-                                    <Font name="Roboto Black" size="25.0" />
-                                 </font>
-                                 <HBox.margin>
-                                    <Insets top="5.0" />
-                                 </HBox.margin>
-                              </Text>
-                              <TextField maxWidth="1000.0" minWidth="50.0" prefWidth="10000.0" visible="false" />
-                              <Button minWidth="80.0" mnemonicParsing="false" onAction="#backToMenu" styleClass="buttonClass" text="Back">
-                                 <font>
-                                    <Font name="Roboto Medium" size="12.0" />
-                                 </font>
-                              </Button>
-                           </children>
-                        </HBox>
+                        <Text fx:id="txtVideoTitle" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Arcane Season 2 | Official Teaser Trailer" VBox.vgrow="ALWAYS">
+                           <font>
+                              <Font name="Roboto Black" size="25.0" />
+                           </font>
+                        </Text>
                         <HBox fx:id="hbxVideoDetails" alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="830.0">
                            <children>
-                              <HBox fx:id="hbxChannel" alignment="CENTER_LEFT" prefHeight="57.0" prefWidth="195.0" HBox.hgrow="NEVER">
+                              <HBox fx:id="hbxChannel" alignment="CENTER_LEFT" prefHeight="57.0" prefWidth="195.0" spacing="10.0" HBox.hgrow="NEVER">
                                  <children>
                                     <Button fx:id="btnChannelProfile" mnemonicParsing="false" onAction="#getChannel" style="-fx-background-color: TRANSPARENT;">
                                        <graphic>
@@ -83,7 +69,7 @@
                                                 <Cursor fx:constant="HAND" />
                                              </cursor>
                                              <image>
-                                                <Image url="@images/profilePictures/pfp3.jpg" />
+                                                <Image url="@images/profilePictures/pfp1.jpg" />
                                              </image>
                                           </ImageView>
                                        </graphic>
@@ -97,7 +83,7 @@
                                              <children>
                                                 <Text fx:id="txtChannelName" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Channel Name">
                                                    <font>
-                                                      <Font name="Roboto Medium" size="16.0" />
+                                                      <Font name="Roboto Medium" size="14.0" />
                                                    </font>
                                                 </Text>
                                                 <Text fx:id="txtChannelSubscribres" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Subscribers">
@@ -137,9 +123,6 @@
                                  <padding>
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </padding>
-                                 <HBox.margin>
-                                    <Insets left="10.0" />
-                                 </HBox.margin>
                               </HBox>
                               <HBox alignment="CENTER" prefHeight="68.0" prefWidth="111.0" styleClass="button-group">
                                  <children>
@@ -229,7 +212,7 @@
                                     </Text>
                                  </children>
                               </HBox>
-                              <Text fx:id="txtVideoDescription" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="It's over Anakin. I have the highground" wrappingWidth="427.9454345703125">
+                              <Text fx:id="txtVideoDescription" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="The hunt is on. Arcane, the final season coming this November to Netflix." wrappingWidth="427.9454345703125">
                                  <font>
                                     <Font name="Roboto" size="15.0" />
                                  </font>
@@ -261,7 +244,7 @@
                            <children>
                               <ImageView fitHeight="54.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@images/profilePictures/pfp3.jpg" />
+                                    <Image url="@images/profilePictures/pfp1.jpg" />
                                  </image>
                               </ImageView>
                               <TextField fx:id="txtComment" prefHeight="32.0" prefWidth="708.0" promptText="Add a comment" styleClass="field-comment" HBox.hgrow="ALWAYS">
@@ -270,8 +253,7 @@
                                  </HBox.margin>
                                  <font>
                                     <Font name="Roboto" size="13.0" />
-                                 </font>
-                              </TextField>
+                                 </font></TextField>
                               <Button fx:id="btnComment" alignment="CENTER" contentDisplay="CENTER" minHeight="40.0" minWidth="120.0" mnemonicParsing="false" onAction="#comment" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: cd0000; -fx-background-radius: 15; -fx-border-color: #ffffff; -fx-border-radius: 15;" styleClass="buttonClass" text="Comment" textAlignment="CENTER" textFill="WHITE" HBox.hgrow="ALWAYS">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
@@ -281,8 +263,7 @@
                                  </font>
                                  <HBox.margin>
                                     <Insets top="7.0" />
-                                 </HBox.margin>
-                              </Button>
+                                 </HBox.margin></Button>
                            </children>
                         </HBox>
                      </children>

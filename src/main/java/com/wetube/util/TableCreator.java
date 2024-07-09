@@ -67,7 +67,8 @@ public class TableCreator {
                     likesCount INT DEFAULT 0,
                     dislikesCount INT DEFAULT 0,
                     creationDate TIMESTAMP,
-                    isOnlyComrade BOOLEAN
+                    isOnlyComrade BOOLEAN,
+                    viewsCount INT DEFAULT 0
                 );
                 """;
         String createPostsTable = """

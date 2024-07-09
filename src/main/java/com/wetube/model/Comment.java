@@ -38,9 +38,9 @@ public class Comment extends Content implements Serializable
         replyCount = 0;
     }
 
-    public Comment (UUID ID, UUID contentID, UUID creatorID, UUID channelID, int likesCount, int dislikesCount, LocalDateTime creationDate, boolean isOnlyComrade, UUID parentCommentID, String content, int replyCount, boolean isReply)
+    public Comment (UUID ID, UUID contentID, UUID creatorID, UUID channelID, int likesCount, int dislikesCount, LocalDateTime creationDate, UUID parentCommentID, String content, int replyCount, boolean isReply)
     {
-        super (ID, creatorID, channelID, likesCount, dislikesCount, creationDate, isOnlyComrade);
+        super (ID, creatorID, channelID, likesCount, dislikesCount, creationDate, false);
         this.contentID       = contentID;
         this.parentCommentID = parentCommentID;
         this.content         = content;
