@@ -118,9 +118,9 @@
       </HBox>
       <HBox prefHeight="1051.0" prefWidth="1920.0">
          <children>
-            <VBox fx:id="leftMenuSmall">
+            <VBox fx:id="leftMenuSmall" minWidth="105.0">
                <HBox.margin>
-                  <Insets left="10.0" top="-5.0" />
+                  <Insets top="-5.0" />
                </HBox.margin>
                <children>
                   <VBox prefHeight="998.0" prefWidth="107.0" style="-fx-border-color: ffffff; -fx-border-width: 5; -fx-background-color: cd0000;">
@@ -501,7 +501,11 @@
                   </VBox>
                </content>
             </ScrollPane>
-            <FlowPane fx:id="videosPane" prefHeight="994.0" prefWidth="1960.0" />
+            <ScrollPane fx:id="videoScrollPane" hbarPolicy="NEVER">
+               <content>
+                  <FlowPane fx:id="videosPane" prefHeight="994.0" prefWidth="1638.0" />
+               </content>
+            </ScrollPane>
          </children>
       </HBox>
    </children>

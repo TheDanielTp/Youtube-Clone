@@ -2,8 +2,11 @@ package org.project.controller;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.sun.tools.javac.Main;
 import com.wetube.dao.impl.ChannelDAOImpl;
+import com.wetube.dao.impl.CommentDAOImpl;
 import com.wetube.dao.impl.UserDAOImpl;
+import com.wetube.dao.impl.VideoDAOImpl;
 import com.wetube.model.Channel;
 import com.wetube.model.Comment;
 import com.wetube.model.User;
@@ -258,7 +261,7 @@ public class VideoPageController implements Initializable
     //region [ - setViewCount() - ]
     private void setViewCount ()
     {
-            txtViews.setText (String.valueOf (video.getViewsCount ()));
+        txtViews.setText (String.valueOf (video.getViewsCount ()));
     }
     //endregion
 
@@ -271,8 +274,8 @@ public class VideoPageController implements Initializable
         File tempFile;
         try
         {
-            File videoFile = new File (video.getVideoURL ());
-            byte[] fileBytes = Files.readAllBytes(Path.of (videoFile.toURI ()));
+            File   videoFile = new File (video.getVideoURL ());
+            byte[] fileBytes = Files.readAllBytes (Path.of (videoFile.toURI ()));
 
             tempFile = File.createTempFile ("video", ".mp4");
             tempFile.deleteOnExit ();
@@ -339,56 +342,48 @@ public class VideoPageController implements Initializable
     //region [ - displayRecommendedVideos() - ]
     private void displayRecommendedVideos ()
     {
-//        Request <ArrayList <Video>> userRequest = new Request <> (YouTubeApplication.socket, "GetRecommendedVideos");
-//        userRequest.send ();
-//
-//        String response = YouTubeApplication.receiveResponse ();
-//        Gson   gson     = new Gson ();
-//        TypeToken <Response <ArrayList <Video>>> responseTypeToken = new TypeToken <> ()
-//        {
-//        };
-//        Response <ArrayList <Video>> videoResponse = gson.fromJson (response, responseTypeToken.getType ());
-//
-//        recommendedVideos = videoResponse.getBody ();
-//        Platform.runLater (() ->
-//        {
-//            if (recommendedVideos != null)
-//            {
-//                for (var v : recommendedVideos)
-//                {
-//                    if (video.getId ().equals (v.getId ()))
-//                    {
-//                        continue;
-//                    }
-//                    FXMLLoader videoRecommendationLoader = new FXMLLoader (getClass ().getResource ("/sbu/cs/youtube/video-recommendation.fxml"));
-//                    HBox       videoRecommendation;
-//                    try
-//                    {
-//                        videoRecommendation = videoRecommendationLoader.load ();
-//
-//                    }
-//                    catch (IOException e)
-//                    {
-//                        throw new RuntimeException (e);
-//                    }
-//                    VideoRecommendationController videoRecommendationController = videoRecommendationLoader.getController ();
-//                    if (videoRecommendationController != null)
-//                    {
-//                        videoRecommendationController.setVideo (v);
-//                    }
-//
-//                    videoRecommendationController.setParentController (parentController);
-//
-//                    Button button = new Button ();
-//                    button.getStyleClass ().add ("btn-video");
-//                    button.setGraphic (videoRecommendation);
-//
-//                    button.setOnAction (event -> getVideo (event, v));
-//                    vbxRecommendedVideos.getChildren ().add (button);
-//                    VBox.setVgrow (videoRecommendation, Priority.ALWAYS);
-//                }
-//            }
-//        });
+        ArrayList <Video> videos = (ArrayList <Video>) MainApplication.client.getAllVideos ()[1];
+        videos.remove (MainApplication.currentVideo);
+        videos.remove (video);
+
+        recommendedVideos = videos;
+        Platform.runLater (() ->
+        {
+            if (recommendedVideos != null)
+            {
+                for (var v : recommendedVideos)
+                {
+                    if (video.getID ().equals (v.getID ()))
+                    {
+                        continue;
+                    }
+                    FXMLLoader videoRecommendationLoader = new FXMLLoader (getClass ().getResource ("/org/project/controller/video-recommendation.fxml"));
+                    HBox       videoRecommendation;
+                    try
+                    {
+                        videoRecommendation = videoRecommendationLoader.load ();
+
+                    }
+                    catch (IOException e)
+                    {
+                        throw new RuntimeException (e);
+                    }
+                    VideoRecommendationController videoRecommendationController = videoRecommendationLoader.getController ();
+                    if (videoRecommendationController != null)
+                    {
+                        videoRecommendationController.setVideo (v);
+                    }
+
+                    Button button = new Button ();
+                    button.getStyleClass ().add ("btn-video");
+                    button.setGraphic (videoRecommendation);
+
+                    button.setOnAction (event -> getVideo (event, v));
+                    vbxRecommendedVideos.getChildren ().add (button);
+                    VBox.setVgrow (videoRecommendation, Priority.ALWAYS);
+                }
+            }
+        });
 
     }
     //endregion
@@ -396,31 +391,21 @@ public class VideoPageController implements Initializable
     //region [ - getVideo(ActionEvent event, Video video) - ]
     private void getVideo (ActionEvent event, Video video)
     {
-//        Request <Video> videoRequest = new Request <> (YouTubeApplication.socket, "GetVideo");
-//        videoRequest.send (new Video (video.getId ()));
-//
-//        getVideoPage (event);
-    }
-    //endregion
-
-    //region [ - getVideoPage(ActionEvent event) - ]
-    private void getVideoPage (ActionEvent event)
-    {
-        mediaPlayer.stop ();
+        MainApplication.currentVideo = video;
         Stage      stage;
         Scene      scene;
         Parent     root;
-        FXMLLoader loader = new FXMLLoader (getClass ().getResource ("/sbu/cs/youtube/video-section.fxml"));
+        FXMLLoader loader2 = new FXMLLoader (getClass ().getResource ("/org/project/controller/video-page.fxml"));
         try
         {
-            root = loader.load ();
+            root = loader2.load ();
         }
         catch (IOException e)
         {
             throw new RuntimeException (e);
         }
         stage = (Stage) ((Node) event.getSource ()).getScene ().getWindow ();
-        scene = new Scene (root, anchrpnVideoPage.getScene ().getWidth (), anchrpnVideoPage.getScene ().getHeight ());
+        scene = new Scene (root);
         stage.setScene (scene);
         stage.show ();
     }
@@ -429,58 +414,30 @@ public class VideoPageController implements Initializable
     //region [ - displayComments() - ]
     private void displayComments ()
     {
-//        Request <Video> videoRequest = new Request <> (YouTubeApplication.socket, "GetVideoComments");
-//        videoRequest.send (new Video (video.getId ()));
-//
-//        Gson   gson     = new Gson ();
-//        String response = YouTubeApplication.receiveResponse ();
-//        TypeToken <Response <ArrayList <Comment>>> viewResponseTypeToken = new TypeToken <> ()
-//        {
-//        };
-//        Response <ArrayList <Comment>> commentsResponse = gson.fromJson (response, viewResponseTypeToken.getType ());
-//        video.setComments (commentsResponse.getBody ());
-//        System.out.println (commentsResponse.getMessage ());
+        Platform.runLater (() ->
+        {
+            CommentDAOImpl      commentDAO = new CommentDAOImpl ();
+            ArrayList <Comment> comments   = (ArrayList <Comment>) commentDAO.findAll ();
 
-        //region [ - Without Thread - ]
-//        vbxCommentSection.getChildren().remove(2, vbxCommentSection.getChildren().size());
-//        for (var comment : video.getComments()) {
-//            FXMLLoader commentPreviewLoader = new FXMLLoader(getClass().getResource("/sbu/cs/youtube/comment-preview.fxml"));
-//            Parent commentPreview;
-//            try {
-//                commentPreview = commentPreviewLoader.load();
-//                CommentPreviewController commentPreviewController = commentPreviewLoader.getController();
-//                commentPreviewController.setComment(comment);
-//            } catch (IOException e) {
-//                throw new RuntimeException(e);
-//            }
-//            vbxCommentSection.getChildren().add(commentPreview);
-//        }
-        //endregion
+            vbxCommentSection.getChildren ().remove (2, vbxCommentSection.getChildren ().size ());
 
-//        vbxCommentSection.prefWidthProperty().bind(videoScrollPane.prefViewportWidthProperty());
-//        vbxCommentSection.prefHeightProperty().bind(videoScrollPane.prefViewportHeightProperty());
-
-//        Platform.runLater (() ->
-//        {
-//            vbxCommentSection.getChildren ().remove (2, vbxCommentSection.getChildren ().size ());
-//            for (var comment : video.getComments ())
-//            {
-//                FXMLLoader commentPreviewLoader = new FXMLLoader (getClass ().getResource ("/sbu/cs/youtube/comment-preview.fxml"));
-//                Parent     commentPreview;
-//                try
-//                {
-//                    commentPreview = commentPreviewLoader.load ();
-//                    CommentPreviewController commentPreviewController = commentPreviewLoader.getController ();
-//                    commentPreviewController.setComment (comment);
-//                    commentPreviewController.setParentController (parentController);
-//                }
-//                catch (IOException e)
-//                {
-//                    throw new RuntimeException (e);
-//                }
-//                vbxCommentSection.getChildren ().add (commentPreview);
-//            }
-//        });
+            for (var comment : comments)
+            {
+                FXMLLoader commentPreviewLoader = new FXMLLoader (getClass ().getResource ("/sbu/cs/youtube/comment-preview.fxml"));
+                Parent     commentPreview;
+                try
+                {
+                    commentPreview = commentPreviewLoader.load ();
+                    CommentPreviewController commentPreviewController = commentPreviewLoader.getController ();
+                    commentPreviewController.setComment (comment);
+                }
+                catch (IOException e)
+                {
+                    throw new RuntimeException (e);
+                }
+                vbxCommentSection.getChildren ().add (commentPreview);
+            }
+        });
     }
     //endregion
 
@@ -682,10 +639,17 @@ public class VideoPageController implements Initializable
     public void setVideo ()
     {
         ChannelDAOImpl channelDAO = new ChannelDAOImpl ();
-        Channel channel = channelDAO.findById (video.getChannelID ());
+        Channel        channel    = channelDAO.findById (video.getChannelID ());
 
         UserDAOImpl userDAO = new UserDAOImpl ();
         User        user    = userDAO.findById (channel.getUserID ());
+
+        VideoDAOImpl videoDAO   = new VideoDAOImpl ();
+        List <User>  likedUsers = videoDAO.findLikedUsers (video);
+        if (likedUsers.contains (MainApplication.currentUser))
+        {
+            hasLiked = true;
+        }
 
         txtVideoTitle.setText (video.getTitle ());
         txtVideoDescription.setText (video.getDescription ());
@@ -695,10 +659,6 @@ public class VideoPageController implements Initializable
         txtDate.setText (date.getDayOfMonth () + " " + date.getMonth () + " " + date.getYear ());
         txtViews.setText (String.valueOf (video.getViewsCount ()));
         txtLikes.setText (String.valueOf (video.getLikesCount ()));
-
-//        Image videoThumbnail = new Image (user.getProfilePictureURL ());
-//        imgChannelProfile.setImage (videoThumbnail);
-
 
         if (hasLiked == null)
         {
@@ -711,48 +671,17 @@ public class VideoPageController implements Initializable
         {
             svgDislike.setContent ("M18,4h3v10h-3V4z M5.23,14h4.23l-1.52,4.94C7.62,19.97,8.46,21,9.62,21c0.58,0,1.14-0.24,1.52-0.65L17,14V4H6.57 C5.5,4,4.59,4.67,4.38,5.61l-1.34,6C2.77,12.85,3.82,14,5.23,14z");
         }
-
-        //region [ - Getting Video Bytes - ]
-        //        File tempFile;
-//        try {
-//            tempFile = File.createTempFile("video", ".mp4");
-//            tempFile.deleteOnExit();
-//
-//            // Write the byte array to the temporary file
-//            try (FileOutputStream fos = new FileOutputStream(tempFile);
-//                 ByteArrayInputStream bais = new ByteArrayInputStream(video.getVideoBytes())) {
-//                byte[] buffer = new byte[1024];
-//                int length;
-//                while ((length = bais.read(buffer)) != -1) {
-//                    fos.write(buffer, 0, length);
-//                }
-//            }
-//
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//            return;
-//        }
-//
-//        // Create a Media object from the temporary file
-//        Media media = new Media(tempFile.toURI().toString());
-//        displayMedia(media);
-//        displayMedia();
-        //endregion
-
-
     }
-    //endregion
 
-    //region [ - updateSub(ActionEvent event) - ]
     @FXML
     private void updateSub (ActionEvent event)
     {
-        SVGPath svgPath = (SVGPath) btnSub.getChildrenUnmodifiable ().getFirst ();
+        SVGPath  svgPath           = (SVGPath) btnSub.getChildrenUnmodifiable ().getFirst ();
         Object[] subscribeResponse = MainApplication.client.subscribe (MainApplication.currentUser, channel);
 
-        ArrayList<UUID> subscribers = (ArrayList<UUID>) MainApplication.client.findSubscribers (channel)[1];
+        ArrayList <UUID> subscribers = (ArrayList <UUID>) MainApplication.client.findSubscribers (channel)[1];
 
-        if (subscribers.contains (MainApplication.currentUser.getID()))
+        if (subscribers.contains (MainApplication.currentUser.getID ()))
         {
             svgPath.setContent ("m3.85 3.15-.7.7 3.48 3.48C6.22 8.21 6 9.22 6 10.32v5.15l-2 1.88V19h14.29l1.85 1.85.71-.71-17-16.99zM5 18v-.23l2-1.88v-5.47c0-.85.15-1.62.41-2.3L17.29 18H5zm5 2h4c0 1.1-.9 2-2 2s-2-.9-2-2zM9.28 5.75l-.7-.7c.43-.29.9-.54 1.42-.7v-.39c0-1.42 1.49-2.5 2.99-1.76.65.32 1.01 1.03 1.01 1.76v.39c2.44.75 4 3.06 4 5.98v4.14l-1-1v-3.05c0-2.47-1.19-4.36-3.13-5.1-1.26-.53-2.64-.5-3.84.03-.27.11-.51.24-.75.4z");
             btnSub.setText ("Unsubscribed");
@@ -765,9 +694,7 @@ public class VideoPageController implements Initializable
             MainApplication.client.subscribe (MainApplication.currentUser, channel);
         }
     }
-    //endregion
 
-    //region [ - updateLike(ActionEvent event) - ]
     @FXML
     private void updateLike (ActionEvent event)
     {
@@ -782,19 +709,19 @@ public class VideoPageController implements Initializable
             svgDislike.setContent (emptiedDislike);
             hasLiked = true;
             txtLikes.setText (String.valueOf (Integer.parseInt (txtLikes.getText ()) + 1));
+            MainApplication.client.like (video, MainApplication.currentUser);
         }
         else if (hasLiked)
         {
             svgLike.setContent (emptiedLike);
             hasLiked = null;
             txtLikes.setText (String.valueOf (Integer.parseInt (txtLikes.getText ()) - 1));
+            MainApplication.client.like (video, MainApplication.currentUser);
         }
 
         MainApplication.client.like (video, MainApplication.currentUser);
     }
-    //endregion
 
-    //region [ - updateDislike(ActionEvent event) - ]
     @FXML
     private void updateDislike (ActionEvent event)
     {
@@ -811,51 +738,45 @@ public class VideoPageController implements Initializable
                 txtLikes.setText (String.valueOf (Integer.parseInt (txtLikes.getText ()) - 1));
             }
             hasLiked = false;
+            MainApplication.client.dislike (video, MainApplication.currentUser);
         }
         else if (! hasLiked)
         {
             svgDislike.setContent (emptiedDislike);
             hasLiked = null;
+            MainApplication.client.dislike (video, MainApplication.currentUser);
         }
 
         MainApplication.client.dislike (video, MainApplication.currentUser);
     }
-    //endregion
 
-    //region [ - updateSave(ActionEvent event) - ]
     @FXML
     private void updateSave (ActionEvent event)
     {
     }
-    //endregion
 
-    //region [ - comment(ActionEvent event) - ]
     @FXML
     private void comment (ActionEvent event)
     {
-        Comment           comment        = new  Comment (video.getID (), MainApplication.currentUser.getID (), null, txtComment.getText (),  false);
+        Comment comment = new Comment (video.getID (), MainApplication.currentUser.getID (), null, txtComment.getText (), false);
         MainApplication.client.create (comment);
         txtComment.clear ();
 
         displayComments ();
     }
-    //endregion
 
-    //region [ - formatTime(Duration time) - ]
     private String formatTime (Duration time)
     {
         int minutes = (int) time.toMinutes ();
         int seconds = (int) time.toSeconds () % 60;
         return String.format ("%02d:%02d", minutes, seconds);
     }
-    //endregion
 
-    //region [ - getChannel(ActionEvent event) - ]
     @FXML
     private void getChannel (ActionEvent event)
     {
         ChannelDAOImpl channelDAO = new ChannelDAOImpl ();
-        Channel channel = channelDAO.findById (video.getChannelID ());
+        Channel        channel    = channelDAO.findById (video.getChannelID ());
 
         getChannelPage (event);
     }

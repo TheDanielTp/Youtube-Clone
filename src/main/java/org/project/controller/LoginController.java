@@ -51,15 +51,6 @@ public class LoginController
                     MainApplication.currentUser = (User) loginResponse[1];
                     System.out.println ("> Front: User login successful");
 
-                    Channel channel = new Channel (currentUser.getID (), currentUser.getUsername (), "");
-                    client.create (channel);
-
-                    Video video = new Video (currentUser.getID (), currentUser.getID (), currentUser.getID (), "You were the chosen one", "Starwars Video",
-                            "D:\\Java\\Projects\\Project_WeTube\\src\\main\\resources\\org\\project\\controller\\videos\\You Were The Chosen One.mp4",
-                            "D:\\Java\\Projects\\Project_WeTube\\src\\main\\resources\\org\\project\\controller\\videos\\thumbnails\\You Were The Chosen One.jpg",
-                            false);
-                    client.create (video);
-
                     Parent root;
                     if (! MainApplication.DarkTheme)
                     {

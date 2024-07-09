@@ -73,7 +73,7 @@ public class CommentPreviewController implements Initializable
     //region [ - setComment(Comment comment) - ]
     public void setComment (Comment comment)
     {
-        UserDAOImpl userDAO = new UserDAOImpl();
+        UserDAOImpl userDAO = new UserDAOImpl ();
         this.comment = comment;
         txtUsername.setText (userDAO.findById (comment.getCreatorID ()).getUsername ());
         txtContent.setText (comment.getContent ());

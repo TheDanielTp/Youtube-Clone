@@ -7,6 +7,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
@@ -453,6 +454,11 @@
                         </Button>
                      </children>
                   </VBox>
+               </content>
+            </ScrollPane>
+            <ScrollPane fx:id="videoScrollPane" hbarPolicy="NEVER">
+               <content>
+                  <FlowPane fx:id="videosPane" prefHeight="994.0" prefWidth="1638.0" />
                </content>
             </ScrollPane>
          </children>

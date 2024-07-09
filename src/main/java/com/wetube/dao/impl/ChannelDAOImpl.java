@@ -27,6 +27,7 @@ public class ChannelDAOImpl
                 uuid = generateID ();
             }
         }
+        System.out.println ("> Database: ID generated");
         return uuid;
     }
 
@@ -49,10 +50,11 @@ public class ChannelDAOImpl
             pstmt.setDouble (11, channel.getOutcome ());
             pstmt.setBytes (12, channel.getChannelPictureURL () != null ? channel.getChannelPictureURL ().toString ().getBytes () : null);
             pstmt.executeUpdate ();
+            System.out.println ("> Database: channel created");
         }
         catch (SQLException e)
         {
-            System.out.println ("> Database: Error creating channel: " + e);
+            System.out.println ("> Database: failed to create channel");
         }
     }
 
@@ -75,10 +77,11 @@ public class ChannelDAOImpl
             pstmt.setBytes (11, channel.getChannelPictureURL () != null ? channel.getChannelPictureURL ().toString ().getBytes () : null);
             pstmt.setObject (12, channel.getID ());
             pstmt.executeUpdate ();
+            System.out.println ("> Database: channel updated");
         }
         catch (SQLException e)
         {
-            e.printStackTrace ();
+            System.out.println ("> Database: failed to update channel");
         }
     }
 
@@ -99,11 +102,11 @@ public class ChannelDAOImpl
 
             String deleteChannel = "DELETE FROM Channels WHERE ID = '" + id + "'";
             stmt.executeUpdate (deleteChannel);
-
+            System.out.println ("> Database: channel deleted");
         }
         catch (SQLException e)
         {
-            e.printStackTrace ();
+            System.out.println ("> Database: failed to delete channel");
         }
     }
 
@@ -116,10 +119,11 @@ public class ChannelDAOImpl
             pstmt.setObject (1, user.getID ());
             pstmt.setObject (2, channel.getID ());
             pstmt.executeUpdate ();
+            System.out.println ("> Database: channel subscribed");
         }
         catch (SQLException e)
         {
-            e.printStackTrace ();
+            System.out.println ("> Database: failed to subscribe channel");
         }
     }
 
@@ -130,10 +134,11 @@ public class ChannelDAOImpl
         {
             String unsubscribe = "DELETE FROM Subscribers WHERE userID = '" + user.getID () + "' && channelID = '" + channel.getID () + "'";
             stmt.executeUpdate (unsubscribe);
+            System.out.println ("> Database: channel unsubscribed");
         }
         catch (SQLException e)
         {
-            e.printStackTrace ();
+            System.out.println ("> Database: failed to unsubscribe channel");
         }
     }
 
@@ -147,6 +152,7 @@ public class ChannelDAOImpl
             ResultSet rs = pstmt.executeQuery ();
             if (rs.next ())
             {
+                System.out.println ("> Database: channel found by ID");
                 return new Channel (
                         rs.getObject ("ID", UUID.class),
                         rs.getObject ("userID", UUID.class),
@@ -166,7 +172,7 @@ public class ChannelDAOImpl
         }
         catch (SQLException e)
         {
-            e.printStackTrace ();
+            System.out.println ("> Database: failed to find channel");
         }
         return null;
     }
@@ -181,6 +187,7 @@ public class ChannelDAOImpl
             ResultSet rs = pstmt.executeQuery ();
             if (rs.next ())
             {
+                System.out.println ("> Database: channel found by name");
                 return new Channel (
                         rs.getObject ("ID", UUID.class),
                         rs.getObject ("userID", UUID.class),
@@ -200,7 +207,7 @@ public class ChannelDAOImpl
         }
         catch (SQLException e)
         {
-            e.printStackTrace ();
+            System.out.println ("> Database: failed to find channel");
         }
         return null;
     }
@@ -220,10 +227,11 @@ public class ChannelDAOImpl
                     subscribersID.add (rs.getObject ("userID", UUID.class));
                 }
             }
+            System.out.println ("> Database: subscribers found");
         }
         catch (SQLException e)
         {
-            e.printStackTrace ();
+            System.out.println ("> Database: failed to find subscribers");
         }
         return subscribersID;
     }
@@ -257,7 +265,7 @@ public class ChannelDAOImpl
         }
         catch (SQLException e)
         {
-            e.printStackTrace ();
+            System.out.println ("> Database: failed to find channels");
         }
         return channels;
     }

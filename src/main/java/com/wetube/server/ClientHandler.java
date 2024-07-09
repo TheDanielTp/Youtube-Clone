@@ -337,7 +337,7 @@ public class ClientHandler extends Thread
     {
         UserDAOImpl userDAO = new UserDAOImpl ();
 
-        List<User> users = userDAO.findAll ();
+        List <User> users = userDAO.findAll ();
         return new Response ("SUCCESS", "Users found successfully", users);
     }
 
@@ -372,44 +372,30 @@ public class ClientHandler extends Thread
     private Response likeVideo (Object[] data)
     {
         Video video = (Video) data[0];
-        User user = (User) data[1];
+        User  user  = (User) data[1];
 
         VideoDAOImpl videoDAO = new VideoDAOImpl ();
-        if (videoDAO.findLikedUsers (video).contains (user))
-        {
-            videoDAO.removeLikeDislike (video, user);
-            return new Response ("SUCCESS", "Like removed successfully", null);
-        }
-        else
-        {
-            videoDAO.like (video, user);
-            return new Response ("SUCCESS", "Like added successfully", null);
-        }
+
+        videoDAO.like (video, user);
+        return new Response ("SUCCESS", "Like functioned successfully", null);
     }
 
     private Response dislikeVideo (Object[] data)
     {
         Video video = (Video) data[0];
-        User user = (User) data[1];
+        User  user  = (User) data[1];
 
         VideoDAOImpl videoDAO = new VideoDAOImpl ();
-        if (videoDAO.findDislikedUsers (video).contains (user))
-        {
-            videoDAO.removeLikeDislike (video, user);
-            return new Response ("SUCCESS", "Dislike removed successfully", null);
-        }
-        else
-        {
-            videoDAO.dislike (video, user);
-            return new Response ("SUCCESS", "Dislike added successfully", null);
-        }
+
+        videoDAO.dislike (video, user);
+        return new Response ("SUCCESS", "Dislike functioned successfully", null);
     }
 
     private Response getLikedUsers (Video video)
     {
         VideoDAOImpl videoDAO = new VideoDAOImpl ();
 
-        List<User> likedUsers = videoDAO.findLikedUsers (video);
+        List <User> likedUsers = videoDAO.findLikedUsers (video);
         return new Response ("SUCCESS", "Liked users found successfully", likedUsers);
     }
 
@@ -417,7 +403,7 @@ public class ClientHandler extends Thread
     {
         VideoDAOImpl videoDAO = new VideoDAOImpl ();
 
-        List<User> dislikedUsers = videoDAO.findDislikedUsers (video);
+        List <User> dislikedUsers = videoDAO.findDislikedUsers (video);
         return new Response ("SUCCESS", "Disliked users found successfully", dislikedUsers);
     }
 
@@ -425,7 +411,7 @@ public class ClientHandler extends Thread
     {
         VideoDAOImpl videoDAO = new VideoDAOImpl ();
 
-        List<Video> videos = videoDAO.findByUser (user.getID ());
+        List <Video> videos = videoDAO.findByUser (user.getID ());
         return new Response ("SUCCESS", "Videos found successfully", videos);
     }
 
@@ -433,7 +419,7 @@ public class ClientHandler extends Thread
     {
         VideoDAOImpl videoDAO = new VideoDAOImpl ();
 
-        List<Video> videos = videoDAO.findAll ();
+        List <Video> videos = videoDAO.findAll ();
         return new Response ("SUCCESS", "Videos found successfully", videos);
     }
 
@@ -505,7 +491,7 @@ public class ClientHandler extends Thread
     {
         PostDAOImpl postDAO = new PostDAOImpl ();
 
-        List<User> likedUsers = postDAO.findLikedUsers (post);
+        List <User> likedUsers = postDAO.findLikedUsers (post);
         return new Response ("SUCCESS", "Liked users found successfully", likedUsers);
     }
 
@@ -513,7 +499,7 @@ public class ClientHandler extends Thread
     {
         PostDAOImpl postDAO = new PostDAOImpl ();
 
-        List<User> dislikedUsers = postDAO.findDislikedUsers (post);
+        List <User> dislikedUsers = postDAO.findDislikedUsers (post);
         return new Response ("SUCCESS", "Disliked users found successfully", dislikedUsers);
     }
 
@@ -521,7 +507,7 @@ public class ClientHandler extends Thread
     {
         PostDAOImpl postDAO = new PostDAOImpl ();
 
-        List<Post> posts = postDAO.findUserPosts (user.getID ());
+        List <Post> posts = postDAO.findUserPosts (user.getID ());
         return new Response ("SUCCESS", "Posts found successfully", posts);
     }
 
@@ -529,7 +515,7 @@ public class ClientHandler extends Thread
     {
         PostDAOImpl postDAO = new PostDAOImpl ();
 
-        List<Post> posts = postDAO.findAll ();
+        List <Post> posts = postDAO.findAll ();
         return new Response ("SUCCESS", "Posts found successfully", posts);
     }
 
@@ -564,7 +550,7 @@ public class ClientHandler extends Thread
     private Response likeComment (Object[] data)
     {
         Comment comment = (Comment) data[0];
-        User user = (User) data[1];
+        User    user    = (User) data[1];
 
         CommentDAOImpl commentDAO = new CommentDAOImpl ();
         if (commentDAO.findLikedUsers (comment).contains (user))
@@ -582,7 +568,7 @@ public class ClientHandler extends Thread
     private Response dislikeComment (Object[] data)
     {
         Comment comment = (Comment) data[0];
-        User user = (User) data[1];
+        User    user    = (User) data[1];
 
         CommentDAOImpl commentDAO = new CommentDAOImpl ();
         if (commentDAO.findDislikedUsers (comment).contains (user))
@@ -600,7 +586,7 @@ public class ClientHandler extends Thread
     private Response getLikedUsers (Comment comment)
     {
         CommentDAOImpl commentDAO = new CommentDAOImpl ();
-        List<User> likedUsers = commentDAO.findLikedUsers (comment);
+        List <User>    likedUsers = commentDAO.findLikedUsers (comment);
 
         return new Response ("SUCCESS", "Liked users found successfully", likedUsers);
     }
@@ -616,7 +602,7 @@ public class ClientHandler extends Thread
     private Response getAllComments ()
     {
         CommentDAOImpl commentDAO = new CommentDAOImpl ();
-        List<Comment> comments = commentDAO.findAll ();
+        List <Comment> comments   = commentDAO.findAll ();
 
         return new Response ("SUCCESS", "Comments found successfully", comments);
     }
@@ -657,7 +643,7 @@ public class ClientHandler extends Thread
 
     private Response subscribe (Object[] data)
     {
-        User user = (User) data[0];
+        User    user    = (User) data[0];
         Channel channel = (Channel) data[1];
 
         ChannelDAOImpl channelDAO = new ChannelDAOImpl ();

@@ -4,21 +4,27 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ec566682-672c-4b02-8981-652c66cb3fe3" name="Changes" comment="Updated Project Functions">
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+    <list default="true" id="ec566682-672c-4b02-8981-652c66cb3fe3" name="Changes" comment="Added Video Page">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/images/thumbnails/Watch My 9mm Go Bang.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/video-page-view.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wetube/client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/client/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wetube/dao/impl/CategoryDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/dao/impl/CategoryDAOImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/wetube/dao/impl/ChannelDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/dao/impl/ChannelDAOImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/wetube/dao/impl/VideoDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/dao/impl/VideoDAOImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wetube/model/Video.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/model/Video.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/wetube/server/ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/server/ClientHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wetube/util/TableCreator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/util/TableCreator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/controller/CommentPreviewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/project/controller/CommentPreviewController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/project/controller/FrontController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/project/controller/FrontController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/project/controller/LoginController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/project/controller/MainApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/project/controller/MainApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/controller/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/project/controller/MainController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/project/controller/VideoPageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/project/controller/VideoPageController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/controller/VideoRecommendationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/project/controller/VideoRecommendationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/project/controller/comment-preview.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/comment-preview.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/project/controller/communist-front-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/communist-front-view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/project/controller/communist-main-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/communist-main-view.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/org/project/controller/video-page.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/video-page.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/project/controller/video-recommendation.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/video-recommendation.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/org/project/controller/video-thumbnail-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/video-thumbnail-view.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -81,7 +87,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "login",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/Java/Projects/Project_WeTube",
+    "last_opened_file_path": "D:/Java/Projects/Project_WeTube/src/main/resources/org/project/controller",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
@@ -103,6 +109,9 @@
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Java\Projects\Project_WeTube\src\main\resources\org\project\controller" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Java\Projects\Project_WeTube\src\main\resources\org\project\controller\images" />
       <recent name="D:\Java\Projects\Project_WeTube\src\main\java\org\project\controller" />
@@ -166,7 +175,7 @@
       <updated>1720246621657</updated>
       <workItem from="1720382424785" duration="4557000" />
       <workItem from="1720477418650" duration="6999000" />
-      <workItem from="1720503665689" duration="6212000" />
+      <workItem from="1720503665689" duration="20047000" />
     </task>
     <task id="LOCAL‎−۰۰۰۰۱" summary="Created Repository">
       <option name="closed" value="true" />
@@ -256,7 +265,14 @@
       <option name="presentableId" value="LOCAL‎−۰۰۰۱۲" />
       <updated>1720504210766</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL‎−۰۰۰۱۳" summary="Added Video Page">
+      <option name="closed" value="true" />
+      <created>1720511101573</created>
+      <option name="number" value="LOCAL‎−۰۰۰۱۳" />
+      <option name="presentableId" value="LOCAL‎−۰۰۰۱۳" />
+      <updated>1720511101573</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -287,6 +303,7 @@
     <MESSAGE value="Updated Interface: Dark signup added" />
     <MESSAGE value="Added Theme Button" />
     <MESSAGE value="Updated Project Functions" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated Project Functions" />
+    <MESSAGE value="Added Video Page" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added Video Page" />
   </component>
 </project>

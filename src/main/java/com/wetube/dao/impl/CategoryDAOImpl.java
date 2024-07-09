@@ -24,6 +24,7 @@ public class CategoryDAOImpl
                 uuid = generateID ();
             }
         }
+        System.out.println ("> Database: ID generated");
         return uuid;
     }
 
@@ -36,10 +37,11 @@ public class CategoryDAOImpl
             pstmt.setObject (1, category.getID ());
             pstmt.setString (2, category.getTitle ());
             pstmt.executeUpdate ();
+            System.out.println ("> Database: category created");
         }
         catch (SQLException e)
         {
-            e.printStackTrace ();
+            System.out.println ("> Database: failed to create category");
         }
     }
 
@@ -52,10 +54,11 @@ public class CategoryDAOImpl
             pstmt.setString (1, category.getTitle ());
             pstmt.setObject (2, category.getID ());
             pstmt.executeUpdate ();
+            System.out.println ("> Database: category updated");
         }
         catch (SQLException e)
         {
-            e.printStackTrace ();
+            System.out.println ("> Database: failed to update category");
         }
     }
 
@@ -66,10 +69,11 @@ public class CategoryDAOImpl
         {
             String deleteCategory = "DELETE FROM Categories WHERE ID = '" + id + "'";
             stmt.executeUpdate (deleteCategory);
+            System.out.println ("> Database: category deleted");
         }
         catch (SQLException e)
         {
-            e.printStackTrace ();
+            System.out.println ("> Database: failed to delete category");
         }
     }
 
@@ -83,6 +87,7 @@ public class CategoryDAOImpl
             ResultSet rs = pstmt.executeQuery ();
             if (rs.next ())
             {
+                System.out.println ("> Database: category found");
                 return new Category (
                         rs.getObject ("ID", UUID.class),
                         rs.getString ("title")
@@ -91,7 +96,7 @@ public class CategoryDAOImpl
         }
         catch (SQLException e)
         {
-            e.printStackTrace ();
+            System.out.println ("> Database: failed to find category by ID");
         }
         return null;
     }
@@ -111,10 +116,11 @@ public class CategoryDAOImpl
                         rs.getString ("title")
                 ));
             }
+            System.out.println ("> Database: categories found");
         }
         catch (SQLException e)
         {
-            e.printStackTrace ();
+            System.out.println ("> Database: failed to find categories");
         }
         return categories;
     }

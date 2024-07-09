@@ -3,6 +3,7 @@ package org.project.controller;
 import com.wetube.model.Video;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
+import javafx.beans.binding.Bindings;
 import javafx.beans.value.ChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -20,6 +21,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.SVGPath;
 import javafx.stage.Stage;
@@ -29,6 +31,8 @@ import java.io.*;
 import javafx.util.Duration;
 
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
@@ -38,30 +42,13 @@ public class FrontController implements Initializable
     @FXML
     private VBox mainPane;
 
-    private void getVideoPage (ActionEvent event)
-    {
-        Stage      stage;
-        Scene      scene;
-        Parent     root;
-        FXMLLoader loader = new FXMLLoader (getClass ().getResource ("/src/main/resource/video-section.fxml"));
-        try
-        {
-            root = loader.load ();
-        }
-        catch (IOException e)
-        {
-            throw new RuntimeException (e);
-        }
-        stage = (Stage) ((Node) event.getSource ()).getScene ().getWindow ();
-        scene = new Scene (root, mainPane.getScene ().getWidth (), mainPane.getScene ().getHeight ());
-        stage.setScene (scene);
-        stage.show ();
-    }
-
     //region------------------------------------------------Stage Size Functions------------------------------------------------
 
     @FXML
     FlowPane videosPane;
+
+    @FXML
+    ScrollPane videoScrollPane;
 
     @Override
     public void initialize (URL url, ResourceBundle resourceBundle)
@@ -77,9 +64,47 @@ public class FrontController implements Initializable
                 FXMLLoader loader    = new FXMLLoader (getClass ().getResource ("/org/project/controller/video-thumbnail-view.fxml"));
                 AnchorPane videoNode = loader.load ();
 
-                ImageView thumbnail = (ImageView) videoNode.lookup ("#thumbnail");
-                Label     title     = (Label) videoNode.lookup ("#title");
-                Button videoButton = (Button) videoNode.lookup ("#videoButton");
+                ImageView thumbnail   = (ImageView) videoNode.lookup ("#thumbnail");
+                Label     title       = (Label) videoNode.lookup ("#title");
+                Button    videoButton = (Button) videoNode.lookup ("#videoButton");
+                Label duration     = (Label) videoNode.lookup ("#duration");
+
+                Media media;
+                File tempFile;
+                try
+                {
+                    File   videoFile = new File (video.getVideoURL ());
+                    byte[] fileBytes = Files.readAllBytes (Path.of (videoFile.toURI ()));
+
+                    tempFile = File.createTempFile ("video", ".mp4");
+                    tempFile.deleteOnExit ();
+
+                    // Write the byte array to the temporary file
+                    try (FileOutputStream fos = new FileOutputStream (tempFile); ByteArrayInputStream bais = new ByteArrayInputStream (fileBytes))
+                    {
+                        byte[] buffer = new byte[1024];
+                        int    length;
+                        while ((length = bais.read (buffer)) != - 1)
+                        {
+                            fos.write (buffer, 0, length);
+                        }
+                    }
+
+                }
+                catch (IOException e)
+                {
+                    e.printStackTrace ();
+                    return;
+                }
+
+                // Create a Media object from the temporary file
+                media = new Media (tempFile.toURI ().toString ());
+
+                Label totalTimeLabel   = new Label ("00:00");
+                Duration total = media.getDuration ();
+                totalTimeLabel.setText (formatTime (total));
+
+                duration.setText (totalTimeLabel.getText ());
 
 //                if (thumbnail != null)
 //                {
@@ -102,25 +127,25 @@ public class FrontController implements Initializable
                 if (videoButton != null)
                 {
                     videoButton.setOnAction (event ->
-                            {
-                                MainApplication.currentVideo = video;
-                                Stage stage;
-                                Scene  scene;
-                                Parent root;
-                                FXMLLoader loader2 = new FXMLLoader (getClass ().getResource ("/org/project/controller/video-page.fxml"));
-                                try
-                                {
-                                    root = loader2.load ();
-                                }
-                                catch (IOException e)
-                                {
-                                    throw new RuntimeException (e);
-                                }
-                                stage = (Stage) ((Node) event.getSource ()).getScene ().getWindow ();
-                                scene = new Scene (root);
-                                stage.setScene (scene);
-                                stage.show ();
-                            });
+                    {
+                        MainApplication.currentVideo = video;
+                        Stage      stage;
+                        Scene      scene;
+                        Parent     root;
+                        FXMLLoader loader2 = new FXMLLoader (getClass ().getResource ("/org/project/controller/video-page.fxml"));
+                        try
+                        {
+                            root = loader2.load ();
+                        }
+                        catch (IOException e)
+                        {
+                            throw new RuntimeException (e);
+                        }
+                        stage = (Stage) ((Node) event.getSource ()).getScene ().getWindow ();
+                        scene = new Scene (root);
+                        stage.setScene (scene);
+                        stage.show ();
+                    });
                 }
 
                 videosPane.getChildren ().add (videoNode);
@@ -135,7 +160,15 @@ public class FrontController implements Initializable
         {
             Stage stage = (Stage) menuButton.getScene ().getWindow ();
             setupStageSizeListeners (stage);
+            bindVideosPaneWidth (stage);
         });
+    }
+
+    private String formatTime (Duration time)
+    {
+        int minutes = (int) time.toMinutes ();
+        int seconds = (int) time.toSeconds () % 60;
+        return String.format ("%02d:%02d", minutes, seconds);
     }
 
     private final double widthThreshold = 960;
@@ -162,6 +195,30 @@ public class FrontController implements Initializable
 
         stage.widthProperty ().addListener (stageSizeListener);
         stage.heightProperty ().addListener (stageSizeListener);
+    }
+
+    private void bindVideosPaneWidth (Stage stage)
+    {
+        videosPane.prefWidthProperty ().bind (
+                Bindings.createDoubleBinding (() ->
+                                stage.getWidth () - (isMenuOpen ? leftMenu.getWidth () : leftMenuSmall.getWidth ()),
+                        stage.widthProperty (), leftMenu.widthProperty (), leftMenuSmall.widthProperty ()
+                )
+        );
+
+        leftMenu.widthProperty ().addListener ((obs, oldVal, newVal) -> updateVideosPaneWidth (stage));
+        leftMenuSmall.widthProperty ().addListener ((obs, oldVal, newVal) -> updateVideosPaneWidth (stage));
+    }
+
+    private void updateVideosPaneWidth (Stage stage)
+    {
+        videosPane.prefWidthProperty ().bind (
+                Bindings.createDoubleBinding (() ->
+                                stage.getWidth () - (isMenuOpen ? leftMenu.getWidth () : leftMenuSmall.getWidth ()),
+                        stage.widthProperty (), leftMenu.widthProperty (), leftMenuSmall.widthProperty ()
+                )
+        );
+        videoScrollPane.setMinViewportWidth (videosPane.getWidth () + 200);
     }
 
     //endregion
@@ -697,7 +754,14 @@ public class FrontController implements Initializable
         closeTransition.setToX (- leftMenuSmall.getWidth ());
         closeTransition.play ();
 
+        TranslateTransition closeTransition3 = new TranslateTransition (Duration.seconds (0.25), videoScrollPane);
+
+        closeTransition3.setFromX (- leftMenu.getWidth () + 105);
+        closeTransition3.setToX (0);
+        closeTransition3.play ();
+
         isMenuOpen = true;
+        updateVideosPaneWidth ((Stage) menuButton.getScene ().getWindow ());
     }
 
     private void closeMenu ()
@@ -714,7 +778,14 @@ public class FrontController implements Initializable
         closeTransition.setToX (- leftMenu.getWidth ());
         closeTransition.play ();
 
+        TranslateTransition openTransition3 = new TranslateTransition (Duration.seconds (0.25), videoScrollPane);
+
+        openTransition3.setFromX (0);
+        openTransition3.setToX (- leftMenu.getWidth () + 105);
+        openTransition3.play ();
+
         isMenuOpen = false;
+        updateVideosPaneWidth ((Stage) menuButton.getScene ().getWindow ());
     }
 
     //endregion

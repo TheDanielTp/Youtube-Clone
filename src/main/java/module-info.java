@@ -9,6 +9,7 @@ module org.project.project_wetube {
     requires java.desktop;
     requires com.sun.jna.platform;
     requires com.sun.jna;
+    requires jdk.compiler;
 
     opens org.project.controller to javafx.fxml;
     exports org.project.controller to javafx.graphics;
