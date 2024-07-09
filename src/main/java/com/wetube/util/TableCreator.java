@@ -57,7 +57,7 @@ public class TableCreator {
                     ID UUID PRIMARY KEY,
                     creatorID UUID REFERENCES Users(ID),
                     channelID UUID REFERENCES Channels(ID),
-                    communityID UUID,
+                    categoryID UUID,
                     title VARCHAR(255),
                     description TEXT,
                     dataType VARCHAR(255),
@@ -105,6 +105,7 @@ public class TableCreator {
                    contentID UUID PRIMARY KEY,
                    userID UUID REFERENCES Users(ID),
                    liked BOOLEAN,
+                   disliked BOOLEAN,
                    PRIMARY KEY (contentID, userID)
                 );
                 """;

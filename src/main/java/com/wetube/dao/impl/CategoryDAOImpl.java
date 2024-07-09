@@ -119,4 +119,27 @@ public class CategoryDAOImpl
         }
         return categories;
     }
+
+    public ArrayList <UUID> findAllVideos (UUID id)
+    {
+        ArrayList <UUID> videosID = new ArrayList <> ();
+        String           sql      = "SELECT * FROM Videos";
+        try (Connection connection= DatabaseConnection.getConnection ();
+             Statement statement = connection.createStatement ();
+             ResultSet resultSet= statement.executeQuery (sql))
+        {
+            while (resultSet.next ())
+            {
+                if (id.equals (resultSet.getObject ("categoryID", UUID.class)))
+                {
+                    videosID.add (resultSet.getObject ("ID", UUID.class));
+                }
+            }
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace ();
+        }
+        return videosID;
+    }
 }

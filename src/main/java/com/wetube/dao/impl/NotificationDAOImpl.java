@@ -31,7 +31,8 @@ public class NotificationDAOImpl
 
     public void create (Notification notification)
     {
-        String sql = "INSERT INTO Notifications (ID, userID, contentID, title, receiveDate, isSeen) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Notifications (ID, userID, contentID, title, receiveDate, isSeen)" +
+                " VALUES (?, ?, ?, ?, ?, ?)";
         try (Connection connection = DatabaseConnection.getConnection ();
              PreparedStatement  preparedStatement = connection.prepareStatement (sql))
         {
