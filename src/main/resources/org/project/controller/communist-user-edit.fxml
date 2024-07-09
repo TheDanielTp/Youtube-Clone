@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" stylesheets="@communist-user-view.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.project.controller.UserHomeController">
+    <children>
+        <HBox prefHeight="69.0" prefWidth="1920.0" style="-fx-background-color: cd0000; -fx-border-color: ffffff; -fx-border-width: 5;">
+         <children>
+            <HBox prefHeight="62.0" prefWidth="849.0" />
+            <ImageView fitHeight="94.0" fitWidth="201.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/logo.png" />
+               </image>
+            </ImageView>
+            <HBox layoutX="15.0" layoutY="15.0" prefHeight="62.0" prefWidth="849.0" />
+         </children></HBox>
+      <HBox prefHeight="1057.0" prefWidth="1920.0" style="-fx-background-color: #ffffff; -fx-border-color: #cd0000; -fx-border-width: 5;">
+         <children>
+            <HBox alignment="TOP_CENTER" prefHeight="1000.0" prefWidth="1157.0">
+               <children>
+                  <ImageView fx:id="pfp" fitHeight="250.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true" />
+               </children></HBox>
+            <VBox prefHeight="1010.0" prefWidth="1806.0" style="-fx-background-color: #cd0000; -fx-border-color: #ffffff; -fx-border-width: 5;">
+               <children>
+                  <HBox prefHeight="65.0" prefWidth="1060.0">
+                     <children>
+                        <HBox prefHeight="66.0" prefWidth="461.0" />
+                        <VBox>
+                           <children>
+                              <Label prefHeight="84.0" prefWidth="157.0" text="Edit Profile" textFill="WHITE" underline="true" wrapText="true">
+                                 <font>
+                                    <Font name="System Bold" size="30.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </VBox>
+                        <HBox layoutX="10.0" layoutY="10.0" prefHeight="66.0" prefWidth="440.0" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="59.0" prefWidth="1060.0">
+                     <children>
+                        <HBox alignment="TOP_RIGHT" prefHeight="34.0" prefWidth="442.0">
+                           <children>
+                              <VBox alignment="CENTER" prefHeight="59.0" prefWidth="114.0">
+                                 <children>
+                                    <Label text="First name:" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold" size="20.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                           </children></HBox>
+                        <VBox alignment="CENTER" prefHeight="53.0" prefWidth="200.0">
+                           <children>
+                              <HBox alignment="CENTER" prefHeight="45.0" prefWidth="200.0">
+                                 <children>
+                                    <TextField fx:id="firstname" prefHeight="39.0" prefWidth="201.0" promptText="First Name" style="-fx-background-radius: 30;" text="First Name">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </TextField>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <HBox prefHeight="25.0" prefWidth="418.0" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="15.0" layoutY="80.0" prefHeight="59.0" prefWidth="1060.0">
+                     <children>
+                        <HBox alignment="TOP_RIGHT" prefHeight="34.0" prefWidth="442.0">
+                           <children>
+                              <VBox alignment="CENTER" prefHeight="37.0" prefWidth="114.0">
+                                 <children>
+                                    <Label text="Last Name:" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold" size="20.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                        <VBox alignment="CENTER" prefHeight="53.0" prefWidth="200.0">
+                           <children>
+                              <HBox prefHeight="45.0" prefWidth="200.0">
+                                 <children>
+                                    <TextField fx:id="lastname" prefHeight="39.0" prefWidth="201.0" promptText="Last Name" style="-fx-background-radius: 30;" text="Last Name">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </TextField>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <HBox prefHeight="25.0" prefWidth="418.0" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="15.0" layoutY="140.0" prefHeight="59.0" prefWidth="1060.0">
+                     <children>
+                        <HBox alignment="TOP_RIGHT" prefHeight="34.0" prefWidth="442.0">
+                           <children>
+                              <VBox alignment="CENTER" prefHeight="37.0" prefWidth="114.0">
+                                 <children>
+                                    <Label text="Username:" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold" size="20.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                        <VBox alignment="CENTER" prefHeight="53.0" prefWidth="200.0">
+                           <children>
+                              <HBox alignment="CENTER" prefHeight="45.0" prefWidth="200.0">
+                                 <children>
+                                    <TextField fx:id="username" prefHeight="39.0" prefWidth="201.0" promptText="Username" style="-fx-background-radius: 30;" text="Username">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </TextField>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <HBox alignment="CENTER_LEFT" prefHeight="25.0" prefWidth="418.0">
+                           <children>
+                              <Label fx:id="usernameError" text="   Username is already taken!">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                           </children></HBox>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="15.0" layoutY="199.0" prefHeight="59.0" prefWidth="1060.0">
+                     <children>
+                        <HBox alignment="TOP_RIGHT" prefHeight="34.0" prefWidth="442.0">
+                           <children>
+                              <VBox alignment="CENTER" prefHeight="59.0" prefWidth="70.0">
+                                 <children>
+                                    <Label text="Email:" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold" size="20.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                        <VBox alignment="CENTER" prefHeight="53.0" prefWidth="200.0">
+                           <children>
+                              <HBox prefHeight="45.0" prefWidth="200.0">
+                                 <children>
+                                    <TextField fx:id="email" prefHeight="39.0" prefWidth="201.0" promptText="Email" style="-fx-background-radius: 30;" text="Email">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </TextField>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <HBox alignment="CENTER_LEFT" prefHeight="25.0" prefWidth="418.0">
+                           <children>
+                              <Label fx:id="emailError" text="   Try another emil!">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                           </children></HBox>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="15.0" layoutY="258.0" prefHeight="59.0" prefWidth="1060.0">
+                     <children>
+                        <HBox alignment="TOP_RIGHT" prefHeight="34.0" prefWidth="442.0">
+                           <children>
+                              <VBox alignment="CENTER" prefHeight="59.0" prefWidth="148.0">
+                                 <children>
+                                    <Label prefHeight="47.0" prefWidth="150.0" text="Old Password:" textFill="WHITE" wrapText="true">
+                                       <font>
+                                          <Font name="System Bold" size="20.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                        <VBox alignment="CENTER" prefHeight="53.0" prefWidth="200.0">
+                           <children>
+                              <HBox prefHeight="45.0" prefWidth="200.0">
+                                 <children>
+                                    <TextField fx:id="oldPassword" prefHeight="39.0" prefWidth="201.0" promptText="Old Password" style="-fx-background-radius: 30;">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </TextField>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <HBox alignment="CENTER_LEFT" prefHeight="25.0" prefWidth="418.0">
+                           <children>
+                              <Label fx:id="passwordError" text="   Wrong password!">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                           </children></HBox>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="15.0" layoutY="317.0" prefHeight="59.0" prefWidth="1060.0">
+                     <children>
+                        <HBox alignment="TOP_RIGHT" prefHeight="34.0" prefWidth="442.0">
+                           <children>
+                              <VBox alignment="CENTER" prefHeight="59.0" prefWidth="158.0">
+                                 <children>
+                                    <Label text="New Password:" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold" size="20.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                        <VBox alignment="CENTER" prefHeight="53.0" prefWidth="200.0">
+                           <children>
+                              <HBox prefHeight="45.0" prefWidth="200.0">
+                                 <children>
+                                    <TextField fx:id="newPassword" prefHeight="39.0" prefWidth="201.0" promptText="New Password" style="-fx-background-radius: 30;">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </TextField>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <HBox prefHeight="25.0" prefWidth="418.0" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="15.0" layoutY="376.0" prefHeight="59.0" prefWidth="1060.0">
+                     <children>
+                        <HBox alignment="TOP_RIGHT" prefHeight="34.0" prefWidth="442.0">
+                           <children>
+                              <VBox alignment="CENTER" prefHeight="37.0" prefWidth="114.0">
+                                 <children>
+                                    <Label text="Birthday:" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold" size="20.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                        <VBox alignment="CENTER" prefHeight="53.0" prefWidth="200.0">
+                           <children>
+                              <HBox prefHeight="45.0" prefWidth="200.0">
+                                 <children>
+                                    <DatePicker fx:id="birthday" prefHeight="38.0" prefWidth="198.0" style="-fx-background-radius: 40;" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <HBox alignment="CENTER_LEFT" prefHeight="25.0" prefWidth="418.0">
+                           <children>
+                              <Label fx:id="birthdayError" text="   You're too young!">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                           </children></HBox>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="15.0" layoutY="376.0" prefHeight="59.0" prefWidth="1060.0">
+                     <children>
+                        <HBox alignment="TOP_RIGHT" prefHeight="34.0" prefWidth="442.0">
+                           <children>
+                              <VBox alignment="CENTER" prefHeight="59.0" prefWidth="221.0">
+                                 <children>
+                                    <Label prefHeight="30.0" prefWidth="221.0" text="Change Profile Picture:" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold" size="20.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                        <VBox alignment="CENTER" prefHeight="53.0" prefWidth="200.0">
+                           <children>
+                              <HBox prefHeight="45.0" prefWidth="200.0">
+                                 <children>
+                                    <Button fx:id="choosePFP" mnemonicParsing="false" prefHeight="43.0" prefWidth="205.0" text="Choose File" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <HBox prefHeight="25.0" prefWidth="418.0" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="15.0" layoutY="495.0" prefHeight="59.0" prefWidth="1060.0">
+                     <children>
+                        <HBox alignment="TOP_RIGHT" prefHeight="34.0" prefWidth="442.0">
+                           <children>
+                              <VBox alignment="CENTER" prefHeight="59.0" prefWidth="239.0">
+                                 <children>
+                                    <Label prefHeight="30.0" prefWidth="239.0" text="Change Channel Picture:" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold" size="20.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                        <VBox alignment="CENTER" prefHeight="53.0" prefWidth="200.0">
+                           <children>
+                              <HBox prefHeight="45.0" prefWidth="200.0">
+                                 <children>
+                                    <Button fx:id="chooseChannelPic" mnemonicParsing="false" prefHeight="43.0" prefWidth="205.0" text="Choose File" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <HBox prefHeight="25.0" prefWidth="418.0" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="15.0" layoutY="613.0" prefHeight="59.0" prefWidth="1060.0">
+                     <children>
+                        <HBox alignment="TOP_RIGHT" prefHeight="34.0" prefWidth="442.0" />
+                        <VBox alignment="CENTER" prefHeight="53.0" prefWidth="200.0">
+                           <children>
+                              <HBox prefHeight="45.0" prefWidth="200.0">
+                                 <children>
+                                    <Button fx:id="joinPremium" mnemonicParsing="false" prefHeight="43.0" prefWidth="205.0" text="Join Premium" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <HBox prefHeight="25.0" prefWidth="418.0" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="275.0" prefWidth="1060.0">
+                     <children>
+                        <ImageView fx:id="channelPic" fitHeight="337.0" fitWidth="1061.0" pickOnBounds="true" preserveRatio="true" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <HBox alignment="TOP_CENTER" layoutX="15.0" layoutY="15.0" prefHeight="1000.0" prefWidth="1157.0">
+               <children>
+                  <Button fx:id="done" mnemonicParsing="false" prefHeight="48.0" prefWidth="113.0" text="Done" textFill="WHITE">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Button>
+               </children></HBox>
+         </children>
+      </HBox>
+    </children>
+</VBox>
