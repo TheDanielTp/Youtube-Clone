@@ -387,7 +387,7 @@
                               <Insets left="10.0" right="10.0" top="10.0" />
                            </VBox.margin>
                         </Button>
-                        <Button alignment="TOP_LEFT" mnemonicParsing="false" onMouseEntered="#musicButtonHover" onMouseExited="#musicButtonUnHover" prefHeight="21.0" prefWidth="227.0" text="   Music">
+                        <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#musicClicked" onMouseEntered="#musicButtonHover" onMouseExited="#musicButtonUnHover" prefHeight="21.0" prefWidth="227.0" text="   Music">
                            <font>
                               <Font name="Roboto Medium" size="14.0" />
                            </font>

@@ -97,6 +97,29 @@ public class CategoryDAOImpl
         return null;
     }
 
+    public Category findByTitle (String title)
+    {
+        String query = "SELECT * FROM Categories WHERE title = ?";
+        try (Connection connection = DatabaseConnection.getConnection ();
+             PreparedStatement preparedStatement = connection.prepareStatement (query))
+        {
+            preparedStatement.setObject (1, title);
+            ResultSet resultSet = preparedStatement.executeQuery ();
+            if (resultSet.next ())
+            {
+                return new Category (
+                        resultSet.getObject ("ID", UUID.class),
+                        resultSet.getString ("title")
+                );
+            }
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace ();
+        }
+        return null;
+    }
+
     public List <Category> findAll ()
     {
         List <Category> categories = new ArrayList <> ();

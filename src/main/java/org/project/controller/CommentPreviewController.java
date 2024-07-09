@@ -19,6 +19,7 @@ import javafx.scene.shape.SVGPath;
 import javafx.scene.text.Text;
 
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.net.URL;
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -65,8 +66,7 @@ public class CommentPreviewController implements Initializable
     @Override
     public void initialize (URL location, ResourceBundle resources)
     {
-        hbxMain.getStylesheets ().clear ();
-        hbxMain.getStylesheets ().add (Objects.requireNonNull (getClass ().getResource ("/Styles/" + MainApplication.DarkTheme + "/comment-preview.css")).toExternalForm ());
+
     }
     //endregion
 
@@ -111,7 +111,8 @@ public class CommentPreviewController implements Initializable
         //endregion
 
         //region [ - Avatar - ]
-        Image videoThumbnail = new Image (userDAO.findById (comment.getCreatorID ()).getProfilePictureURL ());
+        File file = new File (userDAO.findById (comment.getCreatorID ()).getProfilePictureURL ());
+        Image videoThumbnail = new Image (file.toURI ().toString ());
         imgProfile.setImage (videoThumbnail);
         //endregion
 

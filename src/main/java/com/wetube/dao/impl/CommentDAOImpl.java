@@ -159,11 +159,10 @@ public class CommentDAOImpl
                         resultSet.getObject ("ID", UUID.class),
                         resultSet.getObject ("contentID", UUID.class),
                         resultSet.getObject ("creatorID", UUID.class),
-                        resultSet.getObject ("channelID", UUID.class),
+                        resultSet.getObject ("creatorID", UUID.class),
                         resultSet.getInt ("likesCount"),
                         resultSet.getInt ("dislikesCount"),
                         resultSet.getObject ("creationDate", LocalDateTime.class),
-                        resultSet.getBoolean ("isOnlyComrade"),
                         resultSet.getObject ("parentCommentID", UUID.class),
                         resultSet.getString ("content"),
                         resultSet.getInt ("replyCount"),
@@ -181,7 +180,7 @@ public class CommentDAOImpl
     public List <Comment> findAll ()
     {
         List <Comment> comments = new ArrayList <> ();
-        String       sql    = "SELECT * FROM Comment";
+        String       sql    = "SELECT * FROM Comments";
         try (Connection connection = DatabaseConnection.getConnection ();
              Statement stmt = connection.createStatement ();
              ResultSet resultSet = stmt.executeQuery (sql))
@@ -192,11 +191,10 @@ public class CommentDAOImpl
                         resultSet.getObject ("ID", UUID.class),
                         resultSet.getObject ("contentID", UUID.class),
                         resultSet.getObject ("creatorID", UUID.class),
-                        resultSet.getObject ("channelID", UUID.class),
+                        resultSet.getObject ("creatorID", UUID.class),
                         resultSet.getInt ("likesCount"),
                         resultSet.getInt ("dislikesCount"),
                         resultSet.getObject ("creationDate", LocalDateTime.class),
-                        resultSet.getBoolean ("isOnlyComrade"),
                         resultSet.getObject ("parentCommentID", UUID.class),
                         resultSet.getString ("content"),
                         resultSet.getInt ("replyCount"),

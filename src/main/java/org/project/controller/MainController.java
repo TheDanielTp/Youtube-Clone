@@ -15,10 +15,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.paint.Color;
@@ -47,6 +49,7 @@ public class MainController implements Initializable
     @FXML
     ScrollPane videoScrollPane;
 
+    @Override
     public void initialize (URL url, ResourceBundle resourceBundle)
     {
         Object[]     responseObject = MainApplication.client.getAllVideos ();
@@ -56,14 +59,13 @@ public class MainController implements Initializable
         {
             try
             {
-                // Load FXML file and create root node
                 FXMLLoader loader    = new FXMLLoader (getClass ().getResource ("/org/project/controller/video-thumbnail-view.fxml"));
                 AnchorPane videoNode = loader.load ();
 
                 ImageView thumbnail   = (ImageView) videoNode.lookup ("#thumbnail");
-                Label  title       = (Label) videoNode.lookup ("#title");
-                Button videoButton = (Button) videoNode.lookup ("#videoButton");
-                Label  duration    = (Label) videoNode.lookup ("#duration");
+                Label     title       = (Label) videoNode.lookup ("#title");
+                Button    videoButton = (Button) videoNode.lookup ("#videoButton");
+                Label     duration    = (Label) videoNode.lookup ("#duration");
 
                 Media media;
                 File  tempFile;
@@ -96,20 +98,21 @@ public class MainController implements Initializable
                 // Create a Media object from the temporary file
                 media = new Media (tempFile.toURI ().toString ());
 
-                Label totalTimeLabel   = new Label ("00:00");
-                Duration total = media.getDuration ();
+                Label    totalTimeLabel = new Label ("00:00");
+                Duration total          = media.getDuration ();
                 totalTimeLabel.setText (formatTime (total));
 
                 duration.setText (totalTimeLabel.getText ());
 
-//                if (thumbnail != null)
-//                {
-//                    thumbnail.setImage (new Image ("/org/project/controller/images/thumbnails/You_Were_The_Chosen_One.jpg"));
-//                }
-//                else
-//                {
-//                    System.err.println ("Thumbnail ImageView not found in FXML.");
-//                }
+                if (thumbnail != null)
+                {
+                    File file = new File (video.getThumbnailURL ());
+                    thumbnail.setImage (new Image (file.toURI ().toString ()));
+                }
+                else
+                {
+                    System.err.println ("Thumbnail ImageView not found in FXML.");
+                }
 
                 if (title != null)
                 {
@@ -324,18 +327,6 @@ public class MainController implements Initializable
         notificationHover.setVisible (false);
     }
 
-    public void signInButtonClicked (MouseEvent event) throws IOException
-    {
-        if (! MainApplication.DarkTheme)
-        {
-            //TODO
-        }
-        else
-        {
-            //TODO
-        }
-    }
-
     @FXML
     ImageView createButton;
 
@@ -352,6 +343,28 @@ public class MainController implements Initializable
     {
         createButton.setVisible (true);
         createHover.setVisible (false);
+    }
+
+    public void createButtonClick (MouseEvent event) throws IOException
+    {
+        Parent root = FXMLLoader.load (Objects.requireNonNull (getClass ().getResource ("upload_page.fxml")));
+
+        Stage stage = new Stage ();
+
+        double x      = stage.getX ();
+        double y      = stage.getY ();
+
+        Scene scene = new Scene (root);
+
+        stage.setScene (scene);
+
+        stage.setWidth (600);
+        stage.setHeight (400);
+        stage.setX (x);
+        stage.setY (y);
+
+        System.out.println ("> Front: opening upload page");
+        stage.show ();
     }
 
     //endregion
@@ -677,7 +690,14 @@ public class MainController implements Initializable
         closeTransition.setToX (- leftMenuSmall.getWidth ());
         closeTransition.play ();
 
+        TranslateTransition closeTransition3 = new TranslateTransition (Duration.seconds (0.25), videoScrollPane);
+
+        closeTransition3.setFromX (- leftMenu.getWidth () + 105);
+        closeTransition3.setToX (0);
+        closeTransition3.play ();
+
         isMenuOpen = true;
+        updateVideosPaneWidth ((Stage) menuButton.getScene ().getWindow ());
     }
 
     private void closeMenu ()
@@ -694,7 +714,14 @@ public class MainController implements Initializable
         closeTransition.setToX (- leftMenu.getWidth ());
         closeTransition.play ();
 
+        TranslateTransition openTransition3 = new TranslateTransition (Duration.seconds (0.25), videoScrollPane);
+
+        openTransition3.setFromX (0);
+        openTransition3.setToX (- leftMenu.getWidth () + 105);
+        openTransition3.play ();
+
         isMenuOpen = false;
+        updateVideosPaneWidth ((Stage) menuButton.getScene ().getWindow ());
     }
 
     //endregion

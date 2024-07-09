@@ -112,19 +112,26 @@ public class VideoDAOImpl
 
     public void like (Video video, User user)
     {
-        String sql = "INSERT INTO ContentsAction (contentID, userID, liked, disliked) VALUES (?, ?, ?, ?)";
-        try (Connection connection = DatabaseConnection.getConnection ();
-             PreparedStatement preparedStatement = connection.prepareStatement (sql))
+        if (findLikedUsers (video).contains (user))
         {
-            preparedStatement.setObject (1, video.getID ());
-            preparedStatement.setObject (2, user.getID ());
-            preparedStatement.setBoolean (3, true);
-            preparedStatement.setBoolean (4, false);
-            preparedStatement.executeUpdate ();
+
         }
-        catch (SQLException e)
+        else
         {
-            e.printStackTrace ();
+            String sql = "INSERT INTO ContentsAction (contentID, userID, liked, disliked) VALUES (?, ?, ?, ?)";
+            try (Connection connection = DatabaseConnection.getConnection ();
+                 PreparedStatement preparedStatement = connection.prepareStatement (sql))
+            {
+                preparedStatement.setObject (1, video.getID ());
+                preparedStatement.setObject (2, user.getID ());
+                preparedStatement.setBoolean (3, true);
+                preparedStatement.setBoolean (4, false);
+                preparedStatement.executeUpdate ();
+            }
+            catch (SQLException e)
+            {
+                e.printStackTrace ();
+            }
         }
     }
 
@@ -350,7 +357,6 @@ public class VideoDAOImpl
                         resultSet.getInt ("likesCount"),
                         resultSet.getInt ("dislikesCount"),
                         resultSet.getObject ("creationDate", LocalDateTime.class),
-                        resultSet.getBoolean ("isOnlyComrade"),
                         resultSet.getObject ("parentCommentID", UUID.class),
                         resultSet.getString ("content"),
                         resultSet.getInt ("replyCount"),

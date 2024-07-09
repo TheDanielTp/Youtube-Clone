@@ -98,13 +98,27 @@
                   <Insets left="-40.0" right="15.0" top="17.0" />
                </HBox.margin>
             </ImageView>
-            <ImageView fitHeight="48.0" fitWidth="57.0" pickOnBounds="true" preserveRatio="true" />
-            <ImageView fitHeight="48.0" fitWidth="57.0" layoutX="1868.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="createHover" fitHeight="40.0" fitWidth="40.0" onMouseClicked="#createButtonClick" onMouseEntered="#createButtonHover" onMouseExited="#createButtonUnHover" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/createHover.png" />
+               </image>
+               <HBox.margin>
+                  <Insets top="17.0" />
+               </HBox.margin>
+            </ImageView>
+            <ImageView fx:id="createButton" fitHeight="40.0" fitWidth="40.0" onMouseClicked="#createButtonClick" onMouseEntered="#createButtonHover" onMouseExited="#createButtonUnHover" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/create.png" />
+               </image>
+               <HBox.margin>
+                  <Insets left="-40.0" right="15.0" top="17.0" />
+               </HBox.margin>
+            </ImageView>
          </children>
       </HBox>
       <HBox prefHeight="1051.0" prefWidth="1920.0">
          <children>
-            <VBox fx:id="leftMenuSmall">
+            <VBox fx:id="leftMenuSmall" minWidth="105.0">
                <HBox.margin>
                   <Insets top="-5.0" />
                </HBox.margin>
