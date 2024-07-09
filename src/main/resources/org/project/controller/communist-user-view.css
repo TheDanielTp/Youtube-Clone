@@ -28,3 +28,30 @@
 .scroll-pane .scroll-bar:vertical .thumb {
     -fx-background-color: #cd0000;
 }
+
+.tab-pane {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #ffffff;
+}
+
+.tab {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #ffffff;
+    -fx-border-width: 1px;
+    -fx-padding: 5px;
+}
+
+.tab:selected {
+    -fx-background-color: #ffffff;
+}
+
+.tab-label {
+    -fx-font-size: 18px;
+    -fx-text-fill: #000000;
+}
+
+.tab:selected .tab-label {
+    -fx-font-weight: bold;
+    -fx-text-fill: #cd0000;
+    -fx-underline: true;
+}
