@@ -32,7 +32,7 @@ public class ChannelDAOImpl
 
     public void create (Channel channel)
     {
-        String sql = "INSERT INTO Channels (ID, userID, name, description, subscribersCount, totalVideos, totalViews, watchTime, creationDate, isVerified, outcome, channelPicture) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Channels (ID, userID, name, description, subscribersCount, totalVideos, totalViews, watchTime, creationDate, isVerified, outcome, channelPictureURL) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try (Connection conn = DatabaseConnection.getConnection ();
              PreparedStatement pstmt = conn.prepareStatement (sql))
         {
@@ -58,7 +58,7 @@ public class ChannelDAOImpl
 
     public void update (Channel channel)
     {
-        String sql = "UPDATE Channels SET userID = ?, name = ?, description = ?, subscribersCount = ?, totalVideos = ?, totalViews = ?, watchTime = ?, creationDate = ?, isVerified = ?, outcome = ?, channelPicture = ? WHERE ID = ?";
+        String sql = "UPDATE Channels SET userID = ?, name = ?, description = ?, subscribersCount = ?, totalVideos = ?, totalViews = ?, watchTime = ?, creationDate = ?, isVerified = ?, outcome = ?, channelPictureURL = ? WHERE ID = ?";
         try (Connection conn = DatabaseConnection.getConnection ();
              PreparedStatement pstmt = conn.prepareStatement (sql))
         {
@@ -160,7 +160,7 @@ public class ChannelDAOImpl
                         rs.getObject ("creationDate", LocalDate.class),
                         rs.getBoolean ("isVerified"),
                         rs.getDouble ("outcome"),
-                        rs.getString ("channelPicture")
+                        rs.getString ("channelPictureURL")
                         );
             }
         }
@@ -194,7 +194,7 @@ public class ChannelDAOImpl
                         rs.getObject ("creationDate", LocalDate.class),
                         rs.getBoolean ("isVerified"),
                         rs.getDouble ("outcome"),
-                        rs.getString ("channelPicture")
+                        rs.getString ("channelPictureURL")
                 );
             }
         }
@@ -251,7 +251,7 @@ public class ChannelDAOImpl
                         rs.getObject ("creationDate", LocalDate.class),
                         rs.getBoolean ("isVerified"),
                         rs.getDouble ("outcome"),
-                        rs.getString ("channelPicture")
+                        rs.getString ("channelPictureURL")
                 ));
             }
         }

@@ -20,6 +20,7 @@ public class Video extends Content implements Serializable
     String thumbnailURL;
 
     int commentsCount;
+    int viewsCount;
 
     //endregion
 
@@ -39,7 +40,7 @@ public class Video extends Content implements Serializable
         this.thumbnailURL = thumbnailURL;
     }
 
-    public Video (UUID ID, UUID creatorID, UUID communityID, UUID channelID, int likesCount, int dislikesCount, LocalDateTime creationDate, boolean isOnlyComrade, String title, String description, String dataType, String videoURL, String thumbnailURL, int commentsCount)
+    public Video (UUID ID, UUID creatorID, UUID communityID, UUID channelID, int likesCount, int dislikesCount, LocalDateTime creationDate, boolean isOnlyComrade, String title, String description, String dataType, String videoURL, String thumbnailURL, int commentsCount, int viewsCount)
     {
         super (ID, creatorID, channelID, likesCount, dislikesCount, creationDate, isOnlyComrade);
         this.communityID   = communityID;
@@ -49,6 +50,7 @@ public class Video extends Content implements Serializable
         this.videoURL      = videoURL;
         this.thumbnailURL  = thumbnailURL;
         this.commentsCount = commentsCount;
+        this.viewsCount = viewsCount;
     }
 
     //endregion
@@ -125,6 +127,15 @@ public class Video extends Content implements Serializable
         this.commentsCount = commentsCount;
     }
 
+    public int getViewsCount ()
+    {
+        return viewsCount;
+    }
+
+    public void setViewsCount (int viewsCount)
+    {
+        this.viewsCount = viewsCount;
+    }
 
     //endregion
 }

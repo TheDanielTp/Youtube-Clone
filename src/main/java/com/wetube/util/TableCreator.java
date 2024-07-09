@@ -55,6 +55,7 @@ public class TableCreator
                                        commentsCount INT DEFAULT 0,
                                        likesCount INT DEFAULT 0,
                                        dislikesCount INT DEFAULT 0,
+                                       viewsCount INT DEFAULT 0,
                                        creationDate TIMESTAMP,
                                        isOnlyComrade BOOLEAN
                                    );
@@ -148,7 +149,7 @@ public class TableCreator
 
         String createContentsActionTable = """
                                      CREATE TABLE IF NOT EXISTS ContentsAction (
-                                     contentID UUID PRIMARY KEY,
+                                     contentID UUID,
                                      userID UUID REFERENCES Users(ID),
                                      liked BOOLEAN,
                                      disliked BOOLEAN,

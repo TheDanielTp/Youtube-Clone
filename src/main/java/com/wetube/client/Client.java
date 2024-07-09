@@ -393,6 +393,22 @@ public class Client
         return new Object[]{0, response.getData ()};
     }
 
+    public Object[] subscribe (User user, Channel channel)
+    {
+        Request request = new Request ("SUBSCRIBE", new Object[]{user, channel});
+        Response response = sendRequest (request);
+
+        return new Object[]{0, response.getData ()};
+    }
+
+    public Object[] findSubscribers (Channel channel)
+    {
+        Request request = new Request ("FIND_SUBSCRIBERS", channel);
+        Response response = sendRequest (request);
+
+        return new Object[]{0, response.getData ()};
+    }
+
     //endregion
 
     //region

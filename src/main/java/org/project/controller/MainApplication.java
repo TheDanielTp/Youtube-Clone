@@ -1,7 +1,9 @@
 package org.project.controller;
 
 import com.wetube.client.Client;
+import com.wetube.dao.impl.UserDAOImpl;
 import com.wetube.model.User;
+import com.wetube.model.Video;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -16,6 +18,8 @@ public class MainApplication extends Application
     private static BufferedReader bufferedReader;
     private static BufferedWriter bufferedWriter;
 
+    UserDAOImpl userDAO = new UserDAOImpl();
+    static Video currentVideo;
     static User   currentUser;
     static Client client;
 
@@ -34,6 +38,7 @@ public class MainApplication extends Application
     @Override
     public void start (Stage stage) throws Exception
     {
+        currentUser = userDAO.findByUsername ("TheDanielTp");
         FXMLLoader fxmlLoader = new FXMLLoader (MainApplication.class.getResource ("communist-front-view.fxml"));
         Scene      scene      = new Scene (fxmlLoader.load ());
         stage.setTitle ("WeTube");

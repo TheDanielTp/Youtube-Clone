@@ -8,7 +8,9 @@ import com.wetube.model.*;
 
 import java.io.*;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class ClientHandler extends Thread
 {
@@ -241,6 +243,16 @@ public class ClientHandler extends Thread
             case "CREATE_CHANNEL":
             {
                 return create ((Channel) data);
+            }
+
+            case "SUBSCRIBE":
+            {
+                return subscribe ((Object[]) data);
+            }
+
+            case "FIND_SUBSCRIBERS":
+            {
+                return findSubscribers ((Channel) data);
             }
 
             //endregion
@@ -649,20 +661,24 @@ public class ClientHandler extends Thread
         Channel channel = (Channel) data[1];
 
         ChannelDAOImpl channelDAO = new ChannelDAOImpl ();
-        channelDAO.subscribe (user, channel);
-
-        return new Response ("SUCCESS", "Subscribed successfully", null);
+        if (channelDAO.findSubscribers (channel.getID ()).contains (user.getID ()))
+        {
+            channelDAO.unsubscribe (user, channel);
+            return new Response ("SUCCESS", "Subscriber unsubscribed successfully", null);
+        }
+        else
+        {
+            channelDAO.subscribe (user, channel);
+            return new Response ("SUCCESS", "Subscribed successfully", channel);
+        }
     }
 
-    private Response unsubscribe (Object[] data)
+    private Response findSubscribers (Channel channel)
     {
-        User user = (User) data[0];
-        Channel channel = (Channel) data[1];
+        ChannelDAOImpl   channelDAO  = new ChannelDAOImpl ();
+        ArrayList <UUID> subscribers = channelDAO.findSubscribers (channel.getID ());
 
-        ChannelDAOImpl channelDAO = new ChannelDAOImpl ();
-        channelDAO.unsubscribe (user, channel);
-
-        return new Response ("SUCCESS", "Unsubscribed successfully", null);
+        return new Response ("SUCCESS", "Subscriber found successfully", subscribers);
     }
 
     //endregion

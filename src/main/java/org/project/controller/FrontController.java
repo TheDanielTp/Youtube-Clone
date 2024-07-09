@@ -1,6 +1,5 @@
 package org.project.controller;
 
-import com.wetube.dao.impl.VideoDAOImpl;
 import com.wetube.model.Video;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
@@ -12,6 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
@@ -23,9 +23,11 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.SVGPath;
 import javafx.stage.Stage;
+
+import java.io.*;
+
 import javafx.util.Duration;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.Objects;
@@ -75,11 +77,10 @@ public class FrontController implements Initializable
                 FXMLLoader loader    = new FXMLLoader (getClass ().getResource ("/org/project/controller/video-thumbnail-view.fxml"));
                 AnchorPane videoNode = loader.load ();
 
-                // Access nodes in the FXML directly
                 ImageView thumbnail = (ImageView) videoNode.lookup ("#thumbnail");
                 Label     title     = (Label) videoNode.lookup ("#title");
+                Button videoButton = (Button) videoNode.lookup ("#videoButton");
 
-                // Set data directly to the nodes
 //                if (thumbnail != null)
 //                {
 //                    thumbnail.setImage (new Image ("/org/project/controller/images/thumbnails/You_Were_The_Chosen_One.jpg"));
@@ -98,7 +99,30 @@ public class FrontController implements Initializable
                     System.err.println ("Title Label not found in FXML.");
                 }
 
-                // Add the created node to videosPane
+                if (videoButton != null)
+                {
+                    videoButton.setOnAction (event ->
+                            {
+                                MainApplication.currentVideo = video;
+                                Stage stage;
+                                Scene  scene;
+                                Parent root;
+                                FXMLLoader loader2 = new FXMLLoader (getClass ().getResource ("/org/project/controller/video-page.fxml"));
+                                try
+                                {
+                                    root = loader2.load ();
+                                }
+                                catch (IOException e)
+                                {
+                                    throw new RuntimeException (e);
+                                }
+                                stage = (Stage) ((Node) event.getSource ()).getScene ().getWindow ();
+                                scene = new Scene (root);
+                                stage.setScene (scene);
+                                stage.show ();
+                            });
+                }
+
                 videosPane.getChildren ().add (videoNode);
             }
             catch (IOException e)

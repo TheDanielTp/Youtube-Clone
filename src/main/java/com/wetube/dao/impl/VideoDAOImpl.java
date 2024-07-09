@@ -30,7 +30,7 @@ public class VideoDAOImpl
 
     public void create (Video video)
     {
-        String sql = "INSERT INTO Videos (ID, creatorID, channelID, communityID, title, description, dataType, videoURL, thumbnailURL, commentsCount, likesCount, dislikesCount, creationDate, isOnlyComrade) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Videos (ID, creatorID, channelID, communityID, title, description, dataType, videoURL, thumbnailURL, commentsCount, likesCount, dislikesCount, viewsCount, creationDate, isOnlyComrade) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try (Connection conn = DatabaseConnection.getConnection ();
              PreparedStatement pstmt = conn.prepareStatement (sql))
         {
@@ -46,8 +46,9 @@ public class VideoDAOImpl
             pstmt.setInt (10, video.getCommentsCount ());
             pstmt.setInt (11, video.getLikesCount ());
             pstmt.setInt (12, video.getDislikesCount ());
-            pstmt.setTimestamp (13, Timestamp.valueOf (video.getCreationDate ()));
-            pstmt.setBoolean (14, video.isOnlyComrade ());
+            pstmt.setInt (13, video.getViewsCount ());
+            pstmt.setTimestamp (14, Timestamp.valueOf (video.getCreationDate ()));
+            pstmt.setBoolean (15, video.isOnlyComrade ());
             pstmt.executeUpdate ();
         }
         catch (SQLException e)
@@ -58,7 +59,7 @@ public class VideoDAOImpl
 
     public void update (Video video)
     {
-        String sql = "UPDATE Videos SET creatorID = ?, channelID = ?, communityID = ?, title = ?, description = ?, dataType = ?, videoURL = ?, thumbnail = ?, commentsCount = ?, likesCount = ?, dislikesCount = ?, creationDate = ?, isOnlyComrade = ? WHERE ID = ?";
+        String sql = "UPDATE Videos SET creatorID = ?, channelID = ?, communityID = ?, title = ?, description = ?, dataType = ?, videoURL = ?, thumbnail = ?, commentsCount = ?, likesCount = ?, dislikesCount = ?, viewsCount = ?, creationDate = ?, isOnlyComrade = ? WHERE ID = ?";
         try (Connection conn = DatabaseConnection.getConnection ();
              PreparedStatement pstmt = conn.prepareStatement (sql))
         {
@@ -73,9 +74,10 @@ public class VideoDAOImpl
             pstmt.setInt (9, video.getCommentsCount ());
             pstmt.setInt (10, video.getLikesCount ());
             pstmt.setInt (11, video.getDislikesCount ());
-            pstmt.setTimestamp (12, Timestamp.valueOf (video.getCreationDate ()));
-            pstmt.setBoolean (13, video.isOnlyComrade ());
-            pstmt.setObject (14, video.getID ());
+            pstmt.setInt (12, video.getViewsCount ());
+            pstmt.setTimestamp (13, Timestamp.valueOf (video.getCreationDate ()));
+            pstmt.setBoolean (14, video.isOnlyComrade ());
+            pstmt.setObject (15, video.getID ());
             pstmt.executeUpdate ();
         }
         catch (SQLException e)
@@ -181,7 +183,8 @@ public class VideoDAOImpl
                         rs.getString ("dataType"),
                         rs.getString ("videoURL"),
                         rs.getString ("thumbnailURL"),
-                        rs.getInt ("commentsCount")
+                        rs.getInt ("commentsCount"),
+                        rs.getInt ("viewsCount")
                 );
             }
         }
@@ -216,7 +219,8 @@ public class VideoDAOImpl
                         rs.getString ("dataType"),
                         rs.getString ("videoURL"),
                         rs.getString ("thumbnailURL"),
-                        rs.getInt ("commentsCount")
+                        rs.getInt ("commentsCount"),
+                        rs.getInt ("viewsCount")
                 );
             }
         }
@@ -251,7 +255,8 @@ public class VideoDAOImpl
                         rs.getString ("dataType"),
                         rs.getString ("videoURL"),
                         rs.getString ("thumbnailURL"),
-                        rs.getInt ("commentsCount")
+                        rs.getInt ("commentsCount"),
+                        rs.getInt ("viewsCount")
                 ));
             }
         }
@@ -286,7 +291,8 @@ public class VideoDAOImpl
                         rs.getString ("dataType"),
                         rs.getString ("videoURL"),
                         rs.getString ("thumbnailURL"),
-                        rs.getInt ("commentsCount")
+                        rs.getInt ("commentsCount"),
+                        rs.getInt ("viewsCount")
                 ));
             }
         }
