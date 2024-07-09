@@ -602,7 +602,8 @@ public class VideoPageController implements Initializable
     //region [ - next(ActionEvent event) - ]
     private void next (ActionEvent event)
     {
-        getVideo (event, recommendedVideos.getFirst ());
+        pause (event);
+        getVideo (event, recommendedVideos.getLast ());
     }
     //endregion
 
@@ -621,7 +622,6 @@ public class VideoPageController implements Initializable
         mediaPlayer.pause ();
         SVGPath svgPath = (SVGPath) btnPlayPause.getChildrenUnmodifiable ().getFirst ();
         svgPath.setContent ("M 12,26 18.5,22 18.5,14 12,10 z M 18.5,22 25,18 25,18 18.5,14 z");
-
     }
     //endregion
 
@@ -804,6 +804,27 @@ public class VideoPageController implements Initializable
     }
     //endregion
 
-    //endregion
+    public void backToMenu (ActionEvent event)
+    {
+        pause (event);
 
+        Stage      stage;
+        Scene      scene;
+        Parent     root;
+        FXMLLoader loader = new FXMLLoader (getClass ().getResource ("/org/project/controller/communist-main-view.fxml"));
+        try
+        {
+            root = loader.load ();
+        }
+        catch (IOException e)
+        {
+            throw new RuntimeException (e);
+        }
+        stage = (Stage) ((Node) event.getSource ()).getScene ().getWindow ();
+        scene = new Scene (root, vbxLeft.getScene ().getWidth (), vbxLeft.getScene ().getHeight ());
+        stage.setScene (scene);
+        stage.show ();
+    }
+
+    //endregion
 }

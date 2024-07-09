@@ -1,6 +1,7 @@
 package org.project.controller;
 
 import com.wetube.client.Client;
+import com.wetube.dao.impl.ChannelDAOImpl;
 import com.wetube.dao.impl.UserDAOImpl;
 import com.wetube.model.Category;
 import com.wetube.model.Channel;
@@ -43,19 +44,6 @@ public class MainApplication extends Application
     {
         UserDAOImpl userDAO = new UserDAOImpl();
         currentUser = userDAO.findByUsername ("TheDanielTp");
-
-        Channel channel = new Channel (currentUser.getID (), currentUser.getUsername (), currentUser.getUsername () + "'s Channel");
-        client.create (channel);
-
-        Category category = new Category ("Star Wars");
-        client.create (category);
-
-        Video video = new Video (currentUser.getID (), category.getID (), channel.getID (), "You were the chosen one Anakin.",
-                "Star Wars Episode III, Revenge of the Sith",
-                "org/project/controller/videos/You Were The Chosen One.mp4",
-                "org/project/controller/images/thumbnails/You_Were_The_Chosen_One.jpg",
-                false);
-        client.create (video);
 
         FXMLLoader fxmlLoader = new FXMLLoader (MainApplication.class.getResource ("communist-front-view.fxml"));
         Scene      scene      = new Scene (fxmlLoader.load ());

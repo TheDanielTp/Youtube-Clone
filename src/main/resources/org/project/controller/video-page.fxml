@@ -53,11 +53,21 @@
                   </HBox>
                   <VBox fx:id="vbxVideoDetails" prefHeight="170.0" prefWidth="830.0" spacing="10.0">
                      <children>
-                        <Text fx:id="txtVideoTitle" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Arcane Season 2 | Official Teaser Trailer" VBox.vgrow="ALWAYS">
-                           <font>
-                              <Font name="Roboto Black" size="25.0" />
-                           </font>
-                        </Text>
+                        <HBox>
+                           <children>
+                              <Text fx:id="txtVideoTitle" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Star War Episode III | Revenge of the Sith">
+                                 <font>
+                                    <Font name="Roboto Black" size="25.0" />
+                                 </font>
+                              </Text>
+                              <TextField maxWidth="1000.0" minWidth="50.0" prefWidth="10000.0" visible="false" />
+                              <Button minWidth="80.0" mnemonicParsing="false" onAction="#backToMenu" styleClass="buttonClass" text="Back">
+                                 <font>
+                                    <Font name="Roboto Medium" size="12.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </HBox>
                         <HBox fx:id="hbxVideoDetails" alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="830.0">
                            <children>
                               <HBox fx:id="hbxChannel" alignment="CENTER_LEFT" prefHeight="57.0" prefWidth="195.0" spacing="10.0" HBox.hgrow="NEVER">
@@ -69,7 +79,7 @@
                                                 <Cursor fx:constant="HAND" />
                                              </cursor>
                                              <image>
-                                                <Image url="@images/profilePictures/pfp1.jpg" />
+                                                <Image url="@images/profilePictures/pfp3.jpg" />
                                              </image>
                                           </ImageView>
                                        </graphic>
@@ -212,7 +222,7 @@
                                     </Text>
                                  </children>
                               </HBox>
-                              <Text fx:id="txtVideoDescription" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="The hunt is on. Arcane, the final season coming this November to Netflix." wrappingWidth="427.9454345703125">
+                              <Text fx:id="txtVideoDescription" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="It's over Anakin. I have the highground" wrappingWidth="427.9454345703125">
                                  <font>
                                     <Font name="Roboto" size="15.0" />
                                  </font>
@@ -244,7 +254,7 @@
                            <children>
                               <ImageView fitHeight="54.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@images/profilePictures/pfp1.jpg" />
+                                    <Image url="@images/profilePictures/pfp3.jpg" />
                                  </image>
                               </ImageView>
                               <TextField fx:id="txtComment" prefHeight="32.0" prefWidth="708.0" promptText="Add a comment" styleClass="field-comment" HBox.hgrow="ALWAYS">
@@ -253,7 +263,8 @@
                                  </HBox.margin>
                                  <font>
                                     <Font name="Roboto" size="13.0" />
-                                 </font></TextField>
+                                 </font>
+                              </TextField>
                               <Button fx:id="btnComment" alignment="CENTER" contentDisplay="CENTER" minHeight="40.0" minWidth="120.0" mnemonicParsing="false" onAction="#comment" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: cd0000; -fx-background-radius: 15; -fx-border-color: #ffffff; -fx-border-radius: 15;" styleClass="buttonClass" text="Comment" textAlignment="CENTER" textFill="WHITE" HBox.hgrow="ALWAYS">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
@@ -263,7 +274,8 @@
                                  </font>
                                  <HBox.margin>
                                     <Insets top="7.0" />
-                                 </HBox.margin></Button>
+                                 </HBox.margin>
+                              </Button>
                            </children>
                         </HBox>
                      </children>

@@ -30,8 +30,8 @@ public class VideoDAOImpl
     public void create (Video video)
     {
         String sql = "INSERT INTO Videos (ID, creatorID, channelID, categoryID, title, description, dataType," +
-                " videoURL, thumbnailURL, commentsCount, likesCount, dislikesCount, creationDate, isOnlyComrade)" +
-                " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                " videoURL, thumbnailURL, commentsCount, likesCount, dislikesCount, creationDate, isOnlyComrade, viewsCount)" +
+                " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try (Connection connection = DatabaseConnection.getConnection ();
              PreparedStatement preparedStatement = connection.prepareStatement (sql))
         {
@@ -50,6 +50,7 @@ public class VideoDAOImpl
             preparedStatement.setInt (12, video.getDislikesCount ());
             preparedStatement.setTimestamp (13, Timestamp.valueOf (video.getCreationDate ()));
             preparedStatement.setBoolean (14, video.isOnlyComrade ());
+            preparedStatement.setInt (15, video.getViewsCount ());
             preparedStatement.executeUpdate ();
         }
         catch (SQLException e)
@@ -62,7 +63,7 @@ public class VideoDAOImpl
     {
         String sql = "UPDATE Videos SET creatorID = ?, channelID = ?, communityID = ?, title = ?, description = ?," +
                 " dataType = ?, videoURL = ?, thumbnail = ?, commentsCount = ?, likesCount = ?, dislikesCount = ?," +
-                " creationDate = ?, isOnlyComrade = ? WHERE ID = ?";
+                " creationDate = ?, isOnlyComrade = ?, viewsCount = ? WHERE ID = ?";
         try (Connection connection = DatabaseConnection.getConnection ();
              PreparedStatement preparedStatement = connection.prepareStatement (sql))
         {
@@ -80,7 +81,8 @@ public class VideoDAOImpl
             preparedStatement.setInt (11, video.getDislikesCount ());
             preparedStatement.setTimestamp (12, Timestamp.valueOf (video.getCreationDate ()));
             preparedStatement.setBoolean (13, video.isOnlyComrade ());
-            preparedStatement.setObject (14, video.getID ());
+            preparedStatement.setInt (14, video.getViewsCount ());
+            preparedStatement.setObject (15, video.getID ());
             preparedStatement.executeUpdate ();
         }
         catch (SQLException e)
