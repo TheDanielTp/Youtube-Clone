@@ -49,6 +49,7 @@ import java.util.*;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.SVGPath;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -347,10 +348,14 @@ public class VideoPageController implements Initializable
                     }
 
                     Button button = new Button ();
-                    button.getStyleClass ().add ("btn-video");
+                    button.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT, CornerRadii.EMPTY, null)));
                     button.setGraphic (videoRecommendation);
 
-                    button.setOnAction (event -> getVideo (event, v));
+                    button.setOnAction (event ->
+                    {
+                        pause (event);
+                        getVideo (event, v);
+                    });
                     vbxRecommendedVideos.getChildren ().add (button);
                     VBox.setVgrow (videoRecommendation, Priority.ALWAYS);
                 }
@@ -386,7 +391,7 @@ public class VideoPageController implements Initializable
         Platform.runLater (() ->
         {
             CommentDAOImpl      commentDAO = new CommentDAOImpl ();
-            ArrayList <Comment> comments   = (ArrayList <Comment>) commentDAO.findAll ();
+            ArrayList <Comment> comments   = (ArrayList <Comment>) commentDAO.findVideoComments (video);
 
             vbxCommentSection.getChildren ().remove (2, vbxCommentSection.getChildren ().size ());
 
@@ -408,9 +413,7 @@ public class VideoPageController implements Initializable
             }
         });
     }
-    //endregion
 
-    //region [ - setPlaybackButtons() - ]
     private void setPlaybackButtons ()
     {
         btnPlayPause.setOnAction (this :: pause);
@@ -419,9 +422,12 @@ public class VideoPageController implements Initializable
         btnVolume.setOnAction (this :: volumeOff);
 
         Slider timeSlider = new Slider (0, 100, 0);
+        timeSlider.setBackground (new Background(new BackgroundFill(
+                Color.web ("#cd0000"), CornerRadii.EMPTY, null)));
 
         volumeSlider = new Slider (0, 100, 100);
         volumeSlider.setOrientation (Orientation.HORIZONTAL);
+
         volumeSlider.valueProperty ().addListener ((observable, oldValue, newValue) ->
         {
             if (newValue.doubleValue () / 100 == 0)
@@ -571,8 +577,14 @@ public class VideoPageController implements Initializable
     //region [ - next(ActionEvent event) - ]
     private void next (ActionEvent event)
     {
+        ArrayList <Video> videos = (ArrayList <Video>) MainApplication.client.getAllVideos ()[1];
+        videos.remove (MainApplication.currentVideo);
+        videos.remove (video);
+
+        recommendedVideos = videos;
+
         pause (event);
-        getVideo (event, recommendedVideos.getLast ());
+        getVideo (event, recommendedVideos.getFirst ());
     }
     //endregion
 

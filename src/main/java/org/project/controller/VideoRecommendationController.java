@@ -21,6 +21,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
@@ -110,7 +111,8 @@ public class VideoRecommendationController implements Initializable
         txtViews.setText (String.valueOf (video.getViewsCount ()));
 
         ByteArrayInputStream bis;
-        Image                videoThumbnail = new Image (video.getThumbnailURL ());
+        File file = new File (video.getThumbnailURL ());
+        Image                videoThumbnail = new Image (file.toURI ().toString ());
         imgThumbnail.setImage (videoThumbnail);
     }
     //endregion

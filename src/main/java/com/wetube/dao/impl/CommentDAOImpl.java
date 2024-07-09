@@ -177,6 +177,41 @@ public class CommentDAOImpl
         return null;
     }
 
+    public List <Comment> findVideoComments (Video video)
+    {
+        List <Comment> comments = new ArrayList <> ();
+        String       sql    = "SELECT * FROM Comments";
+        try (Connection connection = DatabaseConnection.getConnection ();
+             Statement stmt = connection.createStatement ();
+             ResultSet resultSet = stmt.executeQuery (sql))
+        {
+            while (resultSet.next ())
+            {
+                if (resultSet.getObject ("contentID", UUID.class).equals (video.getID ()))
+                {
+                    comments.add (new Comment (
+                            resultSet.getObject ("ID", UUID.class),
+                            resultSet.getObject ("contentID", UUID.class),
+                            resultSet.getObject ("creatorID", UUID.class),
+                            resultSet.getObject ("creatorID", UUID.class),
+                            resultSet.getInt ("likesCount"),
+                            resultSet.getInt ("dislikesCount"),
+                            resultSet.getObject ("creationDate", LocalDateTime.class),
+                            resultSet.getObject ("parentCommentID", UUID.class),
+                            resultSet.getString ("content"),
+                            resultSet.getInt ("replyCount"),
+                            resultSet.getBoolean ("isReply")
+                    ));
+                }
+            }
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace ();
+        }
+        return comments;
+    }
+
     public List <Comment> findAll ()
     {
         List <Comment> comments = new ArrayList <> ();

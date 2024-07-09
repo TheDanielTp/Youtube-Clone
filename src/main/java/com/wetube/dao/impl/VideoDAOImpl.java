@@ -519,7 +519,7 @@ public class VideoDAOImpl
     public List <User> findLikedUsers (Video video)
     {
         List <User> users = new ArrayList <> ();
-        String      sql   = "SELECT * FROM ContentsAction WHERE id = ?";
+        String      sql   = "SELECT * FROM ContentsAction WHERE contentID = ?";
         try (Connection connection = DatabaseConnection.getConnection ();
              PreparedStatement preparedStatement = connection.prepareStatement (sql))
         {
@@ -544,7 +544,7 @@ public class VideoDAOImpl
     public List <User> findDislikedUsers (Video video)
     {
         List <User> users = new ArrayList <> ();
-        String      sql   = "SELECT * FROM ContentsAction WHERE id = ?";
+        String      sql   = "SELECT * FROM ContentsAction WHERE contentID = ?";
         try (Connection connection = DatabaseConnection.getConnection ();
              PreparedStatement preparedStatement = connection.prepareStatement (sql))
         {
