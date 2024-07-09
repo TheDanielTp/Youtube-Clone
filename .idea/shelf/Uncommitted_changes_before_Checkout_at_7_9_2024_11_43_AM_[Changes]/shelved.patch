@@ -1,0 +1,263 @@
+Index: src/main/java/com/wetube/dao/impl/CategoryDAOImpl.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.wetube.dao.impl;\r\n\r\nimport com.wetube.model.Category;\r\nimport com.wetube.model.Channel;\r\nimport com.wetube.model.Community;\r\nimport com.wetube.util.DatabaseConnection;\r\n\r\nimport java.sql.*;\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\nimport java.util.UUID;\r\n\r\npublic class CategoryDAOImpl\r\n{\r\n    public UUID generateID ()\r\n    {\r\n        UUID uuid = UUID.randomUUID ();\r\n\r\n        List <Category> all = findAll ();\r\n        for (Category object : all)\r\n        {\r\n            if (object.getID () == uuid)\r\n            {\r\n                uuid = generateID ();\r\n            }\r\n        }\r\n        return uuid;\r\n    }\r\n\r\n    public void create (Category category)\r\n    {\r\n        String sql = \"INSERT INTO Categories (ID, title) VALUES (?, ?)\";\r\n        try (Connection conn = DatabaseConnection.getConnection ();\r\n             PreparedStatement pstmt = conn.prepareStatement (sql))\r\n        {\r\n            pstmt.setObject (1, category.getID ());\r\n            pstmt.setString (2, category.getTitle ());\r\n            pstmt.executeUpdate ();\r\n        }\r\n        catch (SQLException e)\r\n        {\r\n            e.printStackTrace ();\r\n        }\r\n    }\r\n\r\n    public void update (Category category)\r\n    {\r\n        String sql = \"UPDATE Categories SET title = ? WHERE ID = ?\";\r\n        try (Connection conn = DatabaseConnection.getConnection ();\r\n             PreparedStatement pstmt = conn.prepareStatement (sql))\r\n        {\r\n            pstmt.setString (1, category.getTitle ());\r\n            pstmt.setObject (2, category.getID ());\r\n            pstmt.executeUpdate ();\r\n        }\r\n        catch (SQLException e)\r\n        {\r\n            e.printStackTrace ();\r\n        }\r\n    }\r\n\r\n    public void delete (UUID id)\r\n    {\r\n        try (Connection conn = DatabaseConnection.getConnection ();\r\n             Statement stmt = conn.createStatement ())\r\n        {\r\n            String deleteCategory = \"DELETE FROM Categories WHERE ID = '\" + id + \"'\";\r\n            stmt.executeUpdate (deleteCategory);\r\n        }\r\n        catch (SQLException e)\r\n        {\r\n            e.printStackTrace ();\r\n        }\r\n    }\r\n\r\n    public Category findById (UUID id)\r\n    {\r\n        String sql = \"SELECT * FROM Categories WHERE ID = ?\";\r\n        try (Connection conn = DatabaseConnection.getConnection ();\r\n             PreparedStatement pstmt = conn.prepareStatement (sql))\r\n        {\r\n            pstmt.setObject (1, id);\r\n            ResultSet rs = pstmt.executeQuery ();\r\n            if (rs.next ())\r\n            {\r\n                return new Category (\r\n                        rs.getObject (\"ID\", UUID.class),\r\n                        rs.getString (\"title\")\r\n                );\r\n            }\r\n        }\r\n        catch (SQLException e)\r\n        {\r\n            e.printStackTrace ();\r\n        }\r\n        return null;\r\n    }\r\n\r\n    public List <Category> findAll ()\r\n    {\r\n        List <Category> categories = new ArrayList <> ();\r\n        String      sql   = \"SELECT * FROM Categories\";\r\n        try (Connection conn = DatabaseConnection.getConnection ();\r\n             Statement stmt = conn.createStatement ();\r\n             ResultSet rs = stmt.executeQuery (sql))\r\n        {\r\n            while (rs.next ())\r\n            {\r\n                categories.add (new Category (\r\n                        rs.getObject (\"ID\", UUID.class),\r\n                        rs.getString (\"title\")\r\n                ));\r\n            }\r\n        }\r\n        catch (SQLException e)\r\n        {\r\n            e.printStackTrace ();\r\n        }\r\n        return categories;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/wetube/dao/impl/CategoryDAOImpl.java b/src/main/java/com/wetube/dao/impl/CategoryDAOImpl.java
+--- a/src/main/java/com/wetube/dao/impl/CategoryDAOImpl.java	(revision 22f01b48877d96b3dc4f62a871ca264068d892e0)
++++ b/src/main/java/com/wetube/dao/impl/CategoryDAOImpl.java	(date 1720512346987)
+@@ -22,6 +22,7 @@
+             if (object.getID () == uuid)
+             {
+                 uuid = generateID ();
++                break;
+             }
+         }
+         return uuid;
+@@ -29,13 +30,13 @@
+ 
+     public void create (Category category)
+     {
+-        String sql = "INSERT INTO Categories (ID, title) VALUES (?, ?)";
+-        try (Connection conn = DatabaseConnection.getConnection ();
+-             PreparedStatement pstmt = conn.prepareStatement (sql))
++        String query = "INSERT INTO Categories (ID, title) VALUES (?, ?)";
++        try (Connection connection = DatabaseConnection.getConnection ();
++             PreparedStatement preparedStatement = connection.prepareStatement (query))
+         {
+-            pstmt.setObject (1, category.getID ());
+-            pstmt.setString (2, category.getTitle ());
+-            pstmt.executeUpdate ();
++            preparedStatement.setObject (1, category.getID ());
++            preparedStatement.setString (2, category.getTitle ());
++            preparedStatement.executeUpdate ();
+         }
+         catch (SQLException e)
+         {
+@@ -45,13 +46,13 @@
+ 
+     public void update (Category category)
+     {
+-        String sql = "UPDATE Categories SET title = ? WHERE ID = ?";
++        String query = "UPDATE Categories SET title = ? WHERE ID = ?";
+         try (Connection conn = DatabaseConnection.getConnection ();
+-             PreparedStatement pstmt = conn.prepareStatement (sql))
++             PreparedStatement preparedStatement = conn.prepareStatement (query))
+         {
+-            pstmt.setString (1, category.getTitle ());
+-            pstmt.setObject (2, category.getID ());
+-            pstmt.executeUpdate ();
++            preparedStatement.setString (1, category.getTitle ());
++            preparedStatement.setObject (2, category.getID ());
++            preparedStatement.executeUpdate ();
+         }
+         catch (SQLException e)
+         {
+@@ -61,11 +62,11 @@
+ 
+     public void delete (UUID id)
+     {
+-        try (Connection conn = DatabaseConnection.getConnection ();
+-             Statement stmt = conn.createStatement ())
++        try (Connection connection = DatabaseConnection.getConnection ();
++             Statement statement = connection.createStatement ())
+         {
+             String deleteCategory = "DELETE FROM Categories WHERE ID = '" + id + "'";
+-            stmt.executeUpdate (deleteCategory);
++            statement.executeUpdate (deleteCategory);
+         }
+         catch (SQLException e)
+         {
+@@ -75,17 +76,17 @@
+ 
+     public Category findById (UUID id)
+     {
+-        String sql = "SELECT * FROM Categories WHERE ID = ?";
+-        try (Connection conn = DatabaseConnection.getConnection ();
+-             PreparedStatement pstmt = conn.prepareStatement (sql))
++        String query = "SELECT * FROM Categories WHERE ID = ?";
++        try (Connection connection = DatabaseConnection.getConnection ();
++             PreparedStatement preparedStatement = connection.prepareStatement (query))
+         {
+-            pstmt.setObject (1, id);
+-            ResultSet rs = pstmt.executeQuery ();
+-            if (rs.next ())
++            preparedStatement.setObject (1, id);
++            ResultSet resultSet = preparedStatement.executeQuery ();
++            if (resultSet.next ())
+             {
+                 return new Category (
+-                        rs.getObject ("ID", UUID.class),
+-                        rs.getString ("title")
++                        resultSet.getObject ("ID", UUID.class),
++                        resultSet.getString ("title")
+                 );
+             }
+         }
+@@ -99,16 +100,16 @@
+     public List <Category> findAll ()
+     {
+         List <Category> categories = new ArrayList <> ();
+-        String      sql   = "SELECT * FROM Categories";
+-        try (Connection conn = DatabaseConnection.getConnection ();
+-             Statement stmt = conn.createStatement ();
+-             ResultSet rs = stmt.executeQuery (sql))
++        String      query   = "SELECT * FROM Categories";
++        try (Connection connection = DatabaseConnection.getConnection ();
++             Statement statement = connection.createStatement ();
++             ResultSet resultSet = statement.executeQuery (query))
+         {
+-            while (rs.next ())
++            while (resultSet.next ())
+             {
+                 categories.add (new Category (
+-                        rs.getObject ("ID", UUID.class),
+-                        rs.getString ("title")
++                        resultSet.getObject ("ID", UUID.class),
++                        resultSet.getString ("title")
+                 ));
+             }
+         }
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"ec566682-672c-4b02-8981-652c66cb3fe3\" name=\"Changes\" comment=\"Sign Up Functionality added to Front\" />\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\r\n      <map>\r\n        <entry key=\"$PROJECT_DIR$\" value=\"develop\" />\r\n      </map>\r\n    </option>\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"GitHubPullRequestSearchHistory\">{\r\n  &quot;lastFilter&quot;: {\r\n    &quot;state&quot;: &quot;OPEN&quot;,\r\n    &quot;assignee&quot;: &quot;TheDanielTp&quot;\r\n  }\r\n}</component>\r\n  <component name=\"GithubPullRequestsUISettings\">{\r\n  &quot;selectedUrlAndAccountId&quot;: {\r\n    &quot;url&quot;: &quot;https://github.com/TheDanielTp/Project_WeTube&quot;,\r\n    &quot;accountId&quot;: &quot;3c65712a-ed86-4130-bb90-4a7622407ea5&quot;\r\n  }\r\n}</component>\r\n  <component name=\"MavenImportPreferences\">\r\n    <option name=\"generalSettings\">\r\n      <MavenGeneralSettings>\r\n        <option name=\"mavenHomeTypeForPersistence\" value=\"WRAPPER\" />\r\n      </MavenGeneralSettings>\r\n    </option>\r\n  </component>\r\n  <component name=\"ProblemsViewState\">\r\n    <option name=\"selectedTabId\" value=\"CurrentFile\" />\r\n  </component>\r\n  <component name=\"ProjectColorInfo\">{\r\n  &quot;associatedIndex&quot;: 3\r\n}</component>\r\n  <component name=\"ProjectId\" id=\"2irRHITZ4w6U1ENbH8rGgw0yzuk\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\">\r\n    <ConfirmationsSetting value=\"2\" id=\"Add\" />\r\n  </component>\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">{\r\n  &quot;keyToString&quot;: {\r\n    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,\r\n    &quot;Application.Client.executor&quot;: &quot;Run&quot;,\r\n    &quot;Application.Client1.executor&quot;: &quot;Run&quot;,\r\n    &quot;Application.Client2.executor&quot;: &quot;Run&quot;,\r\n    &quot;Application.MainApplication.executor&quot;: &quot;Run&quot;,\r\n    &quot;Application.Server.executor&quot;: &quot;Run&quot;,\r\n    &quot;Application.TableCreator.executor&quot;: &quot;Run&quot;,\r\n    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\r\n    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,\r\n    &quot;git-widget-placeholder&quot;: &quot;login&quot;,\r\n    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,\r\n    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,\r\n    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,\r\n    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,\r\n    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,\r\n    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,\r\n    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,\r\n    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,\r\n    &quot;settings.editor.selected.configurable&quot;: &quot;database.query.execution&quot;,\r\n    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;\r\n  },\r\n  &quot;keyToStringList&quot;: {\r\n    &quot;DatabaseDriversLRU&quot;: [\r\n      &quot;mysql_aurora_aws&quot;,\r\n      &quot;postgresql&quot;\r\n    ],\r\n    &quot;com.intellij.ide.scratch.LRUPopupBuilder$1/SQL Dialect&quot;: [\r\n      &quot;PostgreSQL&quot;\r\n    ]\r\n  }\r\n}</component>\r\n  <component name=\"RunManager\" selected=\"Application.Client1\">\r\n    <configuration name=\"Client1\" type=\"Application\" factoryName=\"Application\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"org.project.controller.MainApplication\" />\r\n      <module name=\"Project_WeTube\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"Client2\" type=\"Application\" factoryName=\"Application\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"org.project.controller.MainApplication\" />\r\n      <module name=\"Project_WeTube\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"Server\" type=\"Application\" factoryName=\"Application\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"com.wetube.server.Server\" />\r\n      <module name=\"Project_WeTube\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <list>\r\n      <item itemvalue=\"Application.Client1\" />\r\n      <item itemvalue=\"Application.Server\" />\r\n      <item itemvalue=\"Application.Client2\" />\r\n    </list>\r\n  </component>\r\n  <component name=\"SharedIndexes\">\r\n    <attachedChunks>\r\n      <set>\r\n        <option value=\"bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.18034.62\" />\r\n        <option value=\"bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-IU-241.18034.62\" />\r\n      </set>\r\n    </attachedChunks>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"ec566682-672c-4b02-8981-652c66cb3fe3\" name=\"Changes\" comment=\"\" />\r\n      <created>1720246621657</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1720246621657</updated>\r\n      <workItem from=\"1720382424785\" duration=\"4557000\" />\r\n    </task>\r\n    <task id=\"LOCAL\u200E−۰۰۰۰۱\" summary=\"Created Repository\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1720246781249</created>\r\n      <option name=\"number\" value=\"LOCAL\u200E−۰۰۰۰۱\" />\r\n      <option name=\"presentableId\" value=\"LOCAL\u200E−۰۰۰۰۱\" />\r\n      <updated>1720246781249</updated>\r\n    </task>\r\n    <task id=\"LOCAL\u200E−۰۰۰۰۲\" summary=\"Initialized Project\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1720246902140</created>\r\n      <option name=\"number\" value=\"LOCAL\u200E−۰۰۰۰۲\" />\r\n      <option name=\"presentableId\" value=\"LOCAL\u200E−۰۰۰۰۲\" />\r\n      <updated>1720246902140</updated>\r\n    </task>\r\n    <task id=\"LOCAL\u200E−۰۰۰۰۳\" summary=\"Initialized Models &amp; Access Objects\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1720251963229</created>\r\n      <option name=\"number\" value=\"LOCAL\u200E−۰۰۰۰۳\" />\r\n      <option name=\"presentableId\" value=\"LOCAL\u200E−۰۰۰۰۳\" />\r\n      <updated>1720251963229</updated>\r\n    </task>\r\n    <task id=\"LOCAL\u200E−۰۰۰۰۴\" summary=\"Updated Models Classes\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1720265568491</created>\r\n      <option name=\"number\" value=\"LOCAL\u200E−۰۰۰۰۴\" />\r\n      <option name=\"presentableId\" value=\"LOCAL\u200E−۰۰۰۰۴\" />\r\n      <updated>1720265568491</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00005\" summary=\"Updated Database class\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1720353747360</created>\r\n      <option name=\"number\" value=\"00005\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1720353747360</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00006\" summary=\"Updated Database: UserDAO class\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1720353787159</created>\r\n      <option name=\"number\" value=\"00006\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1720353787159</updated>\r\n    </task>\r\n    <task id=\"LOCAL\u200E−۰۰۰۰۷\" summary=\"Mark 1, might undo these changes later\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1720381519983</created>\r\n      <option name=\"number\" value=\"LOCAL\u200E−۰۰۰۰۷\" />\r\n      <option name=\"presentableId\" value=\"LOCAL\u200E−۰۰۰۰۷\" />\r\n      <updated>1720381519983</updated>\r\n    </task>\r\n    <task id=\"LOCAL\u200E−۰۰۰۰۸\" summary=\"Mark 5, might undo these changes later\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1720442304421</created>\r\n      <option name=\"number\" value=\"LOCAL\u200E−۰۰۰۰۸\" />\r\n      <option name=\"presentableId\" value=\"LOCAL\u200E−۰۰۰۰۸\" />\r\n      <updated>1720442304421</updated>\r\n    </task>\r\n    <task id=\"LOCAL\u200E−۰۰۰۰۹\" summary=\"Project Next Step\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1720454626391</created>\r\n      <option name=\"number\" value=\"LOCAL\u200E−۰۰۰۰۹\" />\r\n      <option name=\"presentableId\" value=\"LOCAL\u200E−۰۰۰۰۹\" />\r\n      <updated>1720454626391</updated>\r\n    </task>\r\n    <task id=\"LOCAL\u200E−۰۰۰۱۰\" summary=\"Sign Up Functionality added to Front\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1720458897052</created>\r\n      <option name=\"number\" value=\"LOCAL\u200E−۰۰۰۱۰\" />\r\n      <option name=\"presentableId\" value=\"LOCAL\u200E−۰۰۰۱۰\" />\r\n      <updated>1720458897052</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"11\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <option name=\"ADD_EXTERNAL_FILES_SILENTLY\" value=\"true\" />\r\n    <MESSAGE value=\"Created Repository\" />\r\n    <MESSAGE value=\"Initialized Project\" />\r\n    <MESSAGE value=\"Initialized Models &amp; Access Objects\" />\r\n    <MESSAGE value=\"Updated Models Classes\" />\r\n    <MESSAGE value=\"Updated Database class\" />\r\n    <MESSAGE value=\"Updated Database: UserDAO class\" />\r\n    <MESSAGE value=\"Mark 1, might undo these changes later\" />\r\n    <MESSAGE value=\"Mark 5, might undo these changes later\" />\r\n    <MESSAGE value=\"Project Next Step\" />\r\n    <MESSAGE value=\"Sign Up Functionality added to Front\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"Sign Up Functionality added to Front\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 22f01b48877d96b3dc4f62a871ca264068d892e0)
++++ b/.idea/workspace.xml	(date 1720512664748)
+@@ -4,7 +4,9 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="ec566682-672c-4b02-8981-652c66cb3fe3" name="Changes" comment="Sign Up Functionality added to Front" />
++    <list default="true" id="ec566682-672c-4b02-8981-652c66cb3fe3" name="Changes" comment="Sign Up Functionality added to Front">
++      <change beforePath="$PROJECT_DIR$/src/main/java/com/wetube/dao/impl/CategoryDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/dao/impl/CategoryDAOImpl.java" afterDir="false" />
++    </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+@@ -37,13 +39,6 @@
+     &quot;accountId&quot;: &quot;3c65712a-ed86-4130-bb90-4a7622407ea5&quot;
+   }
+ }</component>
+-  <component name="MavenImportPreferences">
+-    <option name="generalSettings">
+-      <MavenGeneralSettings>
+-        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+-      </MavenGeneralSettings>
+-    </option>
+-  </component>
+   <component name="ProblemsViewState">
+     <option name="selectedTabId" value="CurrentFile" />
+   </component>
+@@ -58,40 +53,40 @@
+     <option name="hideEmptyMiddlePackages" value="true" />
+     <option name="showLibraryContents" value="true" />
+   </component>
+-  <component name="PropertiesComponent">{
+-  &quot;keyToString&quot;: {
+-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+-    &quot;Application.Client.executor&quot;: &quot;Run&quot;,
+-    &quot;Application.Client1.executor&quot;: &quot;Run&quot;,
+-    &quot;Application.Client2.executor&quot;: &quot;Run&quot;,
+-    &quot;Application.MainApplication.executor&quot;: &quot;Run&quot;,
+-    &quot;Application.Server.executor&quot;: &quot;Run&quot;,
+-    &quot;Application.TableCreator.executor&quot;: &quot;Run&quot;,
+-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+-    &quot;git-widget-placeholder&quot;: &quot;login&quot;,
+-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+-    &quot;settings.editor.selected.configurable&quot;: &quot;database.query.execution&quot;,
+-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
++  <component name="PropertiesComponent"><![CDATA[{
++  "keyToString": {
++    "ASKED_ADD_EXTERNAL_FILES": "true",
++    "Application.Client.executor": "Run",
++    "Application.Client1.executor": "Run",
++    "Application.Client2.executor": "Run",
++    "Application.MainApplication.executor": "Run",
++    "Application.Server.executor": "Run",
++    "Application.TableCreator.executor": "Run",
++    "RunOnceActivity.OpenProjectViewOnStart": "true",
++    "RunOnceActivity.ShowReadmeOnStart": "true",
++    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
++    "git-widget-placeholder": "database__step3",
++    "kotlin-language-version-configured": "true",
++    "node.js.detected.package.eslint": "true",
++    "node.js.selected.package.eslint": "(autodetect)",
++    "node.js.selected.package.tslint": "(autodetect)",
++    "nodejs_package_manager_path": "npm",
++    "project.structure.last.edited": "Project",
++    "project.structure.proportion": "0.0",
++    "project.structure.side.proportion": "0.0",
++    "settings.editor.selected.configurable": "database.query.execution",
++    "vue.rearranger.settings.migration": "true"
+   },
+-  &quot;keyToStringList&quot;: {
+-    &quot;DatabaseDriversLRU&quot;: [
+-      &quot;mysql_aurora_aws&quot;,
+-      &quot;postgresql&quot;
++  "keyToStringList": {
++    "DatabaseDriversLRU": [
++      "mysql_aurora_aws",
++      "postgresql"
+     ],
+-    &quot;com.intellij.ide.scratch.LRUPopupBuilder$1/SQL Dialect&quot;: [
+-      &quot;PostgreSQL&quot;
++    "com.intellij.ide.scratch.LRUPopupBuilder$1/SQL Dialect": [
++      "PostgreSQL"
+     ]
+   }
+-}</component>
++}]]></component>
+   <component name="RunManager" selected="Application.Client1">
+     <configuration name="Client1" type="Application" factoryName="Application">
+       <option name="MAIN_CLASS_NAME" value="org.project.controller.MainApplication" />
+@@ -114,11 +109,34 @@
+         <option name="Make" enabled="true" />
+       </method>
+     </configuration>
++    <configuration name="TableCreator" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
++      <option name="MAIN_CLASS_NAME" value="com.wetube.util.TableCreator" />
++      <module name="Project_WeTube" />
++      <extension name="coverage">
++        <pattern>
++          <option name="PATTERN" value="com.wetube.util.*" />
++          <option name="ENABLED" value="true" />
++        </pattern>
++      </extension>
++      <method v="2">
++        <option name="Make" enabled="true" />
++      </method>
++    </configuration>
+     <list>
+       <item itemvalue="Application.Client1" />
+       <item itemvalue="Application.Server" />
+       <item itemvalue="Application.Client2" />
++      <item itemvalue="Application.TableCreator" />
+     </list>
++    <recent_temporary>
++      <list>
++        <item itemvalue="Application.TableCreator" />
++        <item itemvalue="Application.TableCreator" />
++        <item itemvalue="Application.TableCreator" />
++        <item itemvalue="Application.TableCreator" />
++        <item itemvalue="Application.TableCreator" />
++      </list>
++    </recent_temporary>
+   </component>
+   <component name="SharedIndexes">
+     <attachedChunks>

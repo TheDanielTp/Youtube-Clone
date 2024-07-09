@@ -23,6 +23,7 @@ public class VideoDAOImpl
             if (object.getID () == uuid)
             {
                 uuid = generateID ();
+                break;
             }
         }
         return uuid;
@@ -31,24 +32,24 @@ public class VideoDAOImpl
     public void create (Video video)
     {
         String sql = "INSERT INTO Videos (ID, creatorID, channelID, communityID, title, description, dataType, videoURL, thumbnailURL, commentsCount, likesCount, dislikesCount, creationDate, isOnlyComrade) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        try (Connection conn = DatabaseConnection.getConnection ();
-             PreparedStatement pstmt = conn.prepareStatement (sql))
+        try (Connection connection = DatabaseConnection.getConnection ();
+             PreparedStatement  preparedStatement = connection.prepareStatement (sql))
         {
-            pstmt.setObject (1, video.getID ());
-            pstmt.setObject (2, video.getCreatorID ());
-            pstmt.setObject (3, video.getChannelID ());
-            pstmt.setObject (4, video.getCommunityID ());
-            pstmt.setString (5, video.getTitle ());
-            pstmt.setString (6, video.getDescription ());
-            pstmt.setString (7, video.getDataType ());
-            pstmt.setString (8, video.getVideoURL ());
-            pstmt.setBytes (9, video.getThumbnailURL () != null ? video.getThumbnailURL ().toString ().getBytes () : null);
-            pstmt.setInt (10, video.getCommentsCount ());
-            pstmt.setInt (11, video.getLikesCount ());
-            pstmt.setInt (12, video.getDislikesCount ());
-            pstmt.setTimestamp (13, Timestamp.valueOf (video.getCreationDate ()));
-            pstmt.setBoolean (14, video.isOnlyComrade ());
-            pstmt.executeUpdate ();
+             preparedStatement.setObject (1, video.getID ());
+             preparedStatement.setObject (2, video.getCreatorID ());
+             preparedStatement.setObject (3, video.getChannelID ());
+             preparedStatement.setObject (4, video.getCommunityID ());
+             preparedStatement.setString (5, video.getTitle ());
+             preparedStatement.setString (6, video.getDescription ());
+             preparedStatement.setString (7, video.getDataType ());
+             preparedStatement.setString (8, video.getVideoURL ());
+             preparedStatement.setBytes (9, video.getThumbnailURL () != null ? video.getThumbnailURL ().toString ().getBytes () : null);
+             preparedStatement.setInt (10, video.getCommentsCount ());
+             preparedStatement.setInt (11, video.getLikesCount ());
+             preparedStatement.setInt (12, video.getDislikesCount ());
+             preparedStatement.setTimestamp (13, Timestamp.valueOf (video.getCreationDate ()));
+             preparedStatement.setBoolean (14, video.isOnlyComrade ());
+             preparedStatement.executeUpdate ();
         }
         catch (SQLException e)
         {
@@ -59,24 +60,24 @@ public class VideoDAOImpl
     public void update (Video video)
     {
         String sql = "UPDATE Videos SET creatorID = ?, channelID = ?, communityID = ?, title = ?, description = ?, dataType = ?, videoURL = ?, thumbnail = ?, commentsCount = ?, likesCount = ?, dislikesCount = ?, creationDate = ?, isOnlyComrade = ? WHERE ID = ?";
-        try (Connection conn = DatabaseConnection.getConnection ();
-             PreparedStatement pstmt = conn.prepareStatement (sql))
+        try (Connection connection = DatabaseConnection.getConnection ();
+             PreparedStatement  preparedStatement = connection.prepareStatement (sql))
         {
-            pstmt.setObject (1, video.getCreatorID ());
-            pstmt.setObject (2, video.getChannelID ());
-            pstmt.setObject (3, video.getCommunityID ());
-            pstmt.setString (4, video.getTitle ());
-            pstmt.setString (5, video.getDescription ());
-            pstmt.setString (6, video.getDataType ());
-            pstmt.setString (7, video.getVideoURL ());
-            pstmt.setBytes (8, video.getThumbnailURL () != null ? video.getThumbnailURL ().toString ().getBytes () : null);
-            pstmt.setInt (9, video.getCommentsCount ());
-            pstmt.setInt (10, video.getLikesCount ());
-            pstmt.setInt (11, video.getDislikesCount ());
-            pstmt.setTimestamp (12, Timestamp.valueOf (video.getCreationDate ()));
-            pstmt.setBoolean (13, video.isOnlyComrade ());
-            pstmt.setObject (14, video.getID ());
-            pstmt.executeUpdate ();
+             preparedStatement.setObject (1, video.getCreatorID ());
+             preparedStatement.setObject (2, video.getChannelID ());
+             preparedStatement.setObject (3, video.getCommunityID ());
+             preparedStatement.setString (4, video.getTitle ());
+             preparedStatement.setString (5, video.getDescription ());
+             preparedStatement.setString (6, video.getDataType ());
+             preparedStatement.setString (7, video.getVideoURL ());
+             preparedStatement.setBytes (8, video.getThumbnailURL () != null ? video.getThumbnailURL ().toString ().getBytes () : null);
+             preparedStatement.setInt (9, video.getCommentsCount ());
+             preparedStatement.setInt (10, video.getLikesCount ());
+             preparedStatement.setInt (11, video.getDislikesCount ());
+             preparedStatement.setTimestamp (12, Timestamp.valueOf (video.getCreationDate ()));
+             preparedStatement.setBoolean (13, video.isOnlyComrade ());
+             preparedStatement.setObject (14, video.getID ());
+             preparedStatement.executeUpdate ();
         }
         catch (SQLException e)
         {
@@ -86,16 +87,16 @@ public class VideoDAOImpl
 
     public void delete (UUID id)
     {
-        try (Connection conn = DatabaseConnection.getConnection ();
-             Statement stmt = conn.createStatement ())
+        try (Connection connection = DatabaseConnection.getConnection ();
+             Statement statement = connection.createStatement ())
         {
             String deleteComments       = "DELETE FROM Comments WHERE contentID = '" + id + "'";
             String deleteVideoPlaylists = "DELETE FROM VideoPlaylists WHERE videoID = '" + id + "'";
-            stmt.executeUpdate (deleteComments);
-            stmt.executeUpdate (deleteVideoPlaylists);
+            statement.executeUpdate (deleteComments);
+            statement.executeUpdate (deleteVideoPlaylists);
 
             String deleteVideo = "DELETE FROM Videos WHERE ID = '" + id + "'";
-            stmt.executeUpdate (deleteVideo);
+            statement.executeUpdate (deleteVideo);
         }
         catch (SQLException e)
         {
@@ -106,14 +107,14 @@ public class VideoDAOImpl
     public void like (Video video, User user)
     {
         String sql = "INSERT INTO ContentsAction (contentID, userID, liked, disliked) VALUES (?, ?, ?, ?)";
-        try (Connection conn = DatabaseConnection.getConnection ();
-             PreparedStatement pstmt = conn.prepareStatement (sql))
+        try (Connection connection = DatabaseConnection.getConnection ();
+             PreparedStatement  preparedStatement = connection.prepareStatement (sql))
         {
-            pstmt.setObject (1, video.getID ());
-            pstmt.setObject (2, user.getID ());
-            pstmt.setBoolean (3, true);
-            pstmt.setBoolean (4, false);
-            pstmt.executeUpdate ();
+             preparedStatement.setObject (1, video.getID ());
+             preparedStatement.setObject (2, user.getID ());
+             preparedStatement.setBoolean (3, true);
+             preparedStatement.setBoolean (4, false);
+             preparedStatement.executeUpdate ();
         }
         catch (SQLException e)
         {
@@ -124,14 +125,14 @@ public class VideoDAOImpl
     public void dislike (Video video, User user)
     {
         String sql = "INSERT INTO ContentsAction (contentID, userID, liked, disliked) VALUES (?, ?, ?, ?)";
-        try (Connection conn = DatabaseConnection.getConnection ();
-             PreparedStatement pstmt = conn.prepareStatement (sql))
+        try (Connection connection = DatabaseConnection.getConnection ();
+             PreparedStatement  preparedStatement = connection.prepareStatement (sql))
         {
-            pstmt.setObject (1, video.getID ());
-            pstmt.setObject (2, user.getID ());
-            pstmt.setBoolean (3, false);
-            pstmt.setBoolean (4, true);
-            pstmt.executeUpdate ();
+             preparedStatement.setObject (1, video.getID ());
+             preparedStatement.setObject (2, user.getID ());
+             preparedStatement.setBoolean (3, false);
+             preparedStatement.setBoolean (4, true);
+             preparedStatement.executeUpdate ();
         }
         catch (SQLException e)
         {
@@ -142,14 +143,14 @@ public class VideoDAOImpl
     public void removeLikeDislike (Video video, User user)
     {
         String sql = "INSERT INTO ContentsAction (contentID, userID, liked, disliked) VALUES (?, ?, ?, ?)";
-        try (Connection conn = DatabaseConnection.getConnection ();
-             PreparedStatement pstmt = conn.prepareStatement (sql))
+        try (Connection connection = DatabaseConnection.getConnection ();
+             PreparedStatement  preparedStatement = connection.prepareStatement (sql))
         {
-            pstmt.setObject (1, video.getID ());
-            pstmt.setObject (2, user.getID ());
-            pstmt.setBoolean (3, false);
-            pstmt.setBoolean (4, false);
-            pstmt.executeUpdate ();
+             preparedStatement.setObject (1, video.getID ());
+             preparedStatement.setObject (2, user.getID ());
+             preparedStatement.setBoolean (3, false);
+             preparedStatement.setBoolean (4, false);
+             preparedStatement.executeUpdate ();
         }
         catch (SQLException e)
         {
@@ -160,28 +161,28 @@ public class VideoDAOImpl
     public Video findById (UUID id)
     {
         String sql = "SELECT * FROM Videos WHERE ID = ?";
-        try (Connection conn = DatabaseConnection.getConnection ();
-             PreparedStatement pstmt = conn.prepareStatement (sql))
+        try (Connection connection = DatabaseConnection.getConnection ();
+             PreparedStatement  preparedStatement = connection.prepareStatement (sql))
         {
-            pstmt.setObject (1, id);
-            ResultSet rs = pstmt.executeQuery ();
-            if (rs.next ())
+             preparedStatement.setObject (1, id);
+            ResultSet  resultSet =  preparedStatement.executeQuery ();
+            if  (resultSet.next ())
             {
                 return new Video (
-                        rs.getObject ("ID", UUID.class),
-                        rs.getObject ("creatorID", UUID.class),
-                        rs.getObject ("communityID", UUID.class),
-                        rs.getObject ("channelID", UUID.class),
-                        rs.getInt ("likesCount"),
-                        rs.getInt ("dislikesCount"),
-                        rs.getObject ("creationDate", LocalDateTime.class),
-                        rs.getBoolean ("isOnlyComrade"),
-                        rs.getString ("title"),
-                        rs.getString ("description"),
-                        rs.getString ("dataType"),
-                        rs.getString ("videoURL"),
-                        rs.getString ("thumbnailURL"),
-                        rs.getInt ("commentsCount")
+                         resultSet.getObject ("ID", UUID.class),
+                         resultSet.getObject ("creatorID", UUID.class),
+                         resultSet.getObject ("communityID", UUID.class),
+                         resultSet.getObject ("channelID", UUID.class),
+                         resultSet.getInt ("likesCount"),
+                         resultSet.getInt ("dislikesCount"),
+                         resultSet.getObject ("creationDate", LocalDateTime.class),
+                         resultSet.getBoolean ("isOnlyComrade"),
+                         resultSet.getString ("title"),
+                         resultSet.getString ("description"),
+                         resultSet.getString ("dataType"),
+                         resultSet.getString ("videoURL"),
+                         resultSet.getString ("thumbnailURL"),
+                         resultSet.getInt ("commentsCount")
                 );
             }
         }
@@ -195,28 +196,28 @@ public class VideoDAOImpl
     public Video findByTitle (UUID id)
     {
         String sql = "SELECT * FROM Videos WHERE title = ?";
-        try (Connection conn = DatabaseConnection.getConnection ();
-             PreparedStatement pstmt = conn.prepareStatement (sql))
+        try (Connection connection = DatabaseConnection.getConnection ();
+             PreparedStatement  preparedStatement = connection.prepareStatement (sql))
         {
-            pstmt.setObject (1, id);
-            ResultSet rs = pstmt.executeQuery ();
-            if (rs.next ())
+             preparedStatement.setObject (1, id);
+            ResultSet  resultSet =  preparedStatement.executeQuery ();
+            if  (resultSet.next ())
             {
                 return new Video (
-                        rs.getObject ("ID", UUID.class),
-                        rs.getObject ("creatorID", UUID.class),
-                        rs.getObject ("communityID", UUID.class),
-                        rs.getObject ("channelID", UUID.class),
-                        rs.getInt ("likesCount"),
-                        rs.getInt ("dislikesCount"),
-                        rs.getObject ("creationDate", LocalDateTime.class),
-                        rs.getBoolean ("isOnlyComrade"),
-                        rs.getString ("title"),
-                        rs.getString ("description"),
-                        rs.getString ("dataType"),
-                        rs.getString ("videoURL"),
-                        rs.getString ("thumbnailURL"),
-                        rs.getInt ("commentsCount")
+                         resultSet.getObject ("ID", UUID.class),
+                         resultSet.getObject ("creatorID", UUID.class),
+                         resultSet.getObject ("communityID", UUID.class),
+                         resultSet.getObject ("channelID", UUID.class),
+                         resultSet.getInt ("likesCount"),
+                         resultSet.getInt ("dislikesCount"),
+                         resultSet.getObject ("creationDate", LocalDateTime.class),
+                         resultSet.getBoolean ("isOnlyComrade"),
+                         resultSet.getString ("title"),
+                         resultSet.getString ("description"),
+                         resultSet.getString ("dataType"),
+                         resultSet.getString ("videoURL"),
+                         resultSet.getString ("thumbnailURL"),
+                         resultSet.getInt ("commentsCount")
                 );
             }
         }
@@ -231,27 +232,27 @@ public class VideoDAOImpl
     {
         List <Video> videos = new ArrayList <> ();
         String       sql    = "SELECT * FROM Videos";
-        try (Connection conn = DatabaseConnection.getConnection ();
-             Statement stmt = conn.createStatement ();
-             ResultSet rs = stmt.executeQuery (sql))
+        try (Connection connection = DatabaseConnection.getConnection ();
+             Statement statement = connection.createStatement ();
+             ResultSet  resultSet = statement.executeQuery (sql))
         {
-            while (rs.next ())
+            while  (resultSet.next ())
             {
                 videos.add (new Video (
-                        rs.getObject ("ID", UUID.class),
-                        rs.getObject ("creatorID", UUID.class),
-                        rs.getObject ("communityID", UUID.class),
-                        rs.getObject ("channelID", UUID.class),
-                        rs.getInt ("likesCount"),
-                        rs.getInt ("dislikesCount"),
-                        rs.getObject ("creationDate", LocalDateTime.class),
-                        rs.getBoolean ("isOnlyComrade"),
-                        rs.getString ("title"),
-                        rs.getString ("description"),
-                        rs.getString ("dataType"),
-                        rs.getString ("videoURL"),
-                        rs.getString ("thumbnailURL"),
-                        rs.getInt ("commentsCount")
+                         resultSet.getObject ("ID", UUID.class),
+                         resultSet.getObject ("creatorID", UUID.class),
+                         resultSet.getObject ("communityID", UUID.class),
+                         resultSet.getObject ("channelID", UUID.class),
+                         resultSet.getInt ("likesCount"),
+                         resultSet.getInt ("dislikesCount"),
+                         resultSet.getObject ("creationDate", LocalDateTime.class),
+                         resultSet.getBoolean ("isOnlyComrade"),
+                         resultSet.getString ("title"),
+                         resultSet.getString ("description"),
+                         resultSet.getString ("dataType"),
+                         resultSet.getString ("videoURL"),
+                         resultSet.getString ("thumbnailURL"),
+                         resultSet.getInt ("commentsCount")
                 ));
             }
         }
@@ -266,27 +267,27 @@ public class VideoDAOImpl
     {
         List <Video> videos = new ArrayList <> ();
         String      sql   = "SELECT * FROM Posts";
-        try (Connection conn = DatabaseConnection.getConnection ();
-             Statement stmt = conn.createStatement ();
-             ResultSet rs = stmt.executeQuery (sql))
+        try (Connection connection = DatabaseConnection.getConnection ();
+             Statement statement = connection.createStatement ();
+             ResultSet  resultSet = statement.executeQuery (sql))
         {
-            while (rs.next ())
+            while  (resultSet.next ())
             {
                 videos.add (new Video (
-                        rs.getObject ("ID", UUID.class),
-                        rs.getObject ("creatorID", UUID.class),
-                        rs.getObject ("communityID", UUID.class),
-                        rs.getObject ("channelID", UUID.class),
-                        rs.getInt ("likesCount"),
-                        rs.getInt ("dislikesCount"),
-                        rs.getObject ("creationDate", LocalDateTime.class),
-                        rs.getBoolean ("isOnlyComrade"),
-                        rs.getString ("title"),
-                        rs.getString ("description"),
-                        rs.getString ("dataType"),
-                        rs.getString ("videoURL"),
-                        rs.getString ("thumbnailURL"),
-                        rs.getInt ("commentsCount")
+                         resultSet.getObject ("ID", UUID.class),
+                         resultSet.getObject ("creatorID", UUID.class),
+                         resultSet.getObject ("communityID", UUID.class),
+                         resultSet.getObject ("channelID", UUID.class),
+                         resultSet.getInt ("likesCount"),
+                         resultSet.getInt ("dislikesCount"),
+                         resultSet.getObject ("creationDate", LocalDateTime.class),
+                         resultSet.getBoolean ("isOnlyComrade"),
+                         resultSet.getString ("title"),
+                         resultSet.getString ("description"),
+                         resultSet.getString ("dataType"),
+                         resultSet.getString ("videoURL"),
+                         resultSet.getString ("thumbnailURL"),
+                         resultSet.getInt ("commentsCount")
                 ));
             }
         }
@@ -309,17 +310,17 @@ public class VideoDAOImpl
     {
         List <User> users = new ArrayList <> ();
         String sql = "SELECT * FROM ContentsAction WHERE id = ?";
-        try (Connection conn = DatabaseConnection.getConnection ();
-             PreparedStatement pstmt = conn.prepareStatement (sql))
+        try (Connection connection = DatabaseConnection.getConnection ();
+             PreparedStatement  preparedStatement = connection.prepareStatement (sql))
         {
-            pstmt.setObject (1, video.getID ());
-            ResultSet rs = pstmt.executeQuery ();
+             preparedStatement.setObject (1, video.getID ());
+            ResultSet  resultSet =  preparedStatement.executeQuery ();
             UserDAOImpl userDAO = new UserDAOImpl ();
-            while (rs.next ())
+            while  (resultSet.next ())
             {
-                if (rs.getBoolean ("liked"))
+                if  (resultSet.getBoolean ("liked"))
                 {
-                    users.add (userDAO.findById (rs.getObject ("userID", UUID.class)));
+                    users.add (userDAO.findById  (resultSet.getObject ("userID", UUID.class)));
                 }
             }
         }
@@ -334,17 +335,17 @@ public class VideoDAOImpl
     {
         List <User> users = new ArrayList <> ();
         String sql = "SELECT * FROM ContentsAction WHERE id = ?";
-        try (Connection conn = DatabaseConnection.getConnection ();
-             PreparedStatement pstmt = conn.prepareStatement (sql))
+        try (Connection connection = DatabaseConnection.getConnection ();
+             PreparedStatement  preparedStatement = connection.prepareStatement (sql))
         {
-            pstmt.setObject (1, video.getID ());
-            ResultSet rs = pstmt.executeQuery ();
+             preparedStatement.setObject (1, video.getID ());
+            ResultSet  resultSet =  preparedStatement.executeQuery ();
             UserDAOImpl userDAO = new UserDAOImpl ();
-            while (rs.next ())
+            while  (resultSet.next ())
             {
-                if (rs.getBoolean ("disliked"))
+                if  (resultSet.getBoolean ("disliked"))
                 {
-                    users.add (userDAO.findById (rs.getObject ("userID", UUID.class)));
+                    users.add (userDAO.findById  (resultSet.getObject ("userID", UUID.class)));
                 }
             }
         }

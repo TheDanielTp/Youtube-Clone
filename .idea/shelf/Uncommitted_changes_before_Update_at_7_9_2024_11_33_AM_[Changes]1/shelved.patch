@@ -1,0 +1,478 @@
+Index: src/main/java/com/wetube/dao/impl/ChannelDAOImpl.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.wetube.dao.impl;\r\n\r\nimport com.wetube.model.Channel;\r\nimport com.wetube.model.Comment;\r\nimport com.wetube.model.User;\r\nimport com.wetube.util.DatabaseConnection;\r\nimport javafx.scene.image.Image;\r\n\r\nimport java.sql.*;\r\nimport java.time.LocalDate;\r\nimport java.time.LocalDateTime;\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\nimport java.util.UUID;\r\n\r\npublic class ChannelDAOImpl\r\n{\r\n    public UUID generateID ()\r\n    {\r\n        UUID uuid = UUID.randomUUID ();\r\n\r\n        List <Channel> all = findAll ();\r\n        for (Channel object : all)\r\n        {\r\n            if (object.getID () == uuid)\r\n            {\r\n                uuid = generateID ();\r\n            }\r\n        }\r\n        return uuid;\r\n    }\r\n\r\n    public void create (Channel channel)\r\n    {\r\n        String sql = \"INSERT INTO Channels (ID, userID, name, description, subscribersCount, totalVideos, totalViews, watchTime, creationDate, isVerified, outcome, channelPicture) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)\";\r\n        try (Connection conn = DatabaseConnection.getConnection ();\r\n             PreparedStatement pstmt = conn.prepareStatement (sql))\r\n        {\r\n            pstmt.setObject (1, channel.getID ());\r\n            pstmt.setObject (2, channel.getUserID ());\r\n            pstmt.setString (3, channel.getName ());\r\n            pstmt.setString (4, channel.getDescription ());\r\n            pstmt.setInt (5, channel.getSubscribersCount ());\r\n            pstmt.setInt (6, channel.getTotalVideos ());\r\n            pstmt.setInt (7, channel.getTotalViews ());\r\n            pstmt.setInt (8, channel.getWatchTime ());\r\n            pstmt.setDate (9, Date.valueOf (channel.getCreationDate ()));\r\n            pstmt.setBoolean (10, channel.isVerified ());\r\n            pstmt.setDouble (11, channel.getOutcome ());\r\n            pstmt.setBytes (12, channel.getChannelPictureURL () != null ? channel.getChannelPictureURL ().toString ().getBytes () : null);\r\n            pstmt.executeUpdate ();\r\n        }\r\n        catch (SQLException e)\r\n        {\r\n            e.printStackTrace ();\r\n        }\r\n    }\r\n\r\n    public void update (Channel channel)\r\n    {\r\n        String sql = \"UPDATE Channels SET userID = ?, name = ?, description = ?, subscribersCount = ?, totalVideos = ?, totalViews = ?, watchTime = ?, creationDate = ?, isVerified = ?, outcome = ?, channelPicture = ? WHERE ID = ?\";\r\n        try (Connection conn = DatabaseConnection.getConnection ();\r\n             PreparedStatement pstmt = conn.prepareStatement (sql))\r\n        {\r\n            pstmt.setObject (1, channel.getUserID ());\r\n            pstmt.setString (2, channel.getName ());\r\n            pstmt.setString (3, channel.getDescription ());\r\n            pstmt.setInt (4, channel.getSubscribersCount ());\r\n            pstmt.setInt (5, channel.getTotalVideos ());\r\n            pstmt.setInt (6, channel.getTotalViews ());\r\n            pstmt.setInt (7, channel.getWatchTime ());\r\n            pstmt.setDate (8, Date.valueOf (channel.getCreationDate ()));\r\n            pstmt.setBoolean (9, channel.isVerified ());\r\n            pstmt.setDouble (10, channel.getOutcome ());\r\n            pstmt.setBytes (11, channel.getChannelPictureURL () != null ? channel.getChannelPictureURL ().toString ().getBytes () : null);\r\n            pstmt.setObject (12, channel.getID ());\r\n            pstmt.executeUpdate ();\r\n        }\r\n        catch (SQLException e)\r\n        {\r\n            e.printStackTrace ();\r\n        }\r\n    }\r\n\r\n    public void delete (UUID id)\r\n    {\r\n        try (Connection conn = DatabaseConnection.getConnection ();\r\n             Statement stmt = conn.createStatement ())\r\n        {\r\n            String deleteVideos      = \"DELETE FROM Videos WHERE channelID = '\" + id + \"'\";\r\n            String deletePlaylists   = \"DELETE FROM Playlists WHERE channelID = '\" + id + \"'\";\r\n            String deleteComments    = \"DELETE FROM Comments WHERE channelID = '\" + id + \"'\";\r\n            String deleteSubscribers = \"DELETE FROM Subscribers WHERE channelID = '\" + id + \"'\";\r\n\r\n            stmt.executeUpdate (deleteSubscribers);\r\n            stmt.executeUpdate (deletePlaylists);\r\n            stmt.executeUpdate (deleteVideos);\r\n            stmt.executeUpdate (deleteComments);\r\n\r\n            String deleteChannel = \"DELETE FROM Channels WHERE ID = '\" + id + \"'\";\r\n            stmt.executeUpdate (deleteChannel);\r\n\r\n        }\r\n        catch (SQLException e)\r\n        {\r\n            e.printStackTrace ();\r\n        }\r\n    }\r\n\r\n    public void subscribe (User user, Channel channel)\r\n    {\r\n        String sql = \"INSERT INTO Subscribers (userID, channelID) VALUES (?, ?)\";\r\n        try (Connection conn = DatabaseConnection.getConnection ();\r\n             PreparedStatement pstmt = conn.prepareStatement (sql))\r\n        {\r\n            pstmt.setObject (1, user.getID ());\r\n            pstmt.setObject (2, channel.getID ());\r\n            pstmt.executeUpdate ();\r\n        }\r\n        catch (SQLException e)\r\n        {\r\n            e.printStackTrace ();\r\n        }\r\n    }\r\n\r\n    public void unsubscribe (User user, Channel channel)\r\n    {\r\n        try (Connection conn = DatabaseConnection.getConnection ();\r\n             Statement stmt = conn.createStatement ())\r\n        {\r\n            String unsubscribe = \"DELETE FROM Subscribers WHERE userID = '\" + user.getID () + \"' && channelID = '\" + channel.getID () + \"'\";\r\n            stmt.executeUpdate (unsubscribe);\r\n        }\r\n        catch (SQLException e)\r\n        {\r\n            e.printStackTrace ();\r\n        }\r\n    }\r\n\r\n    public Channel findById (UUID id)\r\n    {\r\n        String sql = \"SELECT * FROM Channels WHERE ID = ?\";\r\n        try (Connection conn = DatabaseConnection.getConnection ();\r\n             PreparedStatement pstmt = conn.prepareStatement (sql))\r\n        {\r\n            pstmt.setObject (1, id);\r\n            ResultSet rs = pstmt.executeQuery ();\r\n            if (rs.next ())\r\n            {\r\n                return new Channel (\r\n                        rs.getObject (\"ID\", UUID.class),\r\n                        rs.getObject (\"userID\", UUID.class),\r\n                        rs.getString (\"name\"),\r\n                        rs.getString (\"description\"),\r\n                        rs.getInt (\"subscribersCount\"),\r\n                        rs.getInt (\"totalVideos\"),\r\n                        rs.getInt (\"totalViews\"),\r\n                        rs.getInt (\"watchTime\"),\r\n                        findSubscribers (id),\r\n                        rs.getObject (\"creationDate\", LocalDate.class),\r\n                        rs.getBoolean (\"isVerified\"),\r\n                        rs.getDouble (\"outcome\"),\r\n                        rs.getString (\"channelPicture\")\r\n                        );\r\n            }\r\n        }\r\n        catch (SQLException e)\r\n        {\r\n            e.printStackTrace ();\r\n        }\r\n        return null;\r\n    }\r\n\r\n    public Channel findByName (String name)\r\n    {\r\n        String sql = \"SELECT * FROM Channels WHERE name = ?\";\r\n        try (Connection conn = DatabaseConnection.getConnection ();\r\n             PreparedStatement pstmt = conn.prepareStatement (sql))\r\n        {\r\n            pstmt.setObject (1, name);\r\n            ResultSet rs = pstmt.executeQuery ();\r\n            if (rs.next ())\r\n            {\r\n                return new Channel (\r\n                        rs.getObject (\"ID\", UUID.class),\r\n                        rs.getObject (\"userID\", UUID.class),\r\n                        rs.getString (\"name\"),\r\n                        rs.getString (\"description\"),\r\n                        rs.getInt (\"subscribersCount\"),\r\n                        rs.getInt (\"totalVideos\"),\r\n                        rs.getInt (\"totalViews\"),\r\n                        rs.getInt (\"watchTime\"),\r\n                        findSubscribers (rs.getObject (\"ID\", UUID.class)),\r\n                        rs.getObject (\"creationDate\", LocalDate.class),\r\n                        rs.getBoolean (\"isVerified\"),\r\n                        rs.getDouble (\"outcome\"),\r\n                        rs.getString (\"channelPicture\")\r\n                );\r\n            }\r\n        }\r\n        catch (SQLException e)\r\n        {\r\n            e.printStackTrace ();\r\n        }\r\n        return null;\r\n    }\r\n\r\n    public ArrayList <UUID> findSubscribers (UUID id)\r\n    {\r\n        ArrayList <UUID> subscribersID = new ArrayList <> ();\r\n        String         sql      = \"SELECT * FROM Subscribers\";\r\n        try (Connection conn = DatabaseConnection.getConnection ();\r\n             Statement stmt = conn.createStatement ();\r\n             ResultSet rs = stmt.executeQuery (sql))\r\n        {\r\n            while (rs.next ())\r\n            {\r\n                if (id.equals (rs.getObject (\"channelID\", UUID.class)))\r\n                {\r\n                    subscribersID.add (rs.getObject (\"userID\", UUID.class));\r\n                }\r\n            }\r\n        }\r\n        catch (SQLException e)\r\n        {\r\n            e.printStackTrace ();\r\n        }\r\n        return subscribersID;\r\n    }\r\n\r\n    public List <Channel> findAll ()\r\n    {\r\n        List <Channel> channels = new ArrayList <> ();\r\n        String         sql      = \"SELECT * FROM Channels\";\r\n        try (Connection conn = DatabaseConnection.getConnection ();\r\n             Statement stmt = conn.createStatement ();\r\n             ResultSet rs = stmt.executeQuery (sql))\r\n        {\r\n            while (rs.next ())\r\n            {\r\n                channels.add (new Channel (\r\n                        rs.getObject (\"ID\", UUID.class),\r\n                        rs.getObject (\"userID\", UUID.class),\r\n                        rs.getString (\"name\"),\r\n                        rs.getString (\"description\"),\r\n                        rs.getInt (\"subscribersCount\"),\r\n                        rs.getInt (\"totalVideos\"),\r\n                        rs.getInt (\"totalViews\"),\r\n                        rs.getInt (\"watchTime\"),\r\n                        findSubscribers (rs.getObject (\"ID\", UUID.class)),\r\n                        rs.getObject (\"creationDate\", LocalDate.class),\r\n                        rs.getBoolean (\"isVerified\"),\r\n                        rs.getDouble (\"outcome\"),\r\n                        rs.getString (\"channelPicture\")\r\n                ));\r\n            }\r\n        }\r\n        catch (SQLException e)\r\n        {\r\n            e.printStackTrace ();\r\n        }\r\n        return channels;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/wetube/dao/impl/ChannelDAOImpl.java b/src/main/java/com/wetube/dao/impl/ChannelDAOImpl.java
+--- a/src/main/java/com/wetube/dao/impl/ChannelDAOImpl.java	
++++ b/src/main/java/com/wetube/dao/impl/ChannelDAOImpl.java	
+@@ -25,6 +25,7 @@
+             if (object.getID () == uuid)
+             {
+                 uuid = generateID ();
++                break;
+             }
+         }
+         return uuid;
+@@ -32,23 +33,26 @@
+ 
+     public void create (Channel channel)
+     {
+-        String sql = "INSERT INTO Channels (ID, userID, name, description, subscribersCount, totalVideos, totalViews, watchTime, creationDate, isVerified, outcome, channelPicture) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+-        try (Connection conn = DatabaseConnection.getConnection ();
+-             PreparedStatement pstmt = conn.prepareStatement (sql))
++        String query = "INSERT INTO Channels (ID, userID, name, description, subscribersCount, totalVideos, totalViews," +
++                " watchTime, creationDate, isVerified, outcome, channelPicture)" +
++                " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
++        try (Connection connection = DatabaseConnection.getConnection ();
++             PreparedStatement preparedStatement = connection.prepareStatement (query))
+         {
+-            pstmt.setObject (1, channel.getID ());
+-            pstmt.setObject (2, channel.getUserID ());
+-            pstmt.setString (3, channel.getName ());
+-            pstmt.setString (4, channel.getDescription ());
+-            pstmt.setInt (5, channel.getSubscribersCount ());
+-            pstmt.setInt (6, channel.getTotalVideos ());
+-            pstmt.setInt (7, channel.getTotalViews ());
+-            pstmt.setInt (8, channel.getWatchTime ());
+-            pstmt.setDate (9, Date.valueOf (channel.getCreationDate ()));
+-            pstmt.setBoolean (10, channel.isVerified ());
+-            pstmt.setDouble (11, channel.getOutcome ());
+-            pstmt.setBytes (12, channel.getChannelPictureURL () != null ? channel.getChannelPictureURL ().toString ().getBytes () : null);
+-            pstmt.executeUpdate ();
++            preparedStatement.setObject (1, channel.getID ());
++            preparedStatement.setObject (2, channel.getUserID ());
++            preparedStatement.setString (3, channel.getName ());
++            preparedStatement.setString (4, channel.getDescription ());
++            preparedStatement.setInt (5, channel.getSubscribersCount ());
++            preparedStatement.setInt (6, channel.getTotalVideos ());
++            preparedStatement.setInt (7, channel.getTotalViews ());
++            preparedStatement.setInt (8, channel.getWatchTime ());
++            preparedStatement.setDate (9, Date.valueOf (channel.getCreationDate ()));
++            preparedStatement.setBoolean (10, channel.isVerified ());
++            preparedStatement.setDouble (11, channel.getOutcome ());
++            preparedStatement.setBytes (12, channel.getChannelPictureURL () != null ?
++                    channel.getChannelPictureURL ().toString ().getBytes () : null);
++            preparedStatement.executeUpdate ();
+         }
+         catch (SQLException e)
+         {
+@@ -58,23 +62,26 @@
+ 
+     public void update (Channel channel)
+     {
+-        String sql = "UPDATE Channels SET userID = ?, name = ?, description = ?, subscribersCount = ?, totalVideos = ?, totalViews = ?, watchTime = ?, creationDate = ?, isVerified = ?, outcome = ?, channelPicture = ? WHERE ID = ?";
+-        try (Connection conn = DatabaseConnection.getConnection ();
+-             PreparedStatement pstmt = conn.prepareStatement (sql))
++        String sql = "UPDATE Channels SET userID = ?, name = ?, description = ?, subscribersCount = ?," +
++                " totalVideos = ?, totalViews = ?, watchTime = ?, creationDate = ?, isVerified = ?, outcome = ?," +
++                " channelPicture = ? WHERE ID = ?";
++        try (Connection connection = DatabaseConnection.getConnection ();
++             PreparedStatement preparedStatement = connection.prepareStatement (sql))
+         {
+-            pstmt.setObject (1, channel.getUserID ());
+-            pstmt.setString (2, channel.getName ());
+-            pstmt.setString (3, channel.getDescription ());
+-            pstmt.setInt (4, channel.getSubscribersCount ());
+-            pstmt.setInt (5, channel.getTotalVideos ());
+-            pstmt.setInt (6, channel.getTotalViews ());
+-            pstmt.setInt (7, channel.getWatchTime ());
+-            pstmt.setDate (8, Date.valueOf (channel.getCreationDate ()));
+-            pstmt.setBoolean (9, channel.isVerified ());
+-            pstmt.setDouble (10, channel.getOutcome ());
+-            pstmt.setBytes (11, channel.getChannelPictureURL () != null ? channel.getChannelPictureURL ().toString ().getBytes () : null);
+-            pstmt.setObject (12, channel.getID ());
+-            pstmt.executeUpdate ();
++            preparedStatement.setObject (1, channel.getUserID ());
++            preparedStatement.setString (2, channel.getName ());
++            preparedStatement.setString (3, channel.getDescription ());
++            preparedStatement.setInt (4, channel.getSubscribersCount ());
++            preparedStatement.setInt (5, channel.getTotalVideos ());
++            preparedStatement.setInt (6, channel.getTotalViews ());
++            preparedStatement.setInt (7, channel.getWatchTime ());
++            preparedStatement.setDate (8, Date.valueOf (channel.getCreationDate ()));
++            preparedStatement.setBoolean (9, channel.isVerified ());
++            preparedStatement.setDouble (10, channel.getOutcome ());
++            preparedStatement.setBytes (11, channel.getChannelPictureURL () != null ?
++                    channel.getChannelPictureURL ().toString ().getBytes () : null);
++            preparedStatement.setObject (12, channel.getID ());
++            preparedStatement.executeUpdate ();
+         }
+         catch (SQLException e)
+         {
+@@ -84,21 +91,19 @@
+ 
+     public void delete (UUID id)
+     {
+-        try (Connection conn = DatabaseConnection.getConnection ();
+-             Statement stmt = conn.createStatement ())
++        try (Connection connection = DatabaseConnection.getConnection ();
++             Statement statement = connection.createStatement ())
+         {
+-            String deleteVideos      = "DELETE FROM Videos WHERE channelID = '" + id + "'";
+             String deletePlaylists   = "DELETE FROM Playlists WHERE channelID = '" + id + "'";
+-            String deleteComments    = "DELETE FROM Comments WHERE channelID = '" + id + "'";
+             String deleteSubscribers = "DELETE FROM Subscribers WHERE channelID = '" + id + "'";
++            String deletePosts = "DELETE FROM Posts WHERE channelID = '" + id + "'";
+ 
+-            stmt.executeUpdate (deleteSubscribers);
+-            stmt.executeUpdate (deletePlaylists);
+-            stmt.executeUpdate (deleteVideos);
+-            stmt.executeUpdate (deleteComments);
++            statement.executeUpdate (deleteSubscribers);
++            statement.executeUpdate (deletePlaylists);
++            statement.executeUpdate (deletePosts);
+ 
+             String deleteChannel = "DELETE FROM Channels WHERE ID = '" + id + "'";
+-            stmt.executeUpdate (deleteChannel);
++            statement.executeUpdate (deleteChannel);
+ 
+         }
+         catch (SQLException e)
+@@ -109,13 +114,13 @@
+ 
+     public void subscribe (User user, Channel channel)
+     {
+-        String sql = "INSERT INTO Subscribers (userID, channelID) VALUES (?, ?)";
+-        try (Connection conn = DatabaseConnection.getConnection ();
+-             PreparedStatement pstmt = conn.prepareStatement (sql))
++        String query = "INSERT INTO Subscribers (userID, channelID) VALUES (?, ?)";
++        try (Connection connection = DatabaseConnection.getConnection ();
++             PreparedStatement preparedStatement = connection.prepareStatement (query))
+         {
+-            pstmt.setObject (1, user.getID ());
+-            pstmt.setObject (2, channel.getID ());
+-            pstmt.executeUpdate ();
++            preparedStatement.setObject (1, user.getID ());
++            preparedStatement.setObject (2, channel.getID ());
++            preparedStatement.executeUpdate ();
+         }
+         catch (SQLException e)
+         {
+@@ -125,11 +130,11 @@
+ 
+     public void unsubscribe (User user, Channel channel)
+     {
+-        try (Connection conn = DatabaseConnection.getConnection ();
+-             Statement stmt = conn.createStatement ())
++        try (Connection connection = DatabaseConnection.getConnection ();
++             Statement preparedStatement = connection.createStatement ())
+         {
+             String unsubscribe = "DELETE FROM Subscribers WHERE userID = '" + user.getID () + "' && channelID = '" + channel.getID () + "'";
+-            stmt.executeUpdate (unsubscribe);
++            preparedStatement.executeUpdate (unsubscribe);
+         }
+         catch (SQLException e)
+         {
+@@ -139,28 +144,28 @@
+ 
+     public Channel findById (UUID id)
+     {
+-        String sql = "SELECT * FROM Channels WHERE ID = ?";
+-        try (Connection conn = DatabaseConnection.getConnection ();
+-             PreparedStatement pstmt = conn.prepareStatement (sql))
++        String query = "SELECT * FROM Channels WHERE ID = ?";
++        try (Connection connection = DatabaseConnection.getConnection ();
++             PreparedStatement preparedStatement = connection.prepareStatement (query))
+         {
+-            pstmt.setObject (1, id);
+-            ResultSet rs = pstmt.executeQuery ();
+-            if (rs.next ())
++            preparedStatement.setObject (1, id);
++            ResultSet resultSet = preparedStatement.executeQuery ();
++            if (resultSet.next ())
+             {
+                 return new Channel (
+-                        rs.getObject ("ID", UUID.class),
+-                        rs.getObject ("userID", UUID.class),
+-                        rs.getString ("name"),
+-                        rs.getString ("description"),
+-                        rs.getInt ("subscribersCount"),
+-                        rs.getInt ("totalVideos"),
+-                        rs.getInt ("totalViews"),
+-                        rs.getInt ("watchTime"),
++                        resultSet.getObject ("ID", UUID.class),
++                        resultSet.getObject ("userID", UUID.class),
++                        resultSet.getString ("name"),
++                        resultSet.getString ("description"),
++                        resultSet.getInt ("subscribersCount"),
++                        resultSet.getInt ("totalVideos"),
++                        resultSet.getInt ("totalViews"),
++                        resultSet.getInt ("watchTime"),
+                         findSubscribers (id),
+-                        rs.getObject ("creationDate", LocalDate.class),
+-                        rs.getBoolean ("isVerified"),
+-                        rs.getDouble ("outcome"),
+-                        rs.getString ("channelPicture")
++                        resultSet.getObject ("creationDate", LocalDate.class),
++                        resultSet.getBoolean ("isVerified"),
++                        resultSet.getDouble ("outcome"),
++                        resultSet.getString ("channelPicture")
+                         );
+             }
+         }
+@@ -173,28 +178,28 @@
+ 
+     public Channel findByName (String name)
+     {
+-        String sql = "SELECT * FROM Channels WHERE name = ?";
+-        try (Connection conn = DatabaseConnection.getConnection ();
+-             PreparedStatement pstmt = conn.prepareStatement (sql))
++        String query = "SELECT * FROM Channels WHERE name = ?";
++        try (Connection connection = DatabaseConnection.getConnection ();
++             PreparedStatement preparedStatement = connection.prepareStatement (query))
+         {
+-            pstmt.setObject (1, name);
+-            ResultSet rs = pstmt.executeQuery ();
+-            if (rs.next ())
++            preparedStatement.setObject (1, name);
++            ResultSet resultSet = preparedStatement.executeQuery ();
++            if (resultSet.next ())
+             {
+                 return new Channel (
+-                        rs.getObject ("ID", UUID.class),
+-                        rs.getObject ("userID", UUID.class),
+-                        rs.getString ("name"),
+-                        rs.getString ("description"),
+-                        rs.getInt ("subscribersCount"),
+-                        rs.getInt ("totalVideos"),
+-                        rs.getInt ("totalViews"),
+-                        rs.getInt ("watchTime"),
+-                        findSubscribers (rs.getObject ("ID", UUID.class)),
+-                        rs.getObject ("creationDate", LocalDate.class),
+-                        rs.getBoolean ("isVerified"),
+-                        rs.getDouble ("outcome"),
+-                        rs.getString ("channelPicture")
++                        resultSet.getObject ("ID", UUID.class),
++                        resultSet.getObject ("userID", UUID.class),
++                        resultSet.getString ("name"),
++                        resultSet.getString ("description"),
++                        resultSet.getInt ("subscribersCount"),
++                        resultSet.getInt ("totalVideos"),
++                        resultSet.getInt ("totalViews"),
++                        resultSet.getInt ("watchTime"),
++                        findSubscribers (resultSet.getObject ("ID", UUID.class)),
++                        resultSet.getObject ("creationDate", LocalDate.class),
++                        resultSet.getBoolean ("isVerified"),
++                        resultSet.getDouble ("outcome"),
++                        resultSet.getString ("channelPicture")
+                 );
+             }
+         }
+@@ -205,19 +210,39 @@
+         return null;
+     }
+ 
++    public static boolean checkSubscription (UUID channelID, UUID userID)
++    {
++        String query = "SELECT EXISTS (SELECT 1 FROM subscribers WHERE channelID = ? AND userID = ? )";
++        try (Connection connection = DatabaseConnection.getConnection();
++             PreparedStatement preparedStatement = connection.prepareStatement(query))
++        {
++            preparedStatement.setObject(1, channelID);
++            preparedStatement.setObject(2, userID);
++            try (ResultSet resultSet = preparedStatement.executeQuery()) {
++                if (resultSet.next()) {
++                    return resultSet.getBoolean(1);
++                }
++            }
++        } catch (SQLException e)
++        {
++            e.printStackTrace();
++        }
++        return false;
++    }
++
+     public ArrayList <UUID> findSubscribers (UUID id)
+     {
+         ArrayList <UUID> subscribersID = new ArrayList <> ();
+-        String         sql      = "SELECT * FROM Subscribers";
+-        try (Connection conn = DatabaseConnection.getConnection ();
+-             Statement stmt = conn.createStatement ();
+-             ResultSet rs = stmt.executeQuery (sql))
++        String               query = "SELECT * FROM Subscribers";
++        try (Connection connection = DatabaseConnection.getConnection ();
++             Statement statement = connection.createStatement ();
++             ResultSet resultSet = statement.executeQuery (query))
+         {
+-            while (rs.next ())
++            while (resultSet.next ())
+             {
+-                if (id.equals (rs.getObject ("channelID", UUID.class)))
++                if (id.equals (resultSet.getObject ("channelID", UUID.class)))
+                 {
+-                    subscribersID.add (rs.getObject ("userID", UUID.class));
++                    subscribersID.add (resultSet.getObject ("userID", UUID.class));
+                 }
+             }
+         }
+@@ -231,27 +256,27 @@
+     public List <Channel> findAll ()
+     {
+         List <Channel> channels = new ArrayList <> ();
+-        String         sql      = "SELECT * FROM Channels";
+-        try (Connection conn = DatabaseConnection.getConnection ();
+-             Statement stmt = conn.createStatement ();
+-             ResultSet rs = stmt.executeQuery (sql))
++        String               query = "SELECT * FROM Channels";
++        try (Connection connection = DatabaseConnection.getConnection ();
++             Statement statement = connection.createStatement ();
++             ResultSet resultSet = statement.executeQuery (query))
+         {
+-            while (rs.next ())
++            while (resultSet.next ())
+             {
+                 channels.add (new Channel (
+-                        rs.getObject ("ID", UUID.class),
+-                        rs.getObject ("userID", UUID.class),
+-                        rs.getString ("name"),
+-                        rs.getString ("description"),
+-                        rs.getInt ("subscribersCount"),
+-                        rs.getInt ("totalVideos"),
+-                        rs.getInt ("totalViews"),
+-                        rs.getInt ("watchTime"),
+-                        findSubscribers (rs.getObject ("ID", UUID.class)),
+-                        rs.getObject ("creationDate", LocalDate.class),
+-                        rs.getBoolean ("isVerified"),
+-                        rs.getDouble ("outcome"),
+-                        rs.getString ("channelPicture")
++                        resultSet.getObject ("ID", UUID.class),
++                        resultSet.getObject ("userID", UUID.class),
++                        resultSet.getString ("name"),
++                        resultSet.getString ("description"),
++                        resultSet.getInt ("subscribersCount"),
++                        resultSet.getInt ("totalVideos"),
++                        resultSet.getInt ("totalViews"),
++                        resultSet.getInt ("watchTime"),
++                        findSubscribers (resultSet.getObject ("ID", UUID.class)),
++                        resultSet.getObject ("creationDate", LocalDate.class),
++                        resultSet.getBoolean ("isVerified"),
++                        resultSet.getDouble ("outcome"),
++                        resultSet.getString ("channelPicture")
+                 ));
+             }
+         }
+Index: src/main/java/com/wetube/dao/impl/CategoryDAOImpl.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.wetube.dao.impl;\r\n\r\nimport com.wetube.model.Category;\r\nimport com.wetube.model.Channel;\r\nimport com.wetube.model.Community;\r\nimport com.wetube.util.DatabaseConnection;\r\n\r\nimport java.sql.*;\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\nimport java.util.UUID;\r\n\r\npublic class CategoryDAOImpl\r\n{\r\n    public UUID generateID ()\r\n    {\r\n        UUID uuid = UUID.randomUUID ();\r\n\r\n        List <Category> all = findAll ();\r\n        for (Category object : all)\r\n        {\r\n            if (object.getID () == uuid)\r\n            {\r\n                uuid = generateID ();\r\n            }\r\n        }\r\n        return uuid;\r\n    }\r\n\r\n    public void create (Category category)\r\n    {\r\n        String sql = \"INSERT INTO Categories (ID, title) VALUES (?, ?)\";\r\n        try (Connection conn = DatabaseConnection.getConnection ();\r\n             PreparedStatement pstmt = conn.prepareStatement (sql))\r\n        {\r\n            pstmt.setObject (1, category.getID ());\r\n            pstmt.setString (2, category.getTitle ());\r\n            pstmt.executeUpdate ();\r\n        }\r\n        catch (SQLException e)\r\n        {\r\n            e.printStackTrace ();\r\n        }\r\n    }\r\n\r\n    public void update (Category category)\r\n    {\r\n        String sql = \"UPDATE Categories SET title = ? WHERE ID = ?\";\r\n        try (Connection conn = DatabaseConnection.getConnection ();\r\n             PreparedStatement pstmt = conn.prepareStatement (sql))\r\n        {\r\n            pstmt.setString (1, category.getTitle ());\r\n            pstmt.setObject (2, category.getID ());\r\n            pstmt.executeUpdate ();\r\n        }\r\n        catch (SQLException e)\r\n        {\r\n            e.printStackTrace ();\r\n        }\r\n    }\r\n\r\n    public void delete (UUID id)\r\n    {\r\n        try (Connection conn = DatabaseConnection.getConnection ();\r\n             Statement stmt = conn.createStatement ())\r\n        {\r\n            String deleteCategory = \"DELETE FROM Categories WHERE ID = '\" + id + \"'\";\r\n            stmt.executeUpdate (deleteCategory);\r\n        }\r\n        catch (SQLException e)\r\n        {\r\n            e.printStackTrace ();\r\n        }\r\n    }\r\n\r\n    public Category findById (UUID id)\r\n    {\r\n        String sql = \"SELECT * FROM Categories WHERE ID = ?\";\r\n        try (Connection conn = DatabaseConnection.getConnection ();\r\n             PreparedStatement pstmt = conn.prepareStatement (sql))\r\n        {\r\n            pstmt.setObject (1, id);\r\n            ResultSet rs = pstmt.executeQuery ();\r\n            if (rs.next ())\r\n            {\r\n                return new Category (\r\n                        rs.getObject (\"ID\", UUID.class),\r\n                        rs.getString (\"title\")\r\n                );\r\n            }\r\n        }\r\n        catch (SQLException e)\r\n        {\r\n            e.printStackTrace ();\r\n        }\r\n        return null;\r\n    }\r\n\r\n    public List <Category> findAll ()\r\n    {\r\n        List <Category> categories = new ArrayList <> ();\r\n        String      sql   = \"SELECT * FROM Categories\";\r\n        try (Connection conn = DatabaseConnection.getConnection ();\r\n             Statement stmt = conn.createStatement ();\r\n             ResultSet rs = stmt.executeQuery (sql))\r\n        {\r\n            while (rs.next ())\r\n            {\r\n                categories.add (new Category (\r\n                        rs.getObject (\"ID\", UUID.class),\r\n                        rs.getString (\"title\")\r\n                ));\r\n            }\r\n        }\r\n        catch (SQLException e)\r\n        {\r\n            e.printStackTrace ();\r\n        }\r\n        return categories;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/wetube/dao/impl/CategoryDAOImpl.java b/src/main/java/com/wetube/dao/impl/CategoryDAOImpl.java
+--- a/src/main/java/com/wetube/dao/impl/CategoryDAOImpl.java	
++++ b/src/main/java/com/wetube/dao/impl/CategoryDAOImpl.java	
+@@ -22,6 +22,7 @@
+             if (object.getID () == uuid)
+             {
+                 uuid = generateID ();
++                break;
+             }
+         }
+         return uuid;
+@@ -29,13 +30,13 @@
+ 
+     public void create (Category category)
+     {
+-        String sql = "INSERT INTO Categories (ID, title) VALUES (?, ?)";
+-        try (Connection conn = DatabaseConnection.getConnection ();
+-             PreparedStatement pstmt = conn.prepareStatement (sql))
++        String query = "INSERT INTO Categories (ID, title) VALUES (?, ?)";
++        try (Connection connection = DatabaseConnection.getConnection ();
++             PreparedStatement preparedStatement = connection.prepareStatement (query))
+         {
+-            pstmt.setObject (1, category.getID ());
+-            pstmt.setString (2, category.getTitle ());
+-            pstmt.executeUpdate ();
++            preparedStatement.setObject (1, category.getID ());
++            preparedStatement.setString (2, category.getTitle ());
++            preparedStatement.executeUpdate ();
+         }
+         catch (SQLException e)
+         {
+@@ -45,13 +46,13 @@
+ 
+     public void update (Category category)
+     {
+-        String sql = "UPDATE Categories SET title = ? WHERE ID = ?";
++        String query = "UPDATE Categories SET title = ? WHERE ID = ?";
+         try (Connection conn = DatabaseConnection.getConnection ();
+-             PreparedStatement pstmt = conn.prepareStatement (sql))
++             PreparedStatement preparedStatement = conn.prepareStatement (query))
+         {
+-            pstmt.setString (1, category.getTitle ());
+-            pstmt.setObject (2, category.getID ());
+-            pstmt.executeUpdate ();
++            preparedStatement.setString (1, category.getTitle ());
++            preparedStatement.setObject (2, category.getID ());
++            preparedStatement.executeUpdate ();
+         }
+         catch (SQLException e)
+         {
+@@ -61,11 +62,11 @@
+ 
+     public void delete (UUID id)
+     {
+-        try (Connection conn = DatabaseConnection.getConnection ();
+-             Statement stmt = conn.createStatement ())
++        try (Connection connection = DatabaseConnection.getConnection ();
++             Statement statement = connection.createStatement ())
+         {
+             String deleteCategory = "DELETE FROM Categories WHERE ID = '" + id + "'";
+-            stmt.executeUpdate (deleteCategory);
++            statement.executeUpdate (deleteCategory);
+         }
+         catch (SQLException e)
+         {
+@@ -75,17 +76,17 @@
+ 
+     public Category findById (UUID id)
+     {
+-        String sql = "SELECT * FROM Categories WHERE ID = ?";
+-        try (Connection conn = DatabaseConnection.getConnection ();
+-             PreparedStatement pstmt = conn.prepareStatement (sql))
++        String query = "SELECT * FROM Categories WHERE ID = ?";
++        try (Connection connection = DatabaseConnection.getConnection ();
++             PreparedStatement preparedStatement = connection.prepareStatement (query))
+         {
+-            pstmt.setObject (1, id);
+-            ResultSet rs = pstmt.executeQuery ();
+-            if (rs.next ())
++            preparedStatement.setObject (1, id);
++            ResultSet resultSet = preparedStatement.executeQuery ();
++            if (resultSet.next ())
+             {
+                 return new Category (
+-                        rs.getObject ("ID", UUID.class),
+-                        rs.getString ("title")
++                        resultSet.getObject ("ID", UUID.class),
++                        resultSet.getString ("title")
+                 );
+             }
+         }
+@@ -99,16 +100,16 @@
+     public List <Category> findAll ()
+     {
+         List <Category> categories = new ArrayList <> ();
+-        String      sql   = "SELECT * FROM Categories";
+-        try (Connection conn = DatabaseConnection.getConnection ();
+-             Statement stmt = conn.createStatement ();
+-             ResultSet rs = stmt.executeQuery (sql))
++        String      query   = "SELECT * FROM Categories";
++        try (Connection connection = DatabaseConnection.getConnection ();
++             Statement statement = connection.createStatement ();
++             ResultSet resultSet = statement.executeQuery (query))
+         {
+-            while (rs.next ())
++            while (resultSet.next ())
+             {
+                 categories.add (new Category (
+-                        rs.getObject ("ID", UUID.class),
+-                        rs.getString ("title")
++                        resultSet.getObject ("ID", UUID.class),
++                        resultSet.getString ("title")
+                 ));
+             }
+         }

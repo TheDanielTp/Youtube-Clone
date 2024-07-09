@@ -1,0 +1,181 @@
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"ec566682-672c-4b02-8981-652c66cb3fe3\" name=\"Changes\" comment=\"Project Next Step\">\r\n      <change afterPath=\"$PROJECT_DIR$/src/main/resources/images/profilePictures/pfp1.jpg\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/com/wetube/client/Client.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/com/wetube/client/Client.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/com/wetube/dao/impl/UserDAOImpl.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/com/wetube/dao/impl/UserDAOImpl.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/com/wetube/model/Category.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/com/wetube/model/Category.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/com/wetube/model/Channel.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/com/wetube/model/Channel.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/com/wetube/model/Comment.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/com/wetube/model/Comment.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/com/wetube/model/Community.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/com/wetube/model/Community.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/com/wetube/model/Content.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/com/wetube/model/Content.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/com/wetube/model/Notification.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/com/wetube/model/Notification.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/com/wetube/model/Playlist.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/com/wetube/model/Playlist.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/com/wetube/model/Post.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/com/wetube/model/Post.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/com/wetube/model/User.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/com/wetube/model/User.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/com/wetube/model/Video.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/com/wetube/model/Video.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/org/project/controller/CommunistSignupFirstView.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/org/project/controller/CommunistSignupFirstView.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/org/project/controller/CommunistSignupSecondView.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/org/project/controller/CommunistSignupSecondView.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/org/project/controller/MainApplication.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/org/project/controller/MainApplication.java\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\r\n      <map>\r\n        <entry key=\"$PROJECT_DIR$\" value=\"develop\" />\r\n      </map>\r\n    </option>\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"GitHubPullRequestSearchHistory\">{\r\n  &quot;lastFilter&quot;: {\r\n    &quot;state&quot;: &quot;OPEN&quot;,\r\n    &quot;assignee&quot;: &quot;TheDanielTp&quot;\r\n  }\r\n}</component>\r\n  <component name=\"GithubPullRequestsUISettings\">{\r\n  &quot;selectedUrlAndAccountId&quot;: {\r\n    &quot;url&quot;: &quot;https://github.com/TheDanielTp/Project_WeTube&quot;,\r\n    &quot;accountId&quot;: &quot;3c65712a-ed86-4130-bb90-4a7622407ea5&quot;\r\n  }\r\n}</component>\r\n  <component name=\"MavenImportPreferences\">\r\n    <option name=\"generalSettings\">\r\n      <MavenGeneralSettings>\r\n        <option name=\"mavenHomeTypeForPersistence\" value=\"WRAPPER\" />\r\n      </MavenGeneralSettings>\r\n    </option>\r\n  </component>\r\n  <component name=\"ProblemsViewState\">\r\n    <option name=\"selectedTabId\" value=\"CurrentFile\" />\r\n  </component>\r\n  <component name=\"ProjectColorInfo\">{\r\n  &quot;associatedIndex&quot;: 3\r\n}</component>\r\n  <component name=\"ProjectId\" id=\"2irRHITZ4w6U1ENbH8rGgw0yzuk\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\">\r\n    <ConfirmationsSetting value=\"2\" id=\"Add\" />\r\n  </component>\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\"><![CDATA[{\r\n  \"keyToString\": {\r\n    \"Application.Client.executor\": \"Run\",\r\n    \"Application.Client1.executor\": \"Run\",\r\n    \"Application.Client2.executor\": \"Run\",\r\n    \"Application.MainApplication.executor\": \"Run\",\r\n    \"Application.Server.executor\": \"Run\",\r\n    \"Application.TableCreator.executor\": \"Run\",\r\n    \"RunOnceActivity.OpenProjectViewOnStart\": \"true\",\r\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\r\n    \"SHARE_PROJECT_CONFIGURATION_FILES\": \"true\",\r\n    \"git-widget-placeholder\": \"login\",\r\n    \"kotlin-language-version-configured\": \"true\",\r\n    \"node.js.detected.package.eslint\": \"true\",\r\n    \"node.js.selected.package.eslint\": \"(autodetect)\",\r\n    \"node.js.selected.package.tslint\": \"(autodetect)\",\r\n    \"nodejs_package_manager_path\": \"npm\",\r\n    \"project.structure.last.edited\": \"Project\",\r\n    \"project.structure.proportion\": \"0.0\",\r\n    \"project.structure.side.proportion\": \"0.0\",\r\n    \"settings.editor.selected.configurable\": \"database.query.execution\",\r\n    \"vue.rearranger.settings.migration\": \"true\"\r\n  },\r\n  \"keyToStringList\": {\r\n    \"DatabaseDriversLRU\": [\r\n      \"mysql_aurora_aws\",\r\n      \"postgresql\"\r\n    ],\r\n    \"com.intellij.ide.scratch.LRUPopupBuilder$1/SQL Dialect\": [\r\n      \"PostgreSQL\"\r\n    ]\r\n  }\r\n}]]></component>\r\n  <component name=\"RunManager\" selected=\"Application.Client1\">\r\n    <configuration name=\"Client1\" type=\"Application\" factoryName=\"Application\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"org.project.controller.MainApplication\" />\r\n      <module name=\"Project_WeTube\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"Client2\" type=\"Application\" factoryName=\"Application\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"org.project.controller.MainApplication\" />\r\n      <module name=\"Project_WeTube\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"Server\" type=\"Application\" factoryName=\"Application\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"com.wetube.server.Server\" />\r\n      <module name=\"Project_WeTube\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <list>\r\n      <item itemvalue=\"Application.Client1\" />\r\n      <item itemvalue=\"Application.Server\" />\r\n      <item itemvalue=\"Application.Client2\" />\r\n    </list>\r\n  </component>\r\n  <component name=\"SharedIndexes\">\r\n    <attachedChunks>\r\n      <set>\r\n        <option value=\"bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.18034.62\" />\r\n        <option value=\"bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-IU-241.18034.62\" />\r\n      </set>\r\n    </attachedChunks>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"ec566682-672c-4b02-8981-652c66cb3fe3\" name=\"Changes\" comment=\"\" />\r\n      <created>1720246621657</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1720246621657</updated>\r\n      <workItem from=\"1720382424785\" duration=\"4557000\" />\r\n    </task>\r\n    <task id=\"LOCAL\u200E−۰۰۰۰۱\" summary=\"Created Repository\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1720246781249</created>\r\n      <option name=\"number\" value=\"LOCAL\u200E−۰۰۰۰۱\" />\r\n      <option name=\"presentableId\" value=\"LOCAL\u200E−۰۰۰۰۱\" />\r\n      <updated>1720246781249</updated>\r\n    </task>\r\n    <task id=\"LOCAL\u200E−۰۰۰۰۲\" summary=\"Initialized Project\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1720246902140</created>\r\n      <option name=\"number\" value=\"LOCAL\u200E−۰۰۰۰۲\" />\r\n      <option name=\"presentableId\" value=\"LOCAL\u200E−۰۰۰۰۲\" />\r\n      <updated>1720246902140</updated>\r\n    </task>\r\n    <task id=\"LOCAL\u200E−۰۰۰۰۳\" summary=\"Initialized Models &amp; Access Objects\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1720251963229</created>\r\n      <option name=\"number\" value=\"LOCAL\u200E−۰۰۰۰۳\" />\r\n      <option name=\"presentableId\" value=\"LOCAL\u200E−۰۰۰۰۳\" />\r\n      <updated>1720251963229</updated>\r\n    </task>\r\n    <task id=\"LOCAL\u200E−۰۰۰۰۴\" summary=\"Updated Models Classes\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1720265568491</created>\r\n      <option name=\"number\" value=\"LOCAL\u200E−۰۰۰۰۴\" />\r\n      <option name=\"presentableId\" value=\"LOCAL\u200E−۰۰۰۰۴\" />\r\n      <updated>1720265568491</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00005\" summary=\"Updated Database class\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1720353747360</created>\r\n      <option name=\"number\" value=\"00005\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1720353747360</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00006\" summary=\"Updated Database: UserDAO class\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1720353787159</created>\r\n      <option name=\"number\" value=\"00006\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1720353787159</updated>\r\n    </task>\r\n    <task id=\"LOCAL\u200E−۰۰۰۰۷\" summary=\"Mark 1, might undo these changes later\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1720381519983</created>\r\n      <option name=\"number\" value=\"LOCAL\u200E−۰۰۰۰۷\" />\r\n      <option name=\"presentableId\" value=\"LOCAL\u200E−۰۰۰۰۷\" />\r\n      <updated>1720381519983</updated>\r\n    </task>\r\n    <task id=\"LOCAL\u200E−۰۰۰۰۸\" summary=\"Mark 5, might undo these changes later\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1720442304421</created>\r\n      <option name=\"number\" value=\"LOCAL\u200E−۰۰۰۰۸\" />\r\n      <option name=\"presentableId\" value=\"LOCAL\u200E−۰۰۰۰۸\" />\r\n      <updated>1720442304421</updated>\r\n    </task>\r\n    <task id=\"LOCAL\u200E−۰۰۰۰۹\" summary=\"Project Next Step\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1720454626391</created>\r\n      <option name=\"number\" value=\"LOCAL\u200E−۰۰۰۰۹\" />\r\n      <option name=\"presentableId\" value=\"LOCAL\u200E−۰۰۰۰۹\" />\r\n      <updated>1720454626391</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"10\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"Created Repository\" />\r\n    <MESSAGE value=\"Initialized Project\" />\r\n    <MESSAGE value=\"Initialized Models &amp; Access Objects\" />\r\n    <MESSAGE value=\"Updated Models Classes\" />\r\n    <MESSAGE value=\"Updated Database class\" />\r\n    <MESSAGE value=\"Updated Database: UserDAO class\" />\r\n    <MESSAGE value=\"Mark 1, might undo these changes later\" />\r\n    <MESSAGE value=\"Mark 5, might undo these changes later\" />\r\n    <MESSAGE value=\"Project Next Step\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"Project Next Step\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision b16b000b4c218e59db2a0f7ce4445752452a08a9)
++++ b/.idea/workspace.xml	(date 1720460275831)
+@@ -4,25 +4,7 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="ec566682-672c-4b02-8981-652c66cb3fe3" name="Changes" comment="Project Next Step">
+-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/profilePictures/pfp1.jpg" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wetube/client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/client/Client.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wetube/dao/impl/UserDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/dao/impl/UserDAOImpl.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wetube/model/Category.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/model/Category.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wetube/model/Channel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/model/Channel.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wetube/model/Comment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/model/Comment.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wetube/model/Community.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/model/Community.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wetube/model/Content.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/model/Content.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wetube/model/Notification.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/model/Notification.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wetube/model/Playlist.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/model/Playlist.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wetube/model/Post.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/model/Post.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wetube/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/model/User.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wetube/model/Video.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/model/Video.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/controller/CommunistSignupFirstView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/project/controller/CommunistSignupFirstView.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/controller/CommunistSignupSecondView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/project/controller/CommunistSignupSecondView.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/controller/MainApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/project/controller/MainApplication.java" afterDir="false" />
+-    </list>
++    <list default="true" id="ec566682-672c-4b02-8981-652c66cb3fe3" name="Changes" comment="Updated Interface: Dark signup added" />
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+@@ -32,13 +14,14 @@
+     <option name="RECENT_TEMPLATES">
+       <list>
+         <option value="Class" />
++        <option value="FxmlFile" />
+       </list>
+     </option>
+   </component>
+   <component name="Git.Settings">
+     <option name="RECENT_BRANCH_BY_REPOSITORY">
+       <map>
+-        <entry key="$PROJECT_DIR$" value="develop" />
++        <entry key="$PROJECT_DIR$" value="login" />
+       </map>
+     </option>
+     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+@@ -55,13 +38,6 @@
+     &quot;accountId&quot;: &quot;3c65712a-ed86-4130-bb90-4a7622407ea5&quot;
+   }
+ }</component>
+-  <component name="MavenImportPreferences">
+-    <option name="generalSettings">
+-      <MavenGeneralSettings>
+-        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+-      </MavenGeneralSettings>
+-    </option>
+-  </component>
+   <component name="ProblemsViewState">
+     <option name="selectedTabId" value="CurrentFile" />
+   </component>
+@@ -80,14 +56,13 @@
+   "keyToString": {
+     "Application.Client.executor": "Run",
+     "Application.Client1.executor": "Run",
+-    "Application.Client2.executor": "Run",
+     "Application.MainApplication.executor": "Run",
+     "Application.Server.executor": "Run",
+     "Application.TableCreator.executor": "Run",
+     "RunOnceActivity.OpenProjectViewOnStart": "true",
+     "RunOnceActivity.ShowReadmeOnStart": "true",
+     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+-    "git-widget-placeholder": "login",
++    "git-widget-placeholder": "iterface__step2",
+     "kotlin-language-version-configured": "true",
+     "node.js.detected.package.eslint": "true",
+     "node.js.selected.package.eslint": "(autodetect)",
+@@ -109,7 +84,7 @@
+     ]
+   }
+ }]]></component>
+-  <component name="RunManager" selected="Application.Client1">
++  <component name="RunManager">
+     <configuration name="Client1" type="Application" factoryName="Application">
+       <option name="MAIN_CLASS_NAME" value="org.project.controller.MainApplication" />
+       <module name="Project_WeTube" />
+@@ -117,25 +92,6 @@
+         <option name="Make" enabled="true" />
+       </method>
+     </configuration>
+-    <configuration name="Client2" type="Application" factoryName="Application">
+-      <option name="MAIN_CLASS_NAME" value="org.project.controller.MainApplication" />
+-      <module name="Project_WeTube" />
+-      <method v="2">
+-        <option name="Make" enabled="true" />
+-      </method>
+-    </configuration>
+-    <configuration name="Server" type="Application" factoryName="Application">
+-      <option name="MAIN_CLASS_NAME" value="com.wetube.server.Server" />
+-      <module name="Project_WeTube" />
+-      <method v="2">
+-        <option name="Make" enabled="true" />
+-      </method>
+-    </configuration>
+-    <list>
+-      <item itemvalue="Application.Client1" />
+-      <item itemvalue="Application.Server" />
+-      <item itemvalue="Application.Client2" />
+-    </list>
+   </component>
+   <component name="SharedIndexes">
+     <attachedChunks>
+@@ -213,14 +169,23 @@
+       <option name="presentableId" value="LOCAL‎−۰۰۰۰۸" />
+       <updated>1720442304421</updated>
+     </task>
+-    <task id="LOCAL‎−۰۰۰۰۹" summary="Project Next Step">
++    <task id="LOCAL-00009" summary="Updated Interface: Dark login added">
+       <option name="closed" value="true" />
+-      <created>1720454626391</created>
+-      <option name="number" value="LOCAL‎−۰۰۰۰۹" />
+-      <option name="presentableId" value="LOCAL‎−۰۰۰۰۹" />
+-      <updated>1720454626391</updated>
++      <created>1720457762946</created>
++      <option name="number" value="00009" />
++      <option name="presentableId" value="LOCAL-00009" />
++      <option name="project" value="LOCAL" />
++      <updated>1720457762946</updated>
+     </task>
+-    <option name="localTasksCounter" value="10" />
++    <task id="LOCAL-00010" summary="Updated Interface: Dark signup added">
++      <option name="closed" value="true" />
++      <created>1720458559720</created>
++      <option name="number" value="00010" />
++      <option name="presentableId" value="LOCAL-00010" />
++      <option name="project" value="LOCAL" />
++      <updated>1720458559720</updated>
++    </task>
++    <option name="localTasksCounter" value="11" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+@@ -231,7 +196,19 @@
+       <map>
+         <entry key="MAIN">
+           <value>
+-            <State />
++            <State>
++              <option name="FILTERS">
++                <map>
++                  <entry key="branch">
++                    <value>
++                      <list>
++                        <option value="origin/iterface_step2" />
++                      </list>
++                    </value>
++                  </entry>
++                </map>
++              </option>
++            </State>
+           </value>
+         </entry>
+       </map>
+@@ -246,7 +223,8 @@
+     <MESSAGE value="Updated Database: UserDAO class" />
+     <MESSAGE value="Mark 1, might undo these changes later" />
+     <MESSAGE value="Mark 5, might undo these changes later" />
+-    <MESSAGE value="Project Next Step" />
+-    <option name="LAST_COMMIT_MESSAGE" value="Project Next Step" />
++    <MESSAGE value="Updated Interface: Dark login added" />
++    <MESSAGE value="Updated Interface: Dark signup added" />
++    <option name="LAST_COMMIT_MESSAGE" value="Updated Interface: Dark signup added" />
+   </component>
+ </project>
+\ No newline at end of file

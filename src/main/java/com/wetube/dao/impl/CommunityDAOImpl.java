@@ -22,6 +22,7 @@ public class CommunityDAOImpl
             if (object.getID () == uuid)
             {
                 uuid = generateID ();
+                break;
             }
         }
         return uuid;
@@ -30,12 +31,12 @@ public class CommunityDAOImpl
     public void create (Community community)
     {
         String sql = "INSERT INTO Communities (ID, channelID) VALUES (?, ?)";
-        try (Connection conn = DatabaseConnection.getConnection ();
-             PreparedStatement pstmt = conn.prepareStatement (sql))
+        try (Connection connection = DatabaseConnection.getConnection ();
+             PreparedStatement preparedStatement = connection.prepareStatement (sql))
         {
-            pstmt.setObject (1, community.getID ());
-            pstmt.setObject (2, community.getChannelID ());
-            pstmt.executeUpdate ();
+            preparedStatement.setObject (1, community.getID ());
+            preparedStatement.setObject (2, community.getChannelID ());
+            preparedStatement.executeUpdate ();
         }
         catch (SQLException e)
         {
@@ -46,12 +47,12 @@ public class CommunityDAOImpl
     public void update (Community community)
     {
         String sql = "UPDATE Communities SET channelID = ? WHERE ID = ?";
-        try (Connection conn = DatabaseConnection.getConnection ();
-             PreparedStatement pstmt = conn.prepareStatement (sql))
+        try (Connection connection = DatabaseConnection.getConnection ();
+             PreparedStatement preparedStatement = connection.prepareStatement (sql))
         {
-            pstmt.setObject (1, community.getChannelID ());
-            pstmt.setObject (2, community.getID ());
-            pstmt.executeUpdate ();
+            preparedStatement.setObject (1, community.getChannelID ());
+            preparedStatement.setObject (2, community.getID ());
+            preparedStatement.executeUpdate ();
         }
         catch (SQLException e)
         {
@@ -61,11 +62,11 @@ public class CommunityDAOImpl
 
     public void delete (UUID id)
     {
-        try (Connection conn = DatabaseConnection.getConnection ();
-             Statement stmt = conn.createStatement ())
+        try (Connection connection = DatabaseConnection.getConnection ();
+             Statement statement = connection.createStatement ())
         {
             String deleteCommunity = "DELETE FROM Communities WHERE ID = '" + id + "'";
-            stmt.executeUpdate (deleteCommunity);
+            statement.executeUpdate (deleteCommunity);
         }
         catch (SQLException e)
         {
@@ -76,16 +77,16 @@ public class CommunityDAOImpl
     public Community findById (UUID id)
     {
         String sql = "SELECT * FROM Communities WHERE ID = ?";
-        try (Connection conn = DatabaseConnection.getConnection ();
-             PreparedStatement pstmt = conn.prepareStatement (sql))
+        try (Connection connection = DatabaseConnection.getConnection ();
+             PreparedStatement preparedStatement = connection.prepareStatement (sql))
         {
-            pstmt.setObject (1, id);
-            ResultSet rs = pstmt.executeQuery ();
-            if (rs.next ())
+            preparedStatement.setObject (1, id);
+            ResultSet  resultSet = preparedStatement.executeQuery ();
+            if  (resultSet.next ())
             {
                 return new Community (
-                        rs.getObject ("ID", UUID.class),
-                        rs.getObject ("channelID", UUID.class)
+                         resultSet.getObject ("ID", UUID.class),
+                         resultSet.getObject ("channelID", UUID.class)
                 );
             }
         }
@@ -100,15 +101,15 @@ public class CommunityDAOImpl
     {
         List <Community> communities = new ArrayList <> ();
         String      sql   = "SELECT * FROM Communities";
-        try (Connection conn = DatabaseConnection.getConnection ();
-             Statement stmt = conn.createStatement ();
-             ResultSet rs = stmt.executeQuery (sql))
+        try (Connection connection = DatabaseConnection.getConnection ();
+             Statement statement = connection.createStatement ();
+             ResultSet  resultSet = statement.executeQuery (sql))
         {
-            while (rs.next ())
+            while  (resultSet.next ())
             {
                 communities.add (new Community (
-                        rs.getObject ("ID", UUID.class),
-                        rs.getObject ("channelID", UUID.class)
+                         resultSet.getObject ("ID", UUID.class),
+                         resultSet.getObject ("channelID", UUID.class)
                 ));
             }
         }

@@ -1,0 +1,1025 @@
+Index: src/main/java/com/wetube/dao/impl/UserDAOImpl.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.wetube.dao.impl;\r\n\r\nimport com.wetube.model.User;\r\nimport com.wetube.util.DatabaseConnection;\r\n\r\nimport java.io.IOException;\r\nimport java.nio.file.DirectoryStream;\r\nimport java.nio.file.Files;\r\nimport java.nio.file.Path;\r\nimport java.nio.file.Paths;\r\nimport java.sql.*;\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\nimport java.util.Random;\r\nimport java.util.UUID;\r\n\r\npublic class UserDAOImpl\r\n{\r\n    public String chooseRandomImage () throws IOException\r\n    {\r\n        Path        dir        = Paths.get (\"D:\\\\Java\\\\Projects\\\\Project_WeTube\\\\src\\\\main\\\\resources\\\\images\\\\profilePictures\");\r\n        List <Path> imageFiles = new ArrayList <> ();\r\n\r\n        try (DirectoryStream <Path> stream = Files.newDirectoryStream (dir, \"*.{jpg,jpeg,png,gif,bmp}\"))\r\n        {\r\n            for (Path entry : stream)\r\n            {\r\n                imageFiles.add (entry);\r\n            }\r\n        }\r\n        catch (IOException e)\r\n        {\r\n            throw new IOException (\"Failed to read directory stream\", e);\r\n        }\r\n\r\n        if (imageFiles.isEmpty ())\r\n        {\r\n            return null;\r\n        }\r\n\r\n        Random random      = new Random ();\r\n        int    randomIndex = random.nextInt (imageFiles.size ());\r\n        return imageFiles.get (randomIndex).toString ();\r\n    }\r\n\r\n    public UUID generateID ()\r\n    {\r\n        UUID uuid = UUID.randomUUID ();\r\n\r\n        List <User> all = findAll ();\r\n        for (User object : all)\r\n        {\r\n            if (object.getID () == uuid)\r\n            {\r\n                uuid = generateID ();\r\n            }\r\n        }\r\n        return uuid;\r\n    }\r\n\r\n    public void create (User user)\r\n    {\r\n        String sql = \"INSERT INTO Users (ID, channelID, firstName, lastName, username, email, password, birthdate, joinDate, isPremium, balance, profilePictureURL) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)\";\r\n        try (Connection conn = DatabaseConnection.getConnection ();\r\n             PreparedStatement pstmt = conn.prepareStatement (sql))\r\n        {\r\n            pstmt.setObject (1, user.getID ());\r\n            pstmt.setObject (2, user.getChannelID ());\r\n            pstmt.setString (3, user.getFirstName ());\r\n            pstmt.setString (4, user.getLastName ());\r\n            pstmt.setString (5, user.getUsername ());\r\n            pstmt.setString (6, user.getEmail ());\r\n            pstmt.setString (7, user.getPassword ());\r\n            pstmt.setDate (8, Date.valueOf (user.getBirthdate ()));\r\n            pstmt.setDate (9, Date.valueOf (user.getJoinDate ()));\r\n            pstmt.setBoolean (10, user.isPremium ());\r\n            pstmt.setDouble (11, user.getBalance ());\r\n            pstmt.setString (12, user.getProfilePictureURL ());\r\n            pstmt.executeUpdate ();\r\n        }\r\n        catch (SQLException e)\r\n        {\r\n            e.printStackTrace ();\r\n        }\r\n    }\r\n\r\n    public void update (User user)\r\n    {\r\n        String sql = \"UPDATE Users SET channelID = ?, firstName = ?, lastName = ?, username = ?, email = ?, password = ?, birthdate = ?, joinDate = ?, isPremium = ?, balance = ?, profilePictureURL = ? WHERE ID = ?\";\r\n        try (Connection conn = DatabaseConnection.getConnection ();\r\n             PreparedStatement pstmt = conn.prepareStatement (sql))\r\n        {\r\n            pstmt.setObject (1, user.getChannelID ());\r\n            pstmt.setString (2, user.getFirstName ());\r\n            pstmt.setString (3, user.getLastName ());\r\n            pstmt.setString (4, user.getUsername ());\r\n            pstmt.setString (5, user.getEmail ());\r\n            pstmt.setString (6, user.getPassword ());\r\n            pstmt.setDate (7, Date.valueOf (user.getBirthdate ()));\r\n            pstmt.setDate (8, Date.valueOf (user.getJoinDate ()));\r\n            pstmt.setBoolean (9, user.isPremium ());\r\n            pstmt.setDouble (10, user.getBalance ());\r\n            pstmt.setString (11, user.getProfilePictureURL ());\r\n            pstmt.setObject (12, user.getID ());\r\n            pstmt.executeUpdate ();\r\n        }\r\n        catch (SQLException e)\r\n        {\r\n            e.printStackTrace ();\r\n        }\r\n    }\r\n\r\n    public void delete (UUID id)\r\n    {\r\n        try (Connection conn = DatabaseConnection.getConnection ();\r\n             Statement stmt = conn.createStatement ())\r\n        {\r\n            String deleteComments      = \"DELETE FROM Comments WHERE creatorID = '\" + id + \"'\";\r\n            String deleteVideos        = \"DELETE FROM Videos WHERE creatorID = '\" + id + \"'\";\r\n            String deletePlaylists     = \"DELETE FROM Playlists WHERE creatorID = '\" + id + \"'\";\r\n            String deleteNotifications = \"DELETE FROM Notifications WHERE userID = '\" + id + \"'\";\r\n            String deleteChannels      = \"DELETE FROM Channels WHERE userID = '\" + id + \"'\";\r\n            String deleteSubscribers   = \"DELETE FROM Subscribers WHERE userID = '\" + id + \"' OR channelID IN (SELECT ID FROM Channels WHERE userID = '\" + id + \"')\";\r\n\r\n            stmt.executeUpdate (deleteSubscribers);\r\n            stmt.executeUpdate (deleteNotifications);\r\n            stmt.executeUpdate (deletePlaylists);\r\n            stmt.executeUpdate (deleteVideos);\r\n            stmt.executeUpdate (deleteComments);\r\n            stmt.executeUpdate (deleteChannels);\r\n\r\n            String deleteUser = \"DELETE FROM Users WHERE ID = '\" + id + \"'\";\r\n            stmt.executeUpdate (deleteUser);\r\n        }\r\n        catch (SQLException e)\r\n        {\r\n            e.printStackTrace ();\r\n        }\r\n    }\r\n\r\n    public User findById (UUID id)\r\n    {\r\n        String sql = \"SELECT * FROM Users WHERE ID = ?\";\r\n        try (Connection conn = DatabaseConnection.getConnection ();\r\n             PreparedStatement pstmt = conn.prepareStatement (sql))\r\n        {\r\n            pstmt.setObject (1, id);\r\n            ResultSet rs = pstmt.executeQuery ();\r\n            if (rs.next ())\r\n            {\r\n                return new User (\r\n                        rs.getObject (\"ID\", UUID.class),\r\n                        rs.getObject (\"channelID\", UUID.class),\r\n                        rs.getString (\"firstName\"),\r\n                        rs.getString (\"lastName\"),\r\n                        rs.getString (\"username\"),\r\n                        rs.getString (\"email\"),\r\n                        rs.getString (\"password\"),\r\n                        rs.getDate (\"birthdate\").toLocalDate (),\r\n                        rs.getDate (\"joinDate\").toLocalDate (),\r\n                        rs.getBoolean (\"isPremium\"),\r\n                        rs.getDouble (\"balance\"),\r\n                        rs.getString (\"profilePictureURL\")\r\n                );\r\n            }\r\n        }\r\n        catch (SQLException e)\r\n        {\r\n            e.printStackTrace ();\r\n        }\r\n        return null;\r\n    }\r\n\r\n    public User findByUsername (String username)\r\n    {\r\n        String sql = \"SELECT * FROM Users WHERE username = ?\";\r\n        try (Connection conn = DatabaseConnection.getConnection ();\r\n             PreparedStatement pstmt = conn.prepareStatement (sql))\r\n        {\r\n            pstmt.setString (1, username);\r\n            ResultSet rs = pstmt.executeQuery ();\r\n            if (rs.next ())\r\n            {\r\n                return new User (\r\n                        rs.getObject (\"ID\", UUID.class),\r\n                        rs.getObject (\"channelID\", UUID.class),\r\n                        rs.getString (\"firstName\"),\r\n                        rs.getString (\"lastName\"),\r\n                        rs.getString (\"username\"),\r\n                        rs.getString (\"email\"),\r\n                        rs.getString (\"password\"),\r\n                        rs.getDate (\"birthdate\").toLocalDate (),\r\n                        rs.getDate (\"joinDate\").toLocalDate (),\r\n                        rs.getBoolean (\"isPremium\"),\r\n                        rs.getDouble (\"balance\"),\r\n                        rs.getString (\"profilePictureURL\")\r\n                );\r\n            }\r\n        }\r\n        catch (SQLException e)\r\n        {\r\n            e.printStackTrace ();\r\n        }\r\n        return null;\r\n    }\r\n\r\n    public User findByEmail (String email)\r\n    {\r\n        String sql = \"SELECT * FROM Users WHERE email = ?\";\r\n        try (Connection conn = DatabaseConnection.getConnection ();\r\n             PreparedStatement pstmt = conn.prepareStatement (sql))\r\n        {\r\n            pstmt.setString (1, email);\r\n            ResultSet rs = pstmt.executeQuery ();\r\n            if (rs.next ())\r\n            {\r\n                return new User (\r\n                        rs.getObject (\"ID\", UUID.class),\r\n                        rs.getObject (\"channelID\", UUID.class),\r\n                        rs.getString (\"firstName\"),\r\n                        rs.getString (\"lastName\"),\r\n                        rs.getString (\"username\"),\r\n                        rs.getString (\"email\"),\r\n                        rs.getString (\"password\"),\r\n                        rs.getDate (\"birthdate\").toLocalDate (),\r\n                        rs.getDate (\"joinDate\").toLocalDate (),\r\n                        rs.getBoolean (\"isPremium\"),\r\n                        rs.getDouble (\"balance\"),\r\n                        rs.getString (\"profilePictureURL\")\r\n                );\r\n            }\r\n        }\r\n        catch (SQLException e)\r\n        {\r\n            e.printStackTrace ();\r\n        }\r\n        return null;\r\n    }\r\n\r\n    public List <User> findAll ()\r\n    {\r\n        List <User> users = new ArrayList <> ();\r\n        String      sql   = \"SELECT * FROM Users\";\r\n        try (Connection conn = DatabaseConnection.getConnection ();\r\n             Statement stmt = conn.createStatement ();\r\n             ResultSet rs = stmt.executeQuery (sql))\r\n        {\r\n            while (rs.next ())\r\n            {\r\n                users.add (new User (\r\n                        rs.getObject (\"ID\", UUID.class),\r\n                        rs.getObject (\"channelID\", UUID.class),\r\n                        rs.getString (\"firstName\"),\r\n                        rs.getString (\"lastName\"),\r\n                        rs.getString (\"username\"),\r\n                        rs.getString (\"email\"),\r\n                        rs.getString (\"password\"),\r\n                        rs.getDate (\"birthdate\").toLocalDate (),\r\n                        rs.getDate (\"joinDate\").toLocalDate (),\r\n                        rs.getBoolean (\"isPremium\"),\r\n                        rs.getDouble (\"balance\"),\r\n                        rs.getString (\"profilePictureURL\")\r\n                ));\r\n            }\r\n        }\r\n        catch (SQLException e)\r\n        {\r\n            e.printStackTrace ();\r\n        }\r\n        return users;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/wetube/dao/impl/UserDAOImpl.java b/src/main/java/com/wetube/dao/impl/UserDAOImpl.java
+--- a/src/main/java/com/wetube/dao/impl/UserDAOImpl.java	
++++ b/src/main/java/com/wetube/dao/impl/UserDAOImpl.java	
+@@ -18,7 +18,8 @@
+ {
+     public String chooseRandomImage () throws IOException
+     {
+-        Path        dir        = Paths.get ("D:\\Java\\Projects\\Project_WeTube\\src\\main\\resources\\images\\profilePictures");
++        Path        dir        = Paths.get ("D:\\Java\\Projects\\Project_WeTube\\src\\main\\resources\\images\\" +
++                "profilePictures");
+         List <Path> imageFiles = new ArrayList <> ();
+ 
+         try (DirectoryStream <Path> stream = Files.newDirectoryStream (dir, "*.{jpg,jpeg,png,gif,bmp}"))
+@@ -53,6 +54,7 @@
+             if (object.getID () == uuid)
+             {
+                 uuid = generateID ();
++                break;
+             }
+         }
+         return uuid;
+@@ -60,23 +62,24 @@
+ 
+     public void create (User user)
+     {
+-        String sql = "INSERT INTO Users (ID, channelID, firstName, lastName, username, email, password, birthdate, joinDate, isPremium, balance, profilePictureURL) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+-        try (Connection conn = DatabaseConnection.getConnection ();
+-             PreparedStatement pstmt = conn.prepareStatement (sql))
++        String query = "INSERT INTO Users (ID, channelID, firstName, lastName, username, email, password, birthdate," +
++                " joinDate, isPremium, balance, profilePictureURL) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
++        try (Connection connection = DatabaseConnection.getConnection ();
++             PreparedStatement preparedStatement = connection.prepareStatement (query))
+         {
+-            pstmt.setObject (1, user.getID ());
+-            pstmt.setObject (2, user.getChannelID ());
+-            pstmt.setString (3, user.getFirstName ());
+-            pstmt.setString (4, user.getLastName ());
+-            pstmt.setString (5, user.getUsername ());
+-            pstmt.setString (6, user.getEmail ());
+-            pstmt.setString (7, user.getPassword ());
+-            pstmt.setDate (8, Date.valueOf (user.getBirthdate ()));
+-            pstmt.setDate (9, Date.valueOf (user.getJoinDate ()));
+-            pstmt.setBoolean (10, user.isPremium ());
+-            pstmt.setDouble (11, user.getBalance ());
+-            pstmt.setString (12, user.getProfilePictureURL ());
+-            pstmt.executeUpdate ();
++            preparedStatement.setObject (1, user.getID ());
++            preparedStatement.setObject (2, user.getChannelID ());
++            preparedStatement.setString (3, user.getFirstName ());
++            preparedStatement.setString (4, user.getLastName ());
++            preparedStatement.setString (5, user.getUsername ());
++            preparedStatement.setString (6, user.getEmail ());
++            preparedStatement.setString (7, user.getPassword ());
++            preparedStatement.setDate (8, Date.valueOf (user.getBirthdate ()));
++            preparedStatement.setDate (9, Date.valueOf (user.getJoinDate ()));
++            preparedStatement.setBoolean (10, user.isPremium ());
++            preparedStatement.setDouble (11, user.getBalance ());
++            preparedStatement.setString (12, user.getProfilePictureURL ());
++            preparedStatement.executeUpdate ();
+         }
+         catch (SQLException e)
+         {
+@@ -86,23 +89,25 @@
+ 
+     public void update (User user)
+     {
+-        String sql = "UPDATE Users SET channelID = ?, firstName = ?, lastName = ?, username = ?, email = ?, password = ?, birthdate = ?, joinDate = ?, isPremium = ?, balance = ?, profilePictureURL = ? WHERE ID = ?";
+-        try (Connection conn = DatabaseConnection.getConnection ();
+-             PreparedStatement pstmt = conn.prepareStatement (sql))
++        String query = "UPDATE Users SET channelID = ?, firstName = ?, lastName = ?, username = ?, email = ?," +
++                " password = ?, birthdate = ?, joinDate = ?, isPremium = ?, balance = ?, profilePictureURL = ?" +
++                " WHERE ID = ?";
++        try (Connection connection = DatabaseConnection.getConnection ();
++             PreparedStatement preparedStatement = connection.prepareStatement (query))
+         {
+-            pstmt.setObject (1, user.getChannelID ());
+-            pstmt.setString (2, user.getFirstName ());
+-            pstmt.setString (3, user.getLastName ());
+-            pstmt.setString (4, user.getUsername ());
+-            pstmt.setString (5, user.getEmail ());
+-            pstmt.setString (6, user.getPassword ());
+-            pstmt.setDate (7, Date.valueOf (user.getBirthdate ()));
+-            pstmt.setDate (8, Date.valueOf (user.getJoinDate ()));
+-            pstmt.setBoolean (9, user.isPremium ());
+-            pstmt.setDouble (10, user.getBalance ());
+-            pstmt.setString (11, user.getProfilePictureURL ());
+-            pstmt.setObject (12, user.getID ());
+-            pstmt.executeUpdate ();
++            preparedStatement.setObject (1, user.getChannelID ());
++            preparedStatement.setString (2, user.getFirstName ());
++            preparedStatement.setString (3, user.getLastName ());
++            preparedStatement.setString (4, user.getUsername ());
++            preparedStatement.setString (5, user.getEmail ());
++            preparedStatement.setString (6, user.getPassword ());
++            preparedStatement.setDate (7, Date.valueOf (user.getBirthdate ()));
++            preparedStatement.setDate (8, Date.valueOf (user.getJoinDate ()));
++            preparedStatement.setBoolean (9, user.isPremium ());
++            preparedStatement.setDouble (10, user.getBalance ());
++            preparedStatement.setString (11, user.getProfilePictureURL ());
++            preparedStatement.setObject (12, user.getID ());
++            preparedStatement.executeUpdate ();
+         }
+         catch (SQLException e)
+         {
+@@ -112,55 +117,133 @@
+ 
+     public void delete (UUID id)
+     {
+-        try (Connection conn = DatabaseConnection.getConnection ();
+-             Statement stmt = conn.createStatement ())
++        try (Connection connection = DatabaseConnection.getConnection ();
++             Statement statement = connection.createStatement ())
+         {
+-            String deleteComments      = "DELETE FROM Comments WHERE creatorID = '" + id + "'";
+-            String deleteVideos        = "DELETE FROM Videos WHERE creatorID = '" + id + "'";
+-            String deletePlaylists     = "DELETE FROM Playlists WHERE creatorID = '" + id + "'";
+-            String deleteNotifications = "DELETE FROM Notifications WHERE userID = '" + id + "'";
+-            String deleteChannels      = "DELETE FROM Channels WHERE userID = '" + id + "'";
+-            String deleteSubscribers   = "DELETE FROM Subscribers WHERE userID = '" + id + "' OR channelID IN (SELECT ID FROM Channels WHERE userID = '" + id + "')";
++            String deletePlaylists           = "DELETE FROM PlaylistAdmins WHERE adminID = '" + id + "'";
++            String deleteNotifications       = "DELETE FROM Notifications WHERE userID = '" + id + "'";
++            String deleteChannels            = "DELETE FROM Channels WHERE userID = '" + id + "'";
++            String deleteContentAction       = "DELETE FROM ContentAction WHERE userID = '" + id + "'";
++            String deleteSubscribers         = "DELETE FROM Subscribers WHERE userID = '" + id + "' OR channelID IN" +
++                    " (SELECT ID FROM Channels WHERE userID = '" + id + "')";
++            String deletePlaylistSubscribers = "DELETE FROM PlaylistSubscribers WHERE userID = '" + id + "' OR channelID IN" +
++                    " (SELECT ID FROM Channels WHERE userID = '" + id + "')";
+ 
+-            stmt.executeUpdate (deleteSubscribers);
+-            stmt.executeUpdate (deleteNotifications);
+-            stmt.executeUpdate (deletePlaylists);
+-            stmt.executeUpdate (deleteVideos);
+-            stmt.executeUpdate (deleteComments);
+-            stmt.executeUpdate (deleteChannels);
++            statement.executeUpdate (deleteSubscribers);
++            statement.executeUpdate (deleteNotifications);
++            statement.executeUpdate (deletePlaylists);
++            statement.executeUpdate (deletePlaylistSubscribers);
++            statement.executeUpdate (deleteContentAction);
++            statement.executeUpdate (deleteChannels);
+ 
+             String deleteUser = "DELETE FROM Users WHERE ID = '" + id + "'";
+-            stmt.executeUpdate (deleteUser);
++            statement.executeUpdate (deleteUser);
+         }
+         catch (SQLException e)
+         {
+             e.printStackTrace ();
+         }
++        UUID deleteAccountID = getDeleteAccountUserID();
++        ArrayList <String> queries2 = new ArrayList <> ();
++
++        queries2.add("UPDATE playlists SET creatorID = ? WHERE creatorID = ?");
++        queries2.add("UPDATE comments SET creatorID = ? WHERE commenterID = ?");
++        queries2.add("UPDATE videos SET creatorID = ? WHERE creatorID = ?");
++
++        try (Connection connection = DatabaseConnection.getConnection()) {
++            connection.setAutoCommit (false);
++            for (String query2 : queries2) {
++                try (PreparedStatement preparedStatement = connection.prepareStatement(query2)) {
++                    preparedStatement.setObject(1, deleteAccountID);
++                    preparedStatement.setObject(2, id);
++                    preparedStatement.executeUpdate();
++                } catch (SQLException e) {
++                    connection.rollback();
++                    e.printStackTrace();
++                }
++            }
++            connection.commit();
++        } catch (SQLException e) {
++            System.out.println(e.getMessage());
++        }
++    }
++
++    public boolean checkEmail (String email)
++    {
++        String query = "SELECT EXISTS (SELECT 1 FROM users WHERE email = ?)";
++        try (Connection connection = DatabaseConnection.getConnection();
++             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
++            preparedStatement.setString(1, email);
++            try (ResultSet resultSet = preparedStatement.executeQuery()) {
++                if (resultSet.next()) {
++                    return resultSet.getBoolean(1);
++                }
++            }
++        } catch (SQLException e)
++        {
++            e.printStackTrace();
++        }
++        return false;
++    }
++
++    public boolean checkUsername (String username)
++    {
++        String query = "SELECT EXISTS (SELECT 1 FROM users WHERE username = ?)";
++        try (Connection connection = DatabaseConnection.getConnection();
++             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
++            preparedStatement.setString(1, username);
++            try (ResultSet resultSet = preparedStatement.executeQuery()) {
++                if (resultSet.next()) {
++                    return resultSet.getBoolean(1);
++                }
++            }
++        } catch (SQLException e)
++        {
++            e.printStackTrace();
++        }
++        return false;
++    }
++
++    public boolean checkPassword (String username, String password)
++    {
++        String query = "SELECT password FROM users WHERE username = ?";
++        try (Connection connection = DatabaseConnection.getConnection();
++             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
++            preparedStatement.setString(1, username);
++            try (ResultSet resultSet = preparedStatement.executeQuery()) {
++                if (resultSet.next()) {
++                    return password.equals(resultSet.getString("password"));
++                }
++            }
++        } catch (SQLException e)
++        {
++            e.printStackTrace();
++        }
++        return false;
+     }
+-
+     public User findById (UUID id)
+     {
+-        String sql = "SELECT * FROM Users WHERE ID = ?";
+-        try (Connection conn = DatabaseConnection.getConnection ();
+-             PreparedStatement pstmt = conn.prepareStatement (sql))
++        String query = "SELECT * FROM Users WHERE ID = ?";
++        try (Connection connection = DatabaseConnection.getConnection ();
++             PreparedStatement preparedStatement = connection.prepareStatement (query))
+         {
+-            pstmt.setObject (1, id);
+-            ResultSet rs = pstmt.executeQuery ();
+-            if (rs.next ())
++            preparedStatement.setObject (1, id);
++            ResultSet resultSet = preparedStatement.executeQuery ();
++            if (resultSet.next ())
+             {
+                 return new User (
+-                        rs.getObject ("ID", UUID.class),
+-                        rs.getObject ("channelID", UUID.class),
+-                        rs.getString ("firstName"),
+-                        rs.getString ("lastName"),
+-                        rs.getString ("username"),
+-                        rs.getString ("email"),
+-                        rs.getString ("password"),
+-                        rs.getDate ("birthdate").toLocalDate (),
+-                        rs.getDate ("joinDate").toLocalDate (),
+-                        rs.getBoolean ("isPremium"),
+-                        rs.getDouble ("balance"),
+-                        rs.getString ("profilePictureURL")
++                        resultSet.getObject ("ID", UUID.class),
++                        resultSet.getObject ("channelID", UUID.class),
++                        resultSet.getString ("firstName"),
++                        resultSet.getString ("lastName"),
++                        resultSet.getString ("username"),
++                        resultSet.getString ("email"),
++                        resultSet.getString ("password"),
++                        resultSet.getDate ("birthdate").toLocalDate (),
++                        resultSet.getDate ("joinDate").toLocalDate (),
++                        resultSet.getBoolean ("isPremium"),
++                        resultSet.getDouble ("balance"),
++                        resultSet.getString ("profilePictureURL")
+                 );
+             }
+         }
+@@ -173,27 +256,27 @@
+ 
+     public User findByUsername (String username)
+     {
+-        String sql = "SELECT * FROM Users WHERE username = ?";
+-        try (Connection conn = DatabaseConnection.getConnection ();
+-             PreparedStatement pstmt = conn.prepareStatement (sql))
++        String query = "SELECT * FROM Users WHERE username = ?";
++        try (Connection connection = DatabaseConnection.getConnection ();
++             PreparedStatement resultSet = connection.prepareStatement (query))
+         {
+-            pstmt.setString (1, username);
+-            ResultSet rs = pstmt.executeQuery ();
+-            if (rs.next ())
++            resultSet.setString (1, username);
++            ResultSet resultSet1 = resultSet.executeQuery ();
++            if (resultSet1.next ())
+             {
+                 return new User (
+-                        rs.getObject ("ID", UUID.class),
+-                        rs.getObject ("channelID", UUID.class),
+-                        rs.getString ("firstName"),
+-                        rs.getString ("lastName"),
+-                        rs.getString ("username"),
+-                        rs.getString ("email"),
+-                        rs.getString ("password"),
+-                        rs.getDate ("birthdate").toLocalDate (),
+-                        rs.getDate ("joinDate").toLocalDate (),
+-                        rs.getBoolean ("isPremium"),
+-                        rs.getDouble ("balance"),
+-                        rs.getString ("profilePictureURL")
++                        resultSet1.getObject ("ID", UUID.class),
++                        resultSet1.getObject ("channelID", UUID.class),
++                        resultSet1.getString ("firstName"),
++                        resultSet1.getString ("lastName"),
++                        resultSet1.getString ("username"),
++                        resultSet1.getString ("email"),
++                        resultSet1.getString ("password"),
++                        resultSet1.getDate ("birthdate").toLocalDate (),
++                        resultSet1.getDate ("joinDate").toLocalDate (),
++                        resultSet1.getBoolean ("isPremium"),
++                        resultSet1.getDouble ("balance"),
++                        resultSet1.getString ("profilePictureURL")
+                 );
+             }
+         }
+@@ -206,27 +289,27 @@
+ 
+     public User findByEmail (String email)
+     {
+-        String sql = "SELECT * FROM Users WHERE email = ?";
+-        try (Connection conn = DatabaseConnection.getConnection ();
+-             PreparedStatement pstmt = conn.prepareStatement (sql))
++        String query = "SELECT * FROM Users WHERE email = ?";
++        try (Connection connection = DatabaseConnection.getConnection ();
++             PreparedStatement preparedStatement = connection.prepareStatement (query))
+         {
+-            pstmt.setString (1, email);
+-            ResultSet rs = pstmt.executeQuery ();
+-            if (rs.next ())
++            preparedStatement.setString (1, email);
++            ResultSet resultSet = preparedStatement.executeQuery ();
++            if (resultSet.next ())
+             {
+                 return new User (
+-                        rs.getObject ("ID", UUID.class),
+-                        rs.getObject ("channelID", UUID.class),
+-                        rs.getString ("firstName"),
+-                        rs.getString ("lastName"),
+-                        rs.getString ("username"),
+-                        rs.getString ("email"),
+-                        rs.getString ("password"),
+-                        rs.getDate ("birthdate").toLocalDate (),
+-                        rs.getDate ("joinDate").toLocalDate (),
+-                        rs.getBoolean ("isPremium"),
+-                        rs.getDouble ("balance"),
+-                        rs.getString ("profilePictureURL")
++                        resultSet.getObject ("ID", UUID.class),
++                        resultSet.getObject ("channelID", UUID.class),
++                        resultSet.getString ("firstName"),
++                        resultSet.getString ("lastName"),
++                        resultSet.getString ("username"),
++                        resultSet.getString ("email"),
++                        resultSet.getString ("password"),
++                        resultSet.getDate ("birthdate").toLocalDate (),
++                        resultSet.getDate ("joinDate").toLocalDate (),
++                        resultSet.getBoolean ("isPremium"),
++                        resultSet.getDouble ("balance"),
++                        resultSet.getString ("profilePictureURL")
+                 );
+             }
+         }
+@@ -237,29 +320,121 @@
+         return null;
+     }
+ 
++    public ArrayList <UUID> getSubscribedChannels (UUID id)
++    {
++        ArrayList <UUID> subscribedChannelsID = new ArrayList <> ();
++        String                          query = "SELECT * FROM Subscribers";
++        try (Connection connection = DatabaseConnection.getConnection ();
++             Statement statement = connection.createStatement ();
++             ResultSet resultSet = statement.executeQuery (query))
++        {
++            while (resultSet.next ())
++            {
++                if (id.equals (resultSet.getObject ("userID", UUID.class)))
++                {
++                    subscribedChannelsID.add (resultSet.getObject ("channelID", UUID.class));
++                }
++            }
++        }
++        catch (SQLException e)
++        {
++            e.printStackTrace ();
++        }
++        return subscribedChannelsID;
++    }
++
++    public ArrayList <UUID> getSubscribedPlaylist (UUID id)
++    {
++        ArrayList <UUID> subscribedPlaylistsID = new ArrayList <> ();
++        String                           query = "SELECT * FROM PlaylistSubscribers";
++        try (Connection connection = DatabaseConnection.getConnection ();
++             Statement statement = connection.createStatement ();
++             ResultSet resultSet = statement.executeQuery (query))
++        {
++            while (resultSet.next ())
++            {
++                if (id.equals (resultSet.getObject ("userID", UUID.class)))
++                {
++                    subscribedPlaylistsID.add (resultSet.getObject ("playlistID", UUID.class));
++                }
++            }
++        }
++        catch (SQLException e)
++        {
++            e.printStackTrace ();
++        }
++        return subscribedPlaylistsID;
++    }
++
++    public ArrayList <UUID> getAllVideos (UUID id)
++    {
++        ArrayList <UUID> videosID = new ArrayList <> ();
++        String              query = "SELECT * FROM videos";
++        try (Connection connection = DatabaseConnection.getConnection ();
++             Statement statement = connection.createStatement ();
++             ResultSet resultSet = statement.executeQuery (query))
++        {
++            while (resultSet.next ())
++            {
++                if (id.equals (resultSet.getObject ("creatorID", UUID.class)))
++                {
++                    videosID.add (resultSet.getObject ("ID", UUID.class));
++                }
++            }
++        }
++        catch (SQLException e)
++        {
++            e.printStackTrace ();
++        }
++        return videosID;
++    }
++
++    public ArrayList <UUID> getAllPosts (UUID id)
++    {
++        ArrayList <UUID> postsID = new ArrayList <> ();
++        String             query = "SELECT * FROM posts";
++        try (Connection connection = DatabaseConnection.getConnection ();
++             Statement statement = connection.createStatement ();
++             ResultSet resultSet = statement.executeQuery (query))
++        {
++            while (resultSet.next ())
++            {
++                if (id.equals (resultSet.getObject ("creatorID", UUID.class)))
++                {
++                    postsID.add (resultSet.getObject ("ID", UUID.class));
++                }
++            }
++        }
++        catch (SQLException e)
++        {
++            e.printStackTrace ();
++        }
++        return postsID;
++    }
++
+     public List <User> findAll ()
+     {
+         List <User> users = new ArrayList <> ();
+-        String      sql   = "SELECT * FROM Users";
+-        try (Connection conn = DatabaseConnection.getConnection ();
+-             Statement stmt = conn.createStatement ();
+-             ResultSet rs = stmt.executeQuery (sql))
++        String      query   = "SELECT * FROM Users";
++        try (Connection connection = DatabaseConnection.getConnection ();
++             Statement statement = connection.createStatement ();
++             ResultSet resultSet = statement.executeQuery (query))
+         {
+-            while (rs.next ())
++            while (resultSet.next ())
+             {
+                 users.add (new User (
+-                        rs.getObject ("ID", UUID.class),
+-                        rs.getObject ("channelID", UUID.class),
+-                        rs.getString ("firstName"),
+-                        rs.getString ("lastName"),
+-                        rs.getString ("username"),
+-                        rs.getString ("email"),
+-                        rs.getString ("password"),
+-                        rs.getDate ("birthdate").toLocalDate (),
+-                        rs.getDate ("joinDate").toLocalDate (),
+-                        rs.getBoolean ("isPremium"),
+-                        rs.getDouble ("balance"),
+-                        rs.getString ("profilePictureURL")
++                        resultSet.getObject ("ID", UUID.class),
++                        resultSet.getObject ("channelID", UUID.class),
++                        resultSet.getString ("firstName"),
++                        resultSet.getString ("lastName"),
++                        resultSet.getString ("username"),
++                        resultSet.getString ("email"),
++                        resultSet.getString ("password"),
++                        resultSet.getDate ("birthdate").toLocalDate (),
++                        resultSet.getDate ("joinDate").toLocalDate (),
++                        resultSet.getBoolean ("isPremium"),
++                        resultSet.getDouble ("balance"),
++                        resultSet.getString ("profilePictureURL")
+                 ));
+             }
+         }
+Index: src/main/java/com/wetube/dao/impl/CommunityDAOImpl.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.wetube.dao.impl;\r\n\r\nimport com.wetube.model.Community;\r\nimport com.wetube.model.Notification;\r\nimport com.wetube.model.Playlist;\r\nimport com.wetube.util.DatabaseConnection;\r\n\r\nimport java.sql.*;\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\nimport java.util.UUID;\r\n\r\npublic class CommunityDAOImpl\r\n{\r\n    public UUID generateID ()\r\n    {\r\n        UUID uuid = UUID.randomUUID ();\r\n\r\n        List <Community> all = findAll ();\r\n        for (Community object : all)\r\n        {\r\n            if (object.getID () == uuid)\r\n            {\r\n                uuid = generateID ();\r\n            }\r\n        }\r\n        return uuid;\r\n    }\r\n\r\n    public void create (Community community)\r\n    {\r\n        String sql = \"INSERT INTO Communities (ID, channelID) VALUES (?, ?)\";\r\n        try (Connection conn = DatabaseConnection.getConnection ();\r\n             PreparedStatement pstmt = conn.prepareStatement (sql))\r\n        {\r\n            pstmt.setObject (1, community.getID ());\r\n            pstmt.setObject (2, community.getChannelID ());\r\n            pstmt.executeUpdate ();\r\n        }\r\n        catch (SQLException e)\r\n        {\r\n            e.printStackTrace ();\r\n        }\r\n    }\r\n\r\n    public void update (Community community)\r\n    {\r\n        String sql = \"UPDATE Communities SET channelID = ? WHERE ID = ?\";\r\n        try (Connection conn = DatabaseConnection.getConnection ();\r\n             PreparedStatement pstmt = conn.prepareStatement (sql))\r\n        {\r\n            pstmt.setObject (1, community.getChannelID ());\r\n            pstmt.setObject (2, community.getID ());\r\n            pstmt.executeUpdate ();\r\n        }\r\n        catch (SQLException e)\r\n        {\r\n            e.printStackTrace ();\r\n        }\r\n    }\r\n\r\n    public void delete (UUID id)\r\n    {\r\n        try (Connection conn = DatabaseConnection.getConnection ();\r\n             Statement stmt = conn.createStatement ())\r\n        {\r\n            String deleteCommunity = \"DELETE FROM Communities WHERE ID = '\" + id + \"'\";\r\n            stmt.executeUpdate (deleteCommunity);\r\n        }\r\n        catch (SQLException e)\r\n        {\r\n            e.printStackTrace ();\r\n        }\r\n    }\r\n\r\n    public Community findById (UUID id)\r\n    {\r\n        String sql = \"SELECT * FROM Communities WHERE ID = ?\";\r\n        try (Connection conn = DatabaseConnection.getConnection ();\r\n             PreparedStatement pstmt = conn.prepareStatement (sql))\r\n        {\r\n            pstmt.setObject (1, id);\r\n            ResultSet rs = pstmt.executeQuery ();\r\n            if (rs.next ())\r\n            {\r\n                return new Community (\r\n                        rs.getObject (\"ID\", UUID.class),\r\n                        rs.getObject (\"channelID\", UUID.class)\r\n                );\r\n            }\r\n        }\r\n        catch (SQLException e)\r\n        {\r\n            e.printStackTrace ();\r\n        }\r\n        return null;\r\n    }\r\n\r\n    public List <Community> findAll ()\r\n    {\r\n        List <Community> communities = new ArrayList <> ();\r\n        String      sql   = \"SELECT * FROM Communities\";\r\n        try (Connection conn = DatabaseConnection.getConnection ();\r\n             Statement stmt = conn.createStatement ();\r\n             ResultSet rs = stmt.executeQuery (sql))\r\n        {\r\n            while (rs.next ())\r\n            {\r\n                communities.add (new Community (\r\n                        rs.getObject (\"ID\", UUID.class),\r\n                        rs.getObject (\"channelID\", UUID.class)\r\n                ));\r\n            }\r\n        }\r\n        catch (SQLException e)\r\n        {\r\n            e.printStackTrace ();\r\n        }\r\n        return communities;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/wetube/dao/impl/CommunityDAOImpl.java b/src/main/java/com/wetube/dao/impl/CommunityDAOImpl.java
+--- a/src/main/java/com/wetube/dao/impl/CommunityDAOImpl.java	
++++ b/src/main/java/com/wetube/dao/impl/CommunityDAOImpl.java	
+@@ -22,6 +22,7 @@
+             if (object.getID () == uuid)
+             {
+                 uuid = generateID ();
++                break;
+             }
+         }
+         return uuid;
+@@ -29,13 +30,13 @@
+ 
+     public void create (Community community)
+     {
+-        String sql = "INSERT INTO Communities (ID, channelID) VALUES (?, ?)";
+-        try (Connection conn = DatabaseConnection.getConnection ();
+-             PreparedStatement pstmt = conn.prepareStatement (sql))
++        String query = "INSERT INTO Communities (ID, channelID) VALUES (?, ?)";
++        try (Connection connection = DatabaseConnection.getConnection ();
++             PreparedStatement preparedStatement = connection.prepareStatement (query))
+         {
+-            pstmt.setObject (1, community.getID ());
+-            pstmt.setObject (2, community.getChannelID ());
+-            pstmt.executeUpdate ();
++            preparedStatement.setObject (1, community.getID ());
++            preparedStatement.setObject (2, community.getChannelID ());
++            preparedStatement.executeUpdate ();
+         }
+         catch (SQLException e)
+         {
+@@ -45,13 +46,13 @@
+ 
+     public void update (Community community)
+     {
+-        String sql = "UPDATE Communities SET channelID = ? WHERE ID = ?";
+-        try (Connection conn = DatabaseConnection.getConnection ();
+-             PreparedStatement pstmt = conn.prepareStatement (sql))
++        String query = "UPDATE Communities SET channelID = ? WHERE ID = ?";
++        try (Connection connection = DatabaseConnection.getConnection ();
++             PreparedStatement preparedStatement = connection.prepareStatement (query))
+         {
+-            pstmt.setObject (1, community.getChannelID ());
+-            pstmt.setObject (2, community.getID ());
+-            pstmt.executeUpdate ();
++            preparedStatement.setObject (1, community.getChannelID ());
++            preparedStatement.setObject (2, community.getID ());
++            preparedStatement.executeUpdate ();
+         }
+         catch (SQLException e)
+         {
+@@ -61,11 +62,11 @@
+ 
+     public void delete (UUID id)
+     {
+-        try (Connection conn = DatabaseConnection.getConnection ();
+-             Statement stmt = conn.createStatement ())
++        try (Connection connection = DatabaseConnection.getConnection ();
++             Statement statement = connection.createStatement ())
+         {
+             String deleteCommunity = "DELETE FROM Communities WHERE ID = '" + id + "'";
+-            stmt.executeUpdate (deleteCommunity);
++            statement.executeUpdate (deleteCommunity);
+         }
+         catch (SQLException e)
+         {
+@@ -75,17 +76,17 @@
+ 
+     public Community findById (UUID id)
+     {
+-        String sql = "SELECT * FROM Communities WHERE ID = ?";
+-        try (Connection conn = DatabaseConnection.getConnection ();
+-             PreparedStatement pstmt = conn.prepareStatement (sql))
++        String query = "SELECT * FROM Communities WHERE ID = ?";
++        try (Connection connection = DatabaseConnection.getConnection ();
++             PreparedStatement preparedStatement = connection.prepareStatement (query))
+         {
+-            pstmt.setObject (1, id);
+-            ResultSet rs = pstmt.executeQuery ();
+-            if (rs.next ())
++            preparedStatement.setObject (1, id);
++            ResultSet resultSet = preparedStatement.executeQuery ();
++            if (resultSet.next ())
+             {
+                 return new Community (
+-                        rs.getObject ("ID", UUID.class),
+-                        rs.getObject ("channelID", UUID.class)
++                        resultSet.getObject ("ID", UUID.class),
++                        resultSet.getObject ("channelID", UUID.class)
+                 );
+             }
+         }
+@@ -99,16 +100,16 @@
+     public List <Community> findAll ()
+     {
+         List <Community> communities = new ArrayList <> ();
+-        String      sql   = "SELECT * FROM Communities";
+-        try (Connection conn = DatabaseConnection.getConnection ();
+-             Statement stmt = conn.createStatement ();
+-             ResultSet rs = stmt.executeQuery (sql))
++        String               query = "SELECT * FROM Communities";
++        try (Connection connection = DatabaseConnection.getConnection ();
++             Statement statement = connection.createStatement ();
++             ResultSet resultSet = statement.executeQuery (query))
+         {
+-            while (rs.next ())
++            while (resultSet.next ())
+             {
+                 communities.add (new Community (
+-                        rs.getObject ("ID", UUID.class),
+-                        rs.getObject ("channelID", UUID.class)
++                        resultSet.getObject ("ID", UUID.class),
++                        resultSet.getObject ("channelID", UUID.class)
+                 ));
+             }
+         }
+Index: src/main/java/com/wetube/dao/impl/NotificationDAOImpl.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.wetube.dao.impl;\r\n\r\nimport com.wetube.model.Notification;\r\nimport com.wetube.model.Playlist;\r\nimport com.wetube.model.Video;\r\nimport com.wetube.util.DatabaseConnection;\r\n\r\nimport java.sql.*;\r\nimport java.time.LocalDateTime;\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\nimport java.util.UUID;\r\n\r\npublic class NotificationDAOImpl\r\n{\r\n    public UUID generateID ()\r\n    {\r\n        UUID uuid = UUID.randomUUID ();\r\n\r\n        List <Notification> all = findAll ();\r\n        for (Notification object : all)\r\n        {\r\n            if (object.getID () == uuid)\r\n            {\r\n                uuid = generateID ();\r\n            }\r\n        }\r\n        return uuid;\r\n    }\r\n\r\n    public void create (Notification notification)\r\n    {\r\n        String sql = \"INSERT INTO Notifications (ID, userID, contentID, title, receiveDate, isSeen) VALUES (?, ?, ?, ?, ?, ?)\";\r\n        try (Connection conn = DatabaseConnection.getConnection ();\r\n             PreparedStatement pstmt = conn.prepareStatement (sql))\r\n        {\r\n            pstmt.setObject (1, notification.getID ());\r\n            pstmt.setObject (2, notification.getUserID ());\r\n            pstmt.setObject (3, notification.getContentID ());\r\n            pstmt.setString (4, notification.getTitle ());\r\n            pstmt.setTimestamp (5, Timestamp.valueOf (notification.getReceiveDate ()));\r\n            pstmt.setBoolean (6, notification.isSeen ());\r\n            pstmt.executeUpdate ();\r\n        }\r\n        catch (SQLException e)\r\n        {\r\n            e.printStackTrace ();\r\n        }\r\n    }\r\n\r\n    public void update (Notification notification)\r\n    {\r\n        String sql = \"UPDATE Notifications SET userID = ?, contentID = ?, title = ?, receiveDate = ?, isSeen = ? WHERE ID = ?\";\r\n        try (Connection conn = DatabaseConnection.getConnection ();\r\n             PreparedStatement pstmt = conn.prepareStatement (sql))\r\n        {\r\n            pstmt.setObject (1, notification.getUserID ());\r\n            pstmt.setObject (2, notification.getContentID ());\r\n            pstmt.setString (3, notification.getTitle ());\r\n            pstmt.setTimestamp (4, Timestamp.valueOf (notification.getReceiveDate ()));\r\n            pstmt.setBoolean (5, notification.isSeen ());\r\n            pstmt.setObject (6, notification.getID ());\r\n            pstmt.executeUpdate ();\r\n        }\r\n        catch (SQLException e)\r\n        {\r\n            e.printStackTrace ();\r\n        }\r\n    }\r\n\r\n    public void delete (UUID id)\r\n    {\r\n        try (Connection conn = DatabaseConnection.getConnection ();\r\n             Statement stmt = conn.createStatement ())\r\n        {\r\n            String deleteNotification = \"DELETE FROM Notifications WHERE ID = '\" + id + \"'\";\r\n            stmt.executeUpdate (deleteNotification);\r\n        }\r\n        catch (SQLException e)\r\n        {\r\n            e.printStackTrace ();\r\n        }\r\n    }\r\n\r\n    public Notification findById (UUID id)\r\n    {\r\n        String sql = \"SELECT * FROM Notifications WHERE ID = ?\";\r\n        try (Connection conn = DatabaseConnection.getConnection ();\r\n             PreparedStatement pstmt = conn.prepareStatement (sql))\r\n        {\r\n            pstmt.setObject (1, id);\r\n            ResultSet rs = pstmt.executeQuery ();\r\n            if (rs.next ())\r\n            {\r\n                return new Notification (\r\n                        rs.getObject (\"ID\", UUID.class),\r\n                        rs.getObject (\"userID\", UUID.class),\r\n                        rs.getObject (\"contentID\", UUID.class),\r\n                        rs.getString (\"title\"),\r\n                        rs.getObject (\"receiveDate\", LocalDateTime.class),\r\n                        rs.getBoolean (\"isSeen\")\r\n                );\r\n            }\r\n        }\r\n        catch (SQLException e)\r\n        {\r\n            e.printStackTrace ();\r\n        }\r\n        return null;\r\n    }\r\n\r\n    public List <Notification> findAll ()\r\n    {\r\n        List <Notification> notifications = new ArrayList <> ();\r\n        String       sql    = \"SELECT * FROM Notifications\";\r\n        try (Connection conn = DatabaseConnection.getConnection ();\r\n             Statement stmt = conn.createStatement ();\r\n             ResultSet rs = stmt.executeQuery (sql))\r\n        {\r\n            while (rs.next ())\r\n            {\r\n                notifications.add (new Notification (\r\n                        rs.getObject (\"ID\", UUID.class),\r\n                        rs.getObject (\"userID\", UUID.class),\r\n                        rs.getObject (\"contentID\", UUID.class),\r\n                        rs.getString (\"title\"),\r\n                        rs.getObject (\"receiveDate\", LocalDateTime.class),\r\n                        rs.getBoolean (\"isSeen\")\r\n                ));\r\n            }\r\n        }\r\n        catch (SQLException e)\r\n        {\r\n            e.printStackTrace ();\r\n        }\r\n        return notifications;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/wetube/dao/impl/NotificationDAOImpl.java b/src/main/java/com/wetube/dao/impl/NotificationDAOImpl.java
+--- a/src/main/java/com/wetube/dao/impl/NotificationDAOImpl.java	
++++ b/src/main/java/com/wetube/dao/impl/NotificationDAOImpl.java	
+@@ -23,6 +23,7 @@
+             if (object.getID () == uuid)
+             {
+                 uuid = generateID ();
++                break;
+             }
+         }
+         return uuid;
+@@ -30,17 +31,18 @@
+ 
+     public void create (Notification notification)
+     {
+-        String sql = "INSERT INTO Notifications (ID, userID, contentID, title, receiveDate, isSeen) VALUES (?, ?, ?, ?, ?, ?)";
+-        try (Connection conn = DatabaseConnection.getConnection ();
+-             PreparedStatement pstmt = conn.prepareStatement (sql))
++        String query = "INSERT INTO Notifications (ID, userID, contentID, title, receiveDate, isSeen) VALUES" +
++                " (?, ?, ?, ?, ?, ?)";
++        try (Connection connection = DatabaseConnection.getConnection ();
++             PreparedStatement preparedStatement = connection.prepareStatement (query))
+         {
+-            pstmt.setObject (1, notification.getID ());
+-            pstmt.setObject (2, notification.getUserID ());
+-            pstmt.setObject (3, notification.getContentID ());
+-            pstmt.setString (4, notification.getTitle ());
+-            pstmt.setTimestamp (5, Timestamp.valueOf (notification.getReceiveDate ()));
+-            pstmt.setBoolean (6, notification.isSeen ());
+-            pstmt.executeUpdate ();
++            preparedStatement.setObject (1, notification.getID ());
++            preparedStatement.setObject (2, notification.getUserID ());
++            preparedStatement.setObject (3, notification.getContentID ());
++            preparedStatement.setString (4, notification.getTitle ());
++            preparedStatement.setTimestamp (5, Timestamp.valueOf (notification.getReceiveDate ()));
++            preparedStatement.setBoolean (6, notification.isSeen ());
++            preparedStatement.executeUpdate ();
+         }
+         catch (SQLException e)
+         {
+@@ -50,17 +52,18 @@
+ 
+     public void update (Notification notification)
+     {
+-        String sql = "UPDATE Notifications SET userID = ?, contentID = ?, title = ?, receiveDate = ?, isSeen = ? WHERE ID = ?";
+-        try (Connection conn = DatabaseConnection.getConnection ();
+-             PreparedStatement pstmt = conn.prepareStatement (sql))
++        String query = "UPDATE Notifications SET userID = ?, contentID = ?, title = ?, receiveDate = ?, isSeen = ?" +
++                " WHERE ID = ?";
++        try (Connection connection = DatabaseConnection.getConnection ();
++             PreparedStatement preparedStatement = connection.prepareStatement (query))
+         {
+-            pstmt.setObject (1, notification.getUserID ());
+-            pstmt.setObject (2, notification.getContentID ());
+-            pstmt.setString (3, notification.getTitle ());
+-            pstmt.setTimestamp (4, Timestamp.valueOf (notification.getReceiveDate ()));
+-            pstmt.setBoolean (5, notification.isSeen ());
+-            pstmt.setObject (6, notification.getID ());
+-            pstmt.executeUpdate ();
++            preparedStatement.setObject (1, notification.getUserID ());
++            preparedStatement.setObject (2, notification.getContentID ());
++            preparedStatement.setString (3, notification.getTitle ());
++            preparedStatement.setTimestamp (4, Timestamp.valueOf (notification.getReceiveDate ()));
++            preparedStatement.setBoolean (5, notification.isSeen ());
++            preparedStatement.setObject (6, notification.getID ());
++            preparedStatement.executeUpdate ();
+         }
+         catch (SQLException e)
+         {
+@@ -70,11 +73,11 @@
+ 
+     public void delete (UUID id)
+     {
+-        try (Connection conn = DatabaseConnection.getConnection ();
+-             Statement stmt = conn.createStatement ())
++        try (Connection connection = DatabaseConnection.getConnection ();
++             Statement statement = connection.createStatement ())
+         {
+             String deleteNotification = "DELETE FROM Notifications WHERE ID = '" + id + "'";
+-            stmt.executeUpdate (deleteNotification);
++            statement.executeUpdate (deleteNotification);
+         }
+         catch (SQLException e)
+         {
+@@ -84,21 +87,21 @@
+ 
+     public Notification findById (UUID id)
+     {
+-        String sql = "SELECT * FROM Notifications WHERE ID = ?";
+-        try (Connection conn = DatabaseConnection.getConnection ();
+-             PreparedStatement pstmt = conn.prepareStatement (sql))
++        String query = "SELECT * FROM Notifications WHERE ID = ?";
++        try (Connection connection = DatabaseConnection.getConnection ();
++             PreparedStatement preparedStatement = connection.prepareStatement (query))
+         {
+-            pstmt.setObject (1, id);
+-            ResultSet rs = pstmt.executeQuery ();
+-            if (rs.next ())
++            preparedStatement.setObject (1, id);
++            ResultSet resultSet = preparedStatement.executeQuery ();
++            if (resultSet.next ())
+             {
+                 return new Notification (
+-                        rs.getObject ("ID", UUID.class),
+-                        rs.getObject ("userID", UUID.class),
+-                        rs.getObject ("contentID", UUID.class),
+-                        rs.getString ("title"),
+-                        rs.getObject ("receiveDate", LocalDateTime.class),
+-                        rs.getBoolean ("isSeen")
++                        resultSet.getObject ("ID", UUID.class),
++                        resultSet.getObject ("userID", UUID.class),
++                        resultSet.getObject ("contentID", UUID.class),
++                        resultSet.getString ("title"),
++                        resultSet.getObject ("receiveDate", LocalDateTime.class),
++                        resultSet.getBoolean ("isSeen")
+                 );
+             }
+         }
+@@ -112,20 +115,20 @@
+     public List <Notification> findAll ()
+     {
+         List <Notification> notifications = new ArrayList <> ();
+-        String       sql    = "SELECT * FROM Notifications";
+-        try (Connection conn = DatabaseConnection.getConnection ();
+-             Statement stmt = conn.createStatement ();
+-             ResultSet rs = stmt.executeQuery (sql))
++        String       query   = "SELECT * FROM Notifications";
++        try (Connection connection = DatabaseConnection.getConnection ();
++             Statement statement = connection.createStatement ();
++             ResultSet resultSet = statement.executeQuery (query))
+         {
+-            while (rs.next ())
++            while (resultSet.next ())
+             {
+                 notifications.add (new Notification (
+-                        rs.getObject ("ID", UUID.class),
+-                        rs.getObject ("userID", UUID.class),
+-                        rs.getObject ("contentID", UUID.class),
+-                        rs.getString ("title"),
+-                        rs.getObject ("receiveDate", LocalDateTime.class),
+-                        rs.getBoolean ("isSeen")
++                        resultSet.getObject ("ID", UUID.class),
++                        resultSet.getObject ("userID", UUID.class),
++                        resultSet.getObject ("contentID", UUID.class),
++                        resultSet.getString ("title"),
++                        resultSet.getObject ("receiveDate", LocalDateTime.class),
++                        resultSet.getBoolean ("isSeen")
+                 ));
+             }
+         }
+Index: src/main/java/com/wetube/util/TableCreator.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.wetube.util;\r\n\r\nimport java.sql.Connection;\r\nimport java.sql.Statement;\r\n\r\npublic class TableCreator\r\n{\r\n    public static void createTables ()\r\n    {\r\n        String createUsersTable = \"\"\"\r\n                                  CREATE TABLE IF NOT EXISTS Users (\r\n                                      ID UUID PRIMARY KEY,\r\n                                      channelID UUID,\r\n                                      firstName VARCHAR(255),\r\n                                      lastName VARCHAR(255),\r\n                                      username VARCHAR(255) UNIQUE,\r\n                                      email VARCHAR(255) UNIQUE,\r\n                                      password VARCHAR(255),\r\n                                      birthdate DATE,\r\n                                      joinDate DATE,\r\n                                      isPremium BOOLEAN,\r\n                                      balance DOUBLE PRECISION,\r\n                                      profilePictureURL VARCHAR(255)\r\n                                  );\r\n                                  \"\"\";\r\n\r\n        String createChannelsTable = \"\"\"\r\n                                     CREATE TABLE IF NOT EXISTS Channels (\r\n                                         ID UUID PRIMARY KEY,\r\n                                         userID UUID REFERENCES Users(ID),\r\n                                         name VARCHAR(255),\r\n                                         description TEXT,\r\n                                         subscribersCount INT DEFAULT 0,\r\n                                         totalVideos INT DEFAULT 0,\r\n                                         totalViews INT DEFAULT 0,\r\n                                         watchTime INT DEFAULT 0,\r\n                                         creationDate DATE,\r\n                                         isVerified BOOLEAN DEFAULT FALSE,\r\n                                         outcome DOUBLE PRECISION DEFAULT 0.0,\r\n                                         channelPictureURL VARCHAR(255)\r\n                                     );\r\n                                     \"\"\";\r\n\r\n        String createVideosTable = \"\"\"\r\n                                   CREATE TABLE IF NOT EXISTS Videos (\r\n                                       ID UUID PRIMARY KEY,\r\n                                       creatorID UUID REFERENCES Users(ID),\r\n                                       channelID UUID REFERENCES Channels(ID),\r\n                                       communityID UUID,\r\n                                       title VARCHAR(255),\r\n                                       description TEXT,\r\n                                       dataType VARCHAR(255),\r\n                                       videoURL VARCHAR(255),\r\n                                       thumbnailURL VARCHAR(255),\r\n                                       commentsCount INT DEFAULT 0,\r\n                                       likesCount INT DEFAULT 0,\r\n                                       dislikesCount INT DEFAULT 0,\r\n                                       creationDate TIMESTAMP,\r\n                                       isOnlyComrade BOOLEAN\r\n                                   );\r\n                                   \"\"\";\r\n\r\n        String createPlaylistsTable = \"\"\"\r\n                                      CREATE TABLE IF NOT EXISTS Playlists (\r\n                                          ID UUID PRIMARY KEY,\r\n                                          creatorID UUID REFERENCES Users(ID),\r\n                                          channelID UUID REFERENCES Channels(ID),\r\n                                          title VARCHAR(255),\r\n                                          description TEXT,\r\n                                          isPublic BOOLEAN,\r\n                                          isOnlyComrade BOOLEAN,\r\n                                          creationDate TIMESTAMP\r\n                                      );\r\n                                      \"\"\";\r\n\r\n        String createCommentsTable = \"\"\"\r\n                                     CREATE TABLE IF NOT EXISTS Comments (\r\n                                         ID UUID PRIMARY KEY,\r\n                                         contentID UUID,\r\n                                         creatorID UUID REFERENCES Users(ID),\r\n                                         parentCommentID UUID,\r\n                                         content TEXT,\r\n                                         replyCount INT DEFAULT 0,\r\n                                         creationDate TIMESTAMP,\r\n                                         isReply BOOLEAN,\r\n                                         likesCount INT DEFAULT 0,\r\n                                         dislikesCount INT DEFAULT 0\r\n                                     );\r\n                                     \"\"\";\r\n\r\n        String createNotificationsTable = \"\"\"\r\n                                          CREATE TABLE IF NOT EXISTS Notifications (\r\n                                              ID UUID PRIMARY KEY,\r\n                                              userID UUID REFERENCES Users(ID),\r\n                                              contentID UUID,\r\n                                              title VARCHAR(255),\r\n                                              receiveDate TIMESTAMP,\r\n                                              isSeen BOOLEAN\r\n                                          );\r\n                                          \"\"\";\r\n\r\n        String createCategoriesTable = \"\"\"\r\n                                       CREATE TABLE IF NOT EXISTS Categories (\r\n                                           ID UUID PRIMARY KEY,\r\n                                           title VARCHAR(255)\r\n                                       );\r\n                                       \"\"\";\r\n\r\n        String createCommunitiesTable = \"\"\"\r\n                                        CREATE TABLE IF NOT EXISTS Communities (\r\n                                            ID UUID PRIMARY KEY,\r\n                                            channelID UUID REFERENCES Channels(ID)\r\n                                        );\r\n                                        \"\"\";\r\n\r\n        String createPostsTable = \"\"\"\r\n                                  CREATE TABLE IF NOT EXISTS Posts (\r\n                                      ID UUID PRIMARY KEY,\r\n                                      communityID UUID REFERENCES Communities(ID),\r\n                                      creatorID UUID REFERENCES Users(ID),\r\n                                      channelID UUID REFERENCES Channels(ID),\r\n                                      title VARCHAR(255),\r\n                                      description TEXT,\r\n                                      imageURL VARCHAR(255),\r\n                                      commentsCount INT DEFAULT 0,\r\n                                      likesCount INT DEFAULT 0,\r\n                                      dislikesCount INT DEFAULT 0,\r\n                                      creationDate TIMESTAMP,\r\n                                      isOnlyComrade BOOLEAN\r\n                                  );\r\n                                  \"\"\";\r\n\r\n        String createSubscribersTable = \"\"\"\r\n                                        CREATE TABLE IF NOT EXISTS Subscribers (\r\n                                            userID UUID REFERENCES Users(ID),\r\n                                            channelID UUID REFERENCES Channels(ID),\r\n                                            PRIMARY KEY (userID, channelID)\r\n                                        );\r\n                                        \"\"\";\r\n\r\n        String createVideoPlaylistsTable = \"\"\"\r\n                                           CREATE TABLE IF NOT EXISTS VideoPlaylists (\r\n                                               playlistID UUID REFERENCES Playlists(ID),\r\n                                               videoID UUID REFERENCES Videos(ID),\r\n                                               PRIMARY KEY (playlistID, videoID)\r\n                                           );\r\n                                           \"\"\";\r\n\r\n        String createContentsActionTable = \"\"\"\r\n                                     CREATE TABLE IF NOT EXISTS ContentsAction (\r\n                                     contentID UUID PRIMARY KEY,\r\n                                     userID UUID REFERENCES Users(ID),\r\n                                     liked BOOLEAN,\r\n                                     disliked BOOLEAN,\r\n                                     PRIMARY KEY (contentID, userID)\r\n                                     );\r\n                                     \"\"\";\r\n\r\n        try (Connection conn = DatabaseConnection.getConnection ();\r\n             Statement stmt = conn.createStatement ())\r\n        {\r\n            stmt.execute (createUsersTable);\r\n            stmt.execute (createChannelsTable);\r\n            stmt.execute (createVideosTable);\r\n            stmt.execute (createPlaylistsTable);\r\n            stmt.execute (createCommentsTable);\r\n            stmt.execute (createNotificationsTable);\r\n            stmt.execute (createCategoriesTable);\r\n            stmt.execute (createCommunitiesTable);\r\n            stmt.execute (createPostsTable);\r\n            stmt.execute (createSubscribersTable);\r\n            stmt.execute (createVideoPlaylistsTable);\r\n            stmt.execute (createContentsActionTable);\r\n            System.out.println (\"Tables created successfully.\");\r\n        }\r\n        catch (Exception e)\r\n        {\r\n            e.printStackTrace ();\r\n        }\r\n    }\r\n\r\n    public static void main (String[] args)\r\n    {\r\n        createTables ();\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/wetube/util/TableCreator.java b/src/main/java/com/wetube/util/TableCreator.java
+--- a/src/main/java/com/wetube/util/TableCreator.java	
++++ b/src/main/java/com/wetube/util/TableCreator.java	
+@@ -73,6 +73,23 @@
+                                       );
+                                       """;
+ 
++        String createPlaylistAdminsTable = """
++                                        CREATE TABLE IF NOT EXISTS playlistAdmins (
++                                            playlistID UUID REFERENCES playlists(ID),
++                                            adminID UUID REFERENCES users(ID)
++                                        );
++                                        """;
++
++
++        String createPlaylistSubscribersTable = """
++                                                CREATE TABLE IF NOT EXISTS playlistSubscribers (
++                                                playlistID UUID REFERENCES playlists(ID),
++                                                userID2
++                                                UUID REFERENCES users(ID),
++                                                subscriptionDate DATE
++                                                );
++                                                """;
++
+         String createCommentsTable = """
+                                      CREATE TABLE IF NOT EXISTS Comments (
+                                          ID UUID PRIMARY KEY,
+@@ -130,10 +147,12 @@
+                                   );
+                                   """;
+ 
++
+         String createSubscribersTable = """
+                                         CREATE TABLE IF NOT EXISTS Subscribers (
+                                             userID UUID REFERENCES Users(ID),
+                                             channelID UUID REFERENCES Channels(ID),
++                                            isOnlyComrade BOOLEAN,
+                                             PRIMARY KEY (userID, channelID)
+                                         );
+                                         """;
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"ec566682-672c-4b02-8981-652c66cb3fe3\" name=\"Changes\" comment=\"Sign Up Functionality added to Front\" />\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\r\n      <map>\r\n        <entry key=\"$PROJECT_DIR$\" value=\"develop\" />\r\n      </map>\r\n    </option>\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"GitHubPullRequestSearchHistory\">{\r\n  &quot;lastFilter&quot;: {\r\n    &quot;state&quot;: &quot;OPEN&quot;,\r\n    &quot;assignee&quot;: &quot;TheDanielTp&quot;\r\n  }\r\n}</component>\r\n  <component name=\"GithubPullRequestsUISettings\">{\r\n  &quot;selectedUrlAndAccountId&quot;: {\r\n    &quot;url&quot;: &quot;https://github.com/TheDanielTp/Project_WeTube&quot;,\r\n    &quot;accountId&quot;: &quot;3c65712a-ed86-4130-bb90-4a7622407ea5&quot;\r\n  }\r\n}</component>\r\n  <component name=\"MavenImportPreferences\">\r\n    <option name=\"generalSettings\">\r\n      <MavenGeneralSettings>\r\n        <option name=\"mavenHomeTypeForPersistence\" value=\"WRAPPER\" />\r\n      </MavenGeneralSettings>\r\n    </option>\r\n  </component>\r\n  <component name=\"ProblemsViewState\">\r\n    <option name=\"selectedTabId\" value=\"CurrentFile\" />\r\n  </component>\r\n  <component name=\"ProjectColorInfo\">{\r\n  &quot;associatedIndex&quot;: 3\r\n}</component>\r\n  <component name=\"ProjectId\" id=\"2irRHITZ4w6U1ENbH8rGgw0yzuk\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\">\r\n    <ConfirmationsSetting value=\"2\" id=\"Add\" />\r\n  </component>\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">{\r\n  &quot;keyToString&quot;: {\r\n    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,\r\n    &quot;Application.Client.executor&quot;: &quot;Run&quot;,\r\n    &quot;Application.Client1.executor&quot;: &quot;Run&quot;,\r\n    &quot;Application.Client2.executor&quot;: &quot;Run&quot;,\r\n    &quot;Application.MainApplication.executor&quot;: &quot;Run&quot;,\r\n    &quot;Application.Server.executor&quot;: &quot;Run&quot;,\r\n    &quot;Application.TableCreator.executor&quot;: &quot;Run&quot;,\r\n    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\r\n    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,\r\n    &quot;git-widget-placeholder&quot;: &quot;login&quot;,\r\n    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,\r\n    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,\r\n    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,\r\n    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,\r\n    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,\r\n    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,\r\n    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,\r\n    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,\r\n    &quot;settings.editor.selected.configurable&quot;: &quot;database.query.execution&quot;,\r\n    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;\r\n  },\r\n  &quot;keyToStringList&quot;: {\r\n    &quot;DatabaseDriversLRU&quot;: [\r\n      &quot;mysql_aurora_aws&quot;,\r\n      &quot;postgresql&quot;\r\n    ],\r\n    &quot;com.intellij.ide.scratch.LRUPopupBuilder$1/SQL Dialect&quot;: [\r\n      &quot;PostgreSQL&quot;\r\n    ]\r\n  }\r\n}</component>\r\n  <component name=\"RunManager\" selected=\"Application.Client1\">\r\n    <configuration name=\"Client1\" type=\"Application\" factoryName=\"Application\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"org.project.controller.MainApplication\" />\r\n      <module name=\"Project_WeTube\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"Client2\" type=\"Application\" factoryName=\"Application\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"org.project.controller.MainApplication\" />\r\n      <module name=\"Project_WeTube\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"Server\" type=\"Application\" factoryName=\"Application\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"com.wetube.server.Server\" />\r\n      <module name=\"Project_WeTube\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <list>\r\n      <item itemvalue=\"Application.Client1\" />\r\n      <item itemvalue=\"Application.Server\" />\r\n      <item itemvalue=\"Application.Client2\" />\r\n    </list>\r\n  </component>\r\n  <component name=\"SharedIndexes\">\r\n    <attachedChunks>\r\n      <set>\r\n        <option value=\"bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.18034.62\" />\r\n        <option value=\"bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-IU-241.18034.62\" />\r\n      </set>\r\n    </attachedChunks>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"ec566682-672c-4b02-8981-652c66cb3fe3\" name=\"Changes\" comment=\"\" />\r\n      <created>1720246621657</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1720246621657</updated>\r\n      <workItem from=\"1720382424785\" duration=\"4557000\" />\r\n    </task>\r\n    <task id=\"LOCAL\u200E−۰۰۰۰۱\" summary=\"Created Repository\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1720246781249</created>\r\n      <option name=\"number\" value=\"LOCAL\u200E−۰۰۰۰۱\" />\r\n      <option name=\"presentableId\" value=\"LOCAL\u200E−۰۰۰۰۱\" />\r\n      <updated>1720246781249</updated>\r\n    </task>\r\n    <task id=\"LOCAL\u200E−۰۰۰۰۲\" summary=\"Initialized Project\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1720246902140</created>\r\n      <option name=\"number\" value=\"LOCAL\u200E−۰۰۰۰۲\" />\r\n      <option name=\"presentableId\" value=\"LOCAL\u200E−۰۰۰۰۲\" />\r\n      <updated>1720246902140</updated>\r\n    </task>\r\n    <task id=\"LOCAL\u200E−۰۰۰۰۳\" summary=\"Initialized Models &amp; Access Objects\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1720251963229</created>\r\n      <option name=\"number\" value=\"LOCAL\u200E−۰۰۰۰۳\" />\r\n      <option name=\"presentableId\" value=\"LOCAL\u200E−۰۰۰۰۳\" />\r\n      <updated>1720251963229</updated>\r\n    </task>\r\n    <task id=\"LOCAL\u200E−۰۰۰۰۴\" summary=\"Updated Models Classes\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1720265568491</created>\r\n      <option name=\"number\" value=\"LOCAL\u200E−۰۰۰۰۴\" />\r\n      <option name=\"presentableId\" value=\"LOCAL\u200E−۰۰۰۰۴\" />\r\n      <updated>1720265568491</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00005\" summary=\"Updated Database class\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1720353747360</created>\r\n      <option name=\"number\" value=\"00005\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1720353747360</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00006\" summary=\"Updated Database: UserDAO class\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1720353787159</created>\r\n      <option name=\"number\" value=\"00006\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1720353787159</updated>\r\n    </task>\r\n    <task id=\"LOCAL\u200E−۰۰۰۰۷\" summary=\"Mark 1, might undo these changes later\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1720381519983</created>\r\n      <option name=\"number\" value=\"LOCAL\u200E−۰۰۰۰۷\" />\r\n      <option name=\"presentableId\" value=\"LOCAL\u200E−۰۰۰۰۷\" />\r\n      <updated>1720381519983</updated>\r\n    </task>\r\n    <task id=\"LOCAL\u200E−۰۰۰۰۸\" summary=\"Mark 5, might undo these changes later\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1720442304421</created>\r\n      <option name=\"number\" value=\"LOCAL\u200E−۰۰۰۰۸\" />\r\n      <option name=\"presentableId\" value=\"LOCAL\u200E−۰۰۰۰۸\" />\r\n      <updated>1720442304421</updated>\r\n    </task>\r\n    <task id=\"LOCAL\u200E−۰۰۰۰۹\" summary=\"Project Next Step\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1720454626391</created>\r\n      <option name=\"number\" value=\"LOCAL\u200E−۰۰۰۰۹\" />\r\n      <option name=\"presentableId\" value=\"LOCAL\u200E−۰۰۰۰۹\" />\r\n      <updated>1720454626391</updated>\r\n    </task>\r\n    <task id=\"LOCAL\u200E−۰۰۰۱۰\" summary=\"Sign Up Functionality added to Front\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1720458897052</created>\r\n      <option name=\"number\" value=\"LOCAL\u200E−۰۰۰۱۰\" />\r\n      <option name=\"presentableId\" value=\"LOCAL\u200E−۰۰۰۱۰\" />\r\n      <updated>1720458897052</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"11\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <option name=\"ADD_EXTERNAL_FILES_SILENTLY\" value=\"true\" />\r\n    <MESSAGE value=\"Created Repository\" />\r\n    <MESSAGE value=\"Initialized Project\" />\r\n    <MESSAGE value=\"Initialized Models &amp; Access Objects\" />\r\n    <MESSAGE value=\"Updated Models Classes\" />\r\n    <MESSAGE value=\"Updated Database class\" />\r\n    <MESSAGE value=\"Updated Database: UserDAO class\" />\r\n    <MESSAGE value=\"Mark 1, might undo these changes later\" />\r\n    <MESSAGE value=\"Mark 5, might undo these changes later\" />\r\n    <MESSAGE value=\"Project Next Step\" />\r\n    <MESSAGE value=\"Sign Up Functionality added to Front\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"Sign Up Functionality added to Front\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	
++++ b/.idea/workspace.xml	
+@@ -4,7 +4,15 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="ec566682-672c-4b02-8981-652c66cb3fe3" name="Changes" comment="Sign Up Functionality added to Front" />
++    <list default="true" id="ec566682-672c-4b02-8981-652c66cb3fe3" name="Changes" comment="Mark 5, might undo these changes later">
++      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/com/wetube/dao/impl/CategoryDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/dao/impl/CategoryDAOImpl.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/com/wetube/dao/impl/ChannelDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/dao/impl/ChannelDAOImpl.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/com/wetube/dao/impl/CommunityDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/dao/impl/CommunityDAOImpl.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/com/wetube/dao/impl/NotificationDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/dao/impl/NotificationDAOImpl.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/com/wetube/dao/impl/UserDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/dao/impl/UserDAOImpl.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/com/wetube/util/TableCreator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/util/TableCreator.java" afterDir="false" />
++    </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+@@ -20,7 +28,7 @@
+   <component name="Git.Settings">
+     <option name="RECENT_BRANCH_BY_REPOSITORY">
+       <map>
+-        <entry key="$PROJECT_DIR$" value="develop" />
++        <entry key="$PROJECT_DIR$" value="login" />
+       </map>
+     </option>
+     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+@@ -37,13 +45,6 @@
+     &quot;accountId&quot;: &quot;3c65712a-ed86-4130-bb90-4a7622407ea5&quot;
+   }
+ }</component>
+-  <component name="MavenImportPreferences">
+-    <option name="generalSettings">
+-      <MavenGeneralSettings>
+-        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+-      </MavenGeneralSettings>
+-    </option>
+-  </component>
+   <component name="ProblemsViewState">
+     <option name="selectedTabId" value="CurrentFile" />
+   </component>
+@@ -58,41 +59,38 @@
+     <option name="hideEmptyMiddlePackages" value="true" />
+     <option name="showLibraryContents" value="true" />
+   </component>
+-  <component name="PropertiesComponent">{
+-  &quot;keyToString&quot;: {
+-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+-    &quot;Application.Client.executor&quot;: &quot;Run&quot;,
+-    &quot;Application.Client1.executor&quot;: &quot;Run&quot;,
+-    &quot;Application.Client2.executor&quot;: &quot;Run&quot;,
+-    &quot;Application.MainApplication.executor&quot;: &quot;Run&quot;,
+-    &quot;Application.Server.executor&quot;: &quot;Run&quot;,
+-    &quot;Application.TableCreator.executor&quot;: &quot;Run&quot;,
+-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+-    &quot;git-widget-placeholder&quot;: &quot;login&quot;,
+-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+-    &quot;settings.editor.selected.configurable&quot;: &quot;database.query.execution&quot;,
+-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
++  <component name="PropertiesComponent"><![CDATA[{
++  "keyToString": {
++    "Application.Client.executor": "Run",
++    "Application.MainApplication.executor": "Run",
++    "Application.Server.executor": "Run",
++    "Application.TableCreator.executor": "Run",
++    "RunOnceActivity.OpenProjectViewOnStart": "true",
++    "RunOnceActivity.ShowReadmeOnStart": "true",
++    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
++    "git-widget-placeholder": "database__step3",
++    "kotlin-language-version-configured": "true",
++    "node.js.detected.package.eslint": "true",
++    "node.js.selected.package.eslint": "(autodetect)",
++    "node.js.selected.package.tslint": "(autodetect)",
++    "nodejs_package_manager_path": "npm",
++    "project.structure.last.edited": "Project",
++    "project.structure.proportion": "0.0",
++    "project.structure.side.proportion": "0.0",
++    "settings.editor.selected.configurable": "database.query.execution",
++    "vue.rearranger.settings.migration": "true"
+   },
+-  &quot;keyToStringList&quot;: {
+-    &quot;DatabaseDriversLRU&quot;: [
+-      &quot;mysql_aurora_aws&quot;,
+-      &quot;postgresql&quot;
++  "keyToStringList": {
++    "DatabaseDriversLRU": [
++      "mysql_aurora_aws",
++      "postgresql"
+     ],
+-    &quot;com.intellij.ide.scratch.LRUPopupBuilder$1/SQL Dialect&quot;: [
+-      &quot;PostgreSQL&quot;
++    "com.intellij.ide.scratch.LRUPopupBuilder$1/SQL Dialect": [
++      "PostgreSQL"
+     ]
+   }
+-}</component>
+-  <component name="RunManager" selected="Application.Client1">
++}]]></component>
++  <component name="RunManager">
+     <configuration name="Client1" type="Application" factoryName="Application">
+       <option name="MAIN_CLASS_NAME" value="org.project.controller.MainApplication" />
+       <module name="Project_WeTube" />
+@@ -100,25 +98,6 @@
+         <option name="Make" enabled="true" />
+       </method>
+     </configuration>
+-    <configuration name="Client2" type="Application" factoryName="Application">
+-      <option name="MAIN_CLASS_NAME" value="org.project.controller.MainApplication" />
+-      <module name="Project_WeTube" />
+-      <method v="2">
+-        <option name="Make" enabled="true" />
+-      </method>
+-    </configuration>
+-    <configuration name="Server" type="Application" factoryName="Application">
+-      <option name="MAIN_CLASS_NAME" value="com.wetube.server.Server" />
+-      <module name="Project_WeTube" />
+-      <method v="2">
+-        <option name="Make" enabled="true" />
+-      </method>
+-    </configuration>
+-    <list>
+-      <item itemvalue="Application.Client1" />
+-      <item itemvalue="Application.Server" />
+-      <item itemvalue="Application.Client2" />
+-    </list>
+   </component>
+   <component name="SharedIndexes">
+     <attachedChunks>
+@@ -196,21 +175,7 @@
+       <option name="presentableId" value="LOCAL‎−۰۰۰۰۸" />
+       <updated>1720442304421</updated>
+     </task>
+-    <task id="LOCAL‎−۰۰۰۰۹" summary="Project Next Step">
+-      <option name="closed" value="true" />
+-      <created>1720454626391</created>
+-      <option name="number" value="LOCAL‎−۰۰۰۰۹" />
+-      <option name="presentableId" value="LOCAL‎−۰۰۰۰۹" />
+-      <updated>1720454626391</updated>
+-    </task>
+-    <task id="LOCAL‎−۰۰۰۱۰" summary="Sign Up Functionality added to Front">
+-      <option name="closed" value="true" />
+-      <created>1720458897052</created>
+-      <option name="number" value="LOCAL‎−۰۰۰۱۰" />
+-      <option name="presentableId" value="LOCAL‎−۰۰۰۱۰" />
+-      <updated>1720458897052</updated>
+-    </task>
+-    <option name="localTasksCounter" value="11" />
++    <option name="localTasksCounter" value="9" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+@@ -228,7 +193,6 @@
+     </option>
+   </component>
+   <component name="VcsManagerConfiguration">
+-    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+     <MESSAGE value="Created Repository" />
+     <MESSAGE value="Initialized Project" />
+     <MESSAGE value="Initialized Models &amp; Access Objects" />
+@@ -237,8 +201,6 @@
+     <MESSAGE value="Updated Database: UserDAO class" />
+     <MESSAGE value="Mark 1, might undo these changes later" />
+     <MESSAGE value="Mark 5, might undo these changes later" />
+-    <MESSAGE value="Project Next Step" />
+-    <MESSAGE value="Sign Up Functionality added to Front" />
+-    <option name="LAST_COMMIT_MESSAGE" value="Sign Up Functionality added to Front" />
++    <option name="LAST_COMMIT_MESSAGE" value="Mark 5, might undo these changes later" />
+   </component>
+ </project>
+\ No newline at end of file
