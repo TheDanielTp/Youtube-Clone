@@ -98,6 +98,8 @@
                   <Insets left="-40.0" right="15.0" top="17.0" />
                </HBox.margin>
             </ImageView>
+            <ImageView fitHeight="48.0" fitWidth="57.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fitHeight="48.0" fitWidth="57.0" layoutX="1868.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true" />
          </children>
       </HBox>
       <HBox prefHeight="1051.0" prefWidth="1920.0">
