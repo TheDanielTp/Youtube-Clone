@@ -257,6 +257,15 @@ public class ClientHandler extends Thread
 
             //endregion
 
+            //region [ - Category Functions - ]
+
+            case "CREATE_CATEGORY":
+            {
+                return create ((Category) data);
+            }
+
+            //endregion
+
             default:
             {
                 return new Response ("ERROR", "Unknown request type");
@@ -665,6 +674,18 @@ public class ClientHandler extends Thread
         ArrayList <UUID> subscribers = channelDAO.findSubscribers (channel.getID ());
 
         return new Response ("SUCCESS", "Subscriber found successfully", subscribers);
+    }
+
+    //endregion
+
+    //region [ - Category Functions - ]
+
+    private Response create (Category category)
+    {
+        CategoryDAOImpl categoryDAO = new CategoryDAOImpl ();
+        categoryDAO.create (category);
+
+        return new Response ("SUCCESS", "Category created successfully", category);
     }
 
     //endregion

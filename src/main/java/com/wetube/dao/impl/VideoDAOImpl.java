@@ -333,10 +333,10 @@ public class VideoDAOImpl
             e.printStackTrace ();
         }
 
-        String sql3 = "SELECT * FROM Comment";
+        String sql3 = "SELECT * FROM Comments";
         try (Connection connection = DatabaseConnection.getConnection ();
-             Statement stmt = connection.createStatement ();
-             ResultSet resultSet = stmt.executeQuery (sql3))
+             Statement statement = connection.createStatement ();
+             ResultSet resultSet = statement.executeQuery (sql3))
         {
             while (resultSet.next ())
             {

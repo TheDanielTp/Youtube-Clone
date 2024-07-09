@@ -411,5 +411,13 @@ public class Client
 
     //endregion
 
-    //region
+    //region [ - Category Functions - ]
+
+    public Object[] create (Category category)
+    {
+        Request request = new Request ("CREATE_CATEGORY", category);
+        Response response = sendRequest (request);
+
+        return new Object[]{0, response.getData ()};
+    }
 }
