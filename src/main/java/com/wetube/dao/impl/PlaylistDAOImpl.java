@@ -1,9 +1,6 @@
 package com.wetube.dao.impl;
 
-import com.wetube.model.Playlist;
-import com.wetube.model.Post;
-import com.wetube.model.User;
-import com.wetube.model.Video;
+import com.wetube.model.*;
 import com.wetube.util.DatabaseConnection;
 
 import java.sql.*;
@@ -32,7 +29,8 @@ public class PlaylistDAOImpl
 
     public void create (Playlist playlist)
     {
-        String sql = "INSERT INTO Playlists (ID, creatorID, channelID, title, description, isPublic, isOnlyComrade, creationDate) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Playlists (ID, creatorID, channelID, title, description, isPublic, isOnlyComrade," +
+                " creationDate) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         try (Connection connection = DatabaseConnection.getConnection ();
              PreparedStatement  preparedStatement = connection.prepareStatement (sql))
         {
@@ -54,7 +52,8 @@ public class PlaylistDAOImpl
 
     public void update (Playlist playlist)
     {
-        String sql = "UPDATE Playlists SET creatorID = ?, channelID = ?, title = ?, description = ?, isPublic = ?, isOnlyComrade = ?, creationDate = ? WHERE ID = ?";
+        String sql = "UPDATE Playlists SET creatorID = ?, channelID = ?, title = ?, description = ?, isPublic = ?," +
+                " isOnlyComrade = ?, creationDate = ? WHERE ID = ?";
         try (Connection connection = DatabaseConnection.getConnection ();
              PreparedStatement  preparedStatement = connection.prepareStatement (sql))
         {
@@ -81,6 +80,37 @@ public class PlaylistDAOImpl
         {
             String deletePlaylist = "DELETE FROM Playlists WHERE ID = '" + id + "'";
             statement.executeUpdate (deletePlaylist);
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace ();
+        }
+    }
+
+    public void subscribe (User user, Playlist playlist)
+    {
+        String sql = "INSERT INTO PlaylistSubscribers (userID, playlistID) VALUES (?, ?)";
+        try (Connection connection= DatabaseConnection.getConnection ();
+             PreparedStatement preparedStatement = connection.prepareStatement (sql))
+        {
+            preparedStatement.setObject (1, user.getID ());
+            preparedStatement.setObject (2, playlist.getID ());
+            preparedStatement.executeUpdate ();
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace ();
+        }
+    }
+
+    public void unsubscribe (User user, Playlist playlist)
+    {
+        try (Connection connection= DatabaseConnection.getConnection ();
+             Statement statement = connection.createStatement ())
+        {
+            String unsubscribe = "DELETE FROM PlaylistSubscriber WHERE userID = '" + user.getID () +
+                    "' && playlistID = '" + playlist.getID () + "'";
+            statement.executeUpdate (unsubscribe);
         }
         catch (SQLException e)
         {
@@ -156,6 +186,29 @@ public class PlaylistDAOImpl
         return userPlaylists;
     }
 
+    public Boolean checkSubscription (UUID playlistID, UUID userID)
+    {
+        String sql = "SELECT * FROM playlistSubscribers";
+        try (Connection connection= DatabaseConnection.getConnection ();
+             Statement statement = connection.createStatement ();
+             ResultSet resultSet= statement.executeQuery (sql))
+        {
+            while (resultSet.next ())
+            {
+                if (playlistID.equals (resultSet.getObject ("playlistID", UUID.class)) &&
+                        userID.equals (resultSet.getObject ("userID", UUID.class)))
+                {
+                    return true;
+                }
+            }
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace ();
+        }
+        return false;
+    }
+
     public List <Playlist> findAll ()
     {
         List <Playlist> playlists = new ArrayList <> ();
@@ -186,6 +239,29 @@ public class PlaylistDAOImpl
         return playlists;
     }
 
+    public ArrayList <UUID> findSubscribers (UUID id)
+    {
+        ArrayList <UUID> subscribersID = new ArrayList <> ();
+        String         sql             = "SELECT * FROM PlaylistSubscribers";
+        try (Connection connection= DatabaseConnection.getConnection ();
+             Statement statement = connection.createStatement ();
+             ResultSet resultSet= statement.executeQuery (sql))
+        {
+            while (resultSet.next ())
+            {
+                if (id.equals (resultSet.getObject ("playlistID", UUID.class)))
+                {
+                    subscribersID.add (resultSet.getObject ("userID", UUID.class));
+                }
+            }
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace ();
+        }
+        return subscribersID;
+    }
+
     public void addVideo (Playlist playlist, Video video)
     {
         String sql = "INSERT INTO VideoPlaylists (playlistID, videoID) VALUES (?, ?)";
@@ -207,7 +283,8 @@ public class PlaylistDAOImpl
         try (Connection connection = DatabaseConnection.getConnection ();
              Statement statement = connection.createStatement ())
         {
-            String deleteVideo = "DELETE FROM VideoPlaylists WHERE playlistID = '" + playlist.getID () + "' && videoID = '" + video.getID () + "'";
+            String deleteVideo = "DELETE FROM VideoPlaylists WHERE playlistID = '" + playlist.getID () +
+                    "' && videoID = '" + video.getID () + "'";
             statement.executeUpdate (deleteVideo);
         }
         catch (SQLException e)

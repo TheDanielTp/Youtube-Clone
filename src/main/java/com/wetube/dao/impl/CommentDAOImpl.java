@@ -15,8 +15,8 @@ public class CommentDAOImpl
     {
         UUID uuid = UUID.randomUUID ();
 
-        List <Comment> all = findAll ();
-        for (Comment object : all)
+        List <Content> all = VideoDAOImpl.findAllContents ();
+        for (Content object : all)
         {
             if (object.getID () == uuid)
             {
@@ -29,7 +29,8 @@ public class CommentDAOImpl
 
     public void create (Comment comment)
     {
-        String sql = "INSERT INTO Comments (ID, contentID, creatorID, parentCommentID, content, replyCount, creationDate, isReply, likesCount, dislikesCount) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Comments (ID, contentID, creatorID, parentCommentID, content, replyCount," +
+                " creationDate, isReply, likesCount, dislikesCount) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try (Connection connection = DatabaseConnection.getConnection ();
              PreparedStatement preparedStatement = connection.prepareStatement (sql))
         {
@@ -53,7 +54,8 @@ public class CommentDAOImpl
 
     public void update (Comment comment)
     {
-        String sql = "UPDATE Comments SET contentID = ?, creatorID = ?, parentCommentID = ?, content = ?, replyCount = ?, creationDate = ?, isReply = ?, likesCount = ?, dislikesCount = ? WHERE ID = ?";
+        String sql = "UPDATE Comments SET contentID = ?, creatorID = ?, parentCommentID = ?, content = ?," +
+                " replyCount = ?, creationDate = ?, isReply = ?, likesCount = ?, dislikesCount = ? WHERE ID = ?";
         try (Connection connection = DatabaseConnection.getConnection ();
              PreparedStatement preparedStatement = connection.prepareStatement (sql))
         {

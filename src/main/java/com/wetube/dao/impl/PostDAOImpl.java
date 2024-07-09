@@ -1,5 +1,6 @@
 package com.wetube.dao.impl;
 
+import com.wetube.model.Content;
 import com.wetube.model.Post;
 import com.wetube.model.User;
 import com.wetube.util.DatabaseConnection;
@@ -16,8 +17,8 @@ public class PostDAOImpl
     {
         UUID uuid = UUID.randomUUID ();
 
-        List <Post> all = findAll ();
-        for (Post object : all)
+        List <Content> all = VideoDAOImpl.findAllContents ();
+        for (Content object : all)
         {
             if (object.getID () == uuid)
             {
@@ -30,7 +31,9 @@ public class PostDAOImpl
 
     public void create (Post post)
     {
-        String sql = "INSERT INTO Posts (ID, communityID, creatorID, channelID, title, description, image, commentsCount, likesCount, dislikesCount, creationDate, isOnlyComrade) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Posts (ID, communityID, creatorID, channelID, title, description, image," +
+                " commentsCount, likesCount, dislikesCount, creationDate, isOnlyComrade) VALUES" +
+                " (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try (Connection connection = DatabaseConnection.getConnection ();
              PreparedStatement  preparedStatement = connection.prepareStatement (sql))
         {
@@ -56,7 +59,9 @@ public class PostDAOImpl
 
     public void update (Post post)
     {
-        String sql = "UPDATE Posts SET communityID = ?, creatorID = ?, channelID = ?, title = ?, description = ?, imageURL = ?, commentsCount = ?, likesCount = ?, dislikesCount = ?, creationDate = ?, isOnlyComrade = ? WHERE ID = ?";
+        String sql = "UPDATE Posts SET communityID = ?, creatorID = ?, channelID = ?, title = ?, description = ?," +
+                " imageURL = ?, commentsCount = ?, likesCount = ?, dislikesCount = ?, creationDate = ?," +
+                " isOnlyComrade = ? WHERE ID = ?";
         try (Connection connection = DatabaseConnection.getConnection ();
              PreparedStatement  preparedStatement = connection.prepareStatement (sql))
         {
