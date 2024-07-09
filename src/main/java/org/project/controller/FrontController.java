@@ -1,5 +1,7 @@
 package org.project.controller;
 
+import com.wetube.dao.impl.VideoDAOImpl;
+import com.wetube.model.Video;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
@@ -12,8 +14,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.SVGPath;
@@ -22,10 +27,11 @@ import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-public class CommunistFrontController implements Initializable
+public class FrontController implements Initializable
 {
     @FXML
     private VBox mainPane;
@@ -52,9 +58,55 @@ public class CommunistFrontController implements Initializable
 
     //region------------------------------------------------Stage Size Functions------------------------------------------------
 
+    @FXML
+    FlowPane videosPane;
+
     @Override
     public void initialize (URL url, ResourceBundle resourceBundle)
     {
+        Object[]     responseObject = MainApplication.client.getAllVideos ();
+        List <Video> videos         = (List <Video>) responseObject[1];
+
+        for (Video video : videos)
+        {
+            try
+            {
+                // Load FXML file and create root node
+                FXMLLoader loader    = new FXMLLoader (getClass ().getResource ("/org/project/controller/video-thumbnail-view.fxml"));
+                AnchorPane videoNode = loader.load ();
+
+                // Access nodes in the FXML directly
+                ImageView thumbnail = (ImageView) videoNode.lookup ("#thumbnail");
+                Label     title     = (Label) videoNode.lookup ("#title");
+
+                // Set data directly to the nodes
+//                if (thumbnail != null)
+//                {
+//                    thumbnail.setImage (new Image ("/org/project/controller/images/thumbnails/You_Were_The_Chosen_One.jpg"));
+//                }
+//                else
+//                {
+//                    System.err.println ("Thumbnail ImageView not found in FXML.");
+//                }
+
+                if (title != null)
+                {
+                    title.setText (video.getTitle ());
+                }
+                else
+                {
+                    System.err.println ("Title Label not found in FXML.");
+                }
+
+                // Add the created node to videosPane
+                videosPane.getChildren ().add (videoNode);
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace ();
+            }
+        }
+
         Platform.runLater (() ->
         {
             Stage stage = (Stage) menuButton.getScene ().getWindow ();
@@ -234,25 +286,50 @@ public class CommunistFrontController implements Initializable
 
     public void signInButtonClicked (MouseEvent event) throws IOException
     {
-        Parent root = FXMLLoader.load (Objects.requireNonNull (getClass ().getResource ("communist-signup-first-view.fxml")));
+        if (! MainApplication.DarkTheme)
+        {
+            Parent root = FXMLLoader.load (Objects.requireNonNull (getClass ().getResource ("communist-signup-first-view.fxml")));
 
-        Stage stage = (Stage) ((Node) event.getSource ()).getScene ().getWindow ();
+            Stage stage = (Stage) ((Node) event.getSource ()).getScene ().getWindow ();
 
-        double width  = stage.getWidth ();
-        double height = stage.getHeight ();
-        double x      = stage.getX ();
-        double y      = stage.getY ();
+            double width  = stage.getWidth ();
+            double height = stage.getHeight ();
+            double x      = stage.getX ();
+            double y      = stage.getY ();
 
-        Scene scene = new Scene (root);
+            Scene scene = new Scene (root);
 
-        stage.setScene (scene);
+            stage.setScene (scene);
 
-        stage.setWidth (width);
-        stage.setHeight (height);
-        stage.setX (x);
-        stage.setY (y);
+            stage.setWidth (width);
+            stage.setHeight (height);
+            stage.setX (x);
+            stage.setY (y);
 
-        System.out.println ("> opening signup panel");
+            System.out.println ("> opening signup panel");
+        }
+        else
+        {
+            Parent root = FXMLLoader.load (Objects.requireNonNull (getClass ().getResource ("dark-signup-first-view.fxml")));
+
+            Stage stage = (Stage) ((Node) event.getSource ()).getScene ().getWindow ();
+
+            double width  = stage.getWidth ();
+            double height = stage.getHeight ();
+            double x      = stage.getX ();
+            double y      = stage.getY ();
+
+            Scene scene = new Scene (root);
+
+            stage.setScene (scene);
+
+            stage.setWidth (width);
+            stage.setHeight (height);
+            stage.setX (x);
+            stage.setY (y);
+
+            System.out.println ("> opening signup panel");
+        }
     }
 
     @FXML

@@ -13,7 +13,7 @@
 <?import javafx.scene.shape.SVGPath?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: #000000; -fx-border-color: #000000;" stylesheets="@dark-front-view.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.project.controller.CommunistFrontController">
+<VBox fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: #000000; -fx-border-color: #000000;" stylesheets="@dark-front-view.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.project.controller.FrontController">
     <children>
         <HBox prefHeight="0.0" prefWidth="1920.0" style="-fx-background-color: #000000; -fx-border-color: #000000; -fx-border-width: 5;">
             <children>

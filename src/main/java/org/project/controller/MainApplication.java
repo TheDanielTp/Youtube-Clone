@@ -1,6 +1,7 @@
 package org.project.controller;
 
 import com.wetube.client.Client;
+import com.wetube.model.User;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -15,6 +16,7 @@ public class MainApplication extends Application
     private static BufferedReader bufferedReader;
     private static BufferedWriter bufferedWriter;
 
+    static User   currentUser;
     static Client client;
 
     static boolean DarkTheme = false;

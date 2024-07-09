@@ -11,9 +11,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: #000000;" stylesheets="@dark-login-view.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.project.controller.CommunistSignupFirstView">
+<HBox prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: #000000;" stylesheets="@dark-login-view.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.project.controller.SignupFirstController">
     <children>
-        <HBox prefHeight="1080.0" prefWidth="80.0" style="-fx-border-color: #000000; -fx-border-width: 5;">
+        <HBox prefHeight="1099.0" prefWidth="104.0" style="-fx-border-color: #000000; -fx-border-width: 5;">
             <HBox.margin>
                 <Insets />
             </HBox.margin>

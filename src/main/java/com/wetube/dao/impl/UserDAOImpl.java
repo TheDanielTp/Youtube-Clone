@@ -18,7 +18,7 @@ public class UserDAOImpl
 {
     public String chooseRandomImage () throws IOException
     {
-        Path        dir        = Paths.get ("D:\\Java\\Projects\\Project_WeTube\\src\\main\\resources\\images\\profilePictures");
+        Path        dir        = Paths.get ("D:\\Java\\Projects\\Project_WeTube\\src\\main\\resources\\org\\project\\controller\\images\\profilePictures");
         List <Path> imageFiles = new ArrayList <> ();
 
         try (DirectoryStream <Path> stream = Files.newDirectoryStream (dir, "*.{jpg,jpeg,png,gif,bmp}"))

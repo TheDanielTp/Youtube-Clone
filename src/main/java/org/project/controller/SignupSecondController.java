@@ -1,5 +1,6 @@
 package org.project.controller;
 
+import com.wetube.model.Channel;
 import com.wetube.model.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,7 +20,7 @@ import java.util.Objects;
 
 import static org.project.controller.MainApplication.client;
 
-public class CommunistSignupSecondView
+public class SignupSecondController
 {
     //region--------------------------------------------------SignUp Functions--------------------------------------------------
 
@@ -55,7 +56,7 @@ public class CommunistSignupSecondView
 
             if (checkAge (birthDate))
             {
-                User user = new User (firstName, lastName, CommunistSignupFirstView.username, CommunistSignupFirstView.email, CommunistSignupFirstView.password, birthDate);
+                User user = new User (firstName, lastName, SignupFirstController.username, SignupFirstController.email, SignupFirstController.password, birthDate);
 
                 Object[] signUpResponse = client.create (user);
                 if (signUpResponse != null)
@@ -70,7 +71,39 @@ public class CommunistSignupSecondView
                     }
                     if ((int) signUpResponse[0] == 0)
                     {
+                        MainApplication.currentUser = user;
                         System.out.println ("> Front: User sign up successful");
+
+                        Channel channel = new Channel (user.getID (), user.getUsername (), "");
+                        Object[] createChannelResponse = client.create (channel);
+
+                        Parent root;
+                        if (! MainApplication.DarkTheme)
+                        {
+                            root = FXMLLoader.load (Objects.requireNonNull (getClass ().getResource ("communist-main-view.fxml")));
+                        }
+                        else
+                        {
+                            root = FXMLLoader.load (Objects.requireNonNull (getClass ().getResource ("dark-main-view.fxml")));
+                        }
+
+                        Stage stage = (Stage) ((Node) event.getSource ()).getScene ().getWindow ();
+
+                        double width  = stage.getWidth ();
+                        double height = stage.getHeight ();
+                        double x      = stage.getX ();
+                        double y      = stage.getY ();
+
+                        Scene scene = new Scene (root);
+
+                        stage.setScene (scene);
+
+                        stage.setWidth (width);
+                        stage.setHeight (height);
+                        stage.setX (x);
+                        stage.setY (y);
+
+                        System.out.println ("> opening front panel");
                     }
                 }
             }
@@ -102,7 +135,15 @@ public class CommunistSignupSecondView
 
     public void cancelButtonClicked (ActionEvent event) throws IOException
     {
-        Parent root = FXMLLoader.load (Objects.requireNonNull (getClass ().getResource ("communist-signup-first-view.fxml")));
+        Parent root;
+        if (! MainApplication.DarkTheme)
+        {
+            root = FXMLLoader.load (Objects.requireNonNull (getClass ().getResource ("communist-signup-first-view.fxml")));
+        }
+        else
+        {
+            root = FXMLLoader.load (Objects.requireNonNull (getClass ().getResource ("dark-signup-first-view.fxml")));
+        }
 
         Stage stage = (Stage) ((Node) event.getSource ()).getScene ().getWindow ();
 
@@ -125,7 +166,15 @@ public class CommunistSignupSecondView
 
     public void loginButtonClicked (MouseEvent event) throws IOException
     {
-        Parent root = FXMLLoader.load (Objects.requireNonNull (getClass ().getResource ("communist-login-view.fxml")));
+        Parent root;
+        if (! MainApplication.DarkTheme)
+        {
+            root = FXMLLoader.load (Objects.requireNonNull (getClass ().getResource ("communist-login-view.fxml")));
+        }
+        else
+        {
+            root = FXMLLoader.load (Objects.requireNonNull (getClass ().getResource ("dark-login-view.fxml")));
+        }
 
         Stage stage = (Stage) ((Node) event.getSource ()).getScene ().getWindow ();
 
@@ -143,7 +192,7 @@ public class CommunistSignupSecondView
         stage.setX (x);
         stage.setY (y);
 
-        System.out.println ("> opening login panel");
+        System.out.println ("> Front: opening login page");
     }
 
     //endregion

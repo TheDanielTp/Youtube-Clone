@@ -86,7 +86,7 @@ public class SignInController implements Initializable
 //
 //        Boolean isEmail = determineInput(input);
 //
-//        User user;
+//        User currentUser;
 //
 //        if (isEmail == null || password.isEmpty ())
 //        {
@@ -96,14 +96,14 @@ public class SignInController implements Initializable
 //        }
 //        else if (isEmail)
 //        {
-//            user = new User (input, "", password);
+//            currentUser = new User (input, "", password);
 //        }
 //        else
 //        {
-//            user = new User ("", input, password);
+//            currentUser = new User ("", input, password);
 //        }
 //
-//        if (signIn(user))
+//        if (signIn(currentUser))
 //        {
 //            exitSignInSignUp (event);
 //            System.out.println ("Signed In");

@@ -1,8 +1,10 @@
 package com.wetube.model;
 
 import com.wetube.dao.impl.ChannelDAOImpl;
+import com.wetube.dao.impl.UserDAOImpl;
 import javafx.scene.image.Image;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -37,10 +39,9 @@ public class Channel implements Serializable
 
     //region [ - Constructor - ]
 
-    public Channel (String name, String description)
+    public Channel (UUID ID, String name, String description) throws IOException
     {
-        ChannelDAOImpl channelDAO = new ChannelDAOImpl();
-        ID = channelDAO.generateID ();
+        this.ID = ID;
         userID = ID;
 
         this.name        = name;
@@ -54,6 +55,9 @@ public class Channel implements Serializable
         creationDate = LocalDate.now ();
 
         outcome = 0.0;
+
+        UserDAOImpl userDAO = new UserDAOImpl();
+        channelPictureURL = userDAO.chooseRandomImage ();
     }
 
     public Channel (UUID ID, UUID userID, String name, String description, int subscribersCount, int totalVideos, int totalViews, int watchTime, ArrayList <UUID> subscribersID, LocalDate creationDate, boolean isVerified, Double outcome, String channelPictureURL)

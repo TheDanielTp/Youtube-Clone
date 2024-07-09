@@ -384,4 +384,16 @@ public class Client
     //endregion
 
     //region [ - Channel Functions - ]
+
+    public Object[] create (Channel channel)
+    {
+        Request request = new Request ("CREATE_CHANNEL", channel);
+        Response response = sendRequest (request);
+
+        return new Object[]{0, response.getData ()};
+    }
+
+    //endregion
+
+    //region
 }

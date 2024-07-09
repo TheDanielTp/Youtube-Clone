@@ -238,7 +238,10 @@ public class ClientHandler extends Thread
 
             //region [ - Channel Functions - ]
 
-
+            case "CREATE_CHANNEL":
+            {
+                return create ((Channel) data);
+            }
 
             //endregion
 
@@ -640,12 +643,27 @@ public class ClientHandler extends Thread
         return new Response ("SUCCESS", "Channel deleted successfully", null);
     }
 
-//    private Response subscribe (Object[] data)
-//    {
-//        ChannelDAOImpl channelDAO = new ChannelDAOImpl ();
-//
-//
-//    }
+    private Response subscribe (Object[] data)
+    {
+        User user = (User) data[0];
+        Channel channel = (Channel) data[1];
+
+        ChannelDAOImpl channelDAO = new ChannelDAOImpl ();
+        channelDAO.subscribe (user, channel);
+
+        return new Response ("SUCCESS", "Subscribed successfully", null);
+    }
+
+    private Response unsubscribe (Object[] data)
+    {
+        User user = (User) data[0];
+        Channel channel = (Channel) data[1];
+
+        ChannelDAOImpl channelDAO = new ChannelDAOImpl ();
+        channelDAO.unsubscribe (user, channel);
+
+        return new Response ("SUCCESS", "Unsubscribed successfully", null);
+    }
 
     //endregion
 }
