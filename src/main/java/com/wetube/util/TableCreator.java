@@ -102,7 +102,7 @@ public class TableCreator {
                                      """;
         String createContentsActionTable = """
                 CREATE TABLE IF NOT EXISTS ContentsAction (
-                   contentID UUID PRIMARY KEY,
+                   contentID UUID,
                    userID UUID REFERENCES Users(ID),
                    liked BOOLEAN,
                    disliked BOOLEAN,
@@ -114,7 +114,7 @@ public class TableCreator {
                     userID UUID REFERENCES Users(ID),
                     channelID UUID REFERENCES Channels(ID),
                     subscriptionDate DATE,
-                    isOnlyComrade BOOLEAN
+                    isOnlyComrade BOOLEAN,
                     PRIMARY KEY (userID, channelID)
                 );
                 """;
@@ -138,7 +138,7 @@ public class TableCreator {
                 """;
         String createPlaylistSubscribersTable = """
                 CREATE TABLE IF NOT EXISTS playlistSubscriptions (
-                    playlistID UUID REFERENCES playlists(ID),
+                    playlistID UUID REFERENCES Playlists(ID),
                     userID UUID REFERENCES users(ID),
                     subscriptionDate DATE
                 );
@@ -173,6 +173,8 @@ public class TableCreator {
             statement.execute(createCommunitiesTable);
             statement.execute(createPostsTable);
             statement.execute(createSubscribersTable);
+            statement.execute(createPlaylistAdminsTable);
+            statement.execute(createPlaylistSubscribersTable);
             statement.execute(createVideoPlaylistsTable);
             statement.execute(createContentsActionTable);
             System.out.println("Tables created successfully.");

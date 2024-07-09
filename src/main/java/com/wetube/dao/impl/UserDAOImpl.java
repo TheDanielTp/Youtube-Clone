@@ -175,6 +175,12 @@ public class UserDAOImpl
 
     }
 
+    public static UUID getDeleteAccountUserID ()
+    {
+        byte[] nameBytes = "Deleted_Account".getBytes ();
+        return UUID.nameUUIDFromBytes (nameBytes);
+    }
+
     public User findById (UUID id)
     {
         String sql = "SELECT * FROM Users WHERE ID = ?";
