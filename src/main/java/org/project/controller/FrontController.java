@@ -1,7 +1,9 @@
 package org.project.controller;
 
 import com.wetube.dao.impl.CategoryDAOImpl;
+import com.wetube.dao.impl.PlaylistDAOImpl;
 import com.wetube.model.Category;
+import com.wetube.model.Playlist;
 import com.wetube.model.Video;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
@@ -77,10 +79,10 @@ public class FrontController implements Initializable
                     File   videoFile = new File (video.getVideoURL ());
                     byte[] fileBytes = Files.readAllBytes (Path.of (videoFile.toURI ()));
 
-                    tempFile = File.createTempFile ("video", ".mp4");
+                    tempFile = File.createTempFile ("videoFile", ".mp4");
                     tempFile.deleteOnExit ();
 
-                    // Write the byte array to the temporary file
+                    // Write the byte array to the temporary videoFile
                     try (FileOutputStream fos = new FileOutputStream (tempFile); ByteArrayInputStream bais = new ByteArrayInputStream (fileBytes))
                     {
                         byte[] buffer = new byte[1024];
@@ -98,7 +100,7 @@ public class FrontController implements Initializable
                     return;
                 }
 
-                // Create a Media object from the temporary file
+                // Create a Media object from the temporary videoFile
                 media = new Media (tempFile.toURI ().toString ());
 
                 Label    totalTimeLabel = new Label ("00:00");
@@ -130,6 +132,12 @@ public class FrontController implements Initializable
                 {
                     videoButton.setOnAction (event ->
                     {
+                        PlaylistDAOImpl playlistDAOImpl = new PlaylistDAOImpl ();
+                        Playlist history = playlistDAOImpl.findByNameUser (MainApplication.currentUser, "History");
+                        history.getVideosID ().add(video.getID ());
+                        playlistDAOImpl.update (history);
+                        playlistDAOImpl.addVideo (history, video);
+
                         MainApplication.currentVideo = video;
                         Stage      stage;
                         Scene      scene;
@@ -488,10 +496,10 @@ public class FrontController implements Initializable
                     File   videoFile = new File (video.getVideoURL ());
                     byte[] fileBytes = Files.readAllBytes (Path.of (videoFile.toURI ()));
 
-                    tempFile = File.createTempFile ("video", ".mp4");
+                    tempFile = File.createTempFile ("videoFile", ".mp4");
                     tempFile.deleteOnExit ();
 
-                    // Write the byte array to the temporary file
+                    // Write the byte array to the temporary videoFile
                     try (FileOutputStream fos = new FileOutputStream (tempFile); ByteArrayInputStream bais = new ByteArrayInputStream (fileBytes))
                     {
                         byte[] buffer = new byte[1024];
@@ -661,6 +669,121 @@ public class FrontController implements Initializable
         historyLabel.setTextFill (Color.web ("#ffffff"));
     }
 
+    public void historyClicked (ActionEvent event)
+    {
+        videosPane.getChildren ().clear ();
+
+        Object[]        responseObject  = MainApplication.client.getAllVideos ();
+        List <Video>    videos          = (List <Video>) responseObject[1];
+        CategoryDAOImpl categoryDAOImpl = new CategoryDAOImpl ();
+        Category        category        = categoryDAOImpl.findByTitle ("Music");
+
+        PlaylistDAOImpl playlistDAOImpl = new PlaylistDAOImpl ();
+        Playlist history = playlistDAOImpl.findByNameUser (MainApplication.currentUser, "History");
+
+        for (Video video : videos)
+        {
+            if (history.getVideosID ().contains (video.getID ()))
+            {
+                try
+                {
+                    FXMLLoader loader    = new FXMLLoader (getClass ().getResource ("/org/project/controller/video-thumbnail-view.fxml"));
+                    AnchorPane videoNode = loader.load ();
+
+                    ImageView thumbnail   = (ImageView) videoNode.lookup ("#thumbnail");
+                    Label     title       = (Label) videoNode.lookup ("#title");
+                    Button    videoButton = (Button) videoNode.lookup ("#videoButton");
+                    Label     duration    = (Label) videoNode.lookup ("#duration");
+
+                    Media media;
+                    File  tempFile;
+                    try
+                    {
+                        File   videoFile = new File (video.getVideoURL ());
+                        byte[] fileBytes = Files.readAllBytes (Path.of (videoFile.toURI ()));
+
+                        tempFile = File.createTempFile ("videoFile", ".mp4");
+                        tempFile.deleteOnExit ();
+
+                        // Write the byte array to the temporary videoFile
+                        try (FileOutputStream fos = new FileOutputStream (tempFile); ByteArrayInputStream bais = new ByteArrayInputStream (fileBytes))
+                        {
+                            byte[] buffer = new byte[1024];
+                            int    length;
+                            while ((length = bais.read (buffer)) != - 1)
+                            {
+                                fos.write (buffer, 0, length);
+                            }
+                        }
+
+                    }
+                    catch (IOException e)
+                    {
+                        e.printStackTrace ();
+                        return;
+                    }
+
+                    media = new Media (tempFile.toURI ().toString ());
+
+                    Label    totalTimeLabel = new Label ("00:00");
+                    Duration total          = media.getDuration ();
+                    totalTimeLabel.setText (formatTime (total));
+
+                    duration.setText (totalTimeLabel.getText ());
+
+                    if (thumbnail != null)
+                    {
+                        File file = new File (video.getThumbnailURL ());
+                        thumbnail.setImage (new Image (file.toURI ().toString ()));
+                    }
+                    else
+                    {
+                        System.err.println ("Thumbnail ImageView not found in FXML.");
+                    }
+
+                    if (title != null)
+                    {
+                        title.setText (video.getTitle ());
+                    }
+                    else
+                    {
+                        System.err.println ("Title Label not found in FXML.");
+                    }
+
+                    if (videoButton != null)
+                    {
+                        videoButton.setOnAction (event2 ->
+                        {
+                            MainApplication.currentVideo = video;
+                            Stage      stage;
+                            Scene      scene;
+                            Parent     root;
+                            FXMLLoader loader2 = new FXMLLoader (getClass ().getResource ("/org/project/controller/video-page.fxml"));
+                            try
+                            {
+                                root = loader2.load ();
+                            }
+                            catch (IOException e)
+                            {
+                                throw new RuntimeException (e);
+                            }
+                            stage = (Stage) ((Node) event2.getSource ()).getScene ().getWindow ();
+                            scene = new Scene (root);
+                            stage.setScene (scene);
+                            stage.show ();
+                        });
+                    }
+
+                    videosPane.getChildren ().add (videoNode);
+                }
+                catch (IOException e)
+                {
+                    e.printStackTrace ();
+                }
+            }
+        }
+    }
+
     //endregion
 
     //region-----------------------------------------------Down Sidebar Functions-----------------------------------------------
@@ -734,10 +857,10 @@ public class FrontController implements Initializable
                         File   videoFile = new File (video.getVideoURL ());
                         byte[] fileBytes = Files.readAllBytes (Path.of (videoFile.toURI ()));
 
-                        tempFile = File.createTempFile ("video", ".mp4");
+                        tempFile = File.createTempFile ("videoFile", ".mp4");
                         tempFile.deleteOnExit ();
 
-                        // Write the byte array to the temporary file
+                        // Write the byte array to the temporary videoFile
                         try (FileOutputStream fos = new FileOutputStream (tempFile); ByteArrayInputStream bais = new ByteArrayInputStream (fileBytes))
                         {
                             byte[] buffer = new byte[1024];

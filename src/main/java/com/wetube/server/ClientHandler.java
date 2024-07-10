@@ -266,6 +266,15 @@ public class ClientHandler extends Thread
 
             //endregion
 
+            //region [ - Playlist Functions - ]
+
+            case "CREATE_PLAYLIST":
+            {
+                return create ((Playlist) data);
+            }
+
+            //endregion
+
             default:
             {
                 return new Response ("ERROR", "Unknown request type");
@@ -686,6 +695,18 @@ public class ClientHandler extends Thread
         categoryDAO.create (category);
 
         return new Response ("SUCCESS", "Category created successfully", category);
+    }
+
+    //endregion
+
+    //region [ - Playlist Functions - ]
+
+    private Response create (Playlist playlist)
+    {
+        PlaylistDAOImpl playlistDAO = new PlaylistDAOImpl ();
+        playlistDAO.create (playlist);
+
+        return new Response ("SUCCESS", "Playlist created successfully", null);
     }
 
     //endregion

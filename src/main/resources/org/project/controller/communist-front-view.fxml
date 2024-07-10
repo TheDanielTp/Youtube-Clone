@@ -125,7 +125,7 @@
                <children>
                   <VBox prefHeight="998.0" prefWidth="107.0" style="-fx-border-color: ffffff; -fx-border-width: 5; -fx-background-color: cd0000;">
                      <children>
-                        <Button alignment="BOTTOM_CENTER" minHeight="65.0" mnemonicParsing="false" onMouseEntered="#homeButtonHover" onMouseExited="#homeButtonUnHover" prefHeight="65.0" prefWidth="80.0">
+                        <Button alignment="BOTTOM_CENTER" minHeight="65.0" mnemonicParsing="false" onAction="#homeClicked" onMouseEntered="#homeButtonHover" onMouseExited="#homeButtonUnHover" prefHeight="65.0" prefWidth="80.0">
                            <font>
                               <Font name="Roboto Medium" size="14.0" />
                            </font>
@@ -271,7 +271,7 @@
                <content>
                   <VBox prefHeight="1152.0" prefWidth="257.0" style="-fx-border-color: ffffff; -fx-border-width: 5; -fx-background-color: cd0000;">
                      <children>
-                        <Button alignment="TOP_LEFT" mnemonicParsing="false" onMouseEntered="#homeButtonHover" onMouseExited="#homeButtonUnHover" prefHeight="9.0" prefWidth="227.0" text="   Home">
+                        <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#homeClicked" onMouseEntered="#homeButtonHover" onMouseExited="#homeButtonUnHover" prefHeight="9.0" prefWidth="227.0" text="   Home">
                            <VBox.margin>
                               <Insets bottom="1.0" left="10.0" right="10.0" top="10.0" />
                            </VBox.margin>
@@ -320,7 +320,7 @@
                               <Insets left="10.0" right="10.0" />
                            </VBox.margin>
                         </Button>
-                        <Button alignment="TOP_LEFT" mnemonicParsing="false" onMouseEntered="#historyButtonHover" onMouseExited="#historyButtonUnHover" prefHeight="21.0" prefWidth="227.0" text="   History">
+                        <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#historyClicked" onMouseEntered="#historyButtonHover" onMouseExited="#historyButtonUnHover" prefHeight="21.0" prefWidth="227.0" text="   History">
                            <font>
                               <Font name="Roboto Medium" size="14.0" />
                            </font>

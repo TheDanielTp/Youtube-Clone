@@ -91,7 +91,7 @@ public class VideoRecommendationController implements Initializable
     }
     //endregion
 
-    //region [ - setVideo(Video video) - ]
+    //region [ - setVideo(Video videoFile) - ]
     public void setVideo (Video video)
     {
         ChannelDAOImpl channelDAO = new ChannelDAOImpl ();

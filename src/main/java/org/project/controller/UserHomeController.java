@@ -72,11 +72,11 @@ public class UserHomeController implements Initializable
             for (Video video : videos)
             {
                 try {
-                    // Load FXML file and create root node
+                    // Load FXML videoFile and create root node
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/project/controller/video-thumbnail-view.fxml"));
                     AnchorPane videoNode = loader.load();
 
-                    ImageView thumbnail = (ImageView) videoNode.lookup("#thumbnail");
+                    ImageView thumbnail = (ImageView) videoNode.lookup("#thumbnailFile");
                     Label title = (Label) videoNode.lookup("#title");
                     Button videoButton = (Button) videoNode.lookup("#videoButton");
                     Label duration = (Label) videoNode.lookup("#duration");
@@ -87,10 +87,10 @@ public class UserHomeController implements Initializable
                         File videoFile = new File(video.getVideoURL());
                         byte[] fileBytes = Files.readAllBytes(Path.of(videoFile.toURI()));
 
-                        tempFile = File.createTempFile("video", ".mp4");
+                        tempFile = File.createTempFile("videoFile", ".mp4");
                         tempFile.deleteOnExit();
 
-                        // Write the byte array to the temporary file
+                        // Write the byte array to the temporary videoFile
                         try (FileOutputStream fos = new FileOutputStream(tempFile); ByteArrayInputStream bais = new ByteArrayInputStream(fileBytes)) {
                             byte[] buffer = new byte[1024];
                             int length;
@@ -104,7 +104,7 @@ public class UserHomeController implements Initializable
                         return;
                     }
 
-                    // Create a Media object from the temporary file
+                    // Create a Media object from the temporary videoFile
                     media = new Media(tempFile.toURI().toString());
 
                     Label totalTimeLabel = new Label("00:00");
@@ -113,9 +113,9 @@ public class UserHomeController implements Initializable
 
                     duration.setText(totalTimeLabel.getText());
 
-//                if (thumbnail != null)
+//                if (thumbnailFile != null)
 //                {
-//                    thumbnail.setImage (new Image ("/org/project/controller/images/thumbnails/You_Were_The_Chosen_One.jpg"));
+//                    thumbnailFile.setImage (new Image ("/org/project/controller/images/thumbnails/You_Were_The_Chosen_One.jpg"));
 //                }
 //                else
 //                {
@@ -158,11 +158,11 @@ public class UserHomeController implements Initializable
             {
                 Video video = videos.get(i);
                 try {
-                    // Load FXML file and create root node
+                    // Load FXML videoFile and create root node
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/project/controller/video-thumbnail-view.fxml"));
                     AnchorPane videoNode = loader.load();
 
-                    ImageView thumbnail = (ImageView) videoNode.lookup("#thumbnail");
+                    ImageView thumbnail = (ImageView) videoNode.lookup("#thumbnailFile");
                     Label title = (Label) videoNode.lookup("#title");
                     Button videoButton = (Button) videoNode.lookup("#videoButton");
                     Label duration = (Label) videoNode.lookup("#duration");
@@ -173,10 +173,10 @@ public class UserHomeController implements Initializable
                         File videoFile = new File(video.getVideoURL());
                         byte[] fileBytes = Files.readAllBytes(Path.of(videoFile.toURI()));
 
-                        tempFile = File.createTempFile("video", ".mp4");
+                        tempFile = File.createTempFile("videoFile", ".mp4");
                         tempFile.deleteOnExit();
 
-                        // Write the byte array to the temporary file
+                        // Write the byte array to the temporary videoFile
                         try (FileOutputStream fos = new FileOutputStream(tempFile); ByteArrayInputStream bais = new ByteArrayInputStream(fileBytes)) {
                             byte[] buffer = new byte[1024];
                             int length;
@@ -190,7 +190,7 @@ public class UserHomeController implements Initializable
                         return;
                     }
 
-                    // Create a Media object from the temporary file
+                    // Create a Media object from the temporary videoFile
                     media = new Media(tempFile.toURI().toString());
 
                     Label totalTimeLabel = new Label("00:00");
@@ -199,9 +199,9 @@ public class UserHomeController implements Initializable
 
                     duration.setText(totalTimeLabel.getText());
 
-//                if (thumbnail != null)
+//                if (thumbnailFile != null)
 //                {
-//                    thumbnail.setImage (new Image ("/org/project/controller/images/thumbnails/You_Were_The_Chosen_One.jpg"));
+//                    thumbnailFile.setImage (new Image ("/org/project/controller/images/thumbnails/You_Were_The_Chosen_One.jpg"));
 //                }
 //                else
 //                {
@@ -244,11 +244,11 @@ public class UserHomeController implements Initializable
             {
                 Video video = videos.get(videos.size() - i);
                 try {
-                    // Load FXML file and create root node
+                    // Load FXML videoFile and create root node
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/project/controller/video-thumbnail-view.fxml"));
                     AnchorPane videoNode = loader.load();
 
-                    ImageView thumbnail = (ImageView) videoNode.lookup("#thumbnail");
+                    ImageView thumbnail = (ImageView) videoNode.lookup("#thumbnailFile");
                     Label title = (Label) videoNode.lookup("#title");
                     Button videoButton = (Button) videoNode.lookup("#videoButton");
                     Label duration = (Label) videoNode.lookup("#duration");
@@ -259,10 +259,10 @@ public class UserHomeController implements Initializable
                         File videoFile = new File(video.getVideoURL());
                         byte[] fileBytes = Files.readAllBytes(Path.of(videoFile.toURI()));
 
-                        tempFile = File.createTempFile("video", ".mp4");
+                        tempFile = File.createTempFile("videoFile", ".mp4");
                         tempFile.deleteOnExit();
 
-                        // Write the byte array to the temporary file
+                        // Write the byte array to the temporary videoFile
                         try (FileOutputStream fos = new FileOutputStream(tempFile); ByteArrayInputStream bais = new ByteArrayInputStream(fileBytes)) {
                             byte[] buffer = new byte[1024];
                             int length;
@@ -276,7 +276,7 @@ public class UserHomeController implements Initializable
                         return;
                     }
 
-                    // Create a Media object from the temporary file
+                    // Create a Media object from the temporary videoFile
                     media = new Media(tempFile.toURI().toString());
 
                     Label totalTimeLabel = new Label("00:00");
@@ -285,9 +285,9 @@ public class UserHomeController implements Initializable
 
                     duration.setText(totalTimeLabel.getText());
 
-//                if (thumbnail != null)
+//                if (thumbnailFile != null)
 //                {
-//                    thumbnail.setImage (new Image ("/org/project/controller/images/thumbnails/You_Were_The_Chosen_One.jpg"));
+//                    thumbnailFile.setImage (new Image ("/org/project/controller/images/thumbnails/You_Were_The_Chosen_One.jpg"));
 //                }
 //                else
 //                {
@@ -329,11 +329,11 @@ public class UserHomeController implements Initializable
             for (Video video : popularVideos)
             {
                 try {
-                    // Load FXML file and create root node
+                    // Load FXML videoFile and create root node
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/project/controller/video-thumbnail-view.fxml"));
                     AnchorPane videoNode = loader.load();
 
-                    ImageView thumbnail = (ImageView) videoNode.lookup("#thumbnail");
+                    ImageView thumbnail = (ImageView) videoNode.lookup("#thumbnailFile");
                     Label title = (Label) videoNode.lookup("#title");
                     Button videoButton = (Button) videoNode.lookup("#videoButton");
                     Label duration = (Label) videoNode.lookup("#duration");
@@ -344,10 +344,10 @@ public class UserHomeController implements Initializable
                         File videoFile = new File(video.getVideoURL());
                         byte[] fileBytes = Files.readAllBytes(Path.of(videoFile.toURI()));
 
-                        tempFile = File.createTempFile("video", ".mp4");
+                        tempFile = File.createTempFile("videoFile", ".mp4");
                         tempFile.deleteOnExit();
 
-                        // Write the byte array to the temporary file
+                        // Write the byte array to the temporary videoFile
                         try (FileOutputStream fos = new FileOutputStream(tempFile); ByteArrayInputStream bais = new ByteArrayInputStream(fileBytes)) {
                             byte[] buffer = new byte[1024];
                             int length;
@@ -361,7 +361,7 @@ public class UserHomeController implements Initializable
                         return;
                     }
 
-                    // Create a Media object from the temporary file
+                    // Create a Media object from the temporary videoFile
                     media = new Media(tempFile.toURI().toString());
 
                     Label totalTimeLabel = new Label("00:00");
@@ -370,9 +370,9 @@ public class UserHomeController implements Initializable
 
                     duration.setText(totalTimeLabel.getText());
 
-//                if (thumbnail != null)
+//                if (thumbnailFile != null)
 //                {
-//                    thumbnail.setImage (new Image ("/org/project/controller/images/thumbnails/You_Were_The_Chosen_One.jpg"));
+//                    thumbnailFile.setImage (new Image ("/org/project/controller/images/thumbnails/You_Were_The_Chosen_One.jpg"));
 //                }
 //                else
 //                {

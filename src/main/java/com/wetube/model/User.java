@@ -1,6 +1,7 @@
 package com.wetube.model;
 
 import com.wetube.dao.impl.UserDAOImpl;
+import org.project.controller.MainApplication;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -61,6 +62,9 @@ public class User implements Serializable
         {
             throw new RuntimeException (e);
         }
+
+        Playlist playlist = new Playlist (ID, ID, "History", "History", false, false);
+        MainApplication.client.create (playlist);
     }
 
     public User (UUID ID, UUID channelID, String firstName, String lastName, String username, String email, String password, LocalDate birthdate, LocalDate joinDate, boolean isPremium, Double balance, String profilePictureURL)

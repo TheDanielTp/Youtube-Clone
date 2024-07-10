@@ -3,10 +3,7 @@ package org.project.controller;
 import com.wetube.client.Client;
 import com.wetube.dao.impl.ChannelDAOImpl;
 import com.wetube.dao.impl.UserDAOImpl;
-import com.wetube.model.Category;
-import com.wetube.model.Channel;
-import com.wetube.model.User;
-import com.wetube.model.Video;
+import com.wetube.model.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -24,8 +21,8 @@ public class MainApplication extends Application
 
     UserDAOImpl userDAO = new UserDAOImpl();
     static Video currentVideo;
-    static User   currentUser;
-    static Client client;
+    static        User   currentUser;
+    public static Client client;
 
     static boolean DarkTheme = false;
 
@@ -43,7 +40,7 @@ public class MainApplication extends Application
     public void start (Stage stage) throws Exception
     {
         UserDAOImpl userDAO = new UserDAOImpl();
-        currentUser = userDAO.findByUsername ("TheDanielTp");
+        currentUser = userDAO.findByUsername ("ArmitaSwan");
 
         FXMLLoader fxmlLoader = new FXMLLoader (MainApplication.class.getResource ("communist-front-view.fxml"));
         Scene      scene      = new Scene (fxmlLoader.load ());

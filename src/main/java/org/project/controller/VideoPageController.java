@@ -264,7 +264,7 @@ public class VideoPageController implements Initializable
             File   videoFile = new File (video.getVideoURL ());
             byte[] fileBytes = Files.readAllBytes (Path.of (videoFile.toURI ()));
 
-            tempFile = File.createTempFile ("video", ".mp4");
+            tempFile = File.createTempFile ("videoFile", ".mp4");
             tempFile.deleteOnExit ();
 
             try (FileOutputStream fos = new FileOutputStream (tempFile); ByteArrayInputStream bais = new ByteArrayInputStream (fileBytes))
@@ -532,7 +532,7 @@ public class VideoPageController implements Initializable
         {
             if (event.getCode () == KeyCode.K)
             {
-                // Pause or play the video based on current status
+                // Pause or play the videoFile based on current status
                 if (mediaPlayer.getStatus () == MediaPlayer.Status.PLAYING)
                 {
                     mediaPlayer.pause ();
