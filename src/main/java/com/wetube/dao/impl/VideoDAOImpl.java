@@ -452,7 +452,7 @@ public class VideoDAOImpl
                         resultSet.getObject ("ID", UUID.class),
                         resultSet.getObject ("contentID", UUID.class),
                         resultSet.getObject ("creatorID", UUID.class),
-                        resultSet.getObject ("channelID", UUID.class),
+                        resultSet.getObject ("creatorID", UUID.class),
                         resultSet.getInt ("likesCount"),
                         resultSet.getInt ("dislikesCount"),
                         resultSet.getObject ("creationDate", LocalDateTime.class),

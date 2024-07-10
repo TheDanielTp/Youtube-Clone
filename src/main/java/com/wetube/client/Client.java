@@ -432,4 +432,18 @@ public class Client
 
         return new Object[]{0, response.getData ()};
     }
+
+    //endregion
+
+    //region [ - Community Functions - ]
+
+    public Object[] create (Community community)
+    {
+        Request request = new Request ("CREATE_COMMUNITY", community);
+        Response response = sendRequest (request);
+
+        return new Object[]{0, response.getData ()};
+    }
+
+    //endregion
 }
