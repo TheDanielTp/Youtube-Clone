@@ -116,7 +116,7 @@ public class VideoDAOImpl
 
     public boolean checkActionExistence (User user, Video video)
     {
-        String sql = "SELECT * FROM ContentsAction WHERE userID = ? AND videoID = ?";
+        String sql = "SELECT * FROM ContentsAction WHERE userID = ? AND contentID = ?";
         try (Connection conn = DatabaseConnection.getConnection ();
              PreparedStatement pstmt = conn.prepareStatement (sql))
         {
