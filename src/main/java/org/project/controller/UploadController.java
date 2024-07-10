@@ -12,10 +12,8 @@ import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import java.io.*;
 import java.nio.file.Path;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -83,13 +81,60 @@ public class UploadController implements Initializable
 
         if (title != null && description != null && videoFile != null && thumbnailFile != null && category != null)
         {
+            File sourceFileVideo = new File (videoFile.getPath ());
+
+            String targetDirPathVideo = "D:\\Java\\Projects\\Project_WeTube\\src\\main\\resources\\org\\project\\controller\\videos";
+
+            File targetDirVideo = new File (targetDirPathVideo);
+            if (! targetDirVideo.exists ())
+            {
+                targetDirVideo.mkdirs ();
+            }
+
+            File targetFileVideo = new File (targetDirVideo, sourceFileVideo.getName ());
+            saveFile (sourceFileVideo, targetFileVideo);
+
+            File sourceFileThumbnail = new File (thumbnailFile.getPath ());
+
+            String targetDirPathThumbnail = "D:\\Java\\Projects\\Project_WeTube\\src\\main\\resources\\org\\project\\controller\\images\\thumbnails";
+
+            File targetDirThumbnail = new File (targetDirPathThumbnail);
+            if (! targetDirThumbnail.exists ())
+            {
+                targetDirThumbnail.mkdirs ();
+            }
+
+            File targetFileThumbnail = new File (targetDirThumbnail, targetFileVideo.getName ());
+            saveFile (sourceFileThumbnail, targetFileThumbnail);
 
             Video video = new Video (MainApplication.currentUser.getID (), category.getID (), MainApplication.currentUser.getID (),
-                    title, description, videoFile.getPath (), thumbnailFile.getPath (), onlyComradeCheckBox.isSelected ());
+                    title, description, targetFileVideo.getPath (), targetFileThumbnail.getPath (), onlyComradeCheckBox.isSelected ());
             MainApplication.client.create (video);
         }
 
         Stage stage = (Stage) titleField.getScene ().getWindow ();
         stage.close ();
+    }
+
+    private static void saveFile (File sourceFile, File targetFile)
+    {
+        try (FileInputStream fis = new FileInputStream (sourceFile);
+             FileOutputStream fos = new FileOutputStream (targetFile))
+        {
+
+            byte[] buffer = new byte[1024];
+            int    length;
+            while ((length = fis.read (buffer)) > 0)
+            {
+                fos.write (buffer, 0, length);
+            }
+
+            System.out.println ("> Uploader: File saved successfully to " + targetFile.getAbsolutePath ());
+
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace ();
+        }
     }
 }
