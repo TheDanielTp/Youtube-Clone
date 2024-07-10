@@ -16,13 +16,13 @@
 <?import javafx.scene.shape.SVGPath?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" stylesheets="@communist-user-view.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.project.controller.UserHomeController">
+<VBox fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: #000000;" stylesheets="@dark-user-view.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.project.controller.UserHomeController">
     <children>
-        <HBox prefHeight="0.0" prefWidth="1920.0" style="-fx-background-color: cd0000; -fx-border-color: ffffff; -fx-border-width: 5;">
+        <HBox prefHeight="0.0" prefWidth="1920.0" style="-fx-background-color: #000000; -fx-border-color: #000000; -fx-border-width: 5;">
             <children>
                 <ImageView fx:id="menuHover" fitHeight="40.0" fitWidth="40.0" onMouseClicked="#menuClick" onMouseEntered="#menuButtonHover" onMouseExited="#menuButtonUnHover" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@images/menuHover.png" />
+                        <Image url="@images/menuGray.png" />
                     </image>
                     <HBox.margin>
                         <Insets left="15.0" top="17.0" />
@@ -30,7 +30,7 @@
                 </ImageView>
                 <ImageView fx:id="menuButton" fitHeight="40.0" fitWidth="40.0" onMouseClicked="#menuClick" onMouseEntered="#menuButtonHover" onMouseExited="#menuButtonUnHover" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@images/menu.png" />
+                        <Image url="@images/menu2.png" />
                     </image>
                     <HBox.margin>
                         <Insets left="-40.0" top="17.0" />
@@ -38,7 +38,7 @@
                 </ImageView>
                 <ImageView fitHeight="36.0" fitWidth="138.0" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@images/logo.png" />
+                        <Image url="@images/naziWeTube.png" />
                     </image>
                     <HBox.margin>
                         <Insets bottom="20.0" left="15.0" right="100.0" top="20.0" />
@@ -54,7 +54,7 @@
                 </TextField>
                 <ImageView fx:id="micHover" fitHeight="40.0" fitWidth="40.0" onMouseEntered="#micButtonHover" onMouseExited="#micButtonUnHover" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@images/micHover.png" />
+                        <Image url="@images/micGray.png" />
                     </image>
                     <HBox.margin>
                         <Insets left="15.0" top="17.0" />
@@ -62,7 +62,7 @@
                 </ImageView>
                 <ImageView fx:id="micButton" fitHeight="40.0" fitWidth="40.0" onMouseEntered="#micButtonHover" onMouseExited="#micButtonUnHover" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@images/mic.png" />
+                        <Image url="@images/mic2.png" />
                     </image>
                     <HBox.margin>
                         <Insets left="-40.0" top="17.0" />
@@ -70,7 +70,7 @@
                 </ImageView>
                 <ImageView fx:id="themeHover" fitHeight="40.0" fitWidth="40.0" onMouseClicked="#themeButtonClicked" onMouseEntered="#themeButtonHover" onMouseExited="#themeButtonUnHover" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@images/darkthemeHover.png" />
+                        <Image url="@images/lightthemeHover.png" />
                     </image>
                     <HBox.margin>
                         <Insets left="100.0" top="17.0" />
@@ -78,7 +78,7 @@
                 </ImageView>
                 <ImageView fx:id="themeButton" fitHeight="40.0" fitWidth="40.0" onMouseClicked="#themeButtonClicked" onMouseEntered="#themeButtonHover" onMouseExited="#themeButtonUnHover" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@images/darktheme.png" />
+                        <Image url="@images/lighttheme.png" />
                     </image>
                     <HBox.margin>
                         <Insets left="-40.0" right="15.0" top="17.0" />
@@ -86,7 +86,7 @@
                 </ImageView>
                 <ImageView fx:id="notificationHover" fitHeight="40.0" fitWidth="40.0" onMouseEntered="#notificationButtonHover" onMouseExited="#notificationButtonUnHover" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@images/notifHover.png" />
+                        <Image url="@images/notifDarkHover.png" />
                     </image>
                     <HBox.margin>
                         <Insets top="17.0" />
@@ -94,7 +94,7 @@
                 </ImageView>
                 <ImageView fx:id="notificationButton" fitHeight="40.0" fitWidth="40.0" onMouseEntered="#notificationButtonHover" onMouseExited="#notificationButtonUnHover" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@images/notif.png" />
+                        <Image url="@images/notifDark.png" />
                     </image>
                     <HBox.margin>
                         <Insets left="-40.0" right="15.0" top="17.0" />
@@ -112,14 +112,14 @@
                 </VBox>
             </children>
         </HBox>
-        <HBox prefHeight="1051.0" prefWidth="1920.0">
+        <HBox prefHeight="1051.0" prefWidth="1920.0" style="-fx-background-color: #000000;">
             <children>
-                <VBox fx:id="leftMenuSmall">
+                <VBox fx:id="leftMenuSmall" style="-fx-background-color: #000000;">
                     <HBox.margin>
                         <Insets top="-5.0" />
                     </HBox.margin>
                     <children>
-                        <VBox prefHeight="998.0" prefWidth="107.0" style="-fx-border-color: ffffff; -fx-border-width: 5; -fx-background-color: cd0000;">
+                        <VBox prefHeight="998.0" prefWidth="107.0" style="-fx-border-color: #000000; -fx-border-width: 5; -fx-background-color: #000000;">
                             <children>
                                 <Button alignment="BOTTOM_CENTER" minHeight="65.0" mnemonicParsing="false" onMouseEntered="#homeButtonHover" onMouseExited="#homeButtonUnHover" prefHeight="65.0" prefWidth="80.0">
                                     <font>
@@ -260,12 +260,12 @@
                         </VBox>
                     </children>
                 </VBox>
-                <ScrollPane fx:id="leftMenu" hbarPolicy="NEVER" minWidth="272.0" vbarPolicy="ALWAYS">
+                <ScrollPane fx:id="leftMenu" hbarPolicy="NEVER" minWidth="272.0" style="-fx-background-color: #000000;" vbarPolicy="ALWAYS">
                     <HBox.margin>
                         <Insets left="-108.0" top="-5.0" />
                     </HBox.margin>
                     <content>
-                        <VBox prefHeight="1152.0" prefWidth="257.0" style="-fx-border-color: ffffff; -fx-border-width: 5; -fx-background-color: cd0000;">
+                        <VBox prefHeight="1152.0" prefWidth="257.0" style="-fx-border-color: #000000; -fx-border-width: 5; -fx-background-color: #000000;">
                             <children>
                                 <Button alignment="TOP_LEFT" mnemonicParsing="false" onMouseEntered="#homeButtonHover" onMouseExited="#homeButtonUnHover" prefHeight="9.0" prefWidth="227.0" text="   Home">
                                     <VBox.margin>
@@ -468,208 +468,208 @@
                         </VBox>
                     </content>
                 </ScrollPane>
-                <ScrollPane hbarPolicy="NEVER">
+                <ScrollPane hbarPolicy="NEVER" style="-fx-background-color: #000000;">
                     <content>
-                  <VBox>
-                     <children>
-                              <FlowPane fx:id="videosPane" prefHeight="994.0" prefWidth="1638.0">
-                                  <children>
-                                      <HBox prefHeight="177.0" prefWidth="1634.0">
-                                          <children>
-                                              <ImageView fitHeight="215.0" fitWidth="1633.0" pickOnBounds="true" preserveRatio="true" />
-                                          </children>
-                                      </HBox>
-                                      <HBox prefHeight="156.0" prefWidth="1627.0">
-                                          <children>
-                                              <ImageView fitHeight="255.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />
-                                              <ImageView fitHeight="255.0" fitWidth="255.0" pickOnBounds="true" preserveRatio="true">
-                                       <HBox.margin>
-                                          <Insets right="20.0" />
-                                       </HBox.margin>
+                        <VBox style="-fx-background-color: #000000;">
+                            <children>
+                                <FlowPane fx:id="videosPane" prefHeight="994.0" prefWidth="1638.0">
+                                    <children>
+                                        <HBox prefHeight="177.0" prefWidth="1634.0">
+                                            <children>
+                                                <ImageView fitHeight="215.0" fitWidth="1633.0" pickOnBounds="true" preserveRatio="true" />
+                                            </children>
+                                        </HBox>
+                                        <HBox prefHeight="156.0" prefWidth="1627.0">
+                                            <children>
+                                                <ImageView fitHeight="255.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />
+                                                <ImageView fitHeight="255.0" fitWidth="255.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@images/profilePictures/pfp3.jpg" />
-                                       </image></ImageView>
-                                              <VBox prefHeight="255.0" prefWidth="1266.0">
-                                                  <children>
-                                                      <Label prefHeight="94.0" prefWidth="905.0" text="Name" textFill="#cd0000" wrapText="true">
-                                                          <font>
-                                                              <Font name="System Bold" size="35.0" />
-                                                          </font>
-                                                      </Label>
-                                                      <HBox prefHeight="47.0" prefWidth="1266.0">
-                                                          <children>
-                                                              <Label text="username" wrapText="true">
-                                                                  <font>
-                                                                      <Font size="20.0" />
-                                                                  </font>
-                                                   <HBox.margin>
-                                                      <Insets right="3.0" />
-                                                   </HBox.margin>
-                                                              </Label>
-                                                              <Label layoutX="10.0" layoutY="10.0" text="subscribers count" textFill="#cd0000" wrapText="true">
-                                                                  <font>
-                                                                      <Font size="20.0" />
-                                                                  </font>
-                                                   <HBox.margin>
-                                                      <Insets left="5.0" right="5.0" />
-                                                   </HBox.margin>
-                                                              </Label>
-                                                              <Label layoutX="96.0" layoutY="10.0" text="total views" wrapText="true">
-                                                                  <font>
-                                                                      <Font size="20.0" />
-                                                                  </font>
-                                                   <HBox.margin>
-                                                      <Insets left="5.0" right="5.0" />
-                                                   </HBox.margin>
-                                                              </Label>
-                                                <Label layoutX="96.0" layoutY="10.0" text="balance" textFill="#cd0000" wrapText="true">
-                                                   <font>
-                                                      <Font size="20.0" />
-                                                   </font>
-                                                   <HBox.margin>
-                                                      <Insets left="5.0" right="5.0" />
-                                                   </HBox.margin>
-                                                </Label>
-                                                          </children>
-                                                      </HBox>
-                                                      <HBox prefHeight="46.0" prefWidth="1266.0">
-                                                          <children>
-                                                              <Label text="More about this channel...">
-                                                                  <font>
-                                                                      <Font size="20.0" />
-                                                                  </font>
-                                                              </Label>
-                                                              <Label fx:id="more" text="more" textFill="#cd0000">
-                                                                  <font>
-                                                                      <Font size="20.0" />
-                                                                  </font>
-                                                              </Label>
-                                                          </children>
-                                                      </HBox>
-                                                      <HBox>
-                                                          <children>
-                                                              <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="166.0" text="Edit">
-                                                                  <font>
-                                                                      <Font size="18.0" />
-                                                                  </font>
-                                                   <HBox.margin>
-                                                      <Insets left="5.0" right="5.0" />
-                                                   </HBox.margin>
-                                                              </Button>
-                                                              <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="166.0" text="Post">
-                                                                  <font>
-                                                                      <Font size="18.0" />
-                                                                  </font>
-                                                   <HBox.margin>
-                                                      <Insets left="5.0" right="5.0" />
-                                                   </HBox.margin>
-                                                              </Button>
-                                                              <Button layoutX="176.0" layoutY="10.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="166.0" text="Add Balance">
-                                                                  <font>
-                                                                      <Font size="18.0" />
-                                                                  </font>
-                                                   <HBox.margin>
-                                                      <Insets left="5.0" right="5.0" />
-                                                   </HBox.margin>
-                                                              </Button>
-                                                          </children>
-                                             <VBox.margin>
-                                                <Insets left="5.0" right="5.0" />
-                                             </VBox.margin>
-                                                      </HBox>
-                                                  </children>
-                                              </VBox>
-                                          </children>
-                                      </HBox>
-                              <VBox>
-                                 <children>
-                                            <TabPane>
-                                                <tabs>
-                                                    <Tab closable="false" text="Home">
-                                                        <content>
-                                                            <VBox prefHeight="470.0" prefWidth="1633.0" style="-fx-background-color: #cd0000;">
-                                                                <children>
-                                                                    <Label text="  Latests" textFill="WHITE">
-                                                                        <font>
-                                                                            <Font size="30.0" />
-                                                                        </font>
-                                                                    </Label>
-                                                                    <FlowPane fx:id="lastVideosPane" prefHeight="189.0" prefWidth="1634.0" />
-                                                                    <Label layoutX="10.0" layoutY="10.0" text="  Videos" textFill="WHITE">
-                                                                        <font>
-                                                                            <Font size="30.0" />
-                                                                        </font>
-                                                                    </Label>
-                                                                    <FlowPane fx:id="videosPane" layoutX="10.0" layoutY="56.0" prefHeight="189.0" prefWidth="1634.0" />
-                                                                </children>
-                                                            </VBox>
-                                                        </content>
-                                                    </Tab>
-                                                    <Tab closable="false" text="Videos">
-                                                        <content>
-                                                <VBox>
-                                                   <children>
-                                                                  <TabPane>
-                                                                      <tabs>
-                                                                          <Tab closable="false" text="Latest">
-                                                                              <content>
-                                                                                  <VBox prefHeight="470.0" prefWidth="1633.0" style="-fx-background-color: #cd0000;">
-                                                                                      <children>
-                                                                                          <FlowPane fx:id="reverseVideosPane" layoutX="10.0" layoutY="56.0" prefHeight="189.0" prefWidth="1634.0" />
-                                                                                      </children>
-                                                                                  </VBox>
-                                                                              </content>
-                                                                          </Tab>
-                                                                          <Tab closable="false" text="Popular">
-                                                                              <content>
-                                                                                  <VBox prefHeight="470.0" prefWidth="1633.0" style="-fx-background-color: #cd0000;">
-                                                                                      <children>
-                                                                                          <FlowPane fx:id="popularVideosPane" layoutX="10.0" layoutY="56.0" prefHeight="449.0" prefWidth="1634.0" />
-                                                                                      </children>
-                                                                                  </VBox>
-                                                                              </content>
-                                                                          </Tab>
-                                                                          <Tab closable="false" text="Oldest">
-                                                                              <content>
-                                                                                  <VBox prefHeight="470.0" prefWidth="1633.0" style="-fx-background-color: #cd0000;">
-                                                                                      <children>
-                                                                                          <FlowPane fx:id="videosPane121" layoutX="10.0" layoutY="56.0" prefHeight="442.0" prefWidth="1634.0" />
-                                                                                      </children>
-                                                                                  </VBox>
-                                                                              </content>
-                                                                          </Tab>
-                                                                      </tabs>
-                                                                  </TabPane>
-                                                   </children>
+                                       </image>
+                                       <HBox.margin>
+                                          <Insets right="20.0" />
+                                       </HBox.margin></ImageView>
+                                                <VBox prefHeight="255.0" prefWidth="1266.0">
+                                                    <children>
+                                                        <Label prefHeight="94.0" prefWidth="905.0" text="Name" textFill="WHITE" wrapText="true">
+                                                            <font>
+                                                                <Font name="System Bold" size="35.0" />
+                                                            </font>
+                                                        </Label>
+                                                        <HBox prefHeight="47.0" prefWidth="1266.0">
+                                                            <children>
+                                                                <Label text="username" textFill="WHITE" wrapText="true">
+                                                                    <font>
+                                                                        <Font size="20.0" />
+                                                                    </font>
+                                                                    <HBox.margin>
+                                                                        <Insets right="3.0" />
+                                                                    </HBox.margin>
+                                                                </Label>
+                                                                <Label layoutX="10.0" layoutY="10.0" text="subscribers count" textFill="WHITE" wrapText="true">
+                                                                    <font>
+                                                                        <Font size="20.0" />
+                                                                    </font>
+                                                                    <HBox.margin>
+                                                                        <Insets left="5.0" right="5.0" />
+                                                                    </HBox.margin>
+                                                                </Label>
+                                                                <Label layoutX="96.0" layoutY="10.0" text="total views" textFill="WHITE" wrapText="true">
+                                                                    <font>
+                                                                        <Font size="20.0" />
+                                                                    </font>
+                                                                    <HBox.margin>
+                                                                        <Insets left="5.0" right="5.0" />
+                                                                    </HBox.margin>
+                                                                </Label>
+                                                                <Label layoutX="96.0" layoutY="10.0" text="balance" textFill="WHITE" wrapText="true">
+                                                                    <font>
+                                                                        <Font size="20.0" />
+                                                                    </font>
+                                                                    <HBox.margin>
+                                                                        <Insets left="5.0" right="5.0" />
+                                                                    </HBox.margin>
+                                                                </Label>
+                                                            </children>
+                                                        </HBox>
+                                                        <HBox prefHeight="46.0" prefWidth="1266.0">
+                                                            <children>
+                                                                <Label text="More about this channel..." textFill="WHITE">
+                                                                    <font>
+                                                                        <Font size="20.0" />
+                                                                    </font>
+                                                                </Label>
+                                                                <Label fx:id="more" text="more" textFill="#cd0000">
+                                                                    <font>
+                                                                        <Font size="20.0" />
+                                                                    </font>
+                                                                </Label>
+                                                            </children>
+                                                        </HBox>
+                                                        <HBox>
+                                                            <children>
+                                                                <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="166.0" text="Edit">
+                                                                    <font>
+                                                                        <Font size="18.0" />
+                                                                    </font>
+                                                                    <HBox.margin>
+                                                                        <Insets left="5.0" right="5.0" />
+                                                                    </HBox.margin>
+                                                                </Button>
+                                                                <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="166.0" text="Post">
+                                                                    <font>
+                                                                        <Font size="18.0" />
+                                                                    </font>
+                                                                    <HBox.margin>
+                                                                        <Insets left="5.0" right="5.0" />
+                                                                    </HBox.margin>
+                                                                </Button>
+                                                                <Button layoutX="176.0" layoutY="10.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="166.0" text="Add Balance">
+                                                                    <font>
+                                                                        <Font size="18.0" />
+                                                                    </font>
+                                                                    <HBox.margin>
+                                                                        <Insets left="5.0" right="5.0" />
+                                                                    </HBox.margin>
+                                                                </Button>
+                                                            </children>
+                                                            <VBox.margin>
+                                                                <Insets left="5.0" right="5.0" />
+                                                            </VBox.margin>
+                                                        </HBox>
+                                                    </children>
                                                 </VBox>
-                                                        </content>
-                                                    </Tab>
-                                                    <Tab closable="false" text="Playlists">
-                                             <content>
-                                                <VBox prefHeight="200.0" prefWidth="100.0">
-                                                   <children>
-                                                      <FlowPane prefHeight="504.0" prefWidth="1635.0" />
-                                                   </children>
-                                                </VBox>
-                                             </content>
-                                                    </Tab>
-                                                    <Tab closable="false" text="Community">
-                                                        <content>
-                                                            <VBox prefHeight="470.0" prefWidth="1633.0" style="-fx-background-color: #cd0000;">
-                                                   <children>
-                                                      <FlowPane prefHeight="560.0" prefWidth="1635.0" />
-                                                   </children>
-                                                            </VBox>
-                                                        </content>
-                                                    </Tab>
-                                                </tabs>
-                                            </TabPane>
-                                 </children>
-                              </VBox>
-                                  </children>
-                        </FlowPane>
-                     </children>
-                  </VBox>
+                                            </children>
+                                        </HBox>
+                                        <VBox style="-fx-background-color: #000000;">
+                                            <children>
+                                                <TabPane>
+                                                    <tabs>
+                                                        <Tab closable="false" text="Home">
+                                                            <content>
+                                                                <VBox prefHeight="470.0" prefWidth="1633.0" style="-fx-background-color: #000000;">
+                                                                    <children>
+                                                                        <Label text="  Latests" textFill="WHITE">
+                                                                            <font>
+                                                                                <Font size="30.0" />
+                                                                            </font>
+                                                                        </Label>
+                                                                        <FlowPane fx:id="lastVideosPane" prefHeight="189.0" prefWidth="1634.0" />
+                                                                        <Label layoutX="10.0" layoutY="10.0" text="  Videos" textFill="WHITE">
+                                                                            <font>
+                                                                                <Font size="30.0" />
+                                                                            </font>
+                                                                        </Label>
+                                                                        <FlowPane fx:id="videosPane" layoutX="10.0" layoutY="56.0" prefHeight="189.0" prefWidth="1634.0" />
+                                                                    </children>
+                                                                </VBox>
+                                                            </content>
+                                                        </Tab>
+                                                        <Tab closable="false" text="Videos">
+                                                            <content>
+                                                                <VBox>
+                                                                    <children>
+                                                                        <TabPane>
+                                                                            <tabs>
+                                                                                <Tab closable="false" text="Latest">
+                                                                                    <content>
+                                                                                        <VBox prefHeight="470.0" prefWidth="1633.0" style="-fx-background-color: #000000;">
+                                                                                            <children>
+                                                                                                <FlowPane fx:id="reverseVideosPane" layoutX="10.0" layoutY="56.0" prefHeight="189.0" prefWidth="1634.0" />
+                                                                                            </children>
+                                                                                        </VBox>
+                                                                                    </content>
+                                                                                </Tab>
+                                                                                <Tab closable="false" text="Popular">
+                                                                                    <content>
+                                                                                        <VBox prefHeight="470.0" prefWidth="1633.0" style="-fx-background-color: #000000;">
+                                                                                            <children>
+                                                                                                <FlowPane fx:id="popularVideosPane" layoutX="10.0" layoutY="56.0" prefHeight="449.0" prefWidth="1634.0" />
+                                                                                            </children>
+                                                                                        </VBox>
+                                                                                    </content>
+                                                                                </Tab>
+                                                                                <Tab closable="false" text="Oldest">
+                                                                                    <content>
+                                                                                        <VBox prefHeight="470.0" prefWidth="1633.0" style="-fx-background-color: #000000;">
+                                                                                            <children>
+                                                                                                <FlowPane fx:id="videosPane121" layoutX="10.0" layoutY="56.0" prefHeight="442.0" prefWidth="1634.0" />
+                                                                                            </children>
+                                                                                        </VBox>
+                                                                                    </content>
+                                                                                </Tab>
+                                                                            </tabs>
+                                                                        </TabPane>
+                                                                    </children>
+                                                                </VBox>
+                                                            </content>
+                                                        </Tab>
+                                                        <Tab closable="false" text="Playlists">
+                                                            <content>
+                                                                <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #000000;">
+                                                                    <children>
+                                                                        <FlowPane prefHeight="504.0" prefWidth="1635.0" />
+                                                                    </children>
+                                                                </VBox>
+                                                            </content>
+                                                        </Tab>
+                                                        <Tab closable="false" text="Community">
+                                                            <content>
+                                                                <VBox prefHeight="470.0" prefWidth="1633.0" style="-fx-background-color: #000000;">
+                                                                    <children>
+                                                                        <FlowPane prefHeight="560.0" prefWidth="1635.0" />
+                                                                    </children>
+                                                                </VBox>
+                                                            </content>
+                                                        </Tab>
+                                                    </tabs>
+                                                </TabPane>
+                                            </children>
+                                        </VBox>
+                                    </children>
+                                </FlowPane>
+                            </children>
+                        </VBox>
                     </content>
                 </ScrollPane>
             </children>
