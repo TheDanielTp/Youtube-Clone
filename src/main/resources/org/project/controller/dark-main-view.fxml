@@ -130,18 +130,66 @@
                         <Insets left="-40.0" right="15.0" top="17.0" />
                     </HBox.margin>
                 </ImageView>
+                <ImageView fx:id="createPlaylistHover" fitHeight="40.0" fitWidth="40.0" onMouseClicked="#createPlaylistButtonClick" onMouseEntered="#createPlaylistButtonHover" onMouseExited="#createPlaylistButtonUnHover" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@images/playlistDarkHover.png" />
+                    </image>
+                    <HBox.margin>
+                        <Insets top="17.0" />
+                    </HBox.margin>
+                </ImageView>
+                <ImageView fx:id="createPlaylistButton" fitHeight="40.0" fitWidth="40.0" onMouseClicked="#createPlaylistButtonClick" onMouseEntered="#createPlaylistButtonHover" onMouseExited="#createPlaylistButtonUnHover" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@images/playlistDark.png" />
+                    </image>
+                    <HBox.margin>
+                        <Insets left="-40.0" right="15.0" top="17.0" />
+                    </HBox.margin>
+                </ImageView>
+                <ImageView fx:id="settingHover" fitHeight="40.0" fitWidth="40.0" onMouseClicked="#settingClicked" onMouseEntered="#settingButtonHover" onMouseExited="#settingButtonUnHover" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@images/moreGray.png" />
+                    </image>
+                    <HBox.margin>
+                        <Insets top="17.0" />
+                    </HBox.margin>
+                </ImageView>
+                <ImageView fx:id="settingButton" fitHeight="40.0" fitWidth="40.0" onMouseClicked="#settingClicked" onMouseEntered="#settingButtonHover" onMouseExited="#settingButtonUnHover" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@images/more.png" />
+                    </image>
+                    <HBox.margin>
+                        <Insets left="-40.0" right="15.0" top="17.0" />
+                    </HBox.margin>
+                </ImageView>
+                <ImageView fx:id="signInHover" fitHeight="150.0" fitWidth="100.0" onMouseClicked="#signInButtonClicked" onMouseEntered="#signInButtonHover" onMouseExited="#signInButtonUnHover" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@images/logoutDarkHover.png" />
+                    </image>
+                    <HBox.margin>
+                        <Insets top="16.0" />
+                    </HBox.margin>
+                </ImageView>
+                <ImageView fx:id="signInButton" fitHeight="150.0" fitWidth="100.0" onMouseClicked="#signInButtonClicked" onMouseEntered="#signInButtonHover" onMouseExited="#signInButtonUnHover" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@images/logoutDark.png" />
+                    </image>
+                    <HBox.margin>
+                        <Insets left="-100.0" right="15.0" top="16.0" />
+                    </HBox.margin>
+                </ImageView>
             </children>
         </HBox>
         <HBox prefHeight="1051.0" prefWidth="1920.0">
             <children>
-                <VBox fx:id="leftMenuSmall" minWidth="105.0" style="-fx-background-color: #000000;">
+                <VBox fx:id="leftMenuSmall" minWidth="105.0">
                     <HBox.margin>
                         <Insets top="-5.0" />
                     </HBox.margin>
                     <children>
-                        <VBox prefHeight="998.0" prefWidth="107.0" style="-fx-border-color: ffff#000000ff; -fx-border-width: 5; -fx-background-color: #000000;">
+                        <VBox prefHeight="998.0" prefWidth="107.0" style="-fx-border-color: #000000; -fx-border-width: 5; -fx-background-color: #000000;">
                             <children>
-                                <Button alignment="BOTTOM_CENTER" minHeight="65.0" mnemonicParsing="false" onMouseEntered="#homeButtonHover" onMouseExited="#homeButtonUnHover" prefHeight="65.0" prefWidth="80.0">
+                                <Button alignment="BOTTOM_CENTER" minHeight="65.0" mnemonicParsing="false" onAction="#homeClicked" onMouseEntered="#homeButtonHover" onMouseExited="#homeButtonUnHover" prefHeight="65.0" prefWidth="80.0">
                                     <font>
                                         <Font name="Roboto Medium" size="14.0" />
                                     </font>
@@ -246,7 +294,7 @@
                                         <Insets left="10.0" right="10.0" top="10.0" />
                                     </VBox.margin>
                                 </Button>
-                                <Button alignment="BOTTOM_CENTER" minHeight="65.0" mnemonicParsing="false" onMouseEntered="#historyButtonHover" onMouseExited="#historyButtonUnHover" prefHeight="65.0" prefWidth="80.0">
+                                <Button alignment="BOTTOM_CENTER" minHeight="65.0" mnemonicParsing="false" onAction="#historyClicked" onMouseEntered="#historyButtonHover" onMouseExited="#historyButtonUnHover" prefHeight="65.0" prefWidth="80.0">
                                     <font>
                                         <Font name="Roboto Medium" size="14.0" />
                                     </font>
@@ -320,12 +368,12 @@
                                         <Insets left="10.0" right="10.0" top="10.0" />
                                     </VBox.margin>
                                 </Button>
-                                <Line endX="119.65644073486328" endY="2.272923848067876E-5" startX="-100.0" stroke="WHITE" strokeWidth="3.0">
+                                <Line endX="119.65644073486328" endY="2.272923848067876E-5" startX="-100.0" stroke="#272727" strokeWidth="3.0">
                                     <VBox.margin>
                                         <Insets bottom="15.0" left="10.0" right="10.0" top="15.0" />
                                     </VBox.margin>
                                 </Line>
-                                <Button alignment="TOP_LEFT" mnemonicParsing="false" onMouseEntered="#youButtonHover" onMouseExited="#youButtonUnHover" prefHeight="21.0" prefWidth="227.0" text="   You">
+                                <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#youButtonClicked" onMouseEntered="#youButtonHover" onMouseExited="#youButtonUnHover" prefHeight="21.0" prefWidth="227.0" text="   You">
                                     <font>
                                         <Font name="Roboto Medium" size="14.0" />
                                     </font>
@@ -347,11 +395,22 @@
                                         <Insets left="10.0" right="10.0" top="10.0" />
                                     </VBox.margin>
                                 </Button>
-                                <Line endX="119.65644073486328" endY="2.272923848067876E-5" startX="-100.0" stroke="WHITE" strokeWidth="3.0">
+                                <Line endX="119.65644073486328" endY="2.272923848067876E-5" startX="-100.0" stroke="#272727" strokeWidth="3.0">
                                     <VBox.margin>
                                         <Insets bottom="15.0" left="10.0" right="10.0" top="15.0" />
                                     </VBox.margin>
                                 </Line>
+                                <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#playlistButtonClicked" onMouseEntered="#playlistButtonHover" onMouseExited="#playlistButtonUnHover" prefHeight="21.0" prefWidth="227.0" text="  Playlists">
+                                    <font>
+                                        <Font name="Roboto Medium" size="14.0" />
+                                    </font>
+                                    <graphic>
+                                        <SVGPath fx:id="playlistButtonSVG" content="M22 7H2v1h20V7zm-9 5H2v-1h11v1zm0 4H2v-1h11v1zm2 3v-8l7 4-7 4z" fill="WHITE" />
+                                    </graphic>
+                                    <VBox.margin>
+                                        <Insets bottom="10.0" left="10.0" right="10.0" />
+                                    </VBox.margin>
+                                </Button>
                                 <Button alignment="TOP_LEFT" mnemonicParsing="false" onMouseEntered="#trendingButtonHover" onMouseExited="#trendingButtonUnHover" prefHeight="23.0" prefWidth="227.0" text="    Trending">
                                     <font>
                                         <Font name="Roboto Medium" size="14.0" />
