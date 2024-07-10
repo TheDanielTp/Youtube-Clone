@@ -51,17 +51,19 @@ public class VideoDAOImpl
             preparedStatement.setBoolean (14, video.isOnlyComrade ());
             preparedStatement.setInt (15, video.getViewsCount ());
             preparedStatement.executeUpdate ();
+            System.out.println ("> Database: video created");
         }
         catch (SQLException e)
         {
-            e.printStackTrace ();
+            System.out.println ("> Database: failed to create video");
+            System.out.println (e.getMessage ());
         }
     }
 
     public void update (Video video)
     {
-        String sql = "UPDATE Videos SET creatorID = ?, channelID = ?, communityID = ?, title = ?, description = ?," +
-                " dataType = ?, videoURL = ?, thumbnail = ?, commentsCount = ?, likesCount = ?, dislikesCount = ?," +
+        String sql = "UPDATE Videos SET creatorID = ?, channelID = ?, categoryID = ?, title = ?, description = ?," +
+                " dataType = ?, videoURL = ?, thumbnailURL = ?, commentsCount = ?, likesCount = ?, dislikesCount = ?," +
                 " creationDate = ?, isOnlyComrade = ?, viewsCount = ? WHERE ID = ?";
         try (Connection connection = DatabaseConnection.getConnection ();
              PreparedStatement preparedStatement = connection.prepareStatement (sql))
@@ -82,10 +84,12 @@ public class VideoDAOImpl
             preparedStatement.setInt (14, video.getViewsCount ());
             preparedStatement.setObject (15, video.getID ());
             preparedStatement.executeUpdate ();
+            System.out.println ("> Database: video updated");
         }
         catch (SQLException e)
         {
-            e.printStackTrace ();
+            System.out.println ("> Database: failed to update video");
+            System.out.println (e.getMessage ());
         }
     }
 
@@ -101,30 +105,36 @@ public class VideoDAOImpl
 
             String deleteVideo = "DELETE FROM Videos WHERE ID = '" + id + "'";
             statement.executeUpdate (deleteVideo);
+            System.out.println ("> Database: video deleted");
         }
         catch (SQLException e)
         {
-            e.printStackTrace ();
+            System.out.println ("> Database: failed to delete video");
+            System.out.println (e.getMessage ());
         }
     }
 
-    public boolean checkActionExistence (User user)
+    public boolean checkActionExistence (User user, Video video)
     {
-        String sql = "SELECT * FROM ContentsAction WHERE userID = ?";
+        String sql = "SELECT * FROM ContentsAction WHERE userID = ? AND videoID = ?";
         try (Connection conn = DatabaseConnection.getConnection ();
              PreparedStatement pstmt = conn.prepareStatement (sql))
         {
             pstmt.setObject (1, user.getID ());
+            pstmt.setObject (2, video.getID ());
             ResultSet rs = pstmt.executeQuery ();
             if (rs.next ())
             {
+                System.out.println ("> Database: action existence checked");
                 return true;
             }
         }
         catch (SQLException e)
         {
-            e.printStackTrace ();
+            System.out.println ("> Database: failed to check action existence");
+            System.out.println (e.getMessage ());
         }
+        System.out.println ("> Database: action existence checked");
         return false;
     }
 
@@ -149,8 +159,9 @@ public class VideoDAOImpl
                 System.out.println (e.getMessage ());
                 System.out.println ("> Database: failed to remove video like");
             }
+            video.setLikesCount (video.getLikesCount () - 1);
         }
-        else if (checkActionExistence (user))
+        else if (checkActionExistence (user, video))
         {
             String sql = "UPDATE ContentsAction SET liked = ?, disliked = ? WHERE contentID = ? AND userID = ?";
             try (Connection conn = DatabaseConnection.getConnection ();
@@ -168,6 +179,7 @@ public class VideoDAOImpl
                 System.out.println (e.getMessage ());
                 System.out.println ("> Database: failed to like video");
             }
+            video.setLikesCount (video.getLikesCount () + 1);
         }
         else
         {
@@ -187,7 +199,9 @@ public class VideoDAOImpl
                 System.out.println (e.getMessage ());
                 System.out.println ("> Database: failed to like video");
             }
+            video.setLikesCount (video.getLikesCount () + 1);
         }
+        update (video);
     }
 
     public void dislike (Video video, User user)
@@ -211,8 +225,9 @@ public class VideoDAOImpl
                 System.out.println (e.getMessage ());
                 System.out.println ("> Database: failed to remove video dislike");
             }
+            video.setDislikesCount (video.getDislikesCount () - 1);
         }
-        else if (checkActionExistence (user))
+        else if (checkActionExistence (user, video))
         {
             String sql = "UPDATE ContentsAction SET liked = ?, disliked = ? WHERE contentID = ? AND userID = ?";
             try (Connection conn = DatabaseConnection.getConnection ();
@@ -230,6 +245,7 @@ public class VideoDAOImpl
                 System.out.println (e.getMessage ());
                 System.out.println ("> Database: failed to dislike video");
             }
+            video.setDislikesCount (video.getDislikesCount () + 1);
         }
         else
         {
@@ -248,26 +264,10 @@ public class VideoDAOImpl
             {
                 System.out.println (e.getMessage ());
                 System.out.println ("> Database: failed to dislike video");
+                video.setDislikesCount (video.getDislikesCount () + 1);
             }
         }
-    }
-
-    public void removeLikeDislike (Video video, User user)
-    {
-        String sql = "INSERT INTO ContentsAction (contentID, userID, liked, disliked) VALUES (?, ?, ?, ?)";
-        try (Connection connection = DatabaseConnection.getConnection ();
-             PreparedStatement preparedStatement = connection.prepareStatement (sql))
-        {
-            preparedStatement.setObject (1, video.getID ());
-            preparedStatement.setObject (2, user.getID ());
-            preparedStatement.setBoolean (3, false);
-            preparedStatement.setBoolean (4, false);
-            preparedStatement.executeUpdate ();
-        }
-        catch (SQLException e)
-        {
-            e.printStackTrace ();
-        }
+        update (video);
     }
 
     public Video findById (UUID id)
@@ -423,7 +423,7 @@ public class VideoDAOImpl
                 contents.add (new Post (
                         resultSet.getObject ("ID", UUID.class),
                         resultSet.getObject ("creatorID", UUID.class),
-                        resultSet.getObject ("communityID", UUID.class),
+                        resultSet.getObject ("categoryID", UUID.class),
                         resultSet.getObject ("channelID", UUID.class),
                         resultSet.getInt ("likesCount"),
                         resultSet.getInt ("dislikesCount"),

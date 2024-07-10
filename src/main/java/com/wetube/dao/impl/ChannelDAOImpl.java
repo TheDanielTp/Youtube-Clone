@@ -125,6 +125,9 @@ public class ChannelDAOImpl
         {
             e.printStackTrace ();
         }
+
+        channel.setSubscribersCount (channel.getSubscribersCount () + 1);
+        update (channel);
     }
 
     public void unsubscribe (User user, Channel channel)
@@ -140,6 +143,9 @@ public class ChannelDAOImpl
         {
             e.printStackTrace ();
         }
+
+        channel.setSubscribersCount (channel.getSubscribersCount () - 1);
+        update (channel);
     }
 
     public Channel findById (UUID id)

@@ -114,6 +114,22 @@
                   <Insets left="-40.0" right="15.0" top="17.0" />
                </HBox.margin>
             </ImageView>
+            <ImageView fx:id="uploadHover" fitHeight="40.0" fitWidth="40.0" onMouseClicked="#uploadButtonClick" onMouseEntered="#uploadButtonHover" onMouseExited="#uploadButtonUnHover" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/uploadHover.png" />
+               </image>
+               <HBox.margin>
+                  <Insets top="17.0" />
+               </HBox.margin>
+            </ImageView>
+            <ImageView fx:id="uploadButton" fitHeight="40.0" fitWidth="40.0" onMouseClicked="#uploadButtonClick" onMouseEntered="#uploadButtonHover" onMouseExited="#uploadButtonUnHover" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/upload.png" />
+               </image>
+               <HBox.margin>
+                  <Insets left="-40.0" right="15.0" top="17.0" />
+               </HBox.margin>
+            </ImageView>
          </children>
       </HBox>
       <HBox prefHeight="1051.0" prefWidth="1920.0">
