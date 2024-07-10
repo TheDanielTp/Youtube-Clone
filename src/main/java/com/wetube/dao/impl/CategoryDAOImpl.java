@@ -37,10 +37,12 @@ public class CategoryDAOImpl
             preparedStatement.setObject (1, category.getID ());
             preparedStatement.setString (2, category.getTitle ());
             preparedStatement.executeUpdate ();
+            System.out.println ("> Database: category created");
         }
         catch (SQLException e)
         {
-            e.printStackTrace ();
+            System.out.println ("> Database: failed to create category");
+            System.out.println (e.getMessage ());
         }
     }
 
@@ -53,10 +55,12 @@ public class CategoryDAOImpl
             preparedStatement.setString (1, category.getTitle ());
             preparedStatement.setObject (2, category.getID ());
             preparedStatement.executeUpdate ();
+            System.out.println ("> Database: category updated");
         }
         catch (SQLException e)
         {
-            e.printStackTrace ();
+            System.out.println ("> Database: failed to update category");
+            System.out.println (e.getMessage ());
         }
     }
 
@@ -67,10 +71,12 @@ public class CategoryDAOImpl
         {
             String deleteCategory = "DELETE FROM Categories WHERE ID = '" + id + "'";
             statement.executeUpdate (deleteCategory);
+            System.out.println ("> Database: category deleted");
         }
         catch (SQLException e)
         {
-            e.printStackTrace ();
+            System.out.println ("> Database: failed to delete category");
+            System.out.println (e.getMessage ());
         }
     }
 
@@ -84,6 +90,7 @@ public class CategoryDAOImpl
             ResultSet resultSet = preparedStatement.executeQuery ();
             if (resultSet.next ())
             {
+                System.out.println ("> Database: category found");
                 return new Category (
                         resultSet.getObject ("ID", UUID.class),
                         resultSet.getString ("title")
@@ -92,7 +99,8 @@ public class CategoryDAOImpl
         }
         catch (SQLException e)
         {
-            e.printStackTrace ();
+            System.out.println ("> Database: failed to find category");
+            System.out.println (e.getMessage ());
         }
         return null;
     }
@@ -107,6 +115,7 @@ public class CategoryDAOImpl
             ResultSet resultSet = preparedStatement.executeQuery ();
             if (resultSet.next ())
             {
+                System.out.println ("> Database: category found");
                 return new Category (
                         resultSet.getObject ("ID", UUID.class),
                         resultSet.getString ("title")
@@ -115,7 +124,8 @@ public class CategoryDAOImpl
         }
         catch (SQLException e)
         {
-            e.printStackTrace ();
+            System.out.println ("> Database: failed to find category");
+            System.out.println (e.getMessage ());
         }
         return null;
     }
@@ -135,10 +145,12 @@ public class CategoryDAOImpl
                         resultSet.getString ("title")
                 ));
             }
+            System.out.println ("> Database: categories found");
         }
         catch (SQLException e)
         {
-            e.printStackTrace ();
+            System.out.println ("> Database: failed to find categories");
+            System.out.println (e.getMessage ());
         }
         return categories;
     }
@@ -158,10 +170,12 @@ public class CategoryDAOImpl
                     videosID.add (resultSet.getObject ("ID", UUID.class));
                 }
             }
+            System.out.println ("> Database: category videos found");
         }
         catch (SQLException e)
         {
-            e.printStackTrace ();
+            System.out.println ("> Database: failed to find category videos");
+            System.out.println (e.getMessage ());
         }
         return videosID;
     }

@@ -74,10 +74,10 @@ public class MainController implements Initializable
                     File   videoFile = new File (video.getVideoURL ());
                     byte[] fileBytes = Files.readAllBytes (Path.of (videoFile.toURI ()));
 
-                    tempFile = File.createTempFile ("video", ".mp4");
+                    tempFile = File.createTempFile ("videoFile", ".mp4");
                     tempFile.deleteOnExit ();
 
-                    // Write the byte array to the temporary file
+                    // Write the byte array to the temporary videoFile
                     try (FileOutputStream fos = new FileOutputStream (tempFile); ByteArrayInputStream bais = new ByteArrayInputStream (fileBytes))
                     {
                         byte[] buffer = new byte[1024];
@@ -95,7 +95,7 @@ public class MainController implements Initializable
                     return;
                 }
 
-                // Create a Media object from the temporary file
+                // Create a Media object from the temporary videoFile
                 media = new Media (tempFile.toURI ().toString ());
 
                 Label    totalTimeLabel = new Label ("00:00");

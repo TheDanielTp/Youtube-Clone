@@ -420,4 +420,16 @@ public class Client
 
         return new Object[]{0, response.getData ()};
     }
+
+    //endregion
+
+    //region [ - Playlist Functions - ]
+
+    public Object[] create (Playlist playlist)
+    {
+        Request request = new Request ("CREATE_PLAYLIST", playlist);
+        Response response = sendRequest (request);
+
+        return new Object[]{0, response.getData ()};
+    }
 }

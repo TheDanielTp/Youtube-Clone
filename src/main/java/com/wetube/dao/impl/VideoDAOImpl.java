@@ -43,8 +43,7 @@ public class VideoDAOImpl
             preparedStatement.setString (6, video.getDescription ());
             preparedStatement.setString (7, video.getDataType ());
             preparedStatement.setString (8, video.getVideoURL ());
-            preparedStatement.setBytes (9, video.getThumbnailURL () != null ?
-                    video.getThumbnailURL ().toString ().getBytes () : null);
+            preparedStatement.setString (9, video.getThumbnailURL ());
             preparedStatement.setInt (10, video.getCommentsCount ());
             preparedStatement.setInt (11, video.getLikesCount ());
             preparedStatement.setInt (12, video.getDislikesCount ());
@@ -74,8 +73,7 @@ public class VideoDAOImpl
             preparedStatement.setString (5, video.getDescription ());
             preparedStatement.setString (6, video.getDataType ());
             preparedStatement.setString (7, video.getVideoURL ());
-            preparedStatement.setBytes (8, video.getThumbnailURL () != null ?
-                    video.getThumbnailURL ().toString ().getBytes () : null);
+            preparedStatement.setString (8, video.getThumbnailURL ());
             preparedStatement.setInt (9, video.getCommentsCount ());
             preparedStatement.setInt (10, video.getLikesCount ());
             preparedStatement.setInt (11, video.getDislikesCount ());
@@ -519,7 +517,7 @@ public class VideoDAOImpl
     public List <User> findLikedUsers (Video video)
     {
         List <User> users = new ArrayList <> ();
-        String      sql   = "SELECT * FROM ContentsAction WHERE id = ?";
+        String      sql   = "SELECT * FROM ContentsAction WHERE contentID = ?";
         try (Connection connection = DatabaseConnection.getConnection ();
              PreparedStatement preparedStatement = connection.prepareStatement (sql))
         {
@@ -544,7 +542,7 @@ public class VideoDAOImpl
     public List <User> findDislikedUsers (Video video)
     {
         List <User> users = new ArrayList <> ();
-        String      sql   = "SELECT * FROM ContentsAction WHERE id = ?";
+        String      sql   = "SELECT * FROM ContentsAction WHERE contentID = ?";
         try (Connection connection = DatabaseConnection.getConnection ();
              PreparedStatement preparedStatement = connection.prepareStatement (sql))
         {

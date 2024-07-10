@@ -53,6 +53,7 @@ public class ChannelDAOImpl
             preparedStatement.setBytes (12, channel.getChannelPictureURL () != null ?
                     channel.getChannelPictureURL ().toString ().getBytes () : null);
             preparedStatement.executeUpdate ();
+
         }
         catch (SQLException e)
         {
