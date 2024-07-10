@@ -26,7 +26,10 @@
          <children>
             <HBox alignment="TOP_CENTER" prefHeight="1000.0" prefWidth="1157.0">
                <children>
-                  <ImageView fx:id="pfp" fitHeight="250.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="pfp" fitHeight="250.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/profilePictures/pfp2.jpg" />
+                     </image></ImageView>
                </children></HBox>
             <VBox prefHeight="1010.0" prefWidth="1806.0" style="-fx-background-color: #cd0000; -fx-border-color: #ffffff; -fx-border-width: 5;">
                <children>

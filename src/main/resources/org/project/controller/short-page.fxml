@@ -55,7 +55,7 @@
                      <children>
                         <Text fx:id="txtVideoTitle" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Arcane Season 2 | Official Teaser Trailer" VBox.vgrow="ALWAYS">
                            <font>
-                              <Font name="Roboto Black" size="25.0" />
+                              <Font name="System Bold" size="25.0" />
                            </font>
                         </Text>
                         <HBox fx:id="hbxVideoDetails" alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="830.0">
@@ -83,7 +83,7 @@
                                              <children>
                                                 <Text fx:id="txtChannelName" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Channel Name">
                                                    <font>
-                                                      <Font name="Roboto Medium" size="14.0" />
+                                                      <Font name="System Bold" size="15.0" />
                                                    </font>
                                                 </Text>
                                                 <Text fx:id="txtChannelSubscribres" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Subscribers">
@@ -105,7 +105,7 @@
                               </HBox>
                               <HBox alignment="CENTER_LEFT" prefHeight="57.0" prefWidth="363.0" styleClass="button-group" HBox.hgrow="ALWAYS">
                                  <children>
-                                    <Button fx:id="btnSub" mnemonicParsing="false" onAction="#updateSub" prefHeight="37.0" prefWidth="126.0" style="-fx-background-color: TRANSPARNET;" styleClass="button-subscription" text="Unsubscribed">
+                                    <Button fx:id="btnSub" mnemonicParsing="false" onAction="#updateSub" prefHeight="37.0" prefWidth="126.0" style="-fx-background-color: TRANSPARNET; -fx-background-radius: 30;" styleClass="button-subscription" text="Unsubscribed">
                                        <padding>
                                           <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                                        </padding>
@@ -234,7 +234,7 @@
                      <children>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Comments">
                            <font>
-                              <Font name="Roboto Bold" size="20.0" />
+                              <Font name="System Bold" size="22.0" />
                            </font>
                            <VBox.margin>
                               <Insets left="5.0" top="5.0" />
@@ -247,14 +247,14 @@
                                     <Image url="@images/profilePictures/pfp1.jpg" />
                                  </image>
                               </ImageView>
-                              <TextField fx:id="txtComment" prefHeight="32.0" prefWidth="708.0" promptText="Add a comment" styleClass="field-comment" HBox.hgrow="ALWAYS">
+                              <TextField fx:id="txtComment" prefHeight="32.0" prefWidth="708.0" promptText="Add a comment" style="-fx-background-radius: 30;" styleClass="field-comment" HBox.hgrow="ALWAYS">
                                  <HBox.margin>
                                     <Insets top="10.0" />
                                  </HBox.margin>
                                  <font>
                                     <Font name="Roboto" size="13.0" />
                                  </font></TextField>
-                              <Button fx:id="btnComment" alignment="CENTER" contentDisplay="CENTER" minHeight="40.0" minWidth="120.0" mnemonicParsing="false" onAction="#comment" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: cd0000; -fx-background-radius: 15; -fx-border-color: #ffffff; -fx-border-radius: 15;" styleClass="buttonClass" text="Comment" textAlignment="CENTER" textFill="WHITE" HBox.hgrow="ALWAYS">
+                              <Button fx:id="btnComment" alignment="CENTER" contentDisplay="CENTER" minHeight="40.0" minWidth="120.0" mnemonicParsing="false" onAction="#comment" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: cd0000; -fx-background-radius: 15; -fx-border-color: #ffffff; -fx-border-radius: 30;" styleClass="buttonClass" text="Comment" textAlignment="CENTER" textFill="WHITE" HBox.hgrow="ALWAYS">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
