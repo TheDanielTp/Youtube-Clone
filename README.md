@@ -52,79 +52,61 @@ The application offers a range of features for our comrades, including video pla
 - Subscriptions: Subscribe to other channels and view a list of subscribed channels.
 - Only Comrade Subscriptions: View the special content of each channel.
 - Home Page: Display trending video thumbnails and provide navigation options.
-- Playlists: Create custom playlists, including default "Watch Later" and "Liked Videos" playlists.
+- Playlists: Create custom playlists, including default "Watch Later" and "Liked Videos" playlists and "Watch History".
 - Video Page: View video details, comments, and related information.
 - Video Player: Play, pause, control volume and speed, and use a progress bar.
-- Video Analytics: Track views, likes, comments, and display publishing dates.
+- Video Analytics: Track views, likes, dislikes, comments, and display publishing dates.
 - Creator Dashboard: Upload, delete, and manage videos.
 - Search: Find channels and videos by title.
 - Video Categories: Tag videos with specific categories.
-- Additional Features (for groups with 3 members)
 - Dynamic Home Page: Personalized recommendations based on user activity.
 - Watch History: View a list of recently watched videos.
 - Dark & Light Theme: Switch between light and dark modes.
 - Public Playlists: Create and share public playlists, including collaborative ones.
 - Notifications: Receive updates on new videos from subscribed channels.
-- Bonus Features
-- Data Encryption: Encrypt data transferred between the server and client.
 - YouTube Music: Integrate a music streaming service.
-- YouTube Shorts: Create and share short-form vertical videos.
 - Recommendation System: Suggest relevant videos and channels using machine learning.
-- Advertisements: Display ads before videos and implement targeted advertising.
 - YouTube Premium: Offer a subscription-based service with additional benefits.
-- Channel Management: Manage multiple channels and collaborate on channel management.
-- Social Media Integration: Share content across different social media platforms.
 - Community Features: Create posts, polls, and interactive content.
-- Video Editing Tool: Edit and enhance videos directly on the platform.
 - Custom Thumbnails: Control video presentation with customizable thumbnails.
-- Subtitles and Captions: Provide subtitles and captions, including translation support.
-- Media Handling: Support various video formats and codecs.
-- Android Port: Develop an Android version of the app.
-- Description
-- This project consists of four integral sections
 
-Server
-Client
-Database
-Recommendation Engine
-Server
-The server infrastructure of WeTube is designed to maintain control and order. Two separate servers handle different functionalities:
+## Technology Stack
 
-Authentication Server: Ensures secure generation and delivery of temporary passwords during the login process.
-Operations Server: Manages video downloading, extraction of video thumbnails, follow functionalities, playlist creation, processing video information requests, and more.
-To protect our data, we employ advanced encryption techniques such as AES and RSA. User passwords and essential information are securely hashed to prevent unauthorized access.
+- **Programming Language**: Java
+- **Database**: PostgreSQL (or any SQL-based/NoSQL database)
+- **GUI Library**: JavaFX
+- **Networking**: Socket Programming
+- **Multithreading**: Java Multithreading
 
-Client
-The client interface is the face of WeTube, providing users with access to a variety of functions. Users can play videos, share content, follow others, view popular and recommended videos, and more. Premium status, achieved through a unique challenge, unlocks additional features such as enhanced social interaction capabilities.
+## UML and Design Patterns
 
-Recommendation Engine
-The recommendation engine, a critical component of our system, utilizes machine learning algorithms to analyze user behavior and generate personalized video recommendations. This ensures that our comrades are always engaged with relevant and approved content.
+### Design Patterns Used
 
-Database
-Our comprehensive database stores a wide range of information, including user credentials, content metadata, playlists, user interactions, and more. With over 588,000 unique video IDs, our database is a testament to our dedication to maintaining a rich and controlled repository of content.
+- **Singleton**: Ensuring a single instance of the server.
+- **Factory**: Creating various request and response types.
+- **Observer**: Managing user subscriptions and notifications.
+- **DAO (Data Access Object)**: Interacting with the database.
 
-Screenshots
-Below are images showcasing the functionality of WeTube:
+### ERD Diagram
 
-Starting Screen:
-Login Page:
-Home Page:
-Profile:
-Search Results:
-Favorites:
-History:
-Premium Status Challenge:
-Video Playback:
-Playlist Management:
-Additional Features
-Light/Dark Mode Toggle: Customize your viewing experience.
-Security Questions: Extra layer of security for password retrieval.
-Email Verification: Secure temporary password delivery.
-Notifications: Stay informed of interactions and updates.
-Profile Customization: Upload your profile image.
-Social Features: Follow users and interact with shared content.
-Socket Communication: Ensures secure and efficient data exchange.
-Conclusion
+![Untitled.png](Untitled.png)
+
+## Contributions
+
+- **Team Members**: [List of team members and their contributions]
+- **Mentor**: [Mentor's name and contributions]
+
+## Usage
+
+### Setup Instructions
+
+1. Clone the repository: `git clone https://github.com/your-repo-url`
+3. Set up the database: Import the schema from `database/schema.sql`
+4. Run the server: `java -jar server.jar`
+5. Run the client: `java -jar client.jar`
+
+
+### Conclusion
 WeTube stands as a testament to our unwavering commitment to control, order, and unity. It is a powerful and versatile platform that offers a rich and engaging video-sharing experience. We invite you to join us in this endeavor, to embrace the spirit of the Motherland, and to contribute to a unified and disciplined digital landscape.
 
 
