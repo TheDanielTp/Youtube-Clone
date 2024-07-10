@@ -2,6 +2,7 @@ package org.project.controller;
 
 import com.wetube.dao.impl.CategoryDAOImpl;
 import com.wetube.dao.impl.PlaylistDAOImpl;
+import com.wetube.dao.impl.VideoDAOImpl;
 import com.wetube.model.Category;
 import com.wetube.model.Playlist;
 import com.wetube.model.Video;
@@ -429,6 +430,54 @@ public class MainController implements Initializable
         stage.setY (y);
 
         System.out.println ("> Front: opening upload page");
+        stage.show ();
+    }
+
+    @FXML
+    ImageView createPlaylistButton;
+
+    @FXML
+    ImageView createPlaylistHover;
+
+    public void createPlaylistButtonHover ()
+    {
+        createPlaylistButton.setVisible (false);
+        createPlaylistHover.setVisible (true);
+    }
+
+    public void createPlaylistButtonUnHover ()
+    {
+        createPlaylistButton.setVisible (true);
+        createPlaylistHover.setVisible (false);
+    }
+
+    public void createPlaylistButtonClick (MouseEvent event) throws IOException
+    {
+        Parent root;
+        if (! MainApplication.DarkTheme)
+        {
+            root = FXMLLoader.load (Objects.requireNonNull (getClass ().getResource ("create-playlist-page.fxml")));
+        }
+        else
+        {
+            root = FXMLLoader.load (Objects.requireNonNull (getClass ().getResource ("dark-create-playlist-page.fxml")));
+        }
+
+        Stage stage = new Stage ();
+
+        double x      = stage.getX ();
+        double y      = stage.getY ();
+
+        Scene scene = new Scene (root);
+
+        stage.setScene (scene);
+
+        stage.setWidth (600);
+        stage.setHeight (400);
+        stage.setX (x);
+        stage.setY (y);
+
+        System.out.println ("> Front: opening playlist creation page");
         stage.show ();
     }
 
@@ -986,6 +1035,94 @@ public class MainController implements Initializable
     //endregion
 
     //region-----------------------------------------------Down Sidebar Functions-----------------------------------------------
+
+    @FXML
+    SVGPath playlistButtonSVG;
+
+    public void playlistButtonHover ()
+    {
+        playlistButtonSVG.setFill (Color.web ("#000000"));
+    }
+
+    public void playlistButtonUnHover ()
+    {
+        playlistButtonSVG.setFill (Color.web ("#ffffff"));
+    }
+
+    public void playlistButtonClicked (ActionEvent event)
+    {
+        videosPane.getChildren ().clear ();
+
+        PlaylistDAOImpl playlistDAO = new PlaylistDAOImpl ();
+        List<Playlist> playlists = playlistDAO.findAll ();
+
+        for (Playlist playlist : playlists)
+        {
+            if (playlist.getCreatorID ().equals (MainApplication.currentUser.getID ()))
+            {
+                try
+                {
+                    FXMLLoader loader    = new FXMLLoader (getClass ().getResource ("/org/project/controller/playlist-thumbnail-view.fxml"));
+                    AnchorPane playlistNode = loader.load ();
+
+                    ImageView thumbnail   = (ImageView) playlistNode.lookup ("#thumbnail");
+                    Label     title       = (Label) playlistNode.lookup ("#title");
+                    Button    videoButton = (Button) playlistNode.lookup ("#videoButton");
+
+                    if (thumbnail != null)
+                    {
+                        VideoDAOImpl videoDAO = new VideoDAOImpl ();
+                        Video video = videoDAO.findById (playlist.getVideosID ().getFirst ());
+                        File file = new File (video.getThumbnailURL ());
+                        thumbnail.setImage (new Image (file.toURI ().toString ()));
+                    }
+                    else
+                    {
+                        System.err.println ("Thumbnail ImageView not found in FXML.");
+                    }
+
+                    if (title != null)
+                    {
+                        title.setText (playlist.getTitle ());
+                    }
+                    else
+                    {
+                        System.err.println ("Title Label not found in FXML.");
+                    }
+
+                    if (videoButton != null)
+                    {
+                        videoButton.setOnAction (event2 ->
+                        {
+                            MainApplication.currentPlaylist = playlist;
+                            Stage      stage;
+                            Scene      scene;
+                            Parent     root;
+                            FXMLLoader loader2 = new FXMLLoader (getClass ().getResource ("/org/project/controller/playlist-page.fxml"));
+                            try
+                            {
+                                root = loader2.load ();
+                            }
+                            catch (IOException e)
+                            {
+                                throw new RuntimeException (e);
+                            }
+                            stage = (Stage) ((Node) event2.getSource ()).getScene ().getWindow ();
+                            scene = new Scene (root);
+                            stage.setScene (scene);
+                            stage.show ();
+                        });
+                    }
+
+                    videosPane.getChildren ().add (playlistNode);
+                }
+                catch (IOException e)
+                {
+                    e.printStackTrace ();
+                }
+            }
+        }
+    }
 
     @FXML
     SVGPath trendingButtonSVG;

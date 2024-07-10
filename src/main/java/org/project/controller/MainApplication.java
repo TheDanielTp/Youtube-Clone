@@ -19,10 +19,11 @@ public class MainApplication extends Application
     private static BufferedReader bufferedReader;
     private static BufferedWriter bufferedWriter;
 
-    UserDAOImpl userDAO = new UserDAOImpl();
-    static Video currentVideo;
-    static        User   currentUser;
-    public static Client client;
+    UserDAOImpl userDAO = new UserDAOImpl ();
+    public static Playlist currentPlaylist;
+    public static Video    currentVideo;
+    public static User     currentUser;
+    public static Client   client;
 
     static boolean DarkTheme = true;
 

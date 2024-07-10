@@ -1,17 +1,11 @@
 package org.project.controller;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import com.sun.tools.javac.Main;
 import com.wetube.dao.impl.*;
 import com.wetube.model.*;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -28,18 +22,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
-
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.time.LocalDateTime;
-import java.util.*;
-
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
@@ -49,16 +31,23 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-public class VideoPageController implements Initializable
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ResourceBundle;
+import java.util.UUID;
+
+public class PlaylistPageController implements Initializable
 {
 
-    //region [ - Attributes - ]
-
-    @FXML
-    ComboBox <String> playlistsComboBox;
-
-    @FXML
-    Button btnAdd;
+    //region [ - Fields - ]
 
     private Video video;
 
@@ -179,8 +168,9 @@ public class VideoPageController implements Initializable
 
     //endregion
 
-    //region [ - Initialize - ]
+    //region [ - Methods - ]
 
+    //region [ - initialize(URL location, ResourceBundle resources) - ]
     @Override
     public void initialize (URL location, ResourceBundle resources)
     {
@@ -211,17 +201,6 @@ public class VideoPageController implements Initializable
         recommendedVideosScrollPane.setHbarPolicy (ScrollPane.ScrollBarPolicy.NEVER);
         recommendedVideosScrollPane.setVbarPolicy (ScrollPane.ScrollBarPolicy.NEVER);
         recommendedVideosScrollPane.setContent (vbxRecommendedVideos);
-
-        PlaylistDAOImpl playlistDAO = new PlaylistDAOImpl ();
-        List <Playlist> playlists   = playlistDAO.findAll ();
-
-        for (Playlist playlist : playlists)
-        {
-            if (playlist.getCreatorID ().equals (MainApplication.currentUser.getID ()))
-            {
-                playlistsComboBox.getItems ().add (playlist.getTitle ());
-            }
-        }
 
         videoScrollPane.getStyleClass ().add ("scroll-pane");
         videoScrollPane.setFitToWidth (true);
@@ -325,9 +304,14 @@ public class VideoPageController implements Initializable
 
     private void displayRecommendedVideos ()
     {
-        ArrayList <Video> videos = (ArrayList <Video>) MainApplication.client.getAllVideos ()[1];
-        videos.remove (MainApplication.currentVideo);
-        videos.remove (video);
+        VideoDAOImpl videoDAO = new VideoDAOImpl ();
+        List<UUID>        videoIDs = MainApplication.currentPlaylist.getVideosID ();
+        ArrayList <Video> videos   = new ArrayList<> ();
+
+        for (UUID videoID : videoIDs)
+        {
+            videos.add (videoDAO.findById (videoID));
+        }
 
         recommendedVideos = videos;
         Platform.runLater (() ->
@@ -358,7 +342,7 @@ public class VideoPageController implements Initializable
                     }
 
                     Button button = new Button ();
-                    button.setBackground (new Background (new BackgroundFill (Color.TRANSPARENT, CornerRadii.EMPTY, null)));
+                    button.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT, CornerRadii.EMPTY, null)));
                     button.setGraphic (videoRecommendation);
 
                     button.setOnAction (event ->
@@ -432,7 +416,7 @@ public class VideoPageController implements Initializable
         btnVolume.setOnAction (this :: volumeOff);
 
         Slider timeSlider = new Slider (0, 100, 0);
-        timeSlider.setBackground (new Background (new BackgroundFill (
+        timeSlider.setBackground (new Background(new BackgroundFill(
                 Color.web ("#cd0000"), CornerRadii.EMPTY, null)));
 
         volumeSlider = new Slider (0, 100, 100);
@@ -748,21 +732,11 @@ public class VideoPageController implements Initializable
     @FXML
     private void updateSave (ActionEvent event)
     {
-        PlaylistDAOImpl playlistDAO = new PlaylistDAOImpl ();
-        Playlist        playlist    = playlistDAO.findByNameUser (MainApplication.currentUser, "Saved");
+        PlaylistDAOImpl playlistDAO = new PlaylistDAOImpl();
+        Playlist playlist = playlistDAO.findByNameUser (MainApplication.currentUser, "Saved");
 
-        playlist.getVideosID ().add (video.getID ());
-        playlistDAO.update (playlist);
-    }
-
-    @FXML
-    public void addToPlaylist (ActionEvent event)
-    {
-        String playlistName = playlistsComboBox.getValue ();
-        PlaylistDAOImpl playlistDAO = new PlaylistDAOImpl ();
-        Playlist playlist = playlistDAO.findByNameUser (MainApplication.currentUser, playlistName);
-        playlist.getVideosID ().add (video.getID ());
-        playlistDAO.update (playlist);
+        playlist.getVideosID ().add(video.getID ());
+        playlistDAO.update(playlist);
     }
 
     @FXML
@@ -835,4 +809,6 @@ public class VideoPageController implements Initializable
         stage.setScene (scene);
         stage.show ();
     }
+
+    //endregion
 }

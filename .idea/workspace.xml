@@ -4,18 +4,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ec566682-672c-4b02-8981-652c66cb3fe3" name="Changes" comment="Updated Main Panel">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/images/logout.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/images/logoutDark.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/images/logoutDarkHover.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/images/logoutHover.png" afterDir="false" />
+    <list default="true" id="ec566682-672c-4b02-8981-652c66cb3fe3" name="Changes" comment="Updated Front">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/project/controller/CreatePlaylistController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/project/controller/PlaylistPageController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/create-playlist-page.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/images/playlist.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/images/playlistDark.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/images/playlistDarkHover.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/images/playlistHover.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/playlist-page.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/playlist-thumbnail-view.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/controller/MainApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/project/controller/MainApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/project/controller/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/project/controller/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/controller/UserEditController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/project/controller/UserEditController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/project/controller/VideoPageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/project/controller/VideoPageController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/project/controller/communist-front-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/communist-front-view.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/org/project/controller/communist-main-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/communist-main-view.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/project/controller/communist-user-edit.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/communist-user-edit.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/project/controller/video-page.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/video-page.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/project/controller/video-recommendation.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/video-recommendation.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/project/controller/video-thumbnail-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/video-thumbnail-view.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -174,7 +180,7 @@
       <workItem from="1720503665689" duration="20047000" />
       <workItem from="1720547583498" duration="315000" />
       <workItem from="1720579766994" duration="5384000" />
-      <workItem from="1720587580966" duration="10943000" />
+      <workItem from="1720587580966" duration="13499000" />
     </task>
     <task id="LOCAL‎−۰۰۰۰۱" summary="Created Repository">
       <option name="closed" value="true" />
@@ -313,7 +319,14 @@
       <option name="presentableId" value="LOCAL‎−۰۰۰۱۹" />
       <updated>1720595004039</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL‎−۰۰۰۲۰" summary="Updated Front">
+      <option name="closed" value="true" />
+      <created>1720599332834</created>
+      <option name="number" value="LOCAL‎−۰۰۰۲۰" />
+      <option name="presentableId" value="LOCAL‎−۰۰۰۲۰" />
+      <updated>1720599332834</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -351,6 +364,7 @@
     <MESSAGE value="Updated Video Recommendation" />
     <MESSAGE value="Updated Post Upload" />
     <MESSAGE value="Updated Main Panel" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated Main Panel" />
+    <MESSAGE value="Updated Front" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated Front" />
   </component>
 </project>

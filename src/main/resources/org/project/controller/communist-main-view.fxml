@@ -130,6 +130,22 @@
                   <Insets left="-40.0" right="15.0" top="17.0" />
                </HBox.margin>
             </ImageView>
+            <ImageView fx:id="createPlaylistHover" fitHeight="40.0" fitWidth="40.0" onMouseClicked="#createPlaylistButtonClick" onMouseEntered="#createPlaylistButtonHover" onMouseExited="#createPlaylistButtonUnHover" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/playlistHover.png" />
+               </image>
+               <HBox.margin>
+                  <Insets top="17.0" />
+               </HBox.margin>
+            </ImageView>
+            <ImageView fx:id="createPlaylistButton" fitHeight="40.0" fitWidth="40.0" onMouseClicked="#createPlaylistButtonClick" onMouseEntered="#createPlaylistButtonHover" onMouseExited="#createPlaylistButtonUnHover" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/playlist.png" />
+               </image>
+               <HBox.margin>
+                  <Insets left="-40.0" right="15.0" top="17.0" />
+               </HBox.margin>
+            </ImageView>
             <ImageView fx:id="settingHover" fitHeight="40.0" fitWidth="40.0" onMouseClicked="#settingClicked" onMouseEntered="#settingButtonHover" onMouseExited="#settingButtonUnHover" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/settingHover.png" />
@@ -384,6 +400,17 @@
                               <Insets bottom="15.0" left="10.0" right="10.0" top="15.0" />
                            </VBox.margin>
                         </Line>
+                        <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#playlistButtonClicked" onMouseEntered="#playlistButtonHover" onMouseExited="#playlistButtonUnHover" prefHeight="21.0" prefWidth="227.0" text="  Playlists">
+                           <font>
+                              <Font name="Roboto Medium" size="14.0" />
+                           </font>
+                           <graphic>
+                              <SVGPath fx:id="playlistButtonSVG" content="M22 7H2v1h20V7zm-9 5H2v-1h11v1zm0 4H2v-1h11v1zm2 3v-8l7 4-7 4z" fill="WHITE" />
+                           </graphic>
+                           <VBox.margin>
+                              <Insets bottom="10.0" left="10.0" right="10.0" />
+                           </VBox.margin>
+                        </Button>
                         <Button alignment="TOP_LEFT" mnemonicParsing="false" onMouseEntered="#trendingButtonHover" onMouseExited="#trendingButtonUnHover" prefHeight="23.0" prefWidth="227.0" text="    Trending">
                            <font>
                               <Font name="Roboto Medium" size="14.0" />
