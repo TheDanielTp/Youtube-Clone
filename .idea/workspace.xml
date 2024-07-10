@@ -4,31 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ec566682-672c-4b02-8981-652c66cb3fe3" name="Changes" comment="Updated Video Upload Functions - Fixed Thumbnails">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/project/controller/UploadPostController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/images/upload.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/images/uploadDark.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/images/uploadDarkHover.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/images/uploadHover.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/upload-post-page.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_7_9_2024_4_36_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_7_9_2024_4_36_PM__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_7_9_2024_4_39_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_7_9_2024_4_39_PM__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_7_9_2024_5_07_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_7_9_2024_5_07_PM__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_7_9_2024_5_29_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_7_9_2024_5_29_PM__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_9_2024_10_09_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_9_2024_10_09_PM__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_9_2024_5_24_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_9_2024_5_24_PM__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wetube/dao/impl/ChannelDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/dao/impl/ChannelDAOImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wetube/dao/impl/VideoDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/dao/impl/VideoDAOImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wetube/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/model/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/controller/MainApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/project/controller/MainApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/controller/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/project/controller/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/controller/SignupSecondController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/project/controller/SignupSecondController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/controller/UserEditController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/project/controller/UserEditController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/controller/VideoPageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/project/controller/VideoPageController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/project/controller/communist-main-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/communist-main-view.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/project/controller/communist-user-edit.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/communist-user-edit.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/project/controller/upload_page.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/upload-page.fxml" afterDir="false" />
+    <list default="true" id="ec566682-672c-4b02-8981-652c66cb3fe3" name="Changes" comment="Updated dark mode: upgraded upload page">
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/project/controller/dark-upload-page.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/dark-upload-page.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,15 +15,15 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="FxmlFile" />
         <option value="Class" />
+        <option value="FxmlFile" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="30c1726d0aa97555e727f31082146e57237e8e0b" />
+        <entry key="$PROJECT_DIR$" value="login" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -120,11 +97,8 @@
       <recent name="D:\Java\Projects\Project_WeTube\src\main\java\org\project\controller" />
       <recent name="D:\Java\Projects\Project_WeTube\src\main\resources\org\project\controller" />
     </key>
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="org.project.controller" />
-    </key>
   </component>
-  <component name="RunManager" selected="Application.Client1">
+  <component name="RunManager" selected="Application.Server">
     <configuration name="Client1" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="org.project.controller.MainApplication" />
       <module name="Project_WeTube" />
@@ -160,17 +134,13 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.TableCreator" />
-        <item itemvalue="Application.TableCreator" />
-        <item itemvalue="Application.TableCreator" />
-        <item itemvalue="Application.TableCreator" />
       </list>
     </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.18034.62" />
-        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-IU-241.18034.62" />
+        <option value="jdk-21.0.2-openjdk-21.0.2-4caba194b151-4f524021" />
       </set>
     </attachedChunks>
   </component>
@@ -185,8 +155,6 @@
       <workItem from="1720382424785" duration="4557000" />
       <workItem from="1720477418650" duration="6999000" />
       <workItem from="1720503665689" duration="20047000" />
-      <workItem from="1720547583498" duration="315000" />
-      <workItem from="1720579766994" duration="5384000" />
     </task>
     <task id="LOCAL‎−۰۰۰۰۱" summary="Created Repository">
       <option name="closed" value="true" />
@@ -283,21 +251,55 @@
       <option name="presentableId" value="LOCAL‎−۰۰۰۱۳" />
       <updated>1720511101573</updated>
     </task>
-    <task id="LOCAL‎−۰۰۰۱۴" summary="Added Video Upload Functions">
+    <task id="LOCAL-00014" summary="Updated fxml files added user page">
       <option name="closed" value="true" />
-      <created>1720579988486</created>
-      <option name="number" value="LOCAL‎−۰۰۰۱۴" />
-      <option name="presentableId" value="LOCAL‎−۰۰۰۱۴" />
-      <updated>1720579988486</updated>
+      <created>1720537062981</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1720537062981</updated>
     </task>
-    <task id="LOCAL‎−۰۰۰۱۵" summary="Updated Video Upload Functions - Fixed Thumbnails">
+    <task id="LOCAL-00015" summary="Updated User page Edit">
       <option name="closed" value="true" />
-      <created>1720581468206</created>
-      <option name="number" value="LOCAL‎−۰۰۰۱۵" />
-      <option name="presentableId" value="LOCAL‎−۰۰۰۱۵" />
-      <updated>1720581468207</updated>
+      <created>1720563921446</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1720563921446</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Updated user pages">
+      <option name="closed" value="true" />
+      <created>1720582667232</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1720582667232</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Updated dark mode: comment preview">
+      <option name="closed" value="true" />
+      <created>1720583155515</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1720583155515</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Updated dark mode: Fixed few bugs + dark video page">
+      <option name="closed" value="true" />
+      <created>1720587256219</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1720587256219</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Updated dark mode: upgraded upload page">
+      <option name="closed" value="true" />
+      <created>1720587701551</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1720587701551</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -308,7 +310,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/develop" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -329,8 +343,12 @@
     <MESSAGE value="Added Theme Button" />
     <MESSAGE value="Updated Project Functions" />
     <MESSAGE value="Added Video Page" />
-    <MESSAGE value="Added Video Upload Functions" />
-    <MESSAGE value="Updated Video Upload Functions - Fixed Thumbnails" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated Video Upload Functions - Fixed Thumbnails" />
+    <MESSAGE value="Updated fxml files added user page" />
+    <MESSAGE value="Updated User page Edit" />
+    <MESSAGE value="Updated user pages" />
+    <MESSAGE value="Updated dark mode: comment preview" />
+    <MESSAGE value="Updated dark mode: Fixed few bugs + dark video page" />
+    <MESSAGE value="Updated dark mode: upgraded upload page" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated dark mode: upgraded upload page" />
   </component>
 </project>

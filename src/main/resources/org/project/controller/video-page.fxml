@@ -57,7 +57,7 @@
                            <children>
                               <Text fx:id="txtVideoTitle" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Star War Episode III | Revenge of the Sith">
                                  <font>
-                                    <Font name="Roboto Black" size="25.0" />
+                                    <Font name="System Bold" size="25.0" />
                                  </font>
                                  <HBox.margin>
                                     <Insets top="5.0" />
@@ -96,7 +96,7 @@
                                              <children>
                                                 <Text fx:id="txtChannelName" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Channel Name">
                                                    <font>
-                                                      <Font name="Roboto Medium" size="16.0" />
+                                                      <Font name="System Bold" size="16.0" />
                                                    </font>
                                                 </Text>
                                                 <Text fx:id="txtChannelSubscribres" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Subscribers">
