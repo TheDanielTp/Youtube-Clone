@@ -10,9 +10,7 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="410.0" style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <ImageView fx:id="thumbnail" fitHeight="235.0" fitWidth="384.0" layoutX="13.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-                <Image url="@images/thumbnails/You_Were_The_Chosen_One.jpg" />
-            </image></ImageView>
+            </ImageView>
         <Label fx:id="title" layoutX="18.0" layoutY="232.0" prefHeight="25.0" prefWidth="374.0" text="You were the chosen one" textFill="WHITE">
             <font>
                 <Font name="System Bold" size="16.0" />

@@ -340,7 +340,15 @@ public class VideoPageController implements Initializable
                     {
                         continue;
                     }
-                    FXMLLoader videoRecommendationLoader = new FXMLLoader (getClass ().getResource ("/org/project/controller/video-recommendation.fxml"));
+                    FXMLLoader videoRecommendationLoader;
+                    if (! MainApplication.DarkTheme)
+                    {
+                        videoRecommendationLoader = new FXMLLoader (getClass ().getResource ("/org/project/controller/video-recommendation.fxml"));
+                    }
+                    else
+                    {
+                        videoRecommendationLoader = new FXMLLoader (getClass ().getResource ("/org/project/controller/dark-video-recommendation.fxml"));
+                    }
                     HBox       videoRecommendation;
                     try
                     {
@@ -380,7 +388,15 @@ public class VideoPageController implements Initializable
         Stage      stage;
         Scene      scene;
         Parent     root;
-        FXMLLoader loader2 = new FXMLLoader (getClass ().getResource ("/org/project/controller/video-page.fxml"));
+        FXMLLoader loader2;
+        if (! MainApplication.DarkTheme)
+        {
+            loader2 = new FXMLLoader (getClass ().getResource ("/org/project/controller/video-page.fxml"));
+        }
+        else
+        {
+            loader2 = new FXMLLoader (getClass ().getResource ("/org/project/controller/dark-video-page.fxml"));
+        }
         try
         {
             root = loader2.load ();
@@ -407,7 +423,15 @@ public class VideoPageController implements Initializable
 
             for (var comment : comments)
             {
-                FXMLLoader commentPreviewLoader = new FXMLLoader (getClass ().getResource ("/org/project/controller/comment-preview.fxml"));
+                FXMLLoader commentPreviewLoader;
+                if (! MainApplication.DarkTheme)
+                {
+                    commentPreviewLoader = new FXMLLoader (getClass ().getResource ("/org/project/controller/comment-preview.fxml"));
+                }
+                else
+                {
+                    commentPreviewLoader = new FXMLLoader (getClass ().getResource ("/org/project/controller/dark-comment-preview.fxml"));
+                }
                 Parent     commentPreview;
                 try
                 {

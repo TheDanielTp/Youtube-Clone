@@ -384,8 +384,8 @@ public class MainController implements Initializable
 
         stage.setScene (scene);
 
-        stage.setWidth (600);
-        stage.setHeight (400);
+        stage.setWidth (650);
+        stage.setHeight (450);
         stage.setX (x);
         stage.setY (y);
 
@@ -432,8 +432,8 @@ public class MainController implements Initializable
 
         stage.setScene (scene);
 
-        stage.setWidth (600);
-        stage.setHeight (400);
+        stage.setWidth (650);
+        stage.setHeight (450);
         stage.setX (x);
         stage.setY (y);
 
@@ -480,8 +480,8 @@ public class MainController implements Initializable
 
         stage.setScene (scene);
 
-        stage.setWidth (600);
-        stage.setHeight (400);
+        stage.setWidth (650);
+        stage.setHeight (450);
         stage.setX (x);
         stage.setY (y);
 
