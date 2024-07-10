@@ -132,7 +132,7 @@ public class MainController implements Initializable
                     {
                         PlaylistDAOImpl playlistDAOImpl = new PlaylistDAOImpl ();
                         Playlist        history         = playlistDAOImpl.findByNameUser (MainApplication.currentUser, "History");
-                        history.getVideosID ().add(video.getID ());
+                        history.getVideosID ().add (video.getID ());
                         playlistDAOImpl.update (history);
                         playlistDAOImpl.addVideo (history, video);
 
@@ -140,7 +140,15 @@ public class MainController implements Initializable
                         Stage      stage;
                         Scene      scene;
                         Parent     root;
-                        FXMLLoader loader2 = new FXMLLoader (getClass ().getResource ("/org/project/controller/video-page.fxml"));
+                        FXMLLoader loader2;
+                        if (! MainApplication.DarkTheme)
+                        {
+                            loader2 = new FXMLLoader (getClass ().getResource ("/org/project/controller/video-page.fxml"));
+                        }
+                        else
+                        {
+                            loader2 = new FXMLLoader (getClass ().getResource ("/org/project/controller/dark-video-page.fxml"));
+                        }
                         try
                         {
                             root = loader2.load ();
@@ -293,12 +301,12 @@ public class MainController implements Initializable
         if (! MainApplication.DarkTheme)
         {
             MainApplication.DarkTheme = true;
-            root = FXMLLoader.load (Objects.requireNonNull (getClass ().getResource ("dark-main-view.fxml")));
+            root                      = FXMLLoader.load (Objects.requireNonNull (getClass ().getResource ("dark-main-view.fxml")));
         }
         else
         {
             MainApplication.DarkTheme = false;
-            root = FXMLLoader.load (Objects.requireNonNull (getClass ().getResource ("communist-main-view.fxml")));
+            root                      = FXMLLoader.load (Objects.requireNonNull (getClass ().getResource ("communist-main-view.fxml")));
         }
         Stage stage = (Stage) ((Node) event.getSource ()).getScene ().getWindow ();
 
@@ -369,8 +377,8 @@ public class MainController implements Initializable
 
         Stage stage = new Stage ();
 
-        double x      = stage.getX ();
-        double y      = stage.getY ();
+        double x = stage.getX ();
+        double y = stage.getY ();
 
         Scene scene = new Scene (root);
 
@@ -417,8 +425,8 @@ public class MainController implements Initializable
 
         Stage stage = new Stage ();
 
-        double x      = stage.getX ();
-        double y      = stage.getY ();
+        double x = stage.getX ();
+        double y = stage.getY ();
 
         Scene scene = new Scene (root);
 
@@ -465,8 +473,8 @@ public class MainController implements Initializable
 
         Stage stage = new Stage ();
 
-        double x      = stage.getX ();
-        double y      = stage.getY ();
+        double x = stage.getX ();
+        double y = stage.getY ();
 
         Scene scene = new Scene (root);
 
@@ -505,12 +513,12 @@ public class MainController implements Initializable
         if (! MainApplication.DarkTheme)
         {
             MainApplication.DarkTheme = true;
-            root = FXMLLoader.load (Objects.requireNonNull (getClass ().getResource ("dark-user-edit.fxml")));
+            root                      = FXMLLoader.load (Objects.requireNonNull (getClass ().getResource ("communist-user-home-view.fxml")));
         }
         else
         {
             MainApplication.DarkTheme = false;
-            root = FXMLLoader.load (Objects.requireNonNull (getClass ().getResource ("communist-user-edit.fxml")));
+            root                      = FXMLLoader.load (Objects.requireNonNull (getClass ().getResource ("dark-user-home-view.fxml")));
         }
         Stage stage = (Stage) ((Node) event.getSource ()).getScene ().getWindow ();
 
@@ -614,8 +622,8 @@ public class MainController implements Initializable
     {
         videosPane.getChildren ().clear ();
 
-        Object[]        responseObject  = MainApplication.client.getAllVideos ();
-        List <Video>    videos          = (List <Video>) responseObject[1];
+        Object[]     responseObject = MainApplication.client.getAllVideos ();
+        List <Video> videos         = (List <Video>) responseObject[1];
 
         for (Video video : videos)
         {
@@ -691,7 +699,15 @@ public class MainController implements Initializable
                         Stage      stage;
                         Scene      scene;
                         Parent     root;
-                        FXMLLoader loader2 = new FXMLLoader (getClass ().getResource ("/org/project/controller/video-page.fxml"));
+                        FXMLLoader loader2;
+                        if (! MainApplication.DarkTheme)
+                        {
+                            loader2 = new FXMLLoader (getClass ().getResource ("/org/project/controller/video-page.fxml"));
+                        }
+                        else
+                        {
+                            loader2 = new FXMLLoader (getClass ().getResource ("/org/project/controller/dark-video-page.fxml"));
+                        }
                         try
                         {
                             root = loader2.load ();
@@ -789,15 +805,15 @@ public class MainController implements Initializable
     {
         videosPane.getChildren ().clear ();
 
-        Object[]        responseObject  = MainApplication.client.getAllVideos ();
-        List <Video>    videos          = (List <Video>) responseObject[1];
+        Object[]     responseObject = MainApplication.client.getAllVideos ();
+        List <Video> videos         = (List <Video>) responseObject[1];
 
         PlaylistDAOImpl playlistDAOImpl = new PlaylistDAOImpl ();
-        Playlist history = playlistDAOImpl.findByNameUser (MainApplication.currentUser, "Saved");
+        Playlist        saved           = playlistDAOImpl.findByNameUser (MainApplication.currentUser, "Saved");
 
         for (Video video : videos)
         {
-            if (history.getVideosID ().contains (video.getID ()))
+            if (saved.getVideosID ().contains (video.getID ()))
             {
                 try
                 {
@@ -871,7 +887,15 @@ public class MainController implements Initializable
                             Stage      stage;
                             Scene      scene;
                             Parent     root;
-                            FXMLLoader loader2 = new FXMLLoader (getClass ().getResource ("/org/project/controller/video-page.fxml"));
+                            FXMLLoader loader2;
+                            if (! MainApplication.DarkTheme)
+                            {
+                                loader2 = new FXMLLoader (getClass ().getResource ("/org/project/controller/video-page.fxml"));
+                            }
+                            else
+                            {
+                                loader2 = new FXMLLoader (getClass ().getResource ("/org/project/controller/dark-video-page.fxml"));
+                            }
                             try
                             {
                                 root = loader2.load ();
@@ -924,11 +948,11 @@ public class MainController implements Initializable
     {
         videosPane.getChildren ().clear ();
 
-        Object[]        responseObject  = MainApplication.client.getAllVideos ();
-        List <Video>    videos          = (List <Video>) responseObject[1];
+        Object[]     responseObject = MainApplication.client.getAllVideos ();
+        List <Video> videos         = (List <Video>) responseObject[1];
 
         PlaylistDAOImpl playlistDAOImpl = new PlaylistDAOImpl ();
-        Playlist history = playlistDAOImpl.findByNameUser (MainApplication.currentUser, "History");
+        Playlist        history         = playlistDAOImpl.findByNameUser (MainApplication.currentUser, "History");
 
         for (Video video : videos)
         {
@@ -1054,72 +1078,69 @@ public class MainController implements Initializable
         videosPane.getChildren ().clear ();
 
         PlaylistDAOImpl playlistDAO = new PlaylistDAOImpl ();
-        List<Playlist> playlists = playlistDAO.findAll ();
+        List <Playlist> playlists   = playlistDAO.findAllUserPlaylists (MainApplication.currentUser);
 
         for (Playlist playlist : playlists)
         {
-            if (playlist.getCreatorID ().equals (MainApplication.currentUser.getID ()))
+            try
             {
-                try
+                FXMLLoader loader       = new FXMLLoader (getClass ().getResource ("/org/project/controller/playlist-thumbnail-view.fxml"));
+                AnchorPane playlistNode = loader.load ();
+
+                ImageView thumbnail   = (ImageView) playlistNode.lookup ("#thumbnail");
+                Label     title       = (Label) playlistNode.lookup ("#title");
+                Button    videoButton = (Button) playlistNode.lookup ("#videoButton");
+
+                if (thumbnail != null)
                 {
-                    FXMLLoader loader    = new FXMLLoader (getClass ().getResource ("/org/project/controller/playlist-thumbnail-view.fxml"));
-                    AnchorPane playlistNode = loader.load ();
+                    VideoDAOImpl videoDAO = new VideoDAOImpl ();
+                    Video        video    = videoDAO.findById (playlist.getVideosID ().getFirst ());
+                    File         file     = new File (video.getThumbnailURL ());
+                    thumbnail.setImage (new Image (file.toURI ().toString ()));
+                }
+                else
+                {
+                    System.err.println ("Thumbnail ImageView not found in FXML.");
+                }
 
-                    ImageView thumbnail   = (ImageView) playlistNode.lookup ("#thumbnail");
-                    Label     title       = (Label) playlistNode.lookup ("#title");
-                    Button    videoButton = (Button) playlistNode.lookup ("#videoButton");
+                if (title != null)
+                {
+                    title.setText (playlist.getTitle ());
+                }
+                else
+                {
+                    System.err.println ("Title Label not found in FXML.");
+                }
 
-                    if (thumbnail != null)
+                if (videoButton != null)
+                {
+                    videoButton.setOnAction (event2 ->
                     {
-                        VideoDAOImpl videoDAO = new VideoDAOImpl ();
-                        Video video = videoDAO.findById (playlist.getVideosID ().getFirst ());
-                        File file = new File (video.getThumbnailURL ());
-                        thumbnail.setImage (new Image (file.toURI ().toString ()));
-                    }
-                    else
-                    {
-                        System.err.println ("Thumbnail ImageView not found in FXML.");
-                    }
-
-                    if (title != null)
-                    {
-                        title.setText (playlist.getTitle ());
-                    }
-                    else
-                    {
-                        System.err.println ("Title Label not found in FXML.");
-                    }
-
-                    if (videoButton != null)
-                    {
-                        videoButton.setOnAction (event2 ->
+                        MainApplication.currentPlaylist = playlist;
+                        Stage      stage;
+                        Scene      scene;
+                        Parent     root;
+                        FXMLLoader loader2 = new FXMLLoader (getClass ().getResource ("/org/project/controller/playlist-page.fxml"));
+                        try
                         {
-                            MainApplication.currentPlaylist = playlist;
-                            Stage      stage;
-                            Scene      scene;
-                            Parent     root;
-                            FXMLLoader loader2 = new FXMLLoader (getClass ().getResource ("/org/project/controller/playlist-page.fxml"));
-                            try
-                            {
-                                root = loader2.load ();
-                            }
-                            catch (IOException e)
-                            {
-                                throw new RuntimeException (e);
-                            }
-                            stage = (Stage) ((Node) event2.getSource ()).getScene ().getWindow ();
-                            scene = new Scene (root);
-                            stage.setScene (scene);
-                            stage.show ();
-                        });
-                    }
+                            root = loader2.load ();
+                        }
+                        catch (IOException e)
+                        {
+                            throw new RuntimeException (e);
+                        }
+                        stage = (Stage) ((Node) event2.getSource ()).getScene ().getWindow ();
+                        scene = new Scene (root);
+                        stage.setScene (scene);
+                        stage.show ();
+                    });
+                }
 
-                    videosPane.getChildren ().add (playlistNode);
-                }
-                catch (IOException e)
-                {
-                    e.printStackTrace ();
-                }
+                videosPane.getChildren ().add (playlistNode);
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace ();
             }
         }
     }

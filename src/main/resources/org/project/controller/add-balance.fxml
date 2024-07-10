@@ -10,11 +10,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: cd0000; -fx-border-color: ffffff; -fx-border-width: 5;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.project.controller.UploadController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: cd0000; -fx-border-color: ffffff; -fx-border-width: 5;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.project.controller.AddBalanceController">
     <children>
-        <Label layoutX="217.0" layoutY="14.0" prefHeight="38.0" prefWidth="166.0" style="-fx-border-color: #ffffff; -fx-border-width: 3; -fx-border-radius: 50;" text="Add to your balance!" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+        <Label alignment="CENTER" layoutX="217.0" layoutY="14.0" prefHeight="38.0" prefWidth="166.0" style="-fx-border-color: #ffffff; -fx-border-width: 3; -fx-border-radius: 50;" text="Add to your balance!" textAlignment="CENTER" textFill="WHITE" wrapText="true">
             <font>
-                <Font name="System Bold" size="15.0" />
+                <Font name="System Bold" size="13.0" />
             </font>
             <padding>
                 <Insets bottom="2.0" left="5.0" right="5.0" top="2.0" />
@@ -25,8 +25,8 @@
       <TextField layoutX="211.0" layoutY="157.0" prefHeight="26.0" prefWidth="178.0" promptText="Card Number" style="-fx-background-radius: 30;" />
       <TextField layoutX="262.0" layoutY="200.0" prefHeight="26.0" prefWidth="74.0" promptText="CVV" style="-fx-background-radius: 30;" />
       <DatePicker layoutX="211.0" layoutY="237.0" promptText="Expiration Date" />
-      <TextField layoutX="230.0" layoutY="275.0" prefHeight="26.0" prefWidth="138.0" promptText="Amount" style="-fx-background-radius: 30;" />
-      <Button layoutX="257.0" layoutY="318.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="86.0" style="-fx-background-color: #cd0000; -fx-border-color: #ffffff; -fx-border-width: 4; -fx-background-radius: 30; -fx-border-radius: 30;" text="Done" textFill="WHITE">
+      <TextField fx:id="amount" layoutX="230.0" layoutY="275.0" prefHeight="26.0" prefWidth="138.0" promptText="Amount" style="-fx-background-radius: 30;" />
+      <Button layoutX="257.0" layoutY="318.0" mnemonicParsing="false" onAction="#done" prefHeight="39.0" prefWidth="86.0" style="-fx-background-color: #cd0000; -fx-border-color: #ffffff; -fx-border-width: 4; -fx-background-radius: 30; -fx-border-radius: 30;" text="Done" textFill="WHITE">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>

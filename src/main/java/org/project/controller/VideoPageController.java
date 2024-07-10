@@ -763,6 +763,7 @@ public class VideoPageController implements Initializable
         Playlist playlist = playlistDAO.findByNameUser (MainApplication.currentUser, playlistName);
         playlist.getVideosID ().add (video.getID ());
         playlistDAO.update (playlist);
+        playlistDAO.addVideo (playlist, video);
     }
 
     @FXML
