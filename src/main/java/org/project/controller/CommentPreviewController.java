@@ -28,8 +28,7 @@ import java.util.ResourceBundle;
 
 public class CommentPreviewController implements Initializable
 {
-
-    //region [ - Fields - ]
+    //region [ - Attributes - ]
 
     @FXML
     private HBox hbxMain;
