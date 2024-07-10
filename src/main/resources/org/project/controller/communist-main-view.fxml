@@ -130,6 +130,38 @@
                   <Insets left="-40.0" right="15.0" top="17.0" />
                </HBox.margin>
             </ImageView>
+            <ImageView fx:id="settingHover" fitHeight="40.0" fitWidth="40.0" onMouseClicked="#settingClicked" onMouseEntered="#settingButtonHover" onMouseExited="#settingButtonUnHover" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/settingHover.png" />
+               </image>
+               <HBox.margin>
+                  <Insets top="17.0" />
+               </HBox.margin>
+            </ImageView>
+            <ImageView fx:id="settingButton" fitHeight="40.0" fitWidth="40.0" onMouseClicked="#settingClicked" onMouseEntered="#settingButtonHover" onMouseExited="#settingButtonUnHover" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/setting.png" />
+               </image>
+               <HBox.margin>
+                  <Insets left="-40.0" right="15.0" top="17.0" />
+               </HBox.margin>
+            </ImageView>
+            <ImageView fx:id="signInHover" fitHeight="150.0" fitWidth="100.0" onMouseClicked="#signInButtonClicked" onMouseEntered="#signInButtonHover" onMouseExited="#signInButtonUnHover" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/logoutHover.png" />
+               </image>
+               <HBox.margin>
+                  <Insets top="16.0" />
+               </HBox.margin>
+            </ImageView>
+            <ImageView fx:id="signInButton" fitHeight="150.0" fitWidth="100.0" onMouseClicked="#signInButtonClicked" onMouseEntered="#signInButtonHover" onMouseExited="#signInButtonUnHover" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/logout.png" />
+               </image>
+               <HBox.margin>
+                  <Insets left="-100.0" right="15.0" top="16.0" />
+               </HBox.margin>
+            </ImageView>
          </children>
       </HBox>
       <HBox prefHeight="1051.0" prefWidth="1920.0">
@@ -141,7 +173,7 @@
                <children>
                   <VBox prefHeight="998.0" prefWidth="107.0" style="-fx-border-color: ffffff; -fx-border-width: 5; -fx-background-color: cd0000;">
                      <children>
-                        <Button alignment="BOTTOM_CENTER" minHeight="65.0" mnemonicParsing="false" onMouseEntered="#homeButtonHover" onMouseExited="#homeButtonUnHover" prefHeight="65.0" prefWidth="80.0">
+                        <Button alignment="BOTTOM_CENTER" minHeight="65.0" mnemonicParsing="false" onAction="#homeClicked" onMouseEntered="#homeButtonHover" onMouseExited="#homeButtonUnHover" prefHeight="65.0" prefWidth="80.0">
                            <font>
                               <Font name="Roboto Medium" size="14.0" />
                            </font>
@@ -246,7 +278,7 @@
                               <Insets left="10.0" right="10.0" top="10.0" />
                            </VBox.margin>
                         </Button>
-                        <Button alignment="BOTTOM_CENTER" minHeight="65.0" mnemonicParsing="false" onMouseEntered="#historyButtonHover" onMouseExited="#historyButtonUnHover" prefHeight="65.0" prefWidth="80.0">
+                        <Button alignment="BOTTOM_CENTER" minHeight="65.0" mnemonicParsing="false" onAction="#historyClicked" onMouseEntered="#historyButtonHover" onMouseExited="#historyButtonUnHover" prefHeight="65.0" prefWidth="80.0">
                            <font>
                               <Font name="Roboto Medium" size="14.0" />
                            </font>
@@ -325,7 +357,7 @@
                               <Insets bottom="15.0" left="10.0" right="10.0" top="15.0" />
                            </VBox.margin>
                         </Line>
-                        <Button alignment="TOP_LEFT" mnemonicParsing="false" onMouseEntered="#youButtonHover" onMouseExited="#youButtonUnHover" prefHeight="21.0" prefWidth="227.0" text="   You">
+                        <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#youButtonClicked" onMouseEntered="#youButtonHover" onMouseExited="#youButtonUnHover" prefHeight="21.0" prefWidth="227.0" text="   You">
                            <font>
                               <Font name="Roboto Medium" size="14.0" />
                            </font>

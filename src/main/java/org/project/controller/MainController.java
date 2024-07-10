@@ -432,6 +432,108 @@ public class MainController implements Initializable
         stage.show ();
     }
 
+    @FXML
+    ImageView settingButton;
+
+    @FXML
+    ImageView settingHover;
+
+    public void settingButtonHover ()
+    {
+        settingButton.setVisible (false);
+        settingHover.setVisible (true);
+    }
+
+    public void settingButtonUnHover ()
+    {
+        settingButton.setVisible (true);
+        settingHover.setVisible (false);
+    }
+
+    public void settingClicked (MouseEvent event) throws IOException
+    {
+        Parent root;
+        if (! MainApplication.DarkTheme)
+        {
+            MainApplication.DarkTheme = true;
+            root = FXMLLoader.load (Objects.requireNonNull (getClass ().getResource ("dark-user-edit.fxml")));
+        }
+        else
+        {
+            MainApplication.DarkTheme = false;
+            root = FXMLLoader.load (Objects.requireNonNull (getClass ().getResource ("communist-user-edit.fxml")));
+        }
+        Stage stage = (Stage) ((Node) event.getSource ()).getScene ().getWindow ();
+
+        double width  = stage.getWidth ();
+        double height = stage.getHeight ();
+        double x      = stage.getX ();
+        double y      = stage.getY ();
+
+        Scene scene = new Scene (root);
+
+        stage.setScene (scene);
+
+        stage.setWidth (width);
+        stage.setHeight (height);
+        stage.setX (x);
+        stage.setY (y);
+
+        System.out.println ("> Front: opening setting page");
+    }
+
+    @FXML
+    ImageView signInButton;
+
+    @FXML
+    ImageView signInHover;
+
+    public void signInButtonHover ()
+    {
+        signInButton.setVisible (false);
+        signInHover.setVisible (true);
+    }
+
+    public void signInButtonUnHover ()
+    {
+        signInButton.setVisible (true);
+        signInHover.setVisible (false);
+    }
+
+    public void signInButtonClicked (MouseEvent event) throws IOException
+    {
+        MainApplication.currentUser = null;
+
+        Parent root;
+        if (! MainApplication.DarkTheme)
+        {
+            MainApplication.DarkTheme = true;
+            root                      = FXMLLoader.load (Objects.requireNonNull (getClass ().getResource ("communist-front-view.fxml")));
+        }
+        else
+        {
+            MainApplication.DarkTheme = false;
+            root                      = FXMLLoader.load (Objects.requireNonNull (getClass ().getResource ("dark-front-view.fxml")));
+        }
+        Stage stage = (Stage) ((Node) event.getSource ()).getScene ().getWindow ();
+
+        double width  = stage.getWidth ();
+        double height = stage.getHeight ();
+        double x      = stage.getX ();
+        double y      = stage.getY ();
+
+        Scene scene = new Scene (root);
+
+        stage.setScene (scene);
+
+        stage.setWidth (width);
+        stage.setHeight (height);
+        stage.setX (x);
+        stage.setY (y);
+
+        System.out.println ("> Front: opening main page");
+    }
+
     //endregion
 
     //region [ - Main Sidebar Functions - ]
@@ -634,6 +736,118 @@ public class MainController implements Initializable
         youLabel.setTextFill (Color.web ("#ffffff"));
     }
 
+    public void youButtonClicked (ActionEvent event)
+    {
+        videosPane.getChildren ().clear ();
+
+        Object[]        responseObject  = MainApplication.client.getAllVideos ();
+        List <Video>    videos          = (List <Video>) responseObject[1];
+
+        PlaylistDAOImpl playlistDAOImpl = new PlaylistDAOImpl ();
+        Playlist history = playlistDAOImpl.findByNameUser (MainApplication.currentUser, "Saved");
+
+        for (Video video : videos)
+        {
+            if (history.getVideosID ().contains (video.getID ()))
+            {
+                try
+                {
+                    FXMLLoader loader    = new FXMLLoader (getClass ().getResource ("/org/project/controller/video-thumbnail-view.fxml"));
+                    AnchorPane videoNode = loader.load ();
+
+                    ImageView thumbnail   = (ImageView) videoNode.lookup ("#thumbnail");
+                    Label     title       = (Label) videoNode.lookup ("#title");
+                    Button    videoButton = (Button) videoNode.lookup ("#videoButton");
+                    Label     duration    = (Label) videoNode.lookup ("#duration");
+
+                    Media media;
+                    File  tempFile;
+                    try
+                    {
+                        File   videoFile = new File (video.getVideoURL ());
+                        byte[] fileBytes = Files.readAllBytes (Path.of (videoFile.toURI ()));
+
+                        tempFile = File.createTempFile ("videoFile", ".mp4");
+                        tempFile.deleteOnExit ();
+
+                        try (FileOutputStream fos = new FileOutputStream (tempFile); ByteArrayInputStream bais = new ByteArrayInputStream (fileBytes))
+                        {
+                            byte[] buffer = new byte[1024];
+                            int    length;
+                            while ((length = bais.read (buffer)) != - 1)
+                            {
+                                fos.write (buffer, 0, length);
+                            }
+                        }
+
+                    }
+                    catch (IOException e)
+                    {
+                        e.printStackTrace ();
+                        return;
+                    }
+
+                    media = new Media (tempFile.toURI ().toString ());
+
+                    Label    totalTimeLabel = new Label ("00:00");
+                    Duration total          = media.getDuration ();
+                    totalTimeLabel.setText (formatTime (total));
+
+                    duration.setText (totalTimeLabel.getText ());
+
+                    if (thumbnail != null)
+                    {
+                        File file = new File (video.getThumbnailURL ());
+                        thumbnail.setImage (new Image (file.toURI ().toString ()));
+                    }
+                    else
+                    {
+                        System.err.println ("Thumbnail ImageView not found in FXML.");
+                    }
+
+                    if (title != null)
+                    {
+                        title.setText (video.getTitle ());
+                    }
+                    else
+                    {
+                        System.err.println ("Title Label not found in FXML.");
+                    }
+
+                    if (videoButton != null)
+                    {
+                        videoButton.setOnAction (event2 ->
+                        {
+                            MainApplication.currentVideo = video;
+                            Stage      stage;
+                            Scene      scene;
+                            Parent     root;
+                            FXMLLoader loader2 = new FXMLLoader (getClass ().getResource ("/org/project/controller/video-page.fxml"));
+                            try
+                            {
+                                root = loader2.load ();
+                            }
+                            catch (IOException e)
+                            {
+                                throw new RuntimeException (e);
+                            }
+                            stage = (Stage) ((Node) event2.getSource ()).getScene ().getWindow ();
+                            scene = new Scene (root);
+                            stage.setScene (scene);
+                            stage.show ();
+                        });
+                    }
+
+                    videosPane.getChildren ().add (videoNode);
+                }
+                catch (IOException e)
+                {
+                    e.printStackTrace ();
+                }
+            }
+        }
+    }
+
     @FXML
     SVGPath historyButtonSVG;
 
@@ -663,8 +877,6 @@ public class MainController implements Initializable
 
         Object[]        responseObject  = MainApplication.client.getAllVideos ();
         List <Video>    videos          = (List <Video>) responseObject[1];
-        CategoryDAOImpl categoryDAOImpl = new CategoryDAOImpl ();
-        Category        category        = categoryDAOImpl.findByTitle ("Music");
 
         PlaylistDAOImpl playlistDAOImpl = new PlaylistDAOImpl ();
         Playlist history = playlistDAOImpl.findByNameUser (MainApplication.currentUser, "History");

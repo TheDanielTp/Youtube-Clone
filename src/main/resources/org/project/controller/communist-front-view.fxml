@@ -320,7 +320,7 @@
                               <Insets left="10.0" right="10.0" />
                            </VBox.margin>
                         </Button>
-                        <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#historyClicked" onMouseEntered="#historyButtonHover" onMouseExited="#historyButtonUnHover" prefHeight="21.0" prefWidth="227.0" text="   History">
+                        <Button alignment="TOP_LEFT" mnemonicParsing="false" onMouseEntered="#historyButtonHover" onMouseExited="#historyButtonUnHover" prefHeight="21.0" prefWidth="227.0" text="   History">
                            <font>
                               <Font name="Roboto Medium" size="14.0" />
                            </font>

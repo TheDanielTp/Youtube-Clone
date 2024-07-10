@@ -1,24 +1,27 @@
 package org.project.controller;
 
+import com.wetube.dao.impl.ChannelDAOImpl;
+import com.wetube.dao.impl.UserDAOImpl;
+import com.wetube.model.Channel;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.io.IOException;
+import java.time.LocalDate;
+import java.util.Objects;
 
 public class UserEditController
 {
-    @FXML
-    private VBox mainPane;
-
-    @FXML
-    private HBox topBar;
-
     @FXML
     private ImageView pfp;
 
@@ -29,7 +32,7 @@ public class UserEditController
     private TextField lastname;
 
     @FXML
-    private TextField username;
+    private TextField usernameField;
 
     @FXML
     private Label usernameError;
@@ -56,22 +59,7 @@ public class UserEditController
     private Label birthdayError;
 
     @FXML
-    private Button choosePFP;
-
-    @FXML
-    private Button chooseChannelPic;
-
-    @FXML
-    private Button joinPremium;
-
-    @FXML
-    private ImageView channelPic;
-
-    @FXML
-    private Button done;
-
-    @FXML
-    private Label editProfileLabel;
+    private ImageView channelpfp;
 
     @FXML
     public void initialize ()
@@ -91,6 +79,8 @@ public class UserEditController
         if (file != null)
         {
             pfp.setImage (new Image (file.toURI ().toString ()));
+            MainApplication.currentUser.setProfilePictureURL (file.toURI ().toString ());
+            MainApplication.client.update (MainApplication.currentUser);
         }
     }
 
@@ -102,95 +92,113 @@ public class UserEditController
         File file = fileChooser.showOpenDialog (new Stage ());
         if (file != null)
         {
-            channelPic.setImage (new Image (file.toURI ().toString ()));
+            channelpfp.setImage (new Image (file.toURI ().toString ()));
+            ChannelDAOImpl channelDAO = new ChannelDAOImpl ();
+            Channel channel = channelDAO.findById (MainApplication.currentUser.getID ());
+            channel.setChannelPictureURL (file.toURI ().toString ());
+            channelDAO.update (channel);
         }
     }
 
     @FXML
     private void handleJoinPremium ()
     {
-        // Implement the logic to handle joining premium
         Alert alert = new Alert (Alert.AlertType.INFORMATION);
         alert.setTitle ("Join Premium");
-        alert.setHeaderText (null);
+        alert.setHeaderText ("Congratulations!");
         alert.setContentText ("You have joined Premium!");
         alert.showAndWait ();
     }
 
     @FXML
-    private void handleDone ()
+    private void doneClicked (ActionEvent event) throws IOException
     {
-        // Implement the logic to handle the "Done" button click
-        boolean valid = validateForm ();
-        if (valid)
+        if (! firstname.getText ().isEmpty ())
         {
-            saveUserData ();
-            Alert alert = new Alert (Alert.AlertType.INFORMATION);
-            alert.setTitle ("Profile Updated");
-            alert.setHeaderText (null);
-            alert.setContentText ("Your profile has been updated successfully!");
-            alert.showAndWait ();
+            String firstName = firstname.getText ();
+            MainApplication.currentUser.setFirstName (firstName);
+            MainApplication.client.update (MainApplication.currentUser);
         }
+        if (! lastname.getText ().isEmpty ())
+        {
+            String lastName = lastname.getText ();
+            MainApplication.currentUser.setLastName (lastName);
+            MainApplication.client.update (MainApplication.currentUser);
+        }
+        if (! usernameField.getText ().isEmpty ())
+        {
+            UserDAOImpl userDAO  = new UserDAOImpl ();
+            String      username = usernameField.getText ();
+            if (userDAO.findByUsername (username) == null)
+            {
+                MainApplication.currentUser.setUsername (username);
+                MainApplication.client.update (MainApplication.currentUser);
+            }
+            else
+            {
+                usernameError.setVisible (true);
+            }
+        }
+        if (! email.getText ().isEmpty ())
+        {
+            UserDAOImpl userDAO  = new UserDAOImpl ();
+            String      emailText = email.getText ();
+            if (userDAO.findByEmail (emailText) == null)
+            {
+                MainApplication.currentUser.setEmail (emailText);
+                MainApplication.client.update (MainApplication.currentUser);
+            }
+            else
+            {
+                emailError.setVisible (true);
+            }
+        }
+        if (! oldPassword.getText ().isEmpty () && ! newPassword.getText ().isEmpty ())
+        {
+            if (oldPassword.getText ().equals (MainApplication.currentUser.getPassword ()))
+            {
+                MainApplication.currentUser.setPassword (newPassword.getText ());
+                MainApplication.client.update (MainApplication.currentUser);
+            }
+            else
+            {
+                passwordError.setVisible (true);
+            }
+        }
+        if (birthday.getValue () != null )
+        {
+            LocalDate birthdayDate = birthday.getValue ();
+            MainApplication.currentUser.setBirthdate (birthdayDate);
+            MainApplication.client.update (MainApplication.currentUser);
+        }
+
+        Parent root;
+        if (! MainApplication.DarkTheme)
+        {
+            MainApplication.DarkTheme = true;
+            root = FXMLLoader.load (Objects.requireNonNull (getClass ().getResource ("communist-main-view.fxml")));
+        }
+        else
+        {
+            MainApplication.DarkTheme = false;
+            root = FXMLLoader.load (Objects.requireNonNull (getClass ().getResource ("dark-main-view.fxml")));
+        }
+        Stage stage = (Stage) ((Node) event.getSource ()).getScene ().getWindow ();
+
+        double width  = stage.getWidth ();
+        double height = stage.getHeight ();
+        double x      = stage.getX ();
+        double y      = stage.getY ();
+
+        Scene scene = new Scene (root);
+
+        stage.setScene (scene);
+
+        stage.setWidth (width);
+        stage.setHeight (height);
+        stage.setX (x);
+        stage.setY (y);
+
+        System.out.println ("> Front: opening main page");
     }
-
-    private boolean validateForm ()
-    {
-        boolean valid = true;
-
-        if (username.getText ().isEmpty ())
-        {
-            usernameError.setVisible (true);
-            valid = false;
-        }
-        else
-        {
-            usernameError.setVisible (false);
-        }
-
-        if (email.getText ().isEmpty ())
-        {
-            emailError.setVisible (true);
-            valid = false;
-        }
-        else
-        {
-            emailError.setVisible (false);
-        }
-
-        if (! oldPassword.getText ().equals ("correctPassword"))
-        { // Replace with actual password validation logic
-            passwordError.setVisible (true);
-            valid = false;
-        }
-        else
-        {
-            passwordError.setVisible (false);
-        }
-
-        if (birthday.getValue () == null)
-        {
-            birthdayError.setVisible (true);
-            valid = false;
-        }
-        else
-        {
-            birthdayError.setVisible (false);
-        }
-
-        return valid;
-    }
-
-    private void saveUserData ()
-    {
-        // Implement the logic to save user data
-        String firstName       = firstname.getText ();
-        String lastName        = lastname.getText ();
-        String userName        = username.getText ();
-        String emailAddress    = email.getText ();
-        String newPasswordText = newPassword.getText ();
-        String birthdayDate    = birthday.getValue ().toString ();
-
-        // Use this data to save to your database or application logic
-    }
-
 }

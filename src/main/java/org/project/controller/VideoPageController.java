@@ -3,14 +3,8 @@ package org.project.controller;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.sun.tools.javac.Main;
-import com.wetube.dao.impl.ChannelDAOImpl;
-import com.wetube.dao.impl.CommentDAOImpl;
-import com.wetube.dao.impl.UserDAOImpl;
-import com.wetube.dao.impl.VideoDAOImpl;
-import com.wetube.model.Channel;
-import com.wetube.model.Comment;
-import com.wetube.model.User;
-import com.wetube.model.Video;
+import com.wetube.dao.impl.*;
+import com.wetube.model.*;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.beans.value.ChangeListener;
@@ -738,6 +732,11 @@ public class VideoPageController implements Initializable
     @FXML
     private void updateSave (ActionEvent event)
     {
+        PlaylistDAOImpl playlistDAO = new PlaylistDAOImpl();
+        Playlist playlist = playlistDAO.findByNameUser (MainApplication.currentUser, "Saved");
+
+        playlist.getVideosID ().add(video.getID ());
+        playlistDAO.update(playlist);
     }
 
     @FXML
