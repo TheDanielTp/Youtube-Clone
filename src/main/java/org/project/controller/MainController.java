@@ -41,7 +41,7 @@ import java.util.ResourceBundle;
 
 public class MainController implements Initializable
 {
-    //region------------------------------------------------Stage Size Functions------------------------------------------------
+    //region [ - Initialize Functions - ]
 
     @FXML
     FlowPane videosPane;
@@ -222,7 +222,7 @@ public class MainController implements Initializable
 
     //endregion
 
-    //region---------------------------------------------------Head Functions---------------------------------------------------
+    //region [ - Head Functions - ]
 
     @FXML
     ImageView menuButton;
@@ -347,7 +347,47 @@ public class MainController implements Initializable
 
     public void createButtonClick (MouseEvent event) throws IOException
     {
-        Parent root = FXMLLoader.load (Objects.requireNonNull (getClass ().getResource ("upload_page.fxml")));
+        Parent root = FXMLLoader.load (Objects.requireNonNull (getClass ().getResource ("upload-page.fxml")));
+
+        Stage stage = new Stage ();
+
+        double x      = stage.getX ();
+        double y      = stage.getY ();
+
+        Scene scene = new Scene (root);
+
+        stage.setScene (scene);
+
+        stage.setWidth (600);
+        stage.setHeight (400);
+        stage.setX (x);
+        stage.setY (y);
+
+        System.out.println ("> Front: opening upload page");
+        stage.show ();
+    }
+
+    @FXML
+    ImageView uploadButton;
+
+    @FXML
+    ImageView uploadHover;
+
+    public void uploadButtonHover ()
+    {
+        uploadButton.setVisible (false);
+        uploadHover.setVisible (true);
+    }
+
+    public void uploadButtonUnHover ()
+    {
+        uploadButton.setVisible (true);
+        uploadHover.setVisible (false);
+    }
+
+    public void uploadButtonClick (MouseEvent event) throws IOException
+    {
+        Parent root = FXMLLoader.load (Objects.requireNonNull (getClass ().getResource ("upload-post-page.fxml")));
 
         Stage stage = new Stage ();
 

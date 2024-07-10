@@ -1,6 +1,7 @@
 package org.project.controller;
 
 import com.wetube.model.Channel;
+import com.wetube.model.Playlist;
 import com.wetube.model.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -57,7 +58,6 @@ public class SignupSecondController
             if (checkAge (birthDate))
             {
                 User user = new User (firstName, lastName, SignupFirstController.username, SignupFirstController.email, SignupFirstController.password, birthDate);
-
                 Object[] signUpResponse = client.create (user);
                 if (signUpResponse != null)
                 {
@@ -76,6 +76,9 @@ public class SignupSecondController
 
                         Channel channel = new Channel (user.getID (), user.getUsername (), "");
                         Object[] createChannelResponse = client.create (channel);
+
+                        Playlist playlist = new Playlist (user.getID (), user.getID (), "History", "History", false, false);
+                        MainApplication.client.create (playlist);
 
                         Parent root;
                         if (! MainApplication.DarkTheme)

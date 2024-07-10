@@ -270,7 +270,7 @@
                            <children>
                               <HBox prefHeight="45.0" prefWidth="200.0">
                                  <children>
-                                    <DatePicker fx:id="birthday" prefHeight="38.0" prefWidth="198.0" style="-fx-background-radius: 40;" />
+                                    <DatePicker fx:id="birthday" prefHeight="38.0" prefWidth="198.0" />
                                  </children>
                               </HBox>
                            </children>

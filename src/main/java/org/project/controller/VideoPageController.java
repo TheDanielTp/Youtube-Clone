@@ -691,6 +691,8 @@ public class VideoPageController implements Initializable
             hasLiked = true;
             txtLikes.setText (String.valueOf (Integer.parseInt (txtLikes.getText ()) + 1));
             MainApplication.client.like (video, MainApplication.currentUser);
+            video.setLikesCount (video.getLikesCount () + 1);
+            MainApplication.client.update (video);
         }
         else if (hasLiked)
         {
@@ -698,9 +700,9 @@ public class VideoPageController implements Initializable
             hasLiked = null;
             txtLikes.setText (String.valueOf (Integer.parseInt (txtLikes.getText ()) - 1));
             MainApplication.client.like (video, MainApplication.currentUser);
+            video.setLikesCount (video.getLikesCount () - 1);
+            MainApplication.client.update (video);
         }
-
-        MainApplication.client.like (video, MainApplication.currentUser);
     }
 
     @FXML
@@ -720,15 +722,17 @@ public class VideoPageController implements Initializable
             }
             hasLiked = false;
             MainApplication.client.dislike (video, MainApplication.currentUser);
+            video.setDislikesCount (video.getDislikesCount () + 1);
+            MainApplication.client.update (video);
         }
         else if (! hasLiked)
         {
             svgDislike.setContent (emptiedDislike);
             hasLiked = null;
             MainApplication.client.dislike (video, MainApplication.currentUser);
+            video.setDislikesCount (video.getDislikesCount () - 1);
+            MainApplication.client.update (video);
         }
-
-        MainApplication.client.dislike (video, MainApplication.currentUser);
     }
 
     @FXML

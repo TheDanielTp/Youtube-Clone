@@ -46,8 +46,8 @@ public class MainApplication extends Application
         Scene      scene      = new Scene (fxmlLoader.load ());
         stage.setTitle ("WeTube");
         stage.setScene (scene);
-        stage.setWidth (960);
-        stage.setHeight (540);
+        stage.setWidth (1280);
+        stage.setHeight (720);
         stage.show ();
     }
 
