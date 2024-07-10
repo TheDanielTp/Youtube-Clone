@@ -93,7 +93,7 @@ public class CommentDAOImpl
 
     public boolean checkActionExistence (User user, Comment comment)
     {
-        String sql = "SELECT * FROM ContentsAction WHERE userID = ? AND commentID = ?";
+        String sql = "SELECT * FROM ContentsAction WHERE userID = ? AND contentID = ?";
         try (Connection conn = DatabaseConnection.getConnection ();
              PreparedStatement pstmt = conn.prepareStatement (sql))
         {
