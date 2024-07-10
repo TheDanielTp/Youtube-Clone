@@ -4,10 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ec566682-672c-4b02-8981-652c66cb3fe3" name="Changes" comment="Upgraded upload pages">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/dark-upload-post-page.fxml" afterDir="false" />
+    <list default="true" id="ec566682-672c-4b02-8981-652c66cb3fe3" name="Changes" comment="Upgraded upload pages posts">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/dark-video-page.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/project/controller/upload-post-page.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/upload-post-page.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/project/controller/short-page.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/short-page.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/project/controller/video-page.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/video-page.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -317,7 +318,15 @@
       <option name="project" value="LOCAL" />
       <updated>1720592671920</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="Upgraded upload pages posts">
+      <option name="closed" value="true" />
+      <created>1720593404984</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1720593404984</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -368,6 +377,7 @@
     <MESSAGE value="Updated dark mode: Fixed few bugs + dark video page" />
     <MESSAGE value="Updated dark mode: upgraded upload page" />
     <MESSAGE value="Upgraded upload pages" />
-    <option name="LAST_COMMIT_MESSAGE" value="Upgraded upload pages" />
+    <MESSAGE value="Upgraded upload pages posts" />
+    <option name="LAST_COMMIT_MESSAGE" value="Upgraded upload pages posts" />
   </component>
 </project>
