@@ -4,8 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ec566682-672c-4b02-8981-652c66cb3fe3" name="Changes" comment="Updated dark mode: Fixed few bugs + dark video page">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/dark-upload-page.fxml" afterDir="false" />
+    <list default="true" id="ec566682-672c-4b02-8981-652c66cb3fe3" name="Changes" comment="Updated dark mode: upgraded upload page">
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/project/controller/dark-upload-page.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/dark-upload-page.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -291,7 +291,15 @@
       <option name="project" value="LOCAL" />
       <updated>1720587256219</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="Updated dark mode: upgraded upload page">
+      <option name="closed" value="true" />
+      <created>1720587701551</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1720587701551</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -340,6 +348,7 @@
     <MESSAGE value="Updated user pages" />
     <MESSAGE value="Updated dark mode: comment preview" />
     <MESSAGE value="Updated dark mode: Fixed few bugs + dark video page" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated dark mode: Fixed few bugs + dark video page" />
+    <MESSAGE value="Updated dark mode: upgraded upload page" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated dark mode: upgraded upload page" />
   </component>
 </project>
