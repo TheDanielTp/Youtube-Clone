@@ -15,25 +15,20 @@
 
 <VBox fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" stylesheets="@communist-user-view.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.project.controller.UserHomeController">
     <children>
-        <HBox prefHeight="1051.0" prefWidth="1920.0">
+        <HBox prefHeight="1189.0" prefWidth="1920.0">
             <children>
-                <VBox fx:id="leftMenuSmall">
-                    <HBox.margin>
-                        <Insets top="-5.0" />
-                    </HBox.margin>
-                </VBox>
-                <ScrollPane hbarPolicy="NEVER">
+                <ScrollPane hbarPolicy="NEVER" prefHeight="1095.0" prefWidth="1918.0">
                     <content>
-                  <VBox>
+                  <VBox prefHeight="1076.0" prefWidth="1918.0">
                      <children>
-                              <FlowPane fx:id="videosPane" prefHeight="994.0" prefWidth="1638.0">
+                              <FlowPane prefHeight="1076.0" prefWidth="1918.0">
                                   <children>
-                                      <HBox prefHeight="177.0" prefWidth="1634.0">
+                                      <HBox prefHeight="215.0" prefWidth="1912.0">
                                           <children>
                                               <ImageView fitHeight="215.0" fitWidth="1633.0" pickOnBounds="true" preserveRatio="true" />
                                           </children>
                                       </HBox>
-                                      <HBox prefHeight="156.0" prefWidth="1627.0">
+                                      <HBox prefHeight="255.0" prefWidth="1919.0">
                                           <children>
                                               <ImageView fitHeight="255.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />
                                               <ImageView fitHeight="255.0" fitWidth="255.0" pickOnBounds="true" preserveRatio="true">
@@ -135,9 +130,9 @@
                                               </VBox>
                                           </children>
                                       </HBox>
-                              <VBox>
+                              <VBox prefHeight="606.0" prefWidth="1917.0">
                                  <children>
-                                            <TabPane>
+                                            <TabPane prefHeight="606.0" prefWidth="2109.0">
                                                 <tabs>
                                                     <Tab closable="false" text="Home">
                                                         <content>
@@ -169,7 +164,7 @@
                                                                               <content>
                                                                                   <VBox prefHeight="470.0" prefWidth="1633.0" style="-fx-background-color: #cd0000;">
                                                                                       <children>
-                                                                                          <FlowPane fx:id="reverseVideosPane" layoutX="10.0" layoutY="56.0" prefHeight="189.0" prefWidth="1634.0" />
+                                                                                          <FlowPane layoutX="10.0" layoutY="56.0" prefHeight="471.0" prefWidth="1633.0" />
                                                                                       </children>
                                                                                   </VBox>
                                                                               </content>
@@ -187,7 +182,7 @@
                                                                               <content>
                                                                                   <VBox prefHeight="470.0" prefWidth="1633.0" style="-fx-background-color: #cd0000;">
                                                                                       <children>
-                                                                                          <FlowPane fx:id="videosPane121" layoutX="10.0" layoutY="56.0" prefHeight="442.0" prefWidth="1634.0" />
+                                                                                          <FlowPane fx:id="reverseVideosPane" layoutX="10.0" layoutY="56.0" prefHeight="442.0" prefWidth="1634.0" />
                                                                                       </children>
                                                                                   </VBox>
                                                                               </content>

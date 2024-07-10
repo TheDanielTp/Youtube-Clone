@@ -64,7 +64,15 @@ public class FrontController implements Initializable
         {
             try
             {
-                FXMLLoader loader    = new FXMLLoader (getClass ().getResource ("/org/project/controller/video-thumbnail-view.fxml"));
+                FXMLLoader loader;
+                if (! MainApplication.DarkTheme)
+                {
+                    loader = new FXMLLoader (getClass ().getResource ("/org/project/controller/video-thumbnail-view.fxml"));
+                }
+                else
+                {
+                    loader = new FXMLLoader (getClass ().getResource ("/org/project/controller/dark-video-thumbnail-view.fxml"));
+                }
                 AnchorPane videoNode = loader.load ();
 
                 ImageView thumbnail   = (ImageView) videoNode.lookup ("#thumbnail");
@@ -140,7 +148,15 @@ public class FrontController implements Initializable
                         Stage      stage;
                         Scene      scene;
                         Parent     root;
-                        FXMLLoader loader2 = new FXMLLoader (getClass ().getResource ("/org/project/controller/video-page.fxml"));
+                        FXMLLoader loader2;
+                        if (! MainApplication.DarkTheme)
+                        {
+                            loader2 = new FXMLLoader (getClass ().getResource ("/org/project/controller/video-page.fxml"));
+                        }
+                        else
+                        {
+                            loader2 = new FXMLLoader (getClass ().getResource ("/org/project/controller/dark-video-page.fxml"));
+                        }
                         try
                         {
                             root = loader2.load ();
@@ -441,7 +457,15 @@ public class FrontController implements Initializable
         {
             try
             {
-                FXMLLoader loader    = new FXMLLoader (getClass ().getResource ("/org/project/controller/video-thumbnail-view.fxml"));
+                FXMLLoader loader;
+                if (! MainApplication.DarkTheme)
+                {
+                    loader = new FXMLLoader (getClass ().getResource ("/org/project/controller/video-thumbnail-view.fxml"));
+                }
+                else
+                {
+                    loader = new FXMLLoader (getClass ().getResource ("/org/project/controller/dark-video-thumbnail-view.fxml"));
+                }
                 AnchorPane videoNode = loader.load ();
 
                 ImageView thumbnail   = (ImageView) videoNode.lookup ("#thumbnail");
@@ -686,7 +710,15 @@ public class FrontController implements Initializable
             {
                 try
                 {
-                    FXMLLoader loader    = new FXMLLoader (getClass ().getResource ("/org/project/controller/video-thumbnail-view.fxml"));
+                    FXMLLoader loader;
+                    if (! MainApplication.DarkTheme)
+                    {
+                        loader = new FXMLLoader (getClass ().getResource ("/org/project/controller/video-thumbnail-view.fxml"));
+                    }
+                    else
+                    {
+                        loader = new FXMLLoader (getClass ().getResource ("/org/project/controller/dark-video-thumbnail-view.fxml"));
+                    }
                     AnchorPane videoNode = loader.load ();
 
                     ImageView thumbnail   = (ImageView) videoNode.lookup ("#thumbnail");
@@ -755,7 +787,15 @@ public class FrontController implements Initializable
                             Stage      stage;
                             Scene      scene;
                             Parent     root;
-                            FXMLLoader loader2 = new FXMLLoader (getClass ().getResource ("/org/project/controller/video-page.fxml"));
+                            FXMLLoader loader2;
+                            if (! MainApplication.DarkTheme)
+                            {
+                                loader2 = new FXMLLoader (getClass ().getResource ("/org/project/controller/video-page.fxml"));
+                            }
+                            else
+                            {
+                                loader2 = new FXMLLoader (getClass ().getResource ("/org/project/controller/dark-video-page.fxml"));
+                            }
                             try
                             {
                                 root = loader2.load ();

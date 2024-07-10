@@ -51,7 +51,6 @@ import javafx.util.Duration;
 
 public class VideoPageController implements Initializable
 {
-
     //region [ - Attributes - ]
 
     @FXML
@@ -206,11 +205,16 @@ public class VideoPageController implements Initializable
         vbxRecommendedVideos.prefHeightProperty ().bind (anchrpnVideoPage.heightProperty ());
         recommendedVideosScrollPane.prefHeightProperty ().bind (anchrpnVideoPage.heightProperty ());
         vbxRecommendedVideos.setSpacing (20);
-        vbxRecommendedVideos.getStyleClass ().add ("vbx-recommended-videos");
+        vbxRecommendedVideos.setStyle("-fx-background-color: #000000");
         recommendedVideosScrollPane.getStyleClass ().add ("scroll-pane");
         recommendedVideosScrollPane.setHbarPolicy (ScrollPane.ScrollBarPolicy.NEVER);
         recommendedVideosScrollPane.setVbarPolicy (ScrollPane.ScrollBarPolicy.NEVER);
         recommendedVideosScrollPane.setContent (vbxRecommendedVideos);
+        recommendedVideosScrollPane.setStyle("-fx-background-color: #000000");
+
+        vbxVideoDetails.setStyle("-fx-background-color: #000000");
+        vbxDescription.setStyle("-fx-background-color: #000000");
+        vbxLeft.setStyle("-fx-background-color: #000000");
 
         PlaylistDAOImpl playlistDAO = new PlaylistDAOImpl ();
         List <Playlist> playlists   = playlistDAO.findAll ();
@@ -234,6 +238,8 @@ public class VideoPageController implements Initializable
         hbx.prefHeightProperty ().bind (anchrpnVideoPage.heightProperty ());
 
         video = MainApplication.currentVideo;
+        video.setViewsCount (video.getViewsCount () + 1);
+        MainApplication.client.update (video);
 
         if (channel.getUserID ().equals (MainApplication.currentUser.getID ()))
         {
@@ -340,7 +346,15 @@ public class VideoPageController implements Initializable
                     {
                         continue;
                     }
-                    FXMLLoader videoRecommendationLoader = new FXMLLoader (getClass ().getResource ("/org/project/controller/video-recommendation.fxml"));
+                    FXMLLoader videoRecommendationLoader;
+                    if (! MainApplication.DarkTheme)
+                    {
+                        videoRecommendationLoader = new FXMLLoader (getClass ().getResource ("/org/project/controller/video-recommendation.fxml"));
+                    }
+                    else
+                    {
+                        videoRecommendationLoader = new FXMLLoader (getClass ().getResource ("/org/project/controller/dark-video-recommendation.fxml"));
+                    }
                     HBox       videoRecommendation;
                     try
                     {
@@ -380,7 +394,15 @@ public class VideoPageController implements Initializable
         Stage      stage;
         Scene      scene;
         Parent     root;
-        FXMLLoader loader2 = new FXMLLoader (getClass ().getResource ("/org/project/controller/video-page.fxml"));
+        FXMLLoader loader2;
+        if (! MainApplication.DarkTheme)
+        {
+            loader2 = new FXMLLoader (getClass ().getResource ("/org/project/controller/video-page.fxml"));
+        }
+        else
+        {
+            loader2 = new FXMLLoader (getClass ().getResource ("/org/project/controller/dark-video-page.fxml"));
+        }
         try
         {
             root = loader2.load ();
@@ -407,7 +429,15 @@ public class VideoPageController implements Initializable
 
             for (var comment : comments)
             {
-                FXMLLoader commentPreviewLoader = new FXMLLoader (getClass ().getResource ("/org/project/controller/comment-preview.fxml"));
+                FXMLLoader commentPreviewLoader;
+                if (! MainApplication.DarkTheme)
+                {
+                    commentPreviewLoader = new FXMLLoader (getClass ().getResource ("/org/project/controller/comment-preview.fxml"));
+                }
+                else
+                {
+                    commentPreviewLoader = new FXMLLoader (getClass ().getResource ("/org/project/controller/dark-comment-preview.fxml"));
+                }
                 Parent     commentPreview;
                 try
                 {
@@ -458,14 +488,11 @@ public class VideoPageController implements Initializable
         timeSlider.prefHeightProperty ().bind (mediaView.fitHeightProperty ());
         timeSlider.getStyleClass ().add ("timeSlider");
 
-        // Create a ProgressBar
         ProgressBar progressBar = new ProgressBar (0);
         progressBar.setMaxWidth (Double.MAX_VALUE);
 
-        // Bind ProgressBar progress to Slider value
         progressBar.progressProperty ().bind (timeSlider.valueProperty ().divide (timeSlider.maxProperty ()));
 
-        // Style the ProgressBar to show the progress in red
         progressBar.getStyleClass ().add ("progressBar");
 
         StackPane stackPane = new StackPane ();
@@ -537,16 +564,13 @@ public class VideoPageController implements Initializable
             videoStuff.setVisible (false);
         });
 
-        // Add key event handler to the scene
         mediaView.getScene ().setOnKeyPressed ((KeyEvent event) ->
         {
             if (event.getCode () == KeyCode.K)
             {
-                // Pause or play the videoFile based on current status
                 if (mediaPlayer.getStatus () == MediaPlayer.Status.PLAYING)
                 {
                     mediaPlayer.pause ();
-//                    pause(new ActionEvent());
                 }
                 else if (mediaPlayer.getStatus () == MediaPlayer.Status.PAUSED || mediaPlayer.getStatus () == MediaPlayer.Status.READY || mediaPlayer.getStatus () == MediaPlayer.Status.STOPPED)
                 {
@@ -558,9 +582,7 @@ public class VideoPageController implements Initializable
         mediaPlayer.play ();
 
     }
-    //endregion
 
-    //region [ - volumeOff(ActionEvent event) - ]
     private void volumeOff (ActionEvent event)
     {
         btnVolume.setOnAction (this :: volumeOn);
@@ -568,9 +590,7 @@ public class VideoPageController implements Initializable
         SVGPath svgPath = (SVGPath) btnVolume.getChildrenUnmodifiable ().getFirst ();
         svgPath.setContent ("m 21.48,17.98 c 0,-1.77 -1.02,-3.29 -2.5,-4.03 v 2.21 l 2.45,2.45 c .03,-0.2 .05,-0.41 .05,-0.63 z m 2.5,0 c 0,.94 -0.2,1.82 -0.54,2.64 l 1.51,1.51 c .66,-1.24 1.03,-2.65 1.03,-4.15 0,-4.28 -2.99,-7.86 -7,-8.76 v 2.05 c 2.89,.86 5,3.54 5,6.71 z M 9.25,8.98 l -1.27,1.26 4.72,4.73 H 7.98 v 6 H 11.98 l 5,5 v -6.73 l 4.25,4.25 c -0.67,.52 -1.42,.93 -2.25,1.18 v 2.06 c 1.38,-0.31 2.63,-0.95 3.69,-1.81 l 2.04,2.05 1.27,-1.27 -9,-9 -7.72,-7.72 z m 7.72,.99 -2.09,2.08 2.09,2.09 V 9.98 z");
     }
-    //endregion
 
-    //region [ - volumeOn(ActionEvent event) - ]
     private void volumeOn (ActionEvent event)
     {
         btnVolume.setOnAction (this :: volumeOff);
@@ -582,9 +602,7 @@ public class VideoPageController implements Initializable
         SVGPath svgPath = (SVGPath) btnVolume.getChildrenUnmodifiable ().getFirst ();
         svgPath.setContent ("M8,21 L12,21 L17,26 L17,10 L12,15 L8,15 L8,21 Z M19,14 L19,22 C20.48,21.32 21.5,19.77 21.5,18 C21.5,16.26 20.48,14.74 19,14 ZM19,11.29 C21.89,12.15 24,14.83 24,18 C24,21.17 21.89,23.85 19,24.71 L19,26.77 C23.01,25.86 26,22.28 26,18 C26,13.72 23.01,10.14 19,9.23 L19,11.29 Z");
     }
-    //endregion
 
-    //region [ - next(ActionEvent event) - ]
     private void next (ActionEvent event)
     {
         ArrayList <Video> videos = (ArrayList <Video>) MainApplication.client.getAllVideos ()[1];
@@ -596,17 +614,13 @@ public class VideoPageController implements Initializable
         pause (event);
         getVideo (event, recommendedVideos.getFirst ());
     }
-    //endregion
 
-    //region [ - restart(ActionEvent event) - ]
     private void restart (ActionEvent event)
     {
         mediaPlayer.stop ();
         pause (event);
     }
-    //endregion
 
-    //region [ - pause(ActionEvent event) - ]
     private void pause (ActionEvent event)
     {
         btnPlayPause.setOnAction (this :: play);
@@ -614,9 +628,7 @@ public class VideoPageController implements Initializable
         SVGPath svgPath = (SVGPath) btnPlayPause.getChildrenUnmodifiable ().getFirst ();
         svgPath.setContent ("M 12,26 18.5,22 18.5,14 12,10 z M 18.5,22 25,18 25,18 18.5,14 z");
     }
-    //endregion
 
-    //region [ - play(ActionEvent event) - ]
     private void play (ActionEvent event)
     {
         btnPlayPause.setOnAction (this :: pause);
@@ -624,9 +636,7 @@ public class VideoPageController implements Initializable
         SVGPath svgPath = (SVGPath) btnPlayPause.getChildrenUnmodifiable ().getFirst ();
         svgPath.setContent ("M 12,26 16,26 16,10 12,10 z M 21,26 25,26 25,10 21,10 z");
     }
-    //endregion
 
-    //region [ - setVideo - ]
     public void setVideo ()
     {
         ChannelDAOImpl channelDAO = new ChannelDAOImpl ();
@@ -822,7 +832,15 @@ public class VideoPageController implements Initializable
         Stage      stage;
         Scene      scene;
         Parent     root;
-        FXMLLoader loader = new FXMLLoader (getClass ().getResource ("/org/project/controller/communist-main-view.fxml"));
+        FXMLLoader loader;
+        if (! MainApplication.DarkTheme)
+        {
+            loader = new FXMLLoader (getClass ().getResource ("/org/project/controller/communist-main-view.fxml"));
+        }
+        else
+        {
+            loader = new FXMLLoader (getClass ().getResource ("/org/project/controller/dark-main-view.fxml"));
+        }
         try
         {
             root = loader.load ();

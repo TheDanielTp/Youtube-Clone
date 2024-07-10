@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #000000; -fx-border-color: #db0000; -fx-border-width: 5;" stylesheets="@dark-user-view.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.project.controller.UploadController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #000000; -fx-border-color: #db0000; -fx-border-width: 5;" stylesheets="@dark-user-view.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.project.controller.NotifView">
     <children>
         <Label layoutX="250.0" layoutY="14.0" prefHeight="38.0" prefWidth="99.0" style="-fx-border-color: #ffffff; -fx-border-width: 3; -fx-border-radius: 50;" text="Notifications" textAlignment="CENTER" textFill="WHITE" wrapText="true">
             <font>
@@ -33,7 +33,7 @@
             <children>
                 <ScrollPane hbarPolicy="NEVER" prefHeight="341.0" prefWidth="194.0" style="-fx-background-color: #000000;">
                     <content>
-                        <VBox prefHeight="325.0" prefWidth="192.0" style="-fx-background-color: #000000;" />
+                        <VBox fx:id="notifBox" prefHeight="325.0" prefWidth="192.0" style="-fx-background-color: #101010;" />
                     </content>
                 </ScrollPane>
             </children>

@@ -345,6 +345,36 @@ public class MainController implements Initializable
         notificationHover.setVisible (false);
     }
 
+    public void notificationClick (MouseEvent event) throws IOException
+    {
+        Parent root;
+        if (! MainApplication.DarkTheme)
+        {
+            root = FXMLLoader.load (Objects.requireNonNull (getClass ().getResource ("notif-view.fxml")));
+        }
+        else
+        {
+            root = FXMLLoader.load (Objects.requireNonNull (getClass ().getResource ("dark-notif-view.fxml")));
+        }
+
+        Stage stage = new Stage ();
+
+        double x = stage.getX ();
+        double y = stage.getY ();
+
+        Scene scene = new Scene (root);
+
+        stage.setScene (scene);
+
+        stage.setWidth (650);
+        stage.setHeight (450);
+        stage.setX (x);
+        stage.setY (y);
+
+        System.out.println ("> Front: opening upload page");
+        stage.show ();
+    }
+
     @FXML
     ImageView createButton;
 
@@ -384,8 +414,8 @@ public class MainController implements Initializable
 
         stage.setScene (scene);
 
-        stage.setWidth (600);
-        stage.setHeight (400);
+        stage.setWidth (650);
+        stage.setHeight (450);
         stage.setX (x);
         stage.setY (y);
 
@@ -432,8 +462,8 @@ public class MainController implements Initializable
 
         stage.setScene (scene);
 
-        stage.setWidth (600);
-        stage.setHeight (400);
+        stage.setWidth (650);
+        stage.setHeight (450);
         stage.setX (x);
         stage.setY (y);
 
@@ -480,8 +510,8 @@ public class MainController implements Initializable
 
         stage.setScene (scene);
 
-        stage.setWidth (600);
-        stage.setHeight (400);
+        stage.setWidth (650);
+        stage.setHeight (450);
         stage.setX (x);
         stage.setY (y);
 
@@ -512,13 +542,11 @@ public class MainController implements Initializable
         Parent root;
         if (! MainApplication.DarkTheme)
         {
-            MainApplication.DarkTheme = true;
-            root                      = FXMLLoader.load (Objects.requireNonNull (getClass ().getResource ("communist-user-home-view.fxml")));
+            root = FXMLLoader.load (Objects.requireNonNull (getClass ().getResource ("communist-user-home-view.fxml")));
         }
         else
         {
-            MainApplication.DarkTheme = false;
-            root                      = FXMLLoader.load (Objects.requireNonNull (getClass ().getResource ("dark-user-home-view.fxml")));
+            root = FXMLLoader.load (Objects.requireNonNull (getClass ().getResource ("dark-user-home-view.fxml")));
         }
         Stage stage = (Stage) ((Node) event.getSource ()).getScene ().getWindow ();
 
@@ -564,13 +592,11 @@ public class MainController implements Initializable
         Parent root;
         if (! MainApplication.DarkTheme)
         {
-            MainApplication.DarkTheme = true;
-            root                      = FXMLLoader.load (Objects.requireNonNull (getClass ().getResource ("communist-front-view.fxml")));
+            root = FXMLLoader.load (Objects.requireNonNull (getClass ().getResource ("communist-front-view.fxml")));
         }
         else
         {
-            MainApplication.DarkTheme = false;
-            root                      = FXMLLoader.load (Objects.requireNonNull (getClass ().getResource ("dark-front-view.fxml")));
+            root = FXMLLoader.load (Objects.requireNonNull (getClass ().getResource ("dark-front-view.fxml")));
         }
         Stage stage = (Stage) ((Node) event.getSource ()).getScene ().getWindow ();
 
@@ -629,7 +655,15 @@ public class MainController implements Initializable
         {
             try
             {
-                FXMLLoader loader    = new FXMLLoader (getClass ().getResource ("/org/project/controller/video-thumbnail-view.fxml"));
+                FXMLLoader loader;
+                if (! MainApplication.DarkTheme)
+                {
+                    loader = new FXMLLoader (getClass ().getResource ("/org/project/controller/video-thumbnail-view.fxml"));
+                }
+                else
+                {
+                    loader = new FXMLLoader (getClass ().getResource ("/org/project/controller/dark-video-thumbnail-view.fxml"));
+                }
                 AnchorPane videoNode = loader.load ();
 
                 ImageView thumbnail   = (ImageView) videoNode.lookup ("#thumbnail");
@@ -817,7 +851,15 @@ public class MainController implements Initializable
             {
                 try
                 {
-                    FXMLLoader loader    = new FXMLLoader (getClass ().getResource ("/org/project/controller/video-thumbnail-view.fxml"));
+                    FXMLLoader loader;
+                    if (! MainApplication.DarkTheme)
+                    {
+                        loader = new FXMLLoader (getClass ().getResource ("/org/project/controller/video-thumbnail-view.fxml"));
+                    }
+                    else
+                    {
+                        loader = new FXMLLoader (getClass ().getResource ("/org/project/controller/dark-video-thumbnail-view.fxml"));
+                    }
                     AnchorPane videoNode = loader.load ();
 
                     ImageView thumbnail   = (ImageView) videoNode.lookup ("#thumbnail");
@@ -960,7 +1002,15 @@ public class MainController implements Initializable
             {
                 try
                 {
-                    FXMLLoader loader    = new FXMLLoader (getClass ().getResource ("/org/project/controller/video-thumbnail-view.fxml"));
+                    FXMLLoader loader;
+                    if (! MainApplication.DarkTheme)
+                    {
+                        loader = new FXMLLoader (getClass ().getResource ("/org/project/controller/video-thumbnail-view.fxml"));
+                    }
+                    else
+                    {
+                        loader = new FXMLLoader (getClass ().getResource ("/org/project/controller/dark-video-thumbnail-view.fxml"));
+                    }
                     AnchorPane videoNode = loader.load ();
 
                     ImageView thumbnail   = (ImageView) videoNode.lookup ("#thumbnail");
@@ -1030,7 +1080,15 @@ public class MainController implements Initializable
                             Stage      stage;
                             Scene      scene;
                             Parent     root;
-                            FXMLLoader loader2 = new FXMLLoader (getClass ().getResource ("/org/project/controller/video-page.fxml"));
+                            FXMLLoader loader2;
+                            if (! MainApplication.DarkTheme)
+                            {
+                                loader2 = new FXMLLoader (getClass ().getResource ("/org/project/controller/video-page.fxml"));
+                            }
+                            else
+                            {
+                                loader2 = new FXMLLoader (getClass ().getResource ("/org/project/controller/dark-video-page.fxml"));
+                            }
                             try
                             {
                                 root = loader2.load ();
@@ -1084,7 +1142,15 @@ public class MainController implements Initializable
         {
             try
             {
-                FXMLLoader loader       = new FXMLLoader (getClass ().getResource ("/org/project/controller/playlist-thumbnail-view.fxml"));
+                FXMLLoader loader;
+                if (! MainApplication.DarkTheme)
+                {
+                    loader = new FXMLLoader (getClass ().getResource ("/org/project/controller/video-thumbnail-view.fxml"));
+                }
+                else
+                {
+                    loader = new FXMLLoader (getClass ().getResource ("/org/project/controller/dark-video-thumbnail-view.fxml"));
+                }
                 AnchorPane playlistNode = loader.load ();
 
                 ImageView thumbnail   = (ImageView) playlistNode.lookup ("#thumbnail");
@@ -1093,10 +1159,13 @@ public class MainController implements Initializable
 
                 if (thumbnail != null)
                 {
-                    VideoDAOImpl videoDAO = new VideoDAOImpl ();
-                    Video        video    = videoDAO.findById (playlist.getVideosID ().getFirst ());
-                    File         file     = new File (video.getThumbnailURL ());
-                    thumbnail.setImage (new Image (file.toURI ().toString ()));
+                    if (! playlist.getVideosID ().isEmpty ())
+                    {
+                        VideoDAOImpl videoDAO = new VideoDAOImpl ();
+                        Video        video    = videoDAO.findById (playlist.getVideosID ().getFirst ());
+                        File         file     = new File (video.getThumbnailURL ());
+                        thumbnail.setImage (new Image (file.toURI ().toString ()));
+                    }
                 }
                 else
                 {
@@ -1120,7 +1189,15 @@ public class MainController implements Initializable
                         Stage      stage;
                         Scene      scene;
                         Parent     root;
-                        FXMLLoader loader2 = new FXMLLoader (getClass ().getResource ("/org/project/controller/playlist-page.fxml"));
+                        FXMLLoader loader2;
+                        if (!MainApplication.DarkTheme)
+                        {
+                            loader2 = new FXMLLoader (getClass ().getResource ("/org/project/controller/playlist-page.fxml"));
+                        }
+                        else
+                        {
+                            loader2 = new FXMLLoader (getClass ().getResource ("/org/project/controller/dark-playlist-page.fxml"));
+                        }
                         try
                         {
                             root = loader2.load ();
@@ -1195,11 +1272,19 @@ public class MainController implements Initializable
 
         for (Video video : videos)
         {
-            if (categoryDAOImpl.findById (video.getCategoryID ()).equals (category))
+            if (category.getID ().equals (video.getCategoryID ()))
             {
                 try
                 {
-                    FXMLLoader loader    = new FXMLLoader (getClass ().getResource ("/org/project/controller/video-thumbnail-view.fxml"));
+                    FXMLLoader loader;
+                    if (! MainApplication.DarkTheme)
+                    {
+                        loader = new FXMLLoader (getClass ().getResource ("/org/project/controller/video-thumbnail-view.fxml"));
+                    }
+                    else
+                    {
+                        loader = new FXMLLoader (getClass ().getResource ("/org/project/controller/dark-video-thumbnail-view.fxml"));
+                    }
                     AnchorPane videoNode = loader.load ();
 
                     ImageView thumbnail   = (ImageView) videoNode.lookup ("#thumbnail");
@@ -1268,7 +1353,15 @@ public class MainController implements Initializable
                             Stage      stage;
                             Scene      scene;
                             Parent     root;
-                            FXMLLoader loader2 = new FXMLLoader (getClass ().getResource ("/org/project/controller/video-page.fxml"));
+                            FXMLLoader loader2;
+                            if (! MainApplication.DarkTheme)
+                            {
+                                loader2 = new FXMLLoader (getClass ().getResource ("/org/project/controller/video-page.fxml"));
+                            }
+                            else
+                            {
+                                loader2 = new FXMLLoader (getClass ().getResource ("/org/project/controller/dark-video-page.fxml"));
+                            }
                             try
                             {
                                 root = loader2.load ();

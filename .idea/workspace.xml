@@ -4,18 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ec566682-672c-4b02-8981-652c66cb3fe3" name="Changes" comment="Added playlist creation">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/project/controller/AddBalanceController.java" afterDir="false" />
+    <list default="true" id="ec566682-672c-4b02-8981-652c66cb3fe3" name="Changes" comment="Updated FXML Files">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/project/controller/NotifView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/controller/CommentPreviewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/project/controller/CommentPreviewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/controller/FrontController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/project/controller/FrontController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/project/controller/LoginController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/project/controller/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/project/controller/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/controller/SignInController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/controller/UserHomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/project/controller/UserHomeController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/project/controller/VideoPageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/project/controller/VideoPageController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/project/controller/add-balance.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/add-balance.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/project/controller/communist-user-home-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/communist-user-home-view.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/project/controller/dark-add-balance.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/dark-add-balance.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/project/controller/dark-login-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/dark-login-view.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/project/controller/dark-video-page.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/dark-video-page.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/project/controller/dark-notif-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/dark-notif-view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/project/controller/dark-notif.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/dark-notif.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/project/controller/notif-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/notif-view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/project/controller/notif.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/notif.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -175,7 +175,7 @@
       <workItem from="1720503665689" duration="20047000" />
       <workItem from="1720547583498" duration="315000" />
       <workItem from="1720579766994" duration="5384000" />
-      <workItem from="1720587580966" duration="16750000" />
+      <workItem from="1720587580966" duration="20488000" />
     </task>
     <task id="LOCAL‎−۰۰۰۰۱" summary="Created Repository">
       <option name="closed" value="true" />
@@ -328,7 +328,21 @@
       <option name="presentableId" value="LOCAL‎−۰۰۰۲۱" />
       <updated>1720601939617</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL‎−۰۰۰۲۲" summary="Updated Project">
+      <option name="closed" value="true" />
+      <created>1720605196965</created>
+      <option name="number" value="LOCAL‎−۰۰۰۲۲" />
+      <option name="presentableId" value="LOCAL‎−۰۰۰۲۲" />
+      <updated>1720605196965</updated>
+    </task>
+    <task id="LOCAL‎−۰۰۰۲۳" summary="Updated FXML Files">
+      <option name="closed" value="true" />
+      <created>1720606227912</created>
+      <option name="number" value="LOCAL‎−۰۰۰۲۳" />
+      <option name="presentableId" value="LOCAL‎−۰۰۰۲۳" />
+      <updated>1720606227912</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -368,6 +382,8 @@
     <MESSAGE value="Updated Main Panel" />
     <MESSAGE value="Updated Front" />
     <MESSAGE value="Added playlist creation" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added playlist creation" />
+    <MESSAGE value="Updated Project" />
+    <MESSAGE value="Updated FXML Files" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated FXML Files" />
   </component>
 </project>

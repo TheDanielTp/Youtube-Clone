@@ -87,98 +87,62 @@ public class LoginController
 
     public void cancelButtonClicked (ActionEvent event) throws IOException
     {
+        Parent root;
         if (! MainApplication.DarkTheme)
         {
-            Parent root = FXMLLoader.load (Objects.requireNonNull (getClass ().getResource ("communist-front-view.fxml")));
-
-            Stage stage = (Stage) ((Node) event.getSource ()).getScene ().getWindow ();
-
-            double width  = stage.getWidth ();
-            double height = stage.getHeight ();
-            double x      = stage.getX ();
-            double y      = stage.getY ();
-
-            Scene scene = new Scene (root);
-
-            stage.setScene (scene);
-
-            stage.setWidth (width);
-            stage.setHeight (height);
-            stage.setX (x);
-            stage.setY (y);
-
-            System.out.println ("> opening front panel");
+            root = FXMLLoader.load (Objects.requireNonNull (getClass ().getResource ("communist-front-view.fxml")));
         }
         else
         {
-            Parent root = FXMLLoader.load (Objects.requireNonNull (getClass ().getResource ("dark-front-view.fxml")));
-
-            Stage stage = (Stage) ((Node) event.getSource ()).getScene ().getWindow ();
-
-            double width  = stage.getWidth ();
-            double height = stage.getHeight ();
-            double x      = stage.getX ();
-            double y      = stage.getY ();
-
-            Scene scene = new Scene (root);
-
-            stage.setScene (scene);
-
-            stage.setWidth (width);
-            stage.setHeight (height);
-            stage.setX (x);
-            stage.setY (y);
-
-            System.out.println ("> opening front panel");
+            root = FXMLLoader.load (Objects.requireNonNull (getClass ().getResource ("dark-front-view.fxml")));
         }
+        Stage stage = (Stage) ((Node) event.getSource ()).getScene ().getWindow ();
+
+        double width  = stage.getWidth ();
+        double height = stage.getHeight ();
+        double x      = stage.getX ();
+        double y      = stage.getY ();
+
+        Scene scene = new Scene (root);
+
+        stage.setScene (scene);
+
+        stage.setWidth (width);
+        stage.setHeight (height);
+        stage.setX (x);
+        stage.setY (y);
+
+        System.out.println ("> opening front panel");
     }
 
     public void signupButtonClicked (MouseEvent event) throws IOException
     {
+        Parent root;
         if (! MainApplication.DarkTheme)
         {
-            Parent root = FXMLLoader.load (Objects.requireNonNull (getClass ().getResource ("communist-signup-first-view.fxml")));
-
-            Stage stage = (Stage) ((Node) event.getSource ()).getScene ().getWindow ();
-
-            double width  = stage.getWidth ();
-            double height = stage.getHeight ();
-            double x      = stage.getX ();
-            double y      = stage.getY ();
-
-            Scene scene = new Scene (root);
-
-            stage.setScene (scene);
-
-            stage.setWidth (width);
-            stage.setHeight (height);
-            stage.setX (x);
-            stage.setY (y);
-
-            System.out.println ("> opening signup panel");
+            root = FXMLLoader.load (Objects.requireNonNull (getClass ().getResource ("communist-signup-first-view.fxml")));
         }
         else
         {
-            Parent root = FXMLLoader.load (Objects.requireNonNull (getClass ().getResource ("dark-signup-first-view.fxml")));
-
-            Stage stage = (Stage) ((Node) event.getSource ()).getScene ().getWindow ();
-
-            double width  = stage.getWidth ();
-            double height = stage.getHeight ();
-            double x      = stage.getX ();
-            double y      = stage.getY ();
-
-            Scene scene = new Scene (root);
-
-            stage.setScene (scene);
-
-            stage.setWidth (width);
-            stage.setHeight (height);
-            stage.setX (x);
-            stage.setY (y);
-
-            System.out.println ("> opening signup panel");
+            root = FXMLLoader.load (Objects.requireNonNull (getClass ().getResource ("dark-signup-first-view.fxml")));
         }
+        Stage stage = (Stage) ((Node) event.getSource ()).getScene ().getWindow ();
+
+        double width  = stage.getWidth ();
+        double height = stage.getHeight ();
+        double x      = stage.getX ();
+        double y      = stage.getY ();
+
+        Scene scene = new Scene (root);
+
+        stage.setScene (scene);
+
+        stage.setWidth (width);
+        stage.setHeight (height);
+        stage.setX (x);
+        stage.setY (y);
+
+        System.out.println ("> opening signup panel");
     }
 
     //endregion
