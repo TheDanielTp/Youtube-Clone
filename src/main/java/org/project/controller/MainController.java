@@ -1,5 +1,9 @@
 package org.project.controller;
 
+import com.wetube.dao.impl.CategoryDAOImpl;
+import com.wetube.dao.impl.PlaylistDAOImpl;
+import com.wetube.model.Category;
+import com.wetube.model.Playlist;
 import com.wetube.model.Video;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
@@ -77,7 +81,6 @@ public class MainController implements Initializable
                     tempFile = File.createTempFile ("videoFile", ".mp4");
                     tempFile.deleteOnExit ();
 
-                    // Write the byte array to the temporary videoFile
                     try (FileOutputStream fos = new FileOutputStream (tempFile); ByteArrayInputStream bais = new ByteArrayInputStream (fileBytes))
                     {
                         byte[] buffer = new byte[1024];
@@ -95,7 +98,6 @@ public class MainController implements Initializable
                     return;
                 }
 
-                // Create a Media object from the temporary videoFile
                 media = new Media (tempFile.toURI ().toString ());
 
                 Label    totalTimeLabel = new Label ("00:00");
@@ -127,6 +129,12 @@ public class MainController implements Initializable
                 {
                     videoButton.setOnAction (event ->
                     {
+                        PlaylistDAOImpl playlistDAOImpl = new PlaylistDAOImpl ();
+                        Playlist        history         = playlistDAOImpl.findByNameUser (MainApplication.currentUser, "History");
+                        history.getVideosID ().add(video.getID ());
+                        playlistDAOImpl.update (history);
+                        playlistDAOImpl.addVideo (history, video);
+
                         MainApplication.currentVideo = video;
                         Stage      stage;
                         Scene      scene;
@@ -266,37 +274,6 @@ public class MainController implements Initializable
     @FXML
     ImageView themeHover;
 
-    public void themeButtonClicked (MouseEvent event) throws IOException
-    {
-        if (! MainApplication.DarkTheme)
-        {
-
-        }
-        else
-        {
-            MainApplication.DarkTheme = false;
-            Parent root = FXMLLoader.load (Objects.requireNonNull (getClass ().getResource ("communist-main-view.fxml")));
-
-            Stage stage = (Stage) ((Node) event.getSource ()).getScene ().getWindow ();
-
-            double width  = stage.getWidth ();
-            double height = stage.getHeight ();
-            double x      = stage.getX ();
-            double y      = stage.getY ();
-
-            Scene scene = new Scene (root);
-
-            stage.setScene (scene);
-
-            stage.setWidth (width);
-            stage.setHeight (height);
-            stage.setX (x);
-            stage.setY (y);
-
-            System.out.println ("> Front: opening light theme front page");
-        }
-    }
-
     public void themeButtonHover ()
     {
         themeButton.setVisible (false);
@@ -307,6 +284,38 @@ public class MainController implements Initializable
     {
         themeButton.setVisible (true);
         themeHover.setVisible (false);
+    }
+
+    public void themeButtonClicked (MouseEvent event) throws IOException
+    {
+        Parent root;
+        if (! MainApplication.DarkTheme)
+        {
+            MainApplication.DarkTheme = true;
+            root = FXMLLoader.load (Objects.requireNonNull (getClass ().getResource ("dark-main-view.fxml")));
+        }
+        else
+        {
+            MainApplication.DarkTheme = false;
+            root = FXMLLoader.load (Objects.requireNonNull (getClass ().getResource ("communist-main-view.fxml")));
+        }
+        Stage stage = (Stage) ((Node) event.getSource ()).getScene ().getWindow ();
+
+        double width  = stage.getWidth ();
+        double height = stage.getHeight ();
+        double x      = stage.getX ();
+        double y      = stage.getY ();
+
+        Scene scene = new Scene (root);
+
+        stage.setScene (scene);
+
+        stage.setWidth (width);
+        stage.setHeight (height);
+        stage.setX (x);
+        stage.setY (y);
+
+        System.out.println ("> Front: changing theme");
     }
 
     @FXML
@@ -347,7 +356,15 @@ public class MainController implements Initializable
 
     public void createButtonClick (MouseEvent event) throws IOException
     {
-        Parent root = FXMLLoader.load (Objects.requireNonNull (getClass ().getResource ("upload-page.fxml")));
+        Parent root;
+        if (! MainApplication.DarkTheme)
+        {
+            root = FXMLLoader.load (Objects.requireNonNull (getClass ().getResource ("upload-page.fxml")));
+        }
+        else
+        {
+            root = FXMLLoader.load (Objects.requireNonNull (getClass ().getResource ("dark-upload-page.fxml")));
+        }
 
         Stage stage = new Stage ();
 
@@ -387,7 +404,15 @@ public class MainController implements Initializable
 
     public void uploadButtonClick (MouseEvent event) throws IOException
     {
-        Parent root = FXMLLoader.load (Objects.requireNonNull (getClass ().getResource ("upload-post-page.fxml")));
+        Parent root;
+        if (! MainApplication.DarkTheme)
+        {
+            root = FXMLLoader.load (Objects.requireNonNull (getClass ().getResource ("upload-post-page.fxml")));
+        }
+        else
+        {
+            root = FXMLLoader.load (Objects.requireNonNull (getClass ().getResource ("dark-upload-post-page.fxml")));
+        }
 
         Stage stage = new Stage ();
 
@@ -409,7 +434,7 @@ public class MainController implements Initializable
 
     //endregion
 
-    //region-----------------------------------------------Main Sidebar Functions-----------------------------------------------
+    //region [ - Main Sidebar Functions - ]
 
     @FXML
     SVGPath homeButtonSVG;
@@ -432,6 +457,112 @@ public class MainController implements Initializable
         homeButtonSVG.setFill (Color.web ("#ffffff"));
         homeButtonSVGSmall.setFill (Color.web ("#ffffff"));
         homeLabel.setTextFill (Color.web ("#ffffff"));
+    }
+
+    public void homeClicked (ActionEvent event)
+    {
+        videosPane.getChildren ().clear ();
+
+        Object[]        responseObject  = MainApplication.client.getAllVideos ();
+        List <Video>    videos          = (List <Video>) responseObject[1];
+
+        for (Video video : videos)
+        {
+            try
+            {
+                FXMLLoader loader    = new FXMLLoader (getClass ().getResource ("/org/project/controller/video-thumbnail-view.fxml"));
+                AnchorPane videoNode = loader.load ();
+
+                ImageView thumbnail   = (ImageView) videoNode.lookup ("#thumbnail");
+                Label     title       = (Label) videoNode.lookup ("#title");
+                Button    videoButton = (Button) videoNode.lookup ("#videoButton");
+                Label     duration    = (Label) videoNode.lookup ("#duration");
+
+                Media media;
+                File  tempFile;
+                try
+                {
+                    File   videoFile = new File (video.getVideoURL ());
+                    byte[] fileBytes = Files.readAllBytes (Path.of (videoFile.toURI ()));
+
+                    tempFile = File.createTempFile ("videoFile", ".mp4");
+                    tempFile.deleteOnExit ();
+
+                    try (FileOutputStream fos = new FileOutputStream (tempFile); ByteArrayInputStream bais = new ByteArrayInputStream (fileBytes))
+                    {
+                        byte[] buffer = new byte[1024];
+                        int    length;
+                        while ((length = bais.read (buffer)) != - 1)
+                        {
+                            fos.write (buffer, 0, length);
+                        }
+                    }
+
+                }
+                catch (IOException e)
+                {
+                    e.printStackTrace ();
+                    return;
+                }
+
+                media = new Media (tempFile.toURI ().toString ());
+
+                Label    totalTimeLabel = new Label ("00:00");
+                Duration total          = media.getDuration ();
+                totalTimeLabel.setText (formatTime (total));
+
+                duration.setText (totalTimeLabel.getText ());
+
+                if (thumbnail != null)
+                {
+                    File file = new File (video.getThumbnailURL ());
+                    thumbnail.setImage (new Image (file.toURI ().toString ()));
+                }
+                else
+                {
+                    System.err.println ("Thumbnail ImageView not found in FXML.");
+                }
+
+                if (title != null)
+                {
+                    title.setText (video.getTitle ());
+                }
+                else
+                {
+                    System.err.println ("Title Label not found in FXML.");
+                }
+
+                if (videoButton != null)
+                {
+                    videoButton.setOnAction (event2 ->
+                    {
+                        MainApplication.currentVideo = video;
+                        Stage      stage;
+                        Scene      scene;
+                        Parent     root;
+                        FXMLLoader loader2 = new FXMLLoader (getClass ().getResource ("/org/project/controller/video-page.fxml"));
+                        try
+                        {
+                            root = loader2.load ();
+                        }
+                        catch (IOException e)
+                        {
+                            throw new RuntimeException (e);
+                        }
+                        stage = (Stage) ((Node) event2.getSource ()).getScene ().getWindow ();
+                        scene = new Scene (root);
+                        stage.setScene (scene);
+                        stage.show ();
+                    });
+                }
+
+                videosPane.getChildren ().add (videoNode);
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace ();
+            }
+        }
     }
 
     @FXML
@@ -526,6 +657,120 @@ public class MainController implements Initializable
         historyLabel.setTextFill (Color.web ("#ffffff"));
     }
 
+    public void historyClicked (ActionEvent event)
+    {
+        videosPane.getChildren ().clear ();
+
+        Object[]        responseObject  = MainApplication.client.getAllVideos ();
+        List <Video>    videos          = (List <Video>) responseObject[1];
+        CategoryDAOImpl categoryDAOImpl = new CategoryDAOImpl ();
+        Category        category        = categoryDAOImpl.findByTitle ("Music");
+
+        PlaylistDAOImpl playlistDAOImpl = new PlaylistDAOImpl ();
+        Playlist history = playlistDAOImpl.findByNameUser (MainApplication.currentUser, "History");
+
+        for (Video video : videos)
+        {
+            if (history.getVideosID ().contains (video.getID ()))
+            {
+                try
+                {
+                    FXMLLoader loader    = new FXMLLoader (getClass ().getResource ("/org/project/controller/video-thumbnail-view.fxml"));
+                    AnchorPane videoNode = loader.load ();
+
+                    ImageView thumbnail   = (ImageView) videoNode.lookup ("#thumbnail");
+                    Label     title       = (Label) videoNode.lookup ("#title");
+                    Button    videoButton = (Button) videoNode.lookup ("#videoButton");
+                    Label     duration    = (Label) videoNode.lookup ("#duration");
+
+                    Media media;
+                    File  tempFile;
+                    try
+                    {
+                        File   videoFile = new File (video.getVideoURL ());
+                        byte[] fileBytes = Files.readAllBytes (Path.of (videoFile.toURI ()));
+
+                        tempFile = File.createTempFile ("videoFile", ".mp4");
+                        tempFile.deleteOnExit ();
+
+                        try (FileOutputStream fos = new FileOutputStream (tempFile); ByteArrayInputStream bais = new ByteArrayInputStream (fileBytes))
+                        {
+                            byte[] buffer = new byte[1024];
+                            int    length;
+                            while ((length = bais.read (buffer)) != - 1)
+                            {
+                                fos.write (buffer, 0, length);
+                            }
+                        }
+
+                    }
+                    catch (IOException e)
+                    {
+                        e.printStackTrace ();
+                        return;
+                    }
+
+                    media = new Media (tempFile.toURI ().toString ());
+
+                    Label    totalTimeLabel = new Label ("00:00");
+                    Duration total          = media.getDuration ();
+                    totalTimeLabel.setText (formatTime (total));
+
+                    duration.setText (totalTimeLabel.getText ());
+
+                    if (thumbnail != null)
+                    {
+                        File file = new File (video.getThumbnailURL ());
+                        thumbnail.setImage (new Image (file.toURI ().toString ()));
+                    }
+                    else
+                    {
+                        System.err.println ("Thumbnail ImageView not found in FXML.");
+                    }
+
+                    if (title != null)
+                    {
+                        title.setText (video.getTitle ());
+                    }
+                    else
+                    {
+                        System.err.println ("Title Label not found in FXML.");
+                    }
+
+                    if (videoButton != null)
+                    {
+                        videoButton.setOnAction (event2 ->
+                        {
+                            MainApplication.currentVideo = video;
+                            Stage      stage;
+                            Scene      scene;
+                            Parent     root;
+                            FXMLLoader loader2 = new FXMLLoader (getClass ().getResource ("/org/project/controller/video-page.fxml"));
+                            try
+                            {
+                                root = loader2.load ();
+                            }
+                            catch (IOException e)
+                            {
+                                throw new RuntimeException (e);
+                            }
+                            stage = (Stage) ((Node) event2.getSource ()).getScene ().getWindow ();
+                            scene = new Scene (root);
+                            stage.setScene (scene);
+                            stage.show ();
+                        });
+                    }
+
+                    videosPane.getChildren ().add (videoNode);
+                }
+                catch (IOException e)
+                {
+                    e.printStackTrace ();
+                }
+            }
+        }
+    }
+
     //endregion
 
     //region-----------------------------------------------Down Sidebar Functions-----------------------------------------------
@@ -567,6 +812,116 @@ public class MainController implements Initializable
     public void musicButtonUnHover ()
     {
         musicButtonSVG.setFill (Color.web ("#ffffff"));
+    }
+
+    public void musicClicked (ActionEvent event)
+    {
+        videosPane.getChildren ().clear ();
+
+        Object[]        responseObject  = MainApplication.client.getAllVideos ();
+        List <Video>    videos          = (List <Video>) responseObject[1];
+        CategoryDAOImpl categoryDAOImpl = new CategoryDAOImpl ();
+        Category        category        = categoryDAOImpl.findByTitle ("Music");
+
+        for (Video video : videos)
+        {
+            if (categoryDAOImpl.findById (video.getCategoryID ()).equals (category))
+            {
+                try
+                {
+                    FXMLLoader loader    = new FXMLLoader (getClass ().getResource ("/org/project/controller/video-thumbnail-view.fxml"));
+                    AnchorPane videoNode = loader.load ();
+
+                    ImageView thumbnail   = (ImageView) videoNode.lookup ("#thumbnail");
+                    Label     title       = (Label) videoNode.lookup ("#title");
+                    Button    videoButton = (Button) videoNode.lookup ("#videoButton");
+                    Label     duration    = (Label) videoNode.lookup ("#duration");
+
+                    Media media;
+                    File  tempFile;
+                    try
+                    {
+                        File   videoFile = new File (video.getVideoURL ());
+                        byte[] fileBytes = Files.readAllBytes (Path.of (videoFile.toURI ()));
+
+                        tempFile = File.createTempFile ("videoFile", ".mp4");
+                        tempFile.deleteOnExit ();
+
+                        try (FileOutputStream fos = new FileOutputStream (tempFile); ByteArrayInputStream bais = new ByteArrayInputStream (fileBytes))
+                        {
+                            byte[] buffer = new byte[1024];
+                            int    length;
+                            while ((length = bais.read (buffer)) != - 1)
+                            {
+                                fos.write (buffer, 0, length);
+                            }
+                        }
+
+                    }
+                    catch (IOException e)
+                    {
+                        e.printStackTrace ();
+                        return;
+                    }
+
+                    media = new Media (tempFile.toURI ().toString ());
+
+                    Label    totalTimeLabel = new Label ("00:00");
+                    Duration total          = media.getDuration ();
+                    totalTimeLabel.setText (formatTime (total));
+
+                    duration.setText (totalTimeLabel.getText ());
+
+                    if (thumbnail != null)
+                    {
+                        thumbnail.setImage (new Image (video.getThumbnailURL ()));
+                    }
+                    else
+                    {
+                        System.err.println ("Thumbnail ImageView not found in FXML.");
+                    }
+
+                    if (title != null)
+                    {
+                        title.setText (video.getTitle ());
+                    }
+                    else
+                    {
+                        System.err.println ("Title Label not found in FXML.");
+                    }
+
+                    if (videoButton != null)
+                    {
+                        videoButton.setOnAction (event2 ->
+                        {
+                            MainApplication.currentVideo = video;
+                            Stage      stage;
+                            Scene      scene;
+                            Parent     root;
+                            FXMLLoader loader2 = new FXMLLoader (getClass ().getResource ("/org/project/controller/video-page.fxml"));
+                            try
+                            {
+                                root = loader2.load ();
+                            }
+                            catch (IOException e)
+                            {
+                                throw new RuntimeException (e);
+                            }
+                            stage = (Stage) ((Node) event2.getSource ()).getScene ().getWindow ();
+                            scene = new Scene (root);
+                            stage.setScene (scene);
+                            stage.show ();
+                        });
+                    }
+
+                    videosPane.getChildren ().add (videoNode);
+                }
+                catch (IOException e)
+                {
+                    e.printStackTrace ();
+                }
+            }
+        }
     }
 
     @FXML
