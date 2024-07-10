@@ -82,7 +82,6 @@ public class FrontController implements Initializable
                     tempFile = File.createTempFile ("videoFile", ".mp4");
                     tempFile.deleteOnExit ();
 
-                    // Write the byte array to the temporary videoFile
                     try (FileOutputStream fos = new FileOutputStream (tempFile); ByteArrayInputStream bais = new ByteArrayInputStream (fileBytes))
                     {
                         byte[] buffer = new byte[1024];
@@ -100,7 +99,6 @@ public class FrontController implements Initializable
                     return;
                 }
 
-                // Create a Media object from the temporary videoFile
                 media = new Media (tempFile.toURI ().toString ());
 
                 Label    totalTimeLabel = new Label ("00:00");
@@ -233,7 +231,7 @@ public class FrontController implements Initializable
 
     //endregion
 
-    //region---------------------------------------------------Head Functions---------------------------------------------------
+    //region [ - Head Functions - ]
 
     @FXML
     ImageView menuButton;
@@ -279,52 +277,34 @@ public class FrontController implements Initializable
 
     public void themeButtonClicked (MouseEvent event) throws IOException
     {
+        Parent root;
         if (! MainApplication.DarkTheme)
         {
             MainApplication.DarkTheme = true;
-            Parent root = FXMLLoader.load (Objects.requireNonNull (getClass ().getResource ("dark-front-view.fxml")));
-
-            Stage stage = (Stage) ((Node) event.getSource ()).getScene ().getWindow ();
-
-            double width  = stage.getWidth ();
-            double height = stage.getHeight ();
-            double x      = stage.getX ();
-            double y      = stage.getY ();
-
-            Scene scene = new Scene (root);
-
-            stage.setScene (scene);
-
-            stage.setWidth (width);
-            stage.setHeight (height);
-            stage.setX (x);
-            stage.setY (y);
-
-            System.out.println ("> Front: opening dark theme front page");
+            root = FXMLLoader.load (Objects.requireNonNull (getClass ().getResource ("dark-front-view.fxml")));
         }
         else
         {
             MainApplication.DarkTheme = false;
-            Parent root = FXMLLoader.load (Objects.requireNonNull (getClass ().getResource ("communist-front-view.fxml")));
-
-            Stage stage = (Stage) ((Node) event.getSource ()).getScene ().getWindow ();
-
-            double width  = stage.getWidth ();
-            double height = stage.getHeight ();
-            double x      = stage.getX ();
-            double y      = stage.getY ();
-
-            Scene scene = new Scene (root);
-
-            stage.setScene (scene);
-
-            stage.setWidth (width);
-            stage.setHeight (height);
-            stage.setX (x);
-            stage.setY (y);
-
-            System.out.println ("> Front: opening light theme front page");
+            root = FXMLLoader.load (Objects.requireNonNull (getClass ().getResource ("communist-front-view.fxml")));
         }
+        Stage stage = (Stage) ((Node) event.getSource ()).getScene ().getWindow ();
+
+        double width  = stage.getWidth ();
+        double height = stage.getHeight ();
+        double x      = stage.getX ();
+        double y      = stage.getY ();
+
+        Scene scene = new Scene (root);
+
+        stage.setScene (scene);
+
+        stage.setWidth (width);
+        stage.setHeight (height);
+        stage.setX (x);
+        stage.setY (y);
+
+        System.out.println ("> Front: changed theme");
     }
 
     public void themeButtonHover ()
@@ -377,50 +357,32 @@ public class FrontController implements Initializable
 
     public void signInButtonClicked (MouseEvent event) throws IOException
     {
+        Parent root;
         if (! MainApplication.DarkTheme)
         {
-            Parent root = FXMLLoader.load (Objects.requireNonNull (getClass ().getResource ("communist-signup-first-view.fxml")));
-
-            Stage stage = (Stage) ((Node) event.getSource ()).getScene ().getWindow ();
-
-            double width  = stage.getWidth ();
-            double height = stage.getHeight ();
-            double x      = stage.getX ();
-            double y      = stage.getY ();
-
-            Scene scene = new Scene (root);
-
-            stage.setScene (scene);
-
-            stage.setWidth (width);
-            stage.setHeight (height);
-            stage.setX (x);
-            stage.setY (y);
-
-            System.out.println ("> opening signup panel");
+            root = FXMLLoader.load (Objects.requireNonNull (getClass ().getResource ("communist-signup-first-view.fxml")));
         }
         else
         {
-            Parent root = FXMLLoader.load (Objects.requireNonNull (getClass ().getResource ("dark-signup-first-view.fxml")));
-
-            Stage stage = (Stage) ((Node) event.getSource ()).getScene ().getWindow ();
-
-            double width  = stage.getWidth ();
-            double height = stage.getHeight ();
-            double x      = stage.getX ();
-            double y      = stage.getY ();
-
-            Scene scene = new Scene (root);
-
-            stage.setScene (scene);
-
-            stage.setWidth (width);
-            stage.setHeight (height);
-            stage.setX (x);
-            stage.setY (y);
-
-            System.out.println ("> opening signup panel");
+            root = FXMLLoader.load (Objects.requireNonNull (getClass ().getResource ("dark-signup-first-view.fxml")));
         }
+        Stage stage = (Stage) ((Node) event.getSource ()).getScene ().getWindow ();
+
+        double width  = stage.getWidth ();
+        double height = stage.getHeight ();
+        double x      = stage.getX ();
+        double y      = stage.getY ();
+
+        Scene scene = new Scene (root);
+
+        stage.setScene (scene);
+
+        stage.setWidth (width);
+        stage.setHeight (height);
+        stage.setX (x);
+        stage.setY (y);
+
+        System.out.println ("> Front: opening signup panel");
     }
 
     @FXML
@@ -443,7 +405,7 @@ public class FrontController implements Initializable
 
     //endregion
 
-    //region-----------------------------------------------Main Sidebar Functions-----------------------------------------------
+    //region [ - Main Sidebar Functions - ]
 
     @FXML
     SVGPath homeButtonSVG;
@@ -474,8 +436,6 @@ public class FrontController implements Initializable
 
         Object[]        responseObject  = MainApplication.client.getAllVideos ();
         List <Video>    videos          = (List <Video>) responseObject[1];
-        CategoryDAOImpl categoryDAOImpl = new CategoryDAOImpl ();
-        Category        category        = categoryDAOImpl.findByTitle ("Music");
 
         for (Video video : videos)
         {
@@ -499,7 +459,6 @@ public class FrontController implements Initializable
                     tempFile = File.createTempFile ("videoFile", ".mp4");
                     tempFile.deleteOnExit ();
 
-                    // Write the byte array to the temporary videoFile
                     try (FileOutputStream fos = new FileOutputStream (tempFile); ByteArrayInputStream bais = new ByteArrayInputStream (fileBytes))
                     {
                         byte[] buffer = new byte[1024];
@@ -705,7 +664,6 @@ public class FrontController implements Initializable
                         tempFile = File.createTempFile ("videoFile", ".mp4");
                         tempFile.deleteOnExit ();
 
-                        // Write the byte array to the temporary videoFile
                         try (FileOutputStream fos = new FileOutputStream (tempFile); ByteArrayInputStream bais = new ByteArrayInputStream (fileBytes))
                         {
                             byte[] buffer = new byte[1024];
@@ -786,7 +744,7 @@ public class FrontController implements Initializable
 
     //endregion
 
-    //region-----------------------------------------------Down Sidebar Functions-----------------------------------------------
+    //region [ - Down Sidebar Functions - ]
 
     @FXML
     SVGPath trendingButtonSVG;
@@ -860,7 +818,6 @@ public class FrontController implements Initializable
                         tempFile = File.createTempFile ("videoFile", ".mp4");
                         tempFile.deleteOnExit ();
 
-                        // Write the byte array to the temporary videoFile
                         try (FileOutputStream fos = new FileOutputStream (tempFile); ByteArrayInputStream bais = new ByteArrayInputStream (fileBytes))
                         {
                             byte[] buffer = new byte[1024];
@@ -1057,7 +1014,7 @@ public class FrontController implements Initializable
 
     //endregion
 
-    //region------------------------------------------------Transition Functions------------------------------------------------
+    //region [ - Transition Functions - ]
 
     @FXML
     ScrollPane leftMenu;

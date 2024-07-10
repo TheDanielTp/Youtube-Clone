@@ -4,12 +4,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ec566682-672c-4b02-8981-652c66cb3fe3" name="Changes" comment="Updated dark mode: upgraded upload page">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/images/1b54150abb94d1a9184e0e4c48976878.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/images/591f6fcf851af502bc5f433404ce948b.jpg" afterDir="false" />
+    <list default="true" id="ec566682-672c-4b02-8981-652c66cb3fe3" name="Changes" comment="Updated Video Recommendation">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/project/controller/dark-upload-page.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/dark-upload-page.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/project/controller/upload-page.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/upload-page.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wetube/client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/client/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wetube/dao/impl/PostDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/dao/impl/PostDAOImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wetube/dao/impl/VideoDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/dao/impl/VideoDAOImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wetube/server/ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/server/ClientHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/controller/FrontController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/project/controller/FrontController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/controller/MainApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/project/controller/MainApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/controller/SignupSecondController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/project/controller/SignupSecondController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/project/controller/images/thumbnails/Darth Revan Starwars.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/project/controller/images/thumbnails/War.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/project/controller/images/thumbnails/Watch My 9mm Go Bang.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/project/controller/images/thumbnails/You_Were_The_Chosen_One.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/project/controller/videos/B05F6EBA-5581-4C5C-B9F0-9A7E4CEAF597.mp4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/project/controller/videos/Star Wars Eclipse – Official Cinematic Reveal Trailer.mp4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/project/controller/videos/Watch My 9MM Go Bang Navi.mp4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/project/controller/videos/You Were The Chosen One.mp4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/project/controller/videos/meme_137.mp4" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,15 +31,15 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="FxmlFile" />
+        <option value="Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="login" />
+        <entry key="$PROJECT_DIR$" value="30c1726d0aa97555e727f31082146e57237e8e0b" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -101,8 +113,11 @@
       <recent name="D:\Java\Projects\Project_WeTube\src\main\java\org\project\controller" />
       <recent name="D:\Java\Projects\Project_WeTube\src\main\resources\org\project\controller" />
     </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="org.project.controller" />
+    </key>
   </component>
-  <component name="RunManager" selected="Application.Server">
+  <component name="RunManager" selected="Application.Client1">
     <configuration name="Client1" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="org.project.controller.MainApplication" />
       <module name="Project_WeTube" />
@@ -138,13 +153,17 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.TableCreator" />
+        <item itemvalue="Application.TableCreator" />
+        <item itemvalue="Application.TableCreator" />
+        <item itemvalue="Application.TableCreator" />
       </list>
     </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="jdk-21.0.2-openjdk-21.0.2-4caba194b151-4f524021" />
+        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.18034.62" />
+        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-IU-241.18034.62" />
       </set>
     </attachedChunks>
   </component>
@@ -159,6 +178,9 @@
       <workItem from="1720382424785" duration="4557000" />
       <workItem from="1720477418650" duration="6999000" />
       <workItem from="1720503665689" duration="20047000" />
+      <workItem from="1720547583498" duration="315000" />
+      <workItem from="1720579766994" duration="5384000" />
+      <workItem from="1720587580966" duration="5055000" />
     </task>
     <task id="LOCAL‎−۰۰۰۰۱" summary="Created Repository">
       <option name="closed" value="true" />
@@ -255,55 +277,35 @@
       <option name="presentableId" value="LOCAL‎−۰۰۰۱۳" />
       <updated>1720511101573</updated>
     </task>
-    <task id="LOCAL-00014" summary="Updated fxml files added user page">
+    <task id="LOCAL‎−۰۰۰۱۴" summary="Added Video Upload Functions">
       <option name="closed" value="true" />
-      <created>1720537062981</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1720537062981</updated>
+      <created>1720579988486</created>
+      <option name="number" value="LOCAL‎−۰۰۰۱۴" />
+      <option name="presentableId" value="LOCAL‎−۰۰۰۱۴" />
+      <updated>1720579988486</updated>
     </task>
-    <task id="LOCAL-00015" summary="Updated User page Edit">
+    <task id="LOCAL‎−۰۰۰۱۵" summary="Updated Video Upload Functions - Fixed Thumbnails">
       <option name="closed" value="true" />
-      <created>1720563921446</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1720563921446</updated>
+      <created>1720581468206</created>
+      <option name="number" value="LOCAL‎−۰۰۰۱۵" />
+      <option name="presentableId" value="LOCAL‎−۰۰۰۱۵" />
+      <updated>1720581468207</updated>
     </task>
-    <task id="LOCAL-00016" summary="Updated user pages">
+    <task id="LOCAL‎−۰۰۰۱۶" summary="Updated Database Functions">
       <option name="closed" value="true" />
-      <created>1720582667232</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1720582667232</updated>
+      <created>1720588708435</created>
+      <option name="number" value="LOCAL‎−۰۰۰۱۶" />
+      <option name="presentableId" value="LOCAL‎−۰۰۰۱۶" />
+      <updated>1720588708435</updated>
     </task>
-    <task id="LOCAL-00017" summary="Updated dark mode: comment preview">
+    <task id="LOCAL‎−۰۰۰۱۷" summary="Updated Video Recommendation">
       <option name="closed" value="true" />
-      <created>1720583155515</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1720583155515</updated>
+      <created>1720589513827</created>
+      <option name="number" value="LOCAL‎−۰۰۰۱۷" />
+      <option name="presentableId" value="LOCAL‎−۰۰۰۱۷" />
+      <updated>1720589513827</updated>
     </task>
-    <task id="LOCAL-00018" summary="Updated dark mode: Fixed few bugs + dark video page">
-      <option name="closed" value="true" />
-      <created>1720587256219</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1720587256219</updated>
-    </task>
-    <task id="LOCAL-00019" summary="Updated dark mode: upgraded upload page">
-      <option name="closed" value="true" />
-      <created>1720587701551</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1720587701551</updated>
-    </task>
-    <option name="localTasksCounter" value="20" />
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -314,19 +316,7 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="FILTERS">
-                <map>
-                  <entry key="branch">
-                    <value>
-                      <list>
-                        <option value="origin/develop" />
-                      </list>
-                    </value>
-                  </entry>
-                </map>
-              </option>
-            </State>
+            <State />
           </value>
         </entry>
       </map>
@@ -347,12 +337,10 @@
     <MESSAGE value="Added Theme Button" />
     <MESSAGE value="Updated Project Functions" />
     <MESSAGE value="Added Video Page" />
-    <MESSAGE value="Updated fxml files added user page" />
-    <MESSAGE value="Updated User page Edit" />
-    <MESSAGE value="Updated user pages" />
-    <MESSAGE value="Updated dark mode: comment preview" />
-    <MESSAGE value="Updated dark mode: Fixed few bugs + dark video page" />
-    <MESSAGE value="Updated dark mode: upgraded upload page" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated dark mode: upgraded upload page" />
+    <MESSAGE value="Added Video Upload Functions" />
+    <MESSAGE value="Updated Video Upload Functions - Fixed Thumbnails" />
+    <MESSAGE value="Updated Database Functions" />
+    <MESSAGE value="Updated Video Recommendation" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated Video Recommendation" />
   </component>
 </project>

@@ -31,7 +31,7 @@ public class PostDAOImpl
 
     public void create (Post post)
     {
-        String sql = "INSERT INTO Posts (ID, communityID, creatorID, channelID, title, description, image," +
+        String sql = "INSERT INTO Posts (ID, communityID, creatorID, channelID, title, description, imageURL," +
                 " commentsCount, likesCount, dislikesCount, creationDate, isOnlyComrade) VALUES" +
                 " (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try (Connection connection = DatabaseConnection.getConnection ();

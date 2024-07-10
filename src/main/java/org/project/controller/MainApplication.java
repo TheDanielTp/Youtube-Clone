@@ -24,7 +24,7 @@ public class MainApplication extends Application
     static        User   currentUser;
     public static Client client;
 
-    static boolean DarkTheme = false;
+    static boolean DarkTheme = true;
 
     public MainApplication ()
     {
@@ -33,16 +33,13 @@ public class MainApplication extends Application
 
     public MainApplication (Client client)
     {
-        this.client = client;
+        MainApplication.client = client;
     }
 
     @Override
     public void start (Stage stage) throws Exception
     {
-        UserDAOImpl userDAO = new UserDAOImpl();
-        currentUser = userDAO.findByUsername ("ArmitaSwan");
-
-        FXMLLoader fxmlLoader = new FXMLLoader (MainApplication.class.getResource ("communist-front-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader (MainApplication.class.getResource ("dark-front-view.fxml"));
         Scene      scene      = new Scene (fxmlLoader.load ());
         stage.setTitle ("WeTube");
         stage.setScene (scene);

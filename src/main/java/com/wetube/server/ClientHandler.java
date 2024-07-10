@@ -275,6 +275,15 @@ public class ClientHandler extends Thread
 
             //endregion
 
+            //region [ - Community Functions - ]
+
+            case "CREATE_COMMUNITY":
+            {
+                return create ((Community) data);
+            }
+
+            //endregion
+
             default:
             {
                 return new Response ("ERROR", "Unknown request type");
@@ -707,6 +716,18 @@ public class ClientHandler extends Thread
         playlistDAO.create (playlist);
 
         return new Response ("SUCCESS", "Playlist created successfully", null);
+    }
+
+    //endregion
+
+    //region [ - Community Functions - ]
+
+    private Response create (Community community)
+    {
+        CommunityDAOImpl communityDAO = new CommunityDAOImpl ();
+        communityDAO.create (community);
+
+        return new Response ("SUCCESS", "Community created successfully", null);
     }
 
     //endregion

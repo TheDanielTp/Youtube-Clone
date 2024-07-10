@@ -1,6 +1,7 @@
 package org.project.controller;
 
 import com.wetube.model.Channel;
+import com.wetube.model.Community;
 import com.wetube.model.Playlist;
 import com.wetube.model.User;
 import javafx.event.ActionEvent;
@@ -75,10 +76,19 @@ public class SignupSecondController
                         System.out.println ("> Front: User sign up successful");
 
                         Channel channel = new Channel (user.getID (), user.getUsername (), "");
-                        Object[] createChannelResponse = client.create (channel);
+                        client.create (channel);
 
                         Playlist playlist = new Playlist (user.getID (), user.getID (), "History", "History", false, false);
-                        MainApplication.client.create (playlist);
+                        client.create (playlist);
+
+                        Playlist playlist1 = new Playlist (user.getID (), user.getID (), "Liked", "Liked", false, false);
+                        client.create (playlist1);
+
+                        Playlist playlist2 = new Playlist (user.getID (), user.getID (), "Saved", "Saved", false, false);
+                        client.create (playlist2);
+
+                        Community community = new Community (user.getID ());
+                        client.create (community);
 
                         Parent root;
                         if (! MainApplication.DarkTheme)
