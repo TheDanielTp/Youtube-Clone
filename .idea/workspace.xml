@@ -4,11 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ec566682-672c-4b02-8981-652c66cb3fe3" name="Changes" comment="Updated User page">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/project/controller/UserEditController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/communist-user-edit.fxml" afterDir="false" />
+    <list default="true" id="ec566682-672c-4b02-8981-652c66cb3fe3" name="Changes" comment="Updated User page Edit">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/project/controller/communist-user-home-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/communist-user-home-view.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -101,7 +98,7 @@
       <recent name="D:\Java\Projects\Project_WeTube\src\main\resources\org\project\controller" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Client1">
+  <component name="RunManager" selected="Application.Server">
     <configuration name="Client1" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="org.project.controller.MainApplication" />
       <module name="Project_WeTube" />
@@ -262,7 +259,15 @@
       <option name="project" value="LOCAL" />
       <updated>1720537062981</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Updated User page Edit">
+      <option name="closed" value="true" />
+      <created>1720563921446</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1720563921446</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -307,6 +312,7 @@
     <MESSAGE value="Updated Project Functions" />
     <MESSAGE value="Added Video Page" />
     <MESSAGE value="Updated fxml files added user page" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated fxml files added user page" />
+    <MESSAGE value="Updated User page Edit" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated User page Edit" />
   </component>
 </project>

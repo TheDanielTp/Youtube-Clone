@@ -1,0 +1,289 @@
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"ec566682-672c-4b02-8981-652c66cb3fe3\" name=\"Changes\" comment=\"Mark 1, might undo these changes later\">\r\n      <change afterPath=\"$PROJECT_DIR$/src/main/java/com/wetube/client/Client.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/src/main/java/com/wetube/dao/impl/CategoryDAOImpl.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/src/main/java/com/wetube/dao/impl/CommunityDAOImpl.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/src/main/java/com/wetube/dao/impl/NotificationDAOImpl.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/src/main/java/com/wetube/dao/impl/PlaylistDAOImpl.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/src/main/java/com/wetube/network/Request.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/src/main/java/com/wetube/network/Response.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/src/main/java/com/wetube/server/ClientHandler.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/src/main/java/com/wetube/server/Server.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/com/wetube/dao/impl/ChannelDAOImpl.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/com/wetube/dao/impl/ChannelDAOImpl.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/com/wetube/dao/impl/CommentDAOImpl.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/com/wetube/dao/impl/CommentDAOImpl.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/com/wetube/dao/impl/PostDAOImpl.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/com/wetube/dao/impl/PostDAOImpl.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/com/wetube/dao/impl/UserDAOImpl.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/com/wetube/dao/impl/UserDAOImpl.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/com/wetube/dao/impl/VideoDAOImpl.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/com/wetube/dao/impl/VideoDAOImpl.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/com/wetube/model/Category.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/com/wetube/model/Category.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/com/wetube/model/Channel.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/com/wetube/model/Channel.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/com/wetube/model/Comment.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/com/wetube/model/Comment.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/com/wetube/model/Community.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/com/wetube/model/Community.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/com/wetube/model/Content.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/com/wetube/model/Content.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/com/wetube/model/Notification.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/com/wetube/model/Notification.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/com/wetube/model/Playlist.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/com/wetube/model/Playlist.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/com/wetube/model/Post.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/com/wetube/model/Post.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/com/wetube/model/ServerResponse.java\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/com/wetube/model/User.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/com/wetube/model/User.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/com/wetube/model/Video.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/com/wetube/model/Video.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/com/wetube/util/TableCreator.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/com/wetube/util/TableCreator.java\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\r\n      <map>\r\n        <entry key=\"$PROJECT_DIR$\" value=\"database\" />\r\n      </map>\r\n    </option>\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"GitHubPullRequestSearchHistory\">{\r\n  &quot;lastFilter&quot;: {\r\n    &quot;state&quot;: &quot;OPEN&quot;,\r\n    &quot;assignee&quot;: &quot;TheDanielTp&quot;\r\n  }\r\n}</component>\r\n  <component name=\"GithubPullRequestsUISettings\">{\r\n  &quot;selectedUrlAndAccountId&quot;: {\r\n    &quot;url&quot;: &quot;https://github.com/TheDanielTp/Project_WeTube&quot;,\r\n    &quot;accountId&quot;: &quot;3c65712a-ed86-4130-bb90-4a7622407ea5&quot;\r\n  }\r\n}</component>\r\n  <component name=\"MavenImportPreferences\">\r\n    <option name=\"generalSettings\">\r\n      <MavenGeneralSettings>\r\n        <option name=\"mavenHomeTypeForPersistence\" value=\"WRAPPER\" />\r\n      </MavenGeneralSettings>\r\n    </option>\r\n  </component>\r\n  <component name=\"ProblemsViewState\">\r\n    <option name=\"selectedTabId\" value=\"CurrentFile\" />\r\n  </component>\r\n  <component name=\"ProjectColorInfo\">{\r\n  &quot;associatedIndex&quot;: 3\r\n}</component>\r\n  <component name=\"ProjectId\" id=\"2irRHITZ4w6U1ENbH8rGgw0yzuk\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\">\r\n    <ConfirmationsSetting value=\"2\" id=\"Add\" />\r\n  </component>\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">{\r\n  &quot;keyToString&quot;: {\r\n    &quot;Application.Client.executor&quot;: &quot;Run&quot;,\r\n    &quot;Application.TableCreator.executor&quot;: &quot;Run&quot;,\r\n    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\r\n    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,\r\n    &quot;git-widget-placeholder&quot;: &quot;database__step2&quot;,\r\n    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,\r\n    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,\r\n    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,\r\n    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,\r\n    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,\r\n    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,\r\n    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,\r\n    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,\r\n    &quot;settings.editor.selected.configurable&quot;: &quot;database.query.execution&quot;,\r\n    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;\r\n  },\r\n  &quot;keyToStringList&quot;: {\r\n    &quot;DatabaseDriversLRU&quot;: [\r\n      &quot;mysql_aurora_aws&quot;,\r\n      &quot;postgresql&quot;\r\n    ],\r\n    &quot;com.intellij.ide.scratch.LRUPopupBuilder$1/SQL Dialect&quot;: [\r\n      &quot;PostgreSQL&quot;\r\n    ]\r\n  }\r\n}</component>\r\n  <component name=\"SharedIndexes\">\r\n    <attachedChunks>\r\n      <set>\r\n        <option value=\"bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.18034.62\" />\r\n        <option value=\"bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-IU-241.18034.62\" />\r\n      </set>\r\n    </attachedChunks>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"ec566682-672c-4b02-8981-652c66cb3fe3\" name=\"Changes\" comment=\"\" />\r\n      <created>1720246621657</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1720246621657</updated>\r\n      <workItem from=\"1720382424785\" duration=\"4557000\" />\r\n    </task>\r\n    <task id=\"LOCAL\u200E−۰۰۰۰۱\" summary=\"Created Repository\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1720246781249</created>\r\n      <option name=\"number\" value=\"LOCAL\u200E−۰۰۰۰۱\" />\r\n      <option name=\"presentableId\" value=\"LOCAL\u200E−۰۰۰۰۱\" />\r\n      <updated>1720246781249</updated>\r\n    </task>\r\n    <task id=\"LOCAL\u200E−۰۰۰۰۲\" summary=\"Initialized Project\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1720246902140</created>\r\n      <option name=\"number\" value=\"LOCAL\u200E−۰۰۰۰۲\" />\r\n      <option name=\"presentableId\" value=\"LOCAL\u200E−۰۰۰۰۲\" />\r\n      <updated>1720246902140</updated>\r\n    </task>\r\n    <task id=\"LOCAL\u200E−۰۰۰۰۳\" summary=\"Initialized Models &amp; Access Objects\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1720251963229</created>\r\n      <option name=\"number\" value=\"LOCAL\u200E−۰۰۰۰۳\" />\r\n      <option name=\"presentableId\" value=\"LOCAL\u200E−۰۰۰۰۳\" />\r\n      <updated>1720251963229</updated>\r\n    </task>\r\n    <task id=\"LOCAL\u200E−۰۰۰۰۴\" summary=\"Updated Models Classes\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1720265568491</created>\r\n      <option name=\"number\" value=\"LOCAL\u200E−۰۰۰۰۴\" />\r\n      <option name=\"presentableId\" value=\"LOCAL\u200E−۰۰۰۰۴\" />\r\n      <updated>1720265568491</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00005\" summary=\"Updated Database class\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1720353747360</created>\r\n      <option name=\"number\" value=\"00005\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1720353747360</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00006\" summary=\"Updated Database: UserDAO class\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1720353787159</created>\r\n      <option name=\"number\" value=\"00006\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1720353787159</updated>\r\n    </task>\r\n    <task id=\"LOCAL\u200E−۰۰۰۰۷\" summary=\"Mark 1, might undo these changes later\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1720381519983</created>\r\n      <option name=\"number\" value=\"LOCAL\u200E−۰۰۰۰۷\" />\r\n      <option name=\"presentableId\" value=\"LOCAL\u200E−۰۰۰۰۷\" />\r\n      <updated>1720381519983</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"8\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"Created Repository\" />\r\n    <MESSAGE value=\"Initialized Project\" />\r\n    <MESSAGE value=\"Initialized Models &amp; Access Objects\" />\r\n    <MESSAGE value=\"Updated Models Classes\" />\r\n    <MESSAGE value=\"Updated Database class\" />\r\n    <MESSAGE value=\"Updated Database: UserDAO class\" />\r\n    <MESSAGE value=\"Mark 1, might undo these changes later\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"Mark 1, might undo these changes later\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 2625e54a43c94f6061e76d81d7e8e4b64a94fcbe)
++++ b/.idea/workspace.xml	(date 1720530418777)
+@@ -4,34 +4,14 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="ec566682-672c-4b02-8981-652c66cb3fe3" name="Changes" comment="Mark 1, might undo these changes later">
+-      <change afterPath="$PROJECT_DIR$/src/main/java/com/wetube/client/Client.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src/main/java/com/wetube/dao/impl/CategoryDAOImpl.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src/main/java/com/wetube/dao/impl/CommunityDAOImpl.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src/main/java/com/wetube/dao/impl/NotificationDAOImpl.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src/main/java/com/wetube/dao/impl/PlaylistDAOImpl.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src/main/java/com/wetube/network/Request.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src/main/java/com/wetube/network/Response.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src/main/java/com/wetube/server/ClientHandler.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src/main/java/com/wetube/server/Server.java" afterDir="false" />
++    <list default="true" id="ec566682-672c-4b02-8981-652c66cb3fe3" name="Changes" comment="Updated Database: Added new methods">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/main/java/com/wetube/dao/impl/ChannelDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/dao/impl/ChannelDAOImpl.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/main/java/com/wetube/dao/impl/CommentDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/dao/impl/CommentDAOImpl.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/com/wetube/dao/impl/PlaylistDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/dao/impl/PlaylistDAOImpl.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/main/java/com/wetube/dao/impl/PostDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/dao/impl/PostDAOImpl.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wetube/dao/impl/UserDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/dao/impl/UserDAOImpl.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/main/java/com/wetube/dao/impl/VideoDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/dao/impl/VideoDAOImpl.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wetube/model/Category.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/model/Category.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wetube/model/Channel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/model/Channel.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wetube/model/Comment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/model/Comment.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wetube/model/Community.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/model/Community.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wetube/model/Content.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/model/Content.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wetube/model/Notification.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/model/Notification.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wetube/model/Playlist.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/model/Playlist.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wetube/model/Post.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/model/Post.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wetube/model/ServerResponse.java" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wetube/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/model/User.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/main/java/com/wetube/model/Video.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/model/Video.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wetube/util/TableCreator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wetube/util/TableCreator.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -48,7 +28,7 @@
+   <component name="Git.Settings">
+     <option name="RECENT_BRANCH_BY_REPOSITORY">
+       <map>
+-        <entry key="$PROJECT_DIR$" value="database" />
++        <entry key="$PROJECT_DIR$" value="22f01b48877d96b3dc4f62a871ca264068d892e0" />
+       </map>
+     </option>
+     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+@@ -65,13 +45,6 @@
+     &quot;accountId&quot;: &quot;3c65712a-ed86-4130-bb90-4a7622407ea5&quot;
+   }
+ }</component>
+-  <component name="MavenImportPreferences">
+-    <option name="generalSettings">
+-      <MavenGeneralSettings>
+-        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+-      </MavenGeneralSettings>
+-    </option>
+-  </component>
+   <component name="ProblemsViewState">
+     <option name="selectedTabId" value="CurrentFile" />
+   </component>
+@@ -86,35 +59,88 @@
+     <option name="hideEmptyMiddlePackages" value="true" />
+     <option name="showLibraryContents" value="true" />
+   </component>
+-  <component name="PropertiesComponent">{
+-  &quot;keyToString&quot;: {
+-    &quot;Application.Client.executor&quot;: &quot;Run&quot;,
+-    &quot;Application.TableCreator.executor&quot;: &quot;Run&quot;,
+-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+-    &quot;git-widget-placeholder&quot;: &quot;database__step2&quot;,
+-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+-    &quot;settings.editor.selected.configurable&quot;: &quot;database.query.execution&quot;,
+-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
++  <component name="PropertiesComponent"><![CDATA[{
++  "keyToString": {
++    "ASKED_ADD_EXTERNAL_FILES": "true",
++    "Application.Client.executor": "Run",
++    "Application.Client1.executor": "Run",
++    "Application.Client2.executor": "Run",
++    "Application.MainApplication.executor": "Run",
++    "Application.Server.executor": "Run",
++    "Application.TableCreator.executor": "Run",
++    "RunOnceActivity.OpenProjectViewOnStart": "true",
++    "RunOnceActivity.ShowReadmeOnStart": "true",
++    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
++    "git-widget-placeholder": "database__step3",
++    "kotlin-language-version-configured": "true",
++    "node.js.detected.package.eslint": "true",
++    "node.js.selected.package.eslint": "(autodetect)",
++    "node.js.selected.package.tslint": "(autodetect)",
++    "nodejs_package_manager_path": "npm",
++    "project.structure.last.edited": "Project",
++    "project.structure.proportion": "0.0",
++    "project.structure.side.proportion": "0.0",
++    "settings.editor.selected.configurable": "database.query.execution",
++    "vue.rearranger.settings.migration": "true"
+   },
+-  &quot;keyToStringList&quot;: {
+-    &quot;DatabaseDriversLRU&quot;: [
+-      &quot;mysql_aurora_aws&quot;,
+-      &quot;postgresql&quot;
++  "keyToStringList": {
++    "DatabaseDriversLRU": [
++      "mysql_aurora_aws",
++      "postgresql"
+     ],
+-    &quot;com.intellij.ide.scratch.LRUPopupBuilder$1/SQL Dialect&quot;: [
+-      &quot;PostgreSQL&quot;
++    "com.intellij.ide.scratch.LRUPopupBuilder$1/SQL Dialect": [
++      "PostgreSQL"
+     ]
+   }
+-}</component>
++}]]></component>
++  <component name="RunManager" selected="Application.Client1">
++    <configuration name="Client1" type="Application" factoryName="Application">
++      <option name="MAIN_CLASS_NAME" value="org.project.controller.MainApplication" />
++      <module name="Project_WeTube" />
++      <method v="2">
++        <option name="Make" enabled="true" />
++      </method>
++    </configuration>
++    <configuration name="Client2" type="Application" factoryName="Application">
++      <option name="MAIN_CLASS_NAME" value="org.project.controller.MainApplication" />
++      <module name="Project_WeTube" />
++      <method v="2">
++        <option name="Make" enabled="true" />
++      </method>
++    </configuration>
++    <configuration name="Server" type="Application" factoryName="Application">
++      <option name="MAIN_CLASS_NAME" value="com.wetube.server.Server" />
++      <module name="Project_WeTube" />
++      <method v="2">
++        <option name="Make" enabled="true" />
++      </method>
++    </configuration>
++    <configuration name="TableCreator" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
++      <option name="MAIN_CLASS_NAME" value="com.wetube.util.TableCreator" />
++      <module name="Project_WeTube" />
++      <extension name="coverage">
++        <pattern>
++          <option name="PATTERN" value="com.wetube.util.*" />
++          <option name="ENABLED" value="true" />
++        </pattern>
++      </extension>
++      <method v="2">
++        <option name="Make" enabled="true" />
++      </method>
++    </configuration>
++    <list>
++      <item itemvalue="Application.Client1" />
++      <item itemvalue="Application.Server" />
++      <item itemvalue="Application.Client2" />
++      <item itemvalue="Application.TableCreator" />
++    </list>
++    <recent_temporary>
++      <list>
++        <item itemvalue="Application.TableCreator" />
++        <item itemvalue="Application.TableCreator" />
++      </list>
++    </recent_temporary>
++  </component>
+   <component name="SharedIndexes">
+     <attachedChunks>
+       <set>
+@@ -184,7 +210,60 @@
+       <option name="presentableId" value="LOCAL‎−۰۰۰۰۷" />
+       <updated>1720381519983</updated>
+     </task>
+-    <option name="localTasksCounter" value="8" />
++    <task id="LOCAL‎−۰۰۰۰۸" summary="Mark 5, might undo these changes later">
++      <option name="closed" value="true" />
++      <created>1720442304421</created>
++      <option name="number" value="LOCAL‎−۰۰۰۰۸" />
++      <option name="presentableId" value="LOCAL‎−۰۰۰۰۸" />
++      <updated>1720442304421</updated>
++    </task>
++    <task id="LOCAL‎−۰۰۰۰۹" summary="Project Next Step">
++      <option name="closed" value="true" />
++      <created>1720454626391</created>
++      <option name="number" value="LOCAL‎−۰۰۰۰۹" />
++      <option name="presentableId" value="LOCAL‎−۰۰۰۰۹" />
++      <updated>1720454626391</updated>
++    </task>
++    <task id="LOCAL‎−۰۰۰۱۰" summary="Sign Up Functionality added to Front">
++      <option name="closed" value="true" />
++      <created>1720458897052</created>
++      <option name="number" value="LOCAL‎−۰۰۰۱۰" />
++      <option name="presentableId" value="LOCAL‎−۰۰۰۱۰" />
++      <updated>1720458897052</updated>
++    </task>
++    <task id="LOCAL-00011" summary="Updated Database: Updated tables">
++      <option name="closed" value="true" />
++      <created>1720517190731</created>
++      <option name="number" value="00011" />
++      <option name="presentableId" value="LOCAL-00011" />
++      <option name="project" value="LOCAL" />
++      <updated>1720517190731</updated>
++    </task>
++    <task id="LOCAL-00012" summary="Updated Database: Updated tables, added new tables">
++      <option name="closed" value="true" />
++      <created>1720517223016</created>
++      <option name="number" value="00012" />
++      <option name="presentableId" value="LOCAL-00012" />
++      <option name="project" value="LOCAL" />
++      <updated>1720517223016</updated>
++    </task>
++    <task id="LOCAL-00013" summary="Updated Database: Updated tables, added new tables">
++      <option name="closed" value="true" />
++      <created>1720517242539</created>
++      <option name="number" value="00013" />
++      <option name="presentableId" value="LOCAL-00013" />
++      <option name="project" value="LOCAL" />
++      <updated>1720517242539</updated>
++    </task>
++    <task id="LOCAL-00014" summary="Updated Database: Added new methods">
++      <option name="closed" value="true" />
++      <created>1720526729267</created>
++      <option name="number" value="00014" />
++      <option name="presentableId" value="LOCAL-00014" />
++      <option name="project" value="LOCAL" />
++      <updated>1720526729267</updated>
++    </task>
++    <option name="localTasksCounter" value="15" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+@@ -195,13 +274,26 @@
+       <map>
+         <entry key="MAIN">
+           <value>
+-            <State />
++            <State>
++              <option name="FILTERS">
++                <map>
++                  <entry key="branch">
++                    <value>
++                      <list>
++                        <option value="database_step3" />
++                      </list>
++                    </value>
++                  </entry>
++                </map>
++              </option>
++            </State>
+           </value>
+         </entry>
+       </map>
+     </option>
+   </component>
+   <component name="VcsManagerConfiguration">
++    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+     <MESSAGE value="Created Repository" />
+     <MESSAGE value="Initialized Project" />
+     <MESSAGE value="Initialized Models &amp; Access Objects" />
+@@ -209,6 +301,12 @@
+     <MESSAGE value="Updated Database class" />
+     <MESSAGE value="Updated Database: UserDAO class" />
+     <MESSAGE value="Mark 1, might undo these changes later" />
+-    <option name="LAST_COMMIT_MESSAGE" value="Mark 1, might undo these changes later" />
++    <MESSAGE value="Mark 5, might undo these changes later" />
++    <MESSAGE value="Project Next Step" />
++    <MESSAGE value="Sign Up Functionality added to Front" />
++    <MESSAGE value="Updated Database: Updated tables" />
++    <MESSAGE value="Updated Database: Updated tables, added new tables" />
++    <MESSAGE value="Updated Database: Added new methods" />
++    <option name="LAST_COMMIT_MESSAGE" value="Updated Database: Added new methods" />
+   </component>
+ </project>
+\ No newline at end of file
