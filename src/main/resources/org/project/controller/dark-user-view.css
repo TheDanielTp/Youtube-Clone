@@ -1,0 +1,57 @@
+.button {
+    -fx-background-color: #000000;
+    -fx-text-fill: #ffffff;
+    -fx-padding: 10px 20px;
+    -fx-border-radius: 25px;
+    -fx-background-radius: 25px;
+    -fx-border-color: #000000;
+    -fx-border-width: 3;
+}
+
+.button:hover {
+    -fx-background-color: #272727;
+    -fx-text-fill: #ffffff;
+}
+
+.scroll-pane .scroll-bar:horizontal .track {
+    -fx-background-color: #272727;
+}
+
+.scroll-pane .scroll-bar:horizontal .thumb {
+    -fx-background-color: #272727;
+}
+
+.scroll-pane .scroll-bar:vertical .track {
+    -fx-background-color: #272727;
+}
+
+.scroll-pane .scroll-bar:vertical .thumb {
+    -fx-background-color: #272727;
+}
+
+.tab-pane {
+    -fx-background-color: #000000;
+    -fx-border-color: #000000;
+}
+
+.tab {
+    -fx-background-color: #000000;
+    -fx-border-color: #000000;
+    -fx-border-width: 1px;
+    -fx-padding: 5px;
+}
+
+.tab:selected {
+    -fx-background-color: #272727;
+}
+
+.tab-label {
+    -fx-font-size: 18px;
+    -fx-text-fill: #ffffff;
+}
+
+.tab:selected .tab-label {
+    -fx-font-weight: bold;
+    -fx-text-fill: #ffffff;
+    -fx-underline: true;
+}

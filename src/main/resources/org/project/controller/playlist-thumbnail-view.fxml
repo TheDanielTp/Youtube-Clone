@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="410.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fx:id="thumbnail" fitHeight="235.0" fitWidth="384.0" layoutX="13.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+         </ImageView>
+      <Label fx:id="title" layoutX="18.0" layoutY="232.0" prefHeight="25.0" prefWidth="374.0" text="You were the chosen one">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="channel" layoutX="18.0" layoutY="261.0" text="Channel Name">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="duration" layoutX="361.0" layoutY="200.0" text="55:55" textFill="WHITE" />
+      <Button fx:id="videoButton" mnemonicParsing="false" prefHeight="300.0" prefWidth="410.0" style="-fx-background-color: TRANSPARENT;" />
+   </children>
+</AnchorPane>

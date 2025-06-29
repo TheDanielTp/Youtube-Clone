@@ -4,44 +4,164 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ec566682-672c-4b02-8981-652c66cb3fe3" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/project_wetube/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/project/project_wetube/HelloApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/project_wetube/HelloController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/project/project_wetube/HelloController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/project/project_wetube/hello-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/project/project_wetube/hello-view.fxml" afterDir="false" />
+    <list default="true" id="ec566682-672c-4b02-8981-652c66cb3fe3" name="Changes" comment="Updated FXML Files">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/project/controller/NotifView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/controller/CommentPreviewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/project/controller/CommentPreviewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/controller/FrontController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/project/controller/FrontController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/project/controller/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/controller/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/project/controller/MainController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/controller/VideoPageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/project/controller/VideoPageController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/project/controller/dark-notif-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/dark-notif-view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/project/controller/dark-notif.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/dark-notif.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/project/controller/notif-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/notif-view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/project/controller/notif.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/project/controller/notif.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="MavenImportPreferences">
-    <option name="generalSettings">
-      <MavenGeneralSettings>
-        <option name="mavenHome" value="Use Maven wrapper" />
-      </MavenGeneralSettings>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="FxmlFile" />
+        <option value="Class" />
+      </list>
     </option>
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 3
-}]]></component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="30c1726d0aa97555e727f31082146e57237e8e0b" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;TheDanielTp&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/TheDanielTp/Project_WeTube&quot;,
+    &quot;accountId&quot;: &quot;3c65712a-ed86-4130-bb90-4a7622407ea5&quot;
+  }
+}</component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
   <component name="ProjectId" id="2irRHITZ4w6U1ENbH8rGgw0yzuk" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;Application.Client.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Client1.executor&quot;: &quot;Run&quot;,
+    &quot;Application.MainApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Server.executor&quot;: &quot;Run&quot;,
+    &quot;Application.TableCreator.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;develop&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_directory_selection&quot;: &quot;D:/Java/Projects/Project_WeTube/src/main/java/org/project/controller&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Java/Projects/Project_WeTube/src/main/resources/org/project/controller&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.48045978&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;database.query.execution&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql_aurora_aws&quot;,
+      &quot;postgresql&quot;
+    ],
+    &quot;com.intellij.ide.scratch.LRUPopupBuilder$1/SQL Dialect&quot;: [
+      &quot;PostgreSQL&quot;
+    ]
   }
-}]]></component>
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Java\Projects\Project_WeTube\src\main\resources\org\project\controller" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Java\Projects\Project_WeTube\src\main\resources\org\project\controller\images" />
+      <recent name="D:\Java\Projects\Project_WeTube\src\main\java\org\project\controller" />
+      <recent name="D:\Java\Projects\Project_WeTube\src\main\resources\org\project\controller" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="org.project.controller" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.Client1">
+    <configuration name="Client1" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="org.project.controller.MainApplication" />
+      <module name="Project_WeTube" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Server" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="com.wetube.server.Server" />
+      <module name="Project_WeTube" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TableCreator" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.wetube.util.TableCreator" />
+      <module name="Project_WeTube" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.wetube.util.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.Client1" />
+      <item itemvalue="Application.Server" />
+      <item itemvalue="Application.TableCreator" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.TableCreator" />
+        <item itemvalue="Application.TableCreator" />
+        <item itemvalue="Application.TableCreator" />
+        <item itemvalue="Application.TableCreator" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.18034.62" />
+        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-IU-241.18034.62" />
+      </set>
+    </attachedChunks>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -50,7 +170,220 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1720246621657</updated>
+      <workItem from="1720382424785" duration="4557000" />
+      <workItem from="1720477418650" duration="6999000" />
+      <workItem from="1720503665689" duration="20047000" />
+      <workItem from="1720547583498" duration="315000" />
+      <workItem from="1720579766994" duration="5384000" />
+      <workItem from="1720587580966" duration="20488000" />
     </task>
+    <task id="LOCAL‎−۰۰۰۰۱" summary="Created Repository">
+      <option name="closed" value="true" />
+      <created>1720246781249</created>
+      <option name="number" value="LOCAL‎−۰۰۰۰۱" />
+      <option name="presentableId" value="LOCAL‎−۰۰۰۰۱" />
+      <updated>1720246781249</updated>
+    </task>
+    <task id="LOCAL‎−۰۰۰۰۲" summary="Initialized Project">
+      <option name="closed" value="true" />
+      <created>1720246902140</created>
+      <option name="number" value="LOCAL‎−۰۰۰۰۲" />
+      <option name="presentableId" value="LOCAL‎−۰۰۰۰۲" />
+      <updated>1720246902140</updated>
+    </task>
+    <task id="LOCAL‎−۰۰۰۰۳" summary="Initialized Models &amp; Access Objects">
+      <option name="closed" value="true" />
+      <created>1720251963229</created>
+      <option name="number" value="LOCAL‎−۰۰۰۰۳" />
+      <option name="presentableId" value="LOCAL‎−۰۰۰۰۳" />
+      <updated>1720251963229</updated>
+    </task>
+    <task id="LOCAL‎−۰۰۰۰۴" summary="Updated Models Classes">
+      <option name="closed" value="true" />
+      <created>1720265568491</created>
+      <option name="number" value="LOCAL‎−۰۰۰۰۴" />
+      <option name="presentableId" value="LOCAL‎−۰۰۰۰۴" />
+      <updated>1720265568491</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Updated Database class">
+      <option name="closed" value="true" />
+      <created>1720353747360</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1720353747360</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Updated Database: UserDAO class">
+      <option name="closed" value="true" />
+      <created>1720353787159</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1720353787159</updated>
+    </task>
+    <task id="LOCAL‎−۰۰۰۰۷" summary="Mark 1, might undo these changes later">
+      <option name="closed" value="true" />
+      <created>1720381519983</created>
+      <option name="number" value="LOCAL‎−۰۰۰۰۷" />
+      <option name="presentableId" value="LOCAL‎−۰۰۰۰۷" />
+      <updated>1720381519983</updated>
+    </task>
+    <task id="LOCAL‎−۰۰۰۰۸" summary="Mark 5, might undo these changes later">
+      <option name="closed" value="true" />
+      <created>1720442304421</created>
+      <option name="number" value="LOCAL‎−۰۰۰۰۸" />
+      <option name="presentableId" value="LOCAL‎−۰۰۰۰۸" />
+      <updated>1720442304421</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Updated Interface: Dark login added">
+      <option name="closed" value="true" />
+      <created>1720457762946</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1720457762946</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Updated Interface: Dark signup added">
+      <option name="closed" value="true" />
+      <created>1720458559720</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1720458559720</updated>
+    </task>
+    <task id="LOCAL‎−۰۰۰۱۱" summary="Added Theme Button">
+      <option name="closed" value="true" />
+      <created>1720463336257</created>
+      <option name="number" value="LOCAL‎−۰۰۰۱۱" />
+      <option name="presentableId" value="LOCAL‎−۰۰۰۱۱" />
+      <updated>1720463336257</updated>
+    </task>
+    <task id="LOCAL‎−۰۰۰۱۲" summary="Updated Project Functions">
+      <option name="closed" value="true" />
+      <created>1720504210766</created>
+      <option name="number" value="LOCAL‎−۰۰۰۱۲" />
+      <option name="presentableId" value="LOCAL‎−۰۰۰۱۲" />
+      <updated>1720504210766</updated>
+    </task>
+    <task id="LOCAL‎−۰۰۰۱۳" summary="Added Video Page">
+      <option name="closed" value="true" />
+      <created>1720511101573</created>
+      <option name="number" value="LOCAL‎−۰۰۰۱۳" />
+      <option name="presentableId" value="LOCAL‎−۰۰۰۱۳" />
+      <updated>1720511101573</updated>
+    </task>
+    <task id="LOCAL‎−۰۰۰۱۴" summary="Added Video Upload Functions">
+      <option name="closed" value="true" />
+      <created>1720579988486</created>
+      <option name="number" value="LOCAL‎−۰۰۰۱۴" />
+      <option name="presentableId" value="LOCAL‎−۰۰۰۱۴" />
+      <updated>1720579988486</updated>
+    </task>
+    <task id="LOCAL‎−۰۰۰۱۵" summary="Updated Video Upload Functions - Fixed Thumbnails">
+      <option name="closed" value="true" />
+      <created>1720581468206</created>
+      <option name="number" value="LOCAL‎−۰۰۰۱۵" />
+      <option name="presentableId" value="LOCAL‎−۰۰۰۱۵" />
+      <updated>1720581468207</updated>
+    </task>
+    <task id="LOCAL‎−۰۰۰۱۶" summary="Updated Database Functions">
+      <option name="closed" value="true" />
+      <created>1720588708435</created>
+      <option name="number" value="LOCAL‎−۰۰۰۱۶" />
+      <option name="presentableId" value="LOCAL‎−۰۰۰۱۶" />
+      <updated>1720588708435</updated>
+    </task>
+    <task id="LOCAL‎−۰۰۰۱۷" summary="Updated Video Recommendation">
+      <option name="closed" value="true" />
+      <created>1720589513827</created>
+      <option name="number" value="LOCAL‎−۰۰۰۱۷" />
+      <option name="presentableId" value="LOCAL‎−۰۰۰۱۷" />
+      <updated>1720589513827</updated>
+    </task>
+    <task id="LOCAL‎−۰۰۰۱۸" summary="Updated Post Upload">
+      <option name="closed" value="true" />
+      <created>1720593131305</created>
+      <option name="number" value="LOCAL‎−۰۰۰۱۸" />
+      <option name="presentableId" value="LOCAL‎−۰۰۰۱۸" />
+      <updated>1720593131305</updated>
+    </task>
+    <task id="LOCAL‎−۰۰۰۱۹" summary="Updated Main Panel">
+      <option name="closed" value="true" />
+      <created>1720595004039</created>
+      <option name="number" value="LOCAL‎−۰۰۰۱۹" />
+      <option name="presentableId" value="LOCAL‎−۰۰۰۱۹" />
+      <updated>1720595004039</updated>
+    </task>
+    <task id="LOCAL‎−۰۰۰۲۰" summary="Updated Front">
+      <option name="closed" value="true" />
+      <created>1720599332834</created>
+      <option name="number" value="LOCAL‎−۰۰۰۲۰" />
+      <option name="presentableId" value="LOCAL‎−۰۰۰۲۰" />
+      <updated>1720599332834</updated>
+    </task>
+    <task id="LOCAL‎−۰۰۰۲۱" summary="Added playlist creation">
+      <option name="closed" value="true" />
+      <created>1720601939617</created>
+      <option name="number" value="LOCAL‎−۰۰۰۲۱" />
+      <option name="presentableId" value="LOCAL‎−۰۰۰۲۱" />
+      <updated>1720601939617</updated>
+    </task>
+    <task id="LOCAL‎−۰۰۰۲۲" summary="Updated Project">
+      <option name="closed" value="true" />
+      <created>1720605196965</created>
+      <option name="number" value="LOCAL‎−۰۰۰۲۲" />
+      <option name="presentableId" value="LOCAL‎−۰۰۰۲۲" />
+      <updated>1720605196965</updated>
+    </task>
+    <task id="LOCAL‎−۰۰۰۲۳" summary="Updated FXML Files">
+      <option name="closed" value="true" />
+      <created>1720606227912</created>
+      <option name="number" value="LOCAL‎−۰۰۰۲۳" />
+      <option name="presentableId" value="LOCAL‎−۰۰۰۲۳" />
+      <updated>1720606227912</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="Created Repository" />
+    <MESSAGE value="Initialized Project" />
+    <MESSAGE value="Initialized Models &amp; Access Objects" />
+    <MESSAGE value="Updated Models Classes" />
+    <MESSAGE value="Updated Database class" />
+    <MESSAGE value="Updated Database: UserDAO class" />
+    <MESSAGE value="Mark 1, might undo these changes later" />
+    <MESSAGE value="Mark 5, might undo these changes later" />
+    <MESSAGE value="Updated Interface: Dark login added" />
+    <MESSAGE value="Updated Interface: Dark signup added" />
+    <MESSAGE value="Added Theme Button" />
+    <MESSAGE value="Updated Project Functions" />
+    <MESSAGE value="Added Video Page" />
+    <MESSAGE value="Added Video Upload Functions" />
+    <MESSAGE value="Updated Video Upload Functions - Fixed Thumbnails" />
+    <MESSAGE value="Updated Database Functions" />
+    <MESSAGE value="Updated Video Recommendation" />
+    <MESSAGE value="Updated Post Upload" />
+    <MESSAGE value="Updated Main Panel" />
+    <MESSAGE value="Updated Front" />
+    <MESSAGE value="Added playlist creation" />
+    <MESSAGE value="Updated Project" />
+    <MESSAGE value="Updated FXML Files" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated FXML Files" />
   </component>
 </project>

@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: #000000;" stylesheets="@dark-user-view.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.project.controller.UserEditController">
+    <children>
+        <HBox prefHeight="69.0" prefWidth="1920.0" style="-fx-background-color: #000000; -fx-border-color: #4F0909; -fx-border-width: 5;">
+            <children>
+                <ImageView fitHeight="36.0" fitWidth="138.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@images/naziWeTube.png" />
+                    </image>
+                    <HBox.margin>
+                        <Insets bottom="20.0" left="15.0" top="20.0" />
+                    </HBox.margin>
+                </ImageView>
+            </children>
+            <VBox.margin>
+                <Insets />
+            </VBox.margin></HBox>
+        <ScrollPane style="-fx-background-color: #000000;">
+            <content>
+                <VBox prefHeight="1010.0" prefWidth="1914.0" style="-fx-background-color: #000000; -fx-border-color: #4F0909; -fx-border-width: 5;">
+                    <children>
+                        <HBox prefHeight="65.0" prefWidth="1779.0">
+                            <children>
+                                <Label prefHeight="84.0" prefWidth="157.0" text="Edit Profile" textFill="WHITE" underline="true" wrapText="true">
+                                    <font>
+                                        <Font name="Roboto Black" size="24.0" />
+                                    </font>
+                                    <HBox.margin>
+                                        <Insets />
+                                    </HBox.margin>
+                                </Label>
+                            </children>
+                            <VBox.margin>
+                                <Insets bottom="20.0" left="50.0" top="20.0" />
+                            </VBox.margin>
+                        </HBox>
+                        <HBox prefHeight="59.0" prefWidth="1060.0">
+                            <children>
+                                <Label text="Change first name: " textFill="WHITE">
+                                    <font>
+                                        <Font name="Roboto Bold" size="16.0" />
+                                    </font>
+                                    <HBox.margin>
+                                        <Insets top="8.0" />
+                                    </HBox.margin>
+                                </Label>
+                                <TextField fx:id="firstname" prefHeight="39.0" prefWidth="201.0" promptText="First Name" style="-fx-background-radius: 30;">
+                                    <font>
+                                        <Font name="Roboto" size="14.0" />
+                                    </font>
+                                    <HBox.margin>
+                                        <Insets left="60.0" />
+                                    </HBox.margin>
+                                </TextField>
+                                <HBox prefHeight="25.0" prefWidth="418.0" />
+                            </children>
+                            <VBox.margin>
+                                <Insets left="50.0" />
+                            </VBox.margin>
+                        </HBox>
+                        <HBox layoutX="15.0" layoutY="80.0" prefHeight="59.0" prefWidth="1060.0">
+                            <children>
+                                <Label text="Last Name:" textFill="WHITE">
+                                    <font>
+                                        <Font name="Roboto Bold" size="16.0" />
+                                    </font>
+                                    <HBox.margin>
+                                        <Insets top="8.0" />
+                                    </HBox.margin>
+                                </Label>
+                                <TextField fx:id="lastname" prefHeight="39.0" prefWidth="201.0" promptText="Last Name" style="-fx-background-radius: 30;">
+                                    <font>
+                                        <Font name="Roboto" size="14.0" />
+                                    </font>
+                                    <HBox.margin>
+                                        <Insets left="119.0" />
+                                    </HBox.margin>
+                                </TextField>
+                                <HBox prefHeight="25.0" prefWidth="418.0" />
+                            </children>
+                            <VBox.margin>
+                                <Insets left="50.0" />
+                            </VBox.margin>
+                        </HBox>
+                        <HBox layoutX="15.0" layoutY="140.0" prefHeight="59.0" prefWidth="1060.0">
+                            <children>
+                                <Label text="Username:" textFill="WHITE">
+                                    <font>
+                                        <Font name="Roboto Bold" size="16.0" />
+                                    </font>
+                                    <HBox.margin>
+                                        <Insets top="8.0" />
+                                    </HBox.margin>
+                                </Label>
+                                <TextField fx:id="usernameField" prefHeight="39.0" prefWidth="201.0" promptText="Username" style="-fx-background-radius: 30;">
+                                    <font>
+                                        <Font name="Roboto" size="14.0" />
+                                    </font>
+                                    <HBox.margin>
+                                        <Insets left="123.0" />
+                                    </HBox.margin>
+                                </TextField>
+                                <Label fx:id="usernameError" text="   Username is already taken!" textFill="WHITE">
+                                    <font>
+                                        <Font name="Roboto" size="14.0" />
+                                    </font>
+                                    <HBox.margin>
+                                        <Insets top="10.0" />
+                                    </HBox.margin>
+                                </Label>
+                            </children>
+                            <VBox.margin>
+                                <Insets left="50.0" />
+                            </VBox.margin>
+                        </HBox>
+                        <HBox layoutX="15.0" layoutY="199.0" prefHeight="59.0" prefWidth="1060.0">
+                            <children>
+                                <Label text="Email:" textFill="WHITE">
+                                    <font>
+                                        <Font name="Roboto Bold" size="16.0" />
+                                    </font>
+                                    <HBox.margin>
+                                        <Insets top="8.0" />
+                                    </HBox.margin>
+                                </Label>
+                                <TextField fx:id="email" prefHeight="39.0" prefWidth="201.0" promptText="Email" style="-fx-background-radius: 30;">
+                                    <font>
+                                        <Font name="Roboto" size="14.0" />
+                                    </font>
+                                    <HBox.margin>
+                                        <Insets left="155.0" />
+                                    </HBox.margin>
+                                </TextField>
+                                <Label fx:id="emailError" text="   Try another email!" textFill="WHITE">
+                                    <font>
+                                        <Font name="Roboto" size="14.0" />
+                                    </font>
+                                    <HBox.margin>
+                                        <Insets top="10.0" />
+                                    </HBox.margin>
+                                </Label>
+                            </children>
+                            <VBox.margin>
+                                <Insets left="50.0" />
+                            </VBox.margin>
+                        </HBox>
+                        <HBox layoutX="15.0" layoutY="258.0" prefHeight="59.0" prefWidth="1060.0">
+                            <children>
+                                <Label text="Old Password:" textFill="WHITE" wrapText="true">
+                                    <font>
+                                        <Font name="Roboto Bold" size="16.0" />
+                                    </font>
+                                    <HBox.margin>
+                                        <Insets top="8.0" />
+                                    </HBox.margin>
+                                </Label>
+                                <TextField fx:id="oldPassword" prefHeight="39.0" prefWidth="201.0" promptText="Old Password" style="-fx-background-radius: 30;">
+                                    <font>
+                                        <Font name="Roboto" size="14.0" />
+                                    </font>
+                                    <HBox.margin>
+                                        <Insets left="96.0" />
+                                    </HBox.margin>
+                                </TextField>
+                                <Label fx:id="passwordError" text="   Wrong password!" textFill="WHITE">
+                                    <font>
+                                        <Font name="Roboto" size="14.0" />
+                                    </font>
+                                    <HBox.margin>
+                                        <Insets top="10.0" />
+                                    </HBox.margin>
+                                </Label>
+                            </children>
+                            <VBox.margin>
+                                <Insets left="50.0" />
+                            </VBox.margin>
+                        </HBox>
+                        <HBox layoutX="15.0" layoutY="317.0" prefHeight="59.0" prefWidth="1060.0">
+                            <children>
+                                <Label text="New Password:" textFill="WHITE">
+                                    <font>
+                                        <Font name="Roboto Bold" size="16.0" />
+                                    </font>
+                                    <HBox.margin>
+                                        <Insets top="8.0" />
+                                    </HBox.margin>
+                                </Label>
+                                <TextField fx:id="newPassword" prefHeight="39.0" prefWidth="201.0" promptText="New Password" style="-fx-background-radius: 30;">
+                                    <font>
+                                        <Font name="Roboto" size="14.0" />
+                                    </font>
+                                    <HBox.margin>
+                                        <Insets left="88.0" />
+                                    </HBox.margin>
+                                </TextField>
+                            </children>
+                            <VBox.margin>
+                                <Insets left="50.0" />
+                            </VBox.margin>
+                        </HBox>
+                        <HBox layoutX="15.0" layoutY="376.0" prefHeight="59.0" prefWidth="1060.0">
+                            <children>
+                                <Label text="Birthday:" textFill="WHITE">
+                                    <font>
+                                        <Font name="Roboto Bold" size="16.0" />
+                                    </font>
+                                    <HBox.margin>
+                                        <Insets top="8.0" />
+                                    </HBox.margin>
+                                </Label>
+                                <DatePicker fx:id="birthday" prefHeight="38.0" prefWidth="198.0">
+                                    <HBox.margin>
+                                        <Insets left="136.0" />
+                                    </HBox.margin>
+                                </DatePicker>
+                                <Label fx:id="birthdayError" text="   You're too young!" textFill="WHITE">
+                                    <font>
+                                        <Font name="Roboto" size="14.0" />
+                                    </font>
+                                    <HBox.margin>
+                                        <Insets top="10.0" />
+                                    </HBox.margin>
+                                </Label>
+                            </children>
+                            <VBox.margin>
+                                <Insets left="50.0" />
+                            </VBox.margin>
+                        </HBox>
+                        <HBox layoutX="15.0" layoutY="376.0" prefHeight="59.0" prefWidth="1060.0">
+                            <children>
+                                <HBox>
+                                    <children>
+                                        <Label text="Change Profile Picture:" textFill="WHITE">
+                                            <font>
+                                                <Font name="Roboto Bold" size="16.0" />
+                                            </font>
+                                            <HBox.margin>
+                                                <Insets top="10.0" />
+                                            </HBox.margin>
+                                        </Label>
+                                        <Button fx:id="choosePFP" mnemonicParsing="false" onAction="#handleChoosePFP" prefHeight="43.0" prefWidth="205.0" text="Choose File">
+                                            <font>
+                                                <Font name="Roboto" size="14.0" />
+                                            </font>
+                                            <HBox.margin>
+                                                <Insets left="31.0" />
+                                            </HBox.margin>
+                                        </Button>
+                                    </children>
+                                    <HBox.margin>
+                                        <Insets top="26.0" />
+                                    </HBox.margin>
+                                </HBox>
+                                <ImageView fx:id="pfp" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@images/profilePictures/pfp3.jpg" />
+                                    </image>
+                                    <HBox.margin>
+                                        <Insets left="15.0" />
+                                    </HBox.margin>
+                                </ImageView>
+                            </children>
+                            <VBox.margin>
+                                <Insets left="50.0" />
+                            </VBox.margin>
+                        </HBox>
+                        <HBox layoutX="15.0" layoutY="495.0" prefHeight="59.0" prefWidth="1060.0">
+                            <children>
+                                <HBox>
+                                    <children>
+                                        <Label text="Change Channel Picture:" textFill="WHITE">
+                                            <font>
+                                                <Font name="Roboto Bold" size="16.0" />
+                                            </font>
+                                            <HBox.margin>
+                                                <Insets top="10.0" />
+                                            </HBox.margin>
+                                        </Label>
+                                        <Button fx:id="chooseChannelPic" mnemonicParsing="false" onAction="#handleChooseChannelPic" prefHeight="43.0" prefWidth="205.0" text="Choose File">
+                                            <font>
+                                                <Font name="Roboto" size="14.0" />
+                                            </font>
+                                            <HBox.margin>
+                                                <Insets left="19.0" />
+                                            </HBox.margin>
+                                        </Button>
+                                    </children>
+                                    <HBox.margin>
+                                        <Insets top="27.0" />
+                                    </HBox.margin>
+                                </HBox>
+                                <ImageView fx:id="channelpfp" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@images/profilePictures/pfp3.jpg" />
+                                    </image>
+                                    <HBox.margin>
+                                        <Insets left="16.0" />
+                                    </HBox.margin>
+                                </ImageView>
+                            </children>
+                            <VBox.margin>
+                                <Insets left="50.0" top="5.0" />
+                            </VBox.margin>
+                        </HBox>
+                        <HBox layoutX="15.0" layoutY="613.0" prefHeight="0.0" prefWidth="1746.0">
+                            <children>
+                                <Label text="Subscribe to premium:" textFill="WHITE">
+                                    <font>
+                                        <Font name="Roboto Bold" size="16.0" />
+                                    </font>
+                                    <HBox.margin>
+                                        <Insets top="8.0" />
+                                    </HBox.margin>
+                                </Label>
+                                <Button fx:id="joinPremium" mnemonicParsing="false" onAction="#handleJoinPremium" prefHeight="43.0" prefWidth="205.0" text="Join Premium">
+                                    <font>
+                                        <Font name="Roboto" size="14.0" />
+                                    </font>
+                                    <HBox.margin>
+                                        <Insets left="32.0" />
+                                    </HBox.margin>
+                                </Button>
+                            </children>
+                            <VBox.margin>
+                                <Insets left="50.0" />
+                            </VBox.margin>
+                        </HBox>
+                        <HBox prefHeight="0.0" prefWidth="1796.0">
+                            <children>
+                                <Button fx:id="done" mnemonicParsing="false" onAction="#doneClicked" prefHeight="48.0" prefWidth="113.0" text="Done" textFill="WHITE">
+                                    <font>
+                                        <Font name="Roboto" size="18.0" />
+                                    </font>
+                                </Button>
+                            </children>
+                            <VBox.margin>
+                                <Insets left="50.0" top="30.0" />
+                            </VBox.margin>
+                        </HBox>
+                    </children>
+                </VBox>
+            </content>
+        </ScrollPane>
+    </children>
+</VBox>

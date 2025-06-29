@@ -1,0 +1,434 @@
+Index: src/main/java/org/project/youtube/database/objects/UserDAO.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package org.project.youtube.database.objects;\r\n\r\npublic class UserDAO\r\n{\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/org/project/youtube/database/objects/UserDAO.java b/src/main/java/org/project/youtube/database/objects/UserDAO.java
+--- a/src/main/java/org/project/youtube/database/objects/UserDAO.java	(revision 496fe457745036d6c41643e3dbd7a02546d48517)
++++ b/src/main/java/org/project/youtube/database/objects/UserDAO.java	(date 1720280772771)
+@@ -1,5 +1,230 @@
+ package org.project.youtube.database.objects;
+ 
++import java.sql.*;
++import java.time.LocalDate;
++import java.util.UUID;
++
+ public class UserDAO
+ {
++    private static final String JDBC_URL = "jdbc:postgresql://localhost:5432/WeTube-DataBase";
++    private static final String USER = "postgres";
++    private static final String PASSWORD = "0000";
++    private static Connection connection() throws SQLException {
++        return DriverManager.getConnection(JDBC_URL, USER, PASSWORD);
++    }
++
++
++    //region Existence checking methods
++    public static boolean checkID (UUID ID) {
++        System.out.println("> Database: Checking if " + ID + " exists...");
++        String query = "SELECT EXISTS (SELECT 1 FROM accounts WHERE email = ?)";
++        try (Connection connection = connection(); PreparedStatement preparedStatement = connection.prepareStatement(query)) {
++            preparedStatement.setString(1, ID);
++            try (ResultSet resultSet = preparedStatement.executeQuery()) {
++                if (resultSet.next()) {
++                    System.out.println("> Database: " + ID + " exists.");
++                    return resultSet.getBoolean(1);
++                }
++            }
++        } catch (SQLException e)
++        {
++            System.out.println(e.getMessage());
++        }
++        return false;
++    }
++
++    public static boolean checkEmail (String email) {
++        System.out.println("> Database: Checking if " + email + " exists...");
++        String query = "SELECT EXISTS (SELECT 1 FROM accounts WHERE email = ?)";
++        try (Connection connection = connection(); PreparedStatement preparedStatement = connection.prepareStatement(query)) {
++            preparedStatement.setString(1, email);
++            try (ResultSet resultSet = preparedStatement.executeQuery()) {
++                if (resultSet.next()) {
++                    System.out.println("> Database: " + email + " exists.");
++                    return resultSet.getBoolean(1);
++                }
++            }
++        } catch (SQLException e)
++        {
++            System.out.println(e.getMessage());
++        }
++        return false;
++    }
++
++    public static boolean checkUsername (String username) {
++        System.out.println("> Database: Checking if " + username + " exists...");
++        String query = "SELECT EXISTS (SELECT 1 FROM accounts WHERE username = ?)";
++        try (Connection connection = connection(); PreparedStatement preparedStatement = connection.prepareStatement(query)) {
++            preparedStatement.setString(1, username);
++            try (ResultSet resultSet = preparedStatement.executeQuery()) {
++                if (resultSet.next()) {
++                    System.out.println("> Database: " + username + " exists.");
++                    return resultSet.getBoolean(1);
++                }
++            }
++        } catch (SQLException e)
++        {
++            System.out.println(e.getMessage());
++        }
++        return false;
++    }
++    public static boolean checkPassword (String username, String password) {
++        System.out.println("> Database: Checking password correction... ");
++        String query = "SELECT password FROM users WHERE username = ?";
++        try (Connection connection = connection(); PreparedStatement preparedStatement = connection.prepareStatement(query)) {
++            preparedStatement.setString(1, username);
++            try (ResultSet resultSet = preparedStatement.executeQuery()) {
++                if (resultSet.next()) {
++                    System.out.println("> Database: password is correct.");
++                    return password.equals(resultSet.getString("password"));
++                }
++            }
++        } catch (SQLException e)
++        {
++            System.out.println(e.getMessage());
++        }
++        return false;
++    }
++    //endregion
++
++    //region Create accout and setting attributes
++    public static void createAccount (String username, String email, String password, String firstName, String lastName,
++                                        LocalDate birthdate, String profilePicture) {
++        System.out.println("> Database: Creating new account for " + username + " ...");
++        Channel_DB.create_user_default_channel(get_id_by_username(username));
++        Playlist_DB.create_watch_later(get_id_by_username(username));
++        UUID ID = UUID.randomUUID();
++        boolean isPremium = false;
++        double balance = 0.00;
++
++        String query = "INSERT INTO users (ID, channelID, firstname, lastname, username, email, password, " +
++                "birthdate, joindate, ispremium, balance, profilePicture) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
++        try (Connection connection = connection();
++             PreparedStatement preparedStatement = connection.prepareStatement(query))
++        {
++            connection.setAutoCommit(false);
++            preparedStatement.setObject(1, ID);
++            preparedStatement.setObject(2, ID);
++            preparedStatement.setString(3, firstName);
++            preparedStatement.setString(4, lastName);
++            preparedStatement.setString(5, username);
++            preparedStatement.setString(6, email);
++            preparedStatement.setString(7, password);
++            preparedStatement.setObject(8, birthdate);
++            preparedStatement.setObject(9, LocalDate.now());
++            preparedStatement.setBoolean(10, isPremium);
++            preparedStatement.setDouble(11, balance);
++            preparedStatement.setString(12, profilePicture);
++            preparedStatement.executeUpdate();
++            connection.commit();
++            System.out.println("> Database: New account for " + username + " created.");
++        } catch (SQLException e)
++        {
++            System.out.println(e.getMessage());
++        }
++    }
++
++    public static void setBalance (UUID userID, double balance) {
++        System.out.println("> Database: Setting " + balance + " rubles for " + getUsernameViaID(userID) + " ...");
++        String query = "UPDATE users SET balance = ? WHERE ID = ?";
++        try (Connection connection = connection();PreparedStatement preparedStatement = connection.prepareStatement(query);)
++        {
++            connection.setAutoCommit(false);
++            preparedStatement.setDouble(1, balance);
++            preparedStatement.setObject(2, userID);
++            preparedStatement.executeUpdate();
++            connection.commit();
++            System.out.println("> Database: " + balance + " rubles set for " + getUsernameViaID(userID) + ".");
++        } catch (SQLException e) {
++            System.out.println(e.getMessage());
++        }
++    }
++
++    public static void setPremium (UUID userID, boolean isPremium) {
++        if (isPremium)
++            System.out.println("> Database: Setting " + getUsernameViaID(userID) + " on premium...");
++        else
++            System.out.println("> Database: Setting " + getUsernameViaID(userID) + " off premium...");
++        String query = "UPDATE users SET isPremium = ? WHERE ID = ?";
++        try (Connection connection = connection();PreparedStatement preparedStatement = connection.prepareStatement(query);)
++        {
++            connection.setAutoCommit(false);
++            preparedStatement.setBoolean(1, isPremium);
++            preparedStatement.setObject(2, userID);
++            preparedStatement.executeUpdate();
++            connection.commit();
++            if (isPremium)
++                System.out.println("> Database: " + getUsernameViaID(userID) + "  is premium.");
++            else
++                System.out.println("> Database: " + getUsernameViaID(userID) + " is not premium.");
++        } catch (SQLException e) {
++            System.out.println(e.getMessage());
++        }
++    }
++
++    public static void setPassword (UUID userID, String password) {
++        System.out.println("> Database: Changing password of " + userID + " ...");
++        String query = "UPDATE users SET password = ? WHERE ID = ?";
++        try (Connection connection = connection();PreparedStatement preparedStatement = connection.prepareStatement(query);) {
++            connection.setAutoCommit(false);
++            preparedStatement.setString(1, password);
++            preparedStatement.setObject(2, userID);
++            preparedStatement.executeUpdate();
++            connection.commit();
++            System.out.println("> Database: Password changed.");
++        } catch (SQLException e)
++        {
++            System.out.println(e.getMessage());
++        }
++    }
++
++    //endregion
++
++    public static void addNotification (UUID userID, Content ) {
++        System.out.println("[DATABASE] Sending notification for user " + user_id + " ...");
++        String query = "INSERT INTO notifications (user_id, content) VALUES (?, ?)";
++        try(Connection connection = create_connection();PreparedStatement preparedStatement = connection.prepareStatement(query)) {
++            connection.setAutoCommit(false);
++            preparedStatement.setObject(1, user_id);
++            preparedStatement.setString(2, content);
++            preparedStatement.executeUpdate();
++            connection.commit();
++            System.out.println("[DATABASE] Done");
++        } catch (SQLException e) {
++            printSQLException(e);
++        }
++    }
++    public static UUID getIDViaUsername (String username) {
++        String query = "SELECT ID FROM users WHERE username = ?";
++        try (Connection connection = connection(); PreparedStatement preparedStatement = connection.prepareStatement(query)) {
++            preparedStatement.setString(1, username);
++            try (ResultSet resultSet = preparedStatement.executeQuery()) {
++                if (resultSet.next()) {
++                    return (UUID)resultSet.getObject("ID");
++                } else {
++                    return null;
++                }
++            }
++        } catch (SQLException e) {
++            System.out.println(e.getMessage());
++        }
++        return null;
++    }
++    public static String getUsernameViaID (UUID ID) {
++        String query = "SELECT username FROM users WHERE id = ?";
++        try (Connection connection = connection(); PreparedStatement preparedStatement = connection.prepareStatement(query)) {
++            preparedStatement.setObject(1, ID);
++            try (ResultSet resultSet = preparedStatement.executeQuery()) {
++                if (resultSet.next()) {
++                    return resultSet.getString("username");
++                } else {
++                    return null;
++                }
++            }
++        } catch (SQLException e) {
++            System.out.println(e.getMessage());
++        }
++        return null;
++    }
++
+ }
+Index: src/main/java/org/project/youtube/database/Database.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package org.project.youtube.database;\r\n\r\npublic class Database\r\n{\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/org/project/youtube/database/Database.java b/src/main/java/org/project/youtube/database/Database.java
+--- a/src/main/java/org/project/youtube/database/Database.java	(revision 496fe457745036d6c41643e3dbd7a02546d48517)
++++ b/src/main/java/org/project/youtube/database/Database.java	(date 1720269956489)
+@@ -1,6 +1,56 @@
+ package org.project.youtube.database;
+ 
++import java.sql.Connection;
++import java.sql.DriverManager;
++import java.sql.SQLException;
++import java.sql.Statement;
++
+ public class Database
+ {
++    public static void createDatabase() {
++        System.out.println("> Database: Creating wetube database...");
++        String query = "CREATE DATABASE wetube;";
++        try (Connection connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/WeTube-DataBase",
++                "postgres", "0000"); Statement statement = connection.createStatement())
++        {
++            statement.executeUpdate(query);
++            System.out.println("> Database: Wetube database created.");
++        } catch (SQLException e)
++        {
++            System.out.println(e.getMessage());
++        }
++    }
+ 
++    public static void createTables() {
++        System.out.println("> Database: Creating database tables...");
++        String[] queries = {
++                "CREATE TABLE IF NOT EXISTS users (ID UUID PRIMARY KEY, channelID UUID REFERENCES channels(ID), firstname VARCHAR(50), lastname VARCHAR(50), username VARCHAR(50), email VARCHAR(50), password VARCHAR(255), birthdate DATE, joindate DATE, ispremium BOOLEAN, balance NUMERIC(10, 2), profilePicture VARCHAR(512));",
++                "CREATE TABLE IF NOT EXISTS channels (ID UUID PRIMARY KEY, userID UUID REFERENCES users(ID), channelname VARCHAR(255), description TEXT, subscribers INTEGER, totalvideos INTEGER, totalviews INTEGER, watchtime INTEGER, creationdate DATE, isverified BOOLEAN, outcome NUMERIC(10, 2), channelPicture VARCHAR(512));",
++                "CREATE TABLE IF NOT EXISTS categories (ID UUID PRIMARY KEY, title VARCHAR(50));",
++                "CREATE TABLE IF NOT EXISTS subscriptions (channelID UUID REFERENCES channels(ID), subscriberID UUID REFERENCES users(ID), subscriptiondate DATE, isonlycomrade BOOLEAN);",
++                "CREATE TABLE IF NOT EXISTS communities (ID UUID PRIMARY KEY, channelID UUID REFERENCES channels(ID));",
++                "CREATE TABLE IF NOT EXISTS contents (ID UUID PRIMARY KEY, creatorID UUID REFERENCES users(ID), categoryID UUID REFERENCES category(ID), channelID UUID REFERENCES channels(ID), posteddate TIMESTAMP WITHOUT TIME ZONE, likedcount INTEGER, dislikedcount INTEGER, isonlycomrade BOOLEAN);",
++                "CREATE TABLE IF NOT EXISTS playlists (ID UUID PRIMARY KEY, creatorID UUID REFERENCES users(ID), channelID UUID REFERENCES channels(ID), title VARCHAR(100), description TEXT, ispublic BOOLEAN, isonlycomrade BOOLEAN, createddate DATE);",
++                "CREATE TABLE IF NOT EXISTS contentAction (ID UUID PRIMARY KEY, contentID UUID REFERENCES contents(ID), userID UUID REFERENCES users(ID), liked BOOLEAN);",
++                "CREATE TABLE IF NOT EXISTS notifications (ID UUID PRIMARY KEY, userID UUID REFERENCES users(ID), contentID UUID REFERENCES contents(ID), recieveddate TIMESTAMP WITHOUT TIME ZONE, title VARCHAR(100), isSeen BOOLEAN);",
++                "CREATE TABLE IF NOT EXISTS posts (ID UUID PRIMARY KEY, contentID UUID REFERENCES contents(ID), communityID UUID REFERENCES community(ID), title VARCHAR(100), description TEXT, imageurl VARCHAR(255), commentcount INTEGER);",
++                "CREATE TABLE IF NOT EXISTS comments (ID UUID PRIMARY KEY, contentID UUID REFERENCES contents(ID), commenterID UUID REFERENCES users(ID), posteddate TIMESTAMP WITHOUT TIME ZONE, body TEXT, replycount INTEGER, isreply BOOLEAN, parentcommentID UUID REFERENCES comment(ID));",
++                "CREATE TABLE IF NOT EXISTS videos (ID UUID PRIMARY KEY, contentID UUID REFERENCES contents(ID), communityID UUID REFERENCES community(ID), title VARCHAR(100), description TEXT, videourl VARCHAR(255), thumbnailurl VARCHAR(255), commentcount INTEGER);",
++                "CREATE TABLE IF NOT EXISTS commentAction (ID UUID PRIMARY KEY, commentID UUID REFERENCES comment(ID), userID UUID REFERENCES users(ID), liked BOOLEAN);",
++                "CREATE TABLE IF NOT EXISTS videoInPlayList (videoID UUID REFERENCES video(ID), playlistID UUID REFERENCES playlist(ID), indexinplaylist INTEGER, addeddate TIMESTAMP WITHOUT TIME ZONE);",
++
++        };
++        try (Connection connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/WeTube-DataBase",
++                "postgres", "0000");Statement statement = connection.createStatement())
++        {
++            connection.setAutoCommit(false);
++            for (String query : queries) {
++                statement.executeUpdate(query);
++            }
++            connection.commit();
++            System.out.println("> Database: Wetube database tables created.");
++        } catch (SQLException e) {
++            System.out.println(e.getMessage());
++        }
++    }
+ }
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"ec566682-672c-4b02-8981-652c66cb3fe3\" name=\"Changes\" comment=\"Initialized Project\">\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\r\n      <map>\r\n        <entry key=\"$PROJECT_DIR$\" value=\"main\" />\r\n      </map>\r\n    </option>\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"MavenImportPreferences\">\r\n    <option name=\"generalSettings\">\r\n      <MavenGeneralSettings>\r\n        <option name=\"mavenHome\" value=\"Use Maven wrapper\" />\r\n      </MavenGeneralSettings>\r\n    </option>\r\n  </component>\r\n  <component name=\"ProjectColorInfo\"><![CDATA[{\r\n  \"associatedIndex\": 3\r\n}]]></component>\r\n  <component name=\"ProjectId\" id=\"2irRHITZ4w6U1ENbH8rGgw0yzuk\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\">\r\n    <ConfirmationsSetting value=\"2\" id=\"Add\" />\r\n  </component>\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\"><![CDATA[{\r\n  \"keyToString\": {\r\n    \"RunOnceActivity.OpenProjectViewOnStart\": \"true\",\r\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\r\n    \"SHARE_PROJECT_CONFIGURATION_FILES\": \"true\",\r\n    \"git-widget-placeholder\": \"develop\",\r\n    \"kotlin-language-version-configured\": \"true\"\r\n  }\r\n}]]></component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"ec566682-672c-4b02-8981-652c66cb3fe3\" name=\"Changes\" comment=\"\" />\r\n      <created>1720246621657</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1720246621657</updated>\r\n    </task>\r\n    <task id=\"LOCAL\u200E−۰۰۰۰۱\" summary=\"Created Repository\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1720246781249</created>\r\n      <option name=\"number\" value=\"LOCAL\u200E−۰۰۰۰۱\" />\r\n      <option name=\"presentableId\" value=\"LOCAL\u200E−۰۰۰۰۱\" />\r\n      <updated>1720246781249</updated>\r\n    </task>\r\n    <task id=\"LOCAL\u200E−۰۰۰۰۲\" summary=\"Initialized Project\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1720246902140</created>\r\n      <option name=\"number\" value=\"LOCAL\u200E−۰۰۰۰۲\" />\r\n      <option name=\"presentableId\" value=\"LOCAL\u200E−۰۰۰۰۲\" />\r\n      <updated>1720246902140</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"3\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"Created Repository\" />\r\n    <MESSAGE value=\"Initialized Project\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"Initialized Project\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 496fe457745036d6c41643e3dbd7a02546d48517)
++++ b/.idea/workspace.xml	(date 1720280772842)
+@@ -4,21 +4,17 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="ec566682-672c-4b02-8981-652c66cb3fe3" name="Changes" comment="Initialized Project">
++    <list default="true" id="ec566682-672c-4b02-8981-652c66cb3fe3" name="Changes" comment="">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/youtube/database/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/project/youtube/database/Database.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/org/project/youtube/database/objects/UserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/project/youtube/database/objects/UserDAO.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+     <option name="LAST_RESOLUTION" value="IGNORE" />
+   </component>
+-  <component name="FileTemplateManagerImpl">
+-    <option name="RECENT_TEMPLATES">
+-      <list>
+-        <option value="Class" />
+-      </list>
+-    </option>
+-  </component>
+   <component name="Git.Settings">
+     <option name="RECENT_BRANCH_BY_REPOSITORY">
+       <map>
+@@ -34,9 +30,9 @@
+       </MavenGeneralSettings>
+     </option>
+   </component>
+-  <component name="ProjectColorInfo"><![CDATA[{
+-  "associatedIndex": 3
+-}]]></component>
++  <component name="ProjectColorInfo">{
++  &quot;associatedIndex&quot;: 3
++}</component>
+   <component name="ProjectId" id="2irRHITZ4w6U1ENbH8rGgw0yzuk" />
+   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+     <ConfirmationsSetting value="2" id="Add" />
+@@ -49,8 +45,7 @@
+   "keyToString": {
+     "RunOnceActivity.OpenProjectViewOnStart": "true",
+     "RunOnceActivity.ShowReadmeOnStart": "true",
+-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+-    "git-widget-placeholder": "develop",
++    "git-widget-placeholder": "database",
+     "kotlin-language-version-configured": "true"
+   }
+ }]]></component>
+@@ -63,37 +58,17 @@
+       <option name="presentableId" value="Default" />
+       <updated>1720246621657</updated>
+     </task>
+-    <task id="LOCAL‎−۰۰۰۰۱" summary="Created Repository">
+-      <option name="closed" value="true" />
+-      <created>1720246781249</created>
+-      <option name="number" value="LOCAL‎−۰۰۰۰۱" />
+-      <option name="presentableId" value="LOCAL‎−۰۰۰۰۱" />
+-      <updated>1720246781249</updated>
+-    </task>
+-    <task id="LOCAL‎−۰۰۰۰۲" summary="Initialized Project">
+-      <option name="closed" value="true" />
+-      <created>1720246902140</created>
+-      <option name="number" value="LOCAL‎−۰۰۰۰۲" />
+-      <option name="presentableId" value="LOCAL‎−۰۰۰۰۲" />
+-      <updated>1720246902140</updated>
+-    </task>
+-    <option name="localTasksCounter" value="3" />
+     <servers />
+   </component>
+-  <component name="Vcs.Log.Tabs.Properties">
+-    <option name="TAB_STATES">
+-      <map>
+-        <entry key="MAIN">
+-          <value>
+-            <State />
+-          </value>
+-        </entry>
+-      </map>
+-    </option>
+-  </component>
+-  <component name="VcsManagerConfiguration">
+-    <MESSAGE value="Created Repository" />
+-    <MESSAGE value="Initialized Project" />
+-    <option name="LAST_COMMIT_MESSAGE" value="Initialized Project" />
++  <component name="XDebuggerManager">
++    <breakpoint-manager>
++      <breakpoints>
++        <line-breakpoint enabled="true" type="java-line">
++          <url>file://$PROJECT_DIR$/src/main/java/org/project/youtube/database/objects/UserDAO.java</url>
++          <line>93</line>
++          <option name="timeStamp" value="3" />
++        </line-breakpoint>
++      </breakpoints>
++    </breakpoint-manager>
+   </component>
+ </project>
+\ No newline at end of file
+Index: src/main/java/module-info.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>module org.project.project_wetube {\r\n    requires javafx.controls;\r\n    requires javafx.fxml;\r\n\r\n    requires org.kordamp.bootstrapfx.core;\r\n\r\n    opens org.project.youtube to javafx.fxml;\r\n    exports org.project.youtube;\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/module-info.java b/src/main/java/module-info.java
+--- a/src/main/java/module-info.java	(revision 496fe457745036d6c41643e3dbd7a02546d48517)
++++ b/src/main/java/module-info.java	(date 1720252835411)
+@@ -3,6 +3,7 @@
+     requires javafx.fxml;
+ 
+     requires org.kordamp.bootstrapfx.core;
++    requires java.sql;
+ 
+     opens org.project.youtube to javafx.fxml;
+     exports org.project.youtube;
